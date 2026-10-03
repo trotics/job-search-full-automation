@@ -55,9 +55,9 @@ A job search system for one person. Set up once, then run any stage when the per
 | Check email for employer replies | `stages/06-mailbox-check/CONTEXT.md` | Read only; the person approves each change |
 | Build, improve or tailor a resume | `stages/07-resume/CONTEXT.md` | Only from facts the person confirms |
 | Find employers, research a company, industry or role | `stages/08-company-research/CONTEXT.md` | Adds employers only after approval |
-| Add employers the person names | `shared/adding-employers.md` | Outside a stage, checked with `--stage research` |
+| Add employers the person names | `shared/adding-employers.md` | Outside a stage, checked with `--stage research` (or `--stage user` when a listing is added too) |
 | A returning person with no request | `shared/next-steps.md` | "A returning person with no request": read the tracker, suggest one thing |
-| Decide a close call (apply or skip) | `stages/02-fit-review/references/fit-outcomes.md` | "The person decides a close call", checked with `--stage fit` |
+| Decide a close call (apply or skip) | `stages/02-fit-review/CONTEXT.md`, then `references/fit-outcomes.md` | "The person decides a close call", checked with `--stage fit` |
 | A status change, or a job they applied to on their own | `shared/tracker-access.md` | "Direct requests", checked with `--stage user` |
 
 ### Shared Resources
@@ -129,7 +129,7 @@ The person should be able to answer both in one message.
 In a chat with no folder: write "code execution" if you can run Python there (then use the Skill's `tools/` as `shared/no-folder.md` says), otherwise "none (Skill only)"; skip the install and the self-test. Otherwise follow `shared/python-setup.md`: find the command that works (`python`, `python3` or `py`), install the add-ons, and run the self-test. Write the command, or "none" if the person chose to continue without Python.
 
 #### `{{APPLY_BROWSER}}`
-Check whether the Claude in Chrome tools are available to you. Write "Claude in Chrome" or "not connected yet". If not connected, tell them: applying works best with the Claude in Chrome extension, because it can upload their resume (`stages/03-apply/references/claude-in-chrome-setup.md`). Sweeps and everything else work without it. This is not a blocker for today.
+Check whether the Claude in Chrome tools are available to you. Write "Claude in Chrome", "built-in browser only" (no Chrome, but the app's browser pane works), or "none" (no browser tool at all). If not connected, tell them: applying works best with the Claude in Chrome extension, because it can upload their resume (`stages/03-apply/references/claude-in-chrome-setup.md`). Sweeps and everything else work without it. This is not a blocker for today.
 
 #### `{{EMAIL_CONNECTOR}}`
 Check whether an email connector (for example Gmail or Outlook) is available to you. Write its name, or "none".
@@ -150,7 +150,7 @@ Today, `YYYY-MM-DD`.
 
 - **Tracker:** [web page link, or tracker/my-tracker.xlsx]
 - **Resume:** [use mine / improve mine / build new / decide later]
-- **Applying browser:** [Claude in Chrome / not connected yet]
+- **Browser:** [Claude in Chrome / built-in browser only / none]
 
 Next is a short interview about the jobs you want. I ask one question at a time."
 
@@ -235,7 +235,7 @@ System settings for this job search, filled in once by setup. Every stage reads 
 - **Tracker kind:** {{TRACKER_KIND}}
 - **Tracker location:** {{TRACKER_LOCATION}}
 - **Python command:** {{PYTHON_COMMAND}}
-- **Browser for applying:** {{APPLY_BROWSER}}
+- **Browser:** {{APPLY_BROWSER}}
 - **Email connector:** {{EMAIL_CONNECTOR}}
 - **Resume choice:** {{RESUME_CHOICE}}
 - **Set up on:** {{SETUP_DATE}}
@@ -246,11 +246,11 @@ System settings for this job search, filled in once by setup. Every stage reads 
 
 ## Next steps
 
-What to suggest when a session ends, so the person always knows what to say next. "Check my email" is short for "Check my email for employer replies". Wherever a line says "Check my email" and `my-setup.md` shows no email connector, say instead: "In a few days, paste any employer replies here and say 'Check these emails' (or connect your email in Claude's settings)." If the person has no browser Claude can control (no desktop app, see `no-folder.md`), never suggest "Run a sweep" as something to do now. "Let's apply" still works with a fill sheet (Claude prepares every answer; the person fills in the form and submits it in their own browser), so say that plainly. Also suggest "Build my resume" (if there is no resume yet) or "Is this a fit? [paste a posting and its link]". Suggest only; never start the next stage yourself. Keep it to one or two lines, with the exact words to say in quotes, and pick the line that fits what just happened.
+What to suggest when a session ends, so the person always knows what to say next. "Check my email" is short for "Check my email for employer replies". Wherever a line says "Check my email" and `my-setup.md` shows no email connector, say instead: "In a few days, paste any employer replies here and say 'Check these emails' (or connect your email in Claude's settings)." If the person has no browser Claude can control (`my-setup.md` says browser "none", or there is no desktop app, see `no-folder.md`), never suggest "Run a sweep" as something to do now. "Let's apply" still works with a fill sheet (Claude prepares every answer; the person fills in the form and submits it in their own browser), so say that plainly. Also suggest "Build my resume" (if there is no resume yet) or "Is this a fit? [paste a posting and its link]". Suggest only; never start the next stage yourself. Keep it to one or two lines, with the exact words to say in quotes, and pick the line that fits what just happened.
 
 ### After the interview
 
-- They chose "build new" or "improve mine" for the resume: "Say 'Build my resume'. After that, 'Suggest employers that fit my background'."
+- They chose "build new" or "improve mine" for the resume: "Say 'Build my resume'." Then, if they have no employers yet, add "After that, 'Suggest employers that fit my background'"; if they just added some, "After that, 'Run a sweep'".
 - They have a resume and no employers yet: "Say 'Suggest employers that fit my background', then 'Run a sweep'."
 - They have a resume and just added employers: "Say 'Run a sweep'."
 
@@ -312,7 +312,7 @@ What to suggest when a session ends, so the person always knows what to say next
 Find the tracker in `my-setup.md` and read `listings` and `coverage` as `tracker-access.md` says (no snapshot needed: this only reads). An employer with no `coverage` row has never been swept, unless its industry is excluded (those are skipped on purpose and do not count). Then suggest the one most useful thing:
 
 1. A deadline or an interview coming up (a listing at Interview whose newest history line gives a future date, or a deadline in the latest mailbox report): name it with its date first. If no prep file for it exists in `stages/05-interview-prep/output/`, add "Say 'Prep me for my interview with [company] on [day]'"; if one exists, just wish them luck. For an assessment or a reply to send, say what to do and by when.
-2. Things waiting on the person: close calls in the latest sweep or fit report that are not decided yet (their req id is in neither `listings` nor `coverage.skipped`; recording a decision: `stages/02-fit-review/references/fit-outcomes.md`), and employers whose `coverage` says `manual` or `LEAD`. Name them in one line each and ask them to decide or open the site.
+2. Things waiting on the person: close calls in the latest sweep or fit report that are not decided yet (not in `listings` or `coverage.skipped` and not marked decided in their report; recording a decision: `stages/02-fit-review/references/fit-outcomes.md`), and employers whose `coverage` says `manual` or `LEAD`. Name them in one line each and ask them to decide or open the site.
 3. Listings at To apply: "Say 'Let's apply'."
 4. Applications in and no mailbox check in the last week: "Say 'Check my email'."
 5. No sweep in the last week: "Say 'Run a sweep'."
@@ -629,7 +629,7 @@ A Claude artifact page the user published from `tracker/tracker-page.html`, with
 
 When the person asks for a tracker change outside a stage, take a snapshot first and run the check with `--stage user` afterwards.
 
-- **A status change:** read the row fresh, change `status`, and append a history line: `YYYY-MM-DD status set to <status> at the user's request.` When the new status is Applied, also set `appliedDate` (ask the date). After a fill sheet, use the history line in `stages/03-apply/references/apply-procedure.md`, "No browser Claude can use".
+- **A status change:** read the row fresh, change `status`, and append a history line: `YYYY-MM-DD status set to <status> at the user's request.` When the new status is Applied, also set `appliedDate` (ask the date); record a confirmation number only by its last 4 digits. After a fill sheet, use the history line in `stages/03-apply/references/apply-procedure.md`, "No browser Claude can use".
 - **A job they applied to on their own:** add the employer first if it is not on the target list (`adding-employers.md`), then add a `listings` row with every column `check_tracker.py` requires: `id` (`<company-slug>-<req id or short title slug>`, unique), `company` (as in `companies`), `title`, `location`, `url`, `industry`, `pay` (or "not posted"), `why` (one line, for example "Applied by the user outside a session"), `teaches` ("Not read." if unknown), `priority`, `status` `Applied`, `appliedDate` (the date they give), `postingText` (the posting if they have it; otherwise "Not saved: applied outside a session"), and `history`: `YYYY-MM-DD added at the user's request; applied on their own on YYYY-MM-DD.` Leave `yourNotes` empty.
 
 ### Backups and snapshots
@@ -1395,7 +1395,7 @@ Decide whether one posting goes in the tracker. A sweep runs this for every new 
    6. **Pay?** Under the floor: no. No posted pay: decide plausibility and write the reasoning (rules 2).
    7. **Hard requirements?** License before hire, a specific degree the user lacks, any hard no in the user's rules: no. Required years inside the user's stretch never fail it on their own (rules 3).
    8. **On-hold employer?** Add the listing, set `priority` to `On hold`, and say so in `why`.
-4. Follow the user's autonomy lines in `my-rules.md`: if they want to be asked before listings are written, or want every close call, show the result and wait for their yes before writing.
+4. Follow the user's autonomy lines in `my-rules.md`: if they want to be asked before listings are written, show each result and wait for their yes before writing. "Bring me every close call" applies only to close calls; clear fits are written as usual.
 5. Write the result as `references/fit-outcomes.md` says: a new listing, a skipped line, or a report item for the user.
 6. If no sweep is running, take an after snapshot and run the check with `--stage fit`.
 7. If no sweep is running, end by suggesting the next step (`next-steps.md`, "After a sweep or a fit call"). Inside a sweep, the sweep does this.
@@ -1459,7 +1459,7 @@ For example a commission-only role when the user's rules say nothing about commi
 
 1. **Flag:** what made it a close call.
 2. **Posting says:** the exact requirement or fact, quoted short, marked required or preferred.
-3. **You have:** how the user's background compares, from the resume and answer bank only.
+3. **You have:** how the user's background compares, from the resume, the answer bank and the experience section of `my-rules.md` only.
 4. **Teaches:** what the role would build.
 5. **Pay and next step:** posted pay or "not posted", and any named next role.
 6. **Lean:** Apply or Skip, with one sentence of reasoning.
@@ -1469,10 +1469,12 @@ For example a commission-only role when the user's rules say nothing about commi
 
 When the person answers a close call (in the session or a later one), record it, so it is never asked again. Take a snapshot first and check with `--stage fit` after.
 
-- **Apply:** write the listing as in "Pass", with history `YYYY-MM-DD added after the user's close-call decision.` Set the employer's `coverage.result` to `HIT`.
-- **Skip:** add `title, req id, skipped by the user's decision YYYY-MM-DD` to the employer's `coverage.skipped`. Set `result` to `NONE` unless something else there is still waiting.
+- **Apply:** first re-open the posting on the employer's own site to confirm it is live and copy `postingText` (if it cannot be opened, follow "not confirmed live" as for pasted text). Then write the listing as in "Pass", with history `YYYY-MM-DD added after the user's close-call decision.` (add "; not confirmed live on the employer's site" when it was judged on pasted text) If the employer has a `coverage` row, set its `result` to `HIT`.
+- **Skip:** if the employer has a `coverage` row, add `title, req id, skipped by the user's decision YYYY-MM-DD` to its `skipped` and set `result` to `NONE` unless something else there is still waiting. If it has no coverage row, do not create one: add `YYYY-MM-DD decided: skip` under that close call in its report instead.
 
-A close call counts as decided when its req id is in `listings` or in `coverage.skipped`.
+A close call that is already a listing and that the person now drops is a status change to `Closed` (`shared/tracker-access.md`, "Direct requests").
+
+A close call counts as decided when its req id (or, with none, its title and location) is in `listings` or `coverage.skipped`, or its report marks it decided.
 
 ### A closed listing that is live again
 
@@ -1511,7 +1513,7 @@ Apply in **Claude in Chrome** when it is connected. It can upload files; the bui
 ### Process
 
 1. Take a tracker snapshot, once for the whole session. Then pick the next listing (`apply-procedure.md`, "Order of work").
-2. **Still live?** Open the posting on the employer's own site. If it is gone, set `expired` or `filled` with a history entry and move on.
+2. **Still live?** Open the posting on the employer's own site. If it is gone, set `expired` or `filled` with a history entry and move on. With no browser at all, follow `apply-procedure.md`, "No browser Claude can use", for steps 2 to 8.
 3. Save the posting text and re-check the fit (`apply-procedure.md`, "Before the form").
 4. Upload the resume, trying the methods in order, and check the upload on the page.
 5. Fill the form from the answer bank and the resume. Quote legal text to the user. Hand every wall to the user.
@@ -1872,7 +1874,7 @@ If no browser tool works in this session (for example a chat with no desktop app
 1. Still save the posting text and re-check the fit, from the posting the person pastes.
 2. Give the review summary as a **fill sheet**: every answer for the form, in order, the file to attach, the legal text to read, and the walls that are theirs.
 3. The person fills it in and submits in their own browser. Claude never claims to have submitted anything.
-4. When they say they submitted, ask for the confirmation, then record `Applied` and `appliedDate`, with a history entry that says "submitted by the user from a fill sheet" and `upload: attached by the user`. Until then the listing stays at To apply.
+4. When they say they submitted, ask for the confirmation (record only "confirmation shown" or the last 4 digits of a long number, as in "After submitting"), then record `Applied` and `appliedDate`, with a history entry that says "submitted by the user from a fill sheet" and `upload: attached by the user`. Until then the listing stays at To apply.
 
 ### Dry run
 

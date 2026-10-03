@@ -1,10 +1,10 @@
 # Next steps
 
-What to suggest when a session ends, so the person always knows what to say next. "Check my email" is short for "Check my email for employer replies". Wherever a line says "Check my email" and `my-setup.md` shows no email connector, say instead: "In a few days, paste any employer replies here and say 'Check these emails' (or connect your email in Claude's settings)." If the person has no browser Claude can control (no desktop app, see `no-folder.md`), never suggest "Run a sweep" as something to do now. "Let's apply" still works with a fill sheet (Claude prepares every answer; the person fills in the form and submits it in their own browser), so say that plainly. Also suggest "Build my resume" (if there is no resume yet) or "Is this a fit? [paste a posting and its link]". Suggest only; never start the next stage yourself. Keep it to one or two lines, with the exact words to say in quotes, and pick the line that fits what just happened.
+What to suggest when a session ends, so the person always knows what to say next. "Check my email" is short for "Check my email for employer replies". Wherever a line says "Check my email" and `my-setup.md` shows no email connector, say instead: "In a few days, paste any employer replies here and say 'Check these emails' (or connect your email in Claude's settings)." If the person has no browser Claude can control (`my-setup.md` says browser "none", or there is no desktop app, see `no-folder.md`), never suggest "Run a sweep" as something to do now. "Let's apply" still works with a fill sheet (Claude prepares every answer; the person fills in the form and submits it in their own browser), so say that plainly. Also suggest "Build my resume" (if there is no resume yet) or "Is this a fit? [paste a posting and its link]". Suggest only; never start the next stage yourself. Keep it to one or two lines, with the exact words to say in quotes, and pick the line that fits what just happened.
 
 ## After the interview
 
-- They chose "build new" or "improve mine" for the resume: "Say 'Build my resume'. After that, 'Suggest employers that fit my background'."
+- They chose "build new" or "improve mine" for the resume: "Say 'Build my resume'." Then, if they have no employers yet, add "After that, 'Suggest employers that fit my background'"; if they just added some, "After that, 'Run a sweep'".
 - They have a resume and no employers yet: "Say 'Suggest employers that fit my background', then 'Run a sweep'."
 - They have a resume and just added employers: "Say 'Run a sweep'."
 
@@ -66,7 +66,7 @@ What to suggest when a session ends, so the person always knows what to say next
 Find the tracker in `my-setup.md` and read `listings` and `coverage` as `tracker-access.md` says (no snapshot needed: this only reads). An employer with no `coverage` row has never been swept, unless its industry is excluded (those are skipped on purpose and do not count). Then suggest the one most useful thing:
 
 1. A deadline or an interview coming up (a listing at Interview whose newest history line gives a future date, or a deadline in the latest mailbox report): name it with its date first. If no prep file for it exists in `stages/05-interview-prep/output/`, add "Say 'Prep me for my interview with [company] on [day]'"; if one exists, just wish them luck. For an assessment or a reply to send, say what to do and by when.
-2. Things waiting on the person: close calls in the latest sweep or fit report that are not decided yet (their req id is in neither `listings` nor `coverage.skipped`; recording a decision: `stages/02-fit-review/references/fit-outcomes.md`), and employers whose `coverage` says `manual` or `LEAD`. Name them in one line each and ask them to decide or open the site.
+2. Things waiting on the person: close calls in the latest sweep or fit report that are not decided yet (not in `listings` or `coverage.skipped` and not marked decided in their report; recording a decision: `stages/02-fit-review/references/fit-outcomes.md`), and employers whose `coverage` says `manual` or `LEAD`. Name them in one line each and ask them to decide or open the site.
 3. Listings at To apply: "Say 'Let's apply'."
 4. Applications in and no mailbox check in the last week: "Say 'Check my email'."
 5. No sweep in the last week: "Say 'Run a sweep'."

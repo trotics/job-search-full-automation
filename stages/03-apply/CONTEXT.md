@@ -27,7 +27,7 @@ Apply in **Claude in Chrome** when it is connected. It can upload files; the bui
 ## Process
 
 1. Take a tracker snapshot, once for the whole session. Then pick the next listing (`apply-procedure.md`, "Order of work").
-2. **Still live?** Open the posting on the employer's own site. If it is gone, set `expired` or `filled` with a history entry and move on.
+2. **Still live?** Open the posting on the employer's own site. If it is gone, set `expired` or `filled` with a history entry and move on. With no browser at all, follow `apply-procedure.md`, "No browser Claude can use", for steps 2 to 8.
 3. Save the posting text and re-check the fit (`apply-procedure.md`, "Before the form").
 4. Upload the resume, trying the methods in order, and check the upload on the page.
 5. Fill the form from the answer bank and the resume. Quote legal text to the user. Hand every wall to the user.

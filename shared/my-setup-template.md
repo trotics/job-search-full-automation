@@ -7,7 +7,7 @@ System settings for this job search, filled in once by setup. Every stage reads 
 - **Tracker kind:** {{TRACKER_KIND}}
 - **Tracker location:** {{TRACKER_LOCATION}}
 - **Python command:** {{PYTHON_COMMAND}}
-- **Browser for applying:** {{APPLY_BROWSER}}
+- **Browser:** {{APPLY_BROWSER}}
 - **Email connector:** {{EMAIL_CONNECTOR}}
 - **Resume choice:** {{RESUME_CHOICE}}
 - **Set up on:** {{SETUP_DATE}}

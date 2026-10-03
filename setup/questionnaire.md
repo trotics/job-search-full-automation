@@ -40,7 +40,7 @@ The person should be able to answer both in one message.
 In a chat with no folder: write "code execution" if you can run Python there (then use the Skill's `tools/` as `shared/no-folder.md` says), otherwise "none (Skill only)"; skip the install and the self-test. Otherwise follow `shared/python-setup.md`: find the command that works (`python`, `python3` or `py`), install the add-ons, and run the self-test. Write the command, or "none" if the person chose to continue without Python.
 
 ### `{{APPLY_BROWSER}}`
-Check whether the Claude in Chrome tools are available to you. Write "Claude in Chrome" or "not connected yet". If not connected, tell them: applying works best with the Claude in Chrome extension, because it can upload their resume (`stages/03-apply/references/claude-in-chrome-setup.md`). Sweeps and everything else work without it. This is not a blocker for today.
+Check whether the Claude in Chrome tools are available to you. Write "Claude in Chrome", "built-in browser only" (no Chrome, but the app's browser pane works), or "none" (no browser tool at all). If not connected, tell them: applying works best with the Claude in Chrome extension, because it can upload their resume (`stages/03-apply/references/claude-in-chrome-setup.md`). Sweeps and everything else work without it. This is not a blocker for today.
 
 ### `{{EMAIL_CONNECTOR}}`
 Check whether an email connector (for example Gmail or Outlook) is available to you. Write its name, or "none".
@@ -61,7 +61,7 @@ Today, `YYYY-MM-DD`.
 
 - **Tracker:** [web page link, or tracker/my-tracker.xlsx]
 - **Resume:** [use mine / improve mine / build new / decide later]
-- **Applying browser:** [Claude in Chrome / not connected yet]
+- **Browser:** [Claude in Chrome / built-in browser only / none]
 
 Next is a short interview about the jobs you want. I ask one question at a time."
 

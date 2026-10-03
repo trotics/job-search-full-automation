@@ -30,7 +30,7 @@ Decide whether one posting goes in the tracker. A sweep runs this for every new 
    6. **Pay?** Under the floor: no. No posted pay: decide plausibility and write the reasoning (rules 2).
    7. **Hard requirements?** License before hire, a specific degree the user lacks, any hard no in the user's rules: no. Required years inside the user's stretch never fail it on their own (rules 3).
    8. **On-hold employer?** Add the listing, set `priority` to `On hold`, and say so in `why`.
-4. Follow the user's autonomy lines in `my-rules.md`: if they want to be asked before listings are written, or want every close call, show the result and wait for their yes before writing.
+4. Follow the user's autonomy lines in `my-rules.md`: if they want to be asked before listings are written, show each result and wait for their yes before writing. "Bring me every close call" applies only to close calls; clear fits are written as usual.
 5. Write the result as `references/fit-outcomes.md` says: a new listing, a skipped line, or a report item for the user.
 6. If no sweep is running, take an after snapshot and run the check with `--stage fit`.
 7. If no sweep is running, end by suggesting the next step (`next-steps.md`, "After a sweep or a fit call"). Inside a sweep, the sweep does this.

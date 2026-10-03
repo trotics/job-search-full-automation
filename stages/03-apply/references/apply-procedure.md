@@ -69,7 +69,7 @@ If no browser tool works in this session (for example a chat with no desktop app
 1. Still save the posting text and re-check the fit, from the posting the person pastes.
 2. Give the review summary as a **fill sheet**: every answer for the form, in order, the file to attach, the legal text to read, and the walls that are theirs.
 3. The person fills it in and submits in their own browser. Claude never claims to have submitted anything.
-4. When they say they submitted, ask for the confirmation, then record `Applied` and `appliedDate`, with a history entry that says "submitted by the user from a fill sheet" and `upload: attached by the user`. Until then the listing stays at To apply.
+4. When they say they submitted, ask for the confirmation (record only "confirmation shown" or the last 4 digits of a long number, as in "After submitting"), then record `Applied` and `appliedDate`, with a history entry that says "submitted by the user from a fill sheet" and `upload: attached by the user`. Until then the listing stays at To apply.
 
 ## Dry run
 
