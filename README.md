@@ -48,13 +48,13 @@ This was built for one real job search and used every day on it. This public ver
 
 ## What you need
 
-1. **A Claude account** on a paid plan, using the **Claude desktop app**. Cowork is the easiest way to run it. Claude Code works too. This project works with Claude only (see "Built for Claude").
+1. **A Claude account** on a paid plan, using the **Claude desktop app** for Windows or Mac ([download](https://claude.com/download)). A normal Claude conversation in the app is the easiest way to run it, because it can work in a folder on your computer. Claude Code works too. This project works with Claude only (see "Built for Claude").
 2. **Claude in Chrome** (the Claude browser extension for Google Chrome), connected to the Claude app. [How to get it](https://support.claude.com/en/articles/12012173-get-started-with-claude-in-chrome). Sweeps can use the app's built-in browser, but **applying works best with Claude in Chrome**, because the built-in browser cannot upload files such as your resume.
 3. **This folder**, downloaded to your computer. It becomes your job search folder.
 4. **Your resume** as a PDF.
 5. **Python 3, with two add-ons (openpyxl and reportlab).** Claude runs small scripts to check its own work and to build your resume as a PDF.
    - **Claude Code on your own computer:** install Python 3 from python.org (on Windows, tick "Add python.exe to PATH" in the installer). Then open a terminal in your job search folder and run `python -m pip install -r requirements.txt` once.
-   - **Cowork:** Claude runs the scripts in its own workspace. If it says Python or an add-on is missing, ask it to install them.
+   - **A Claude conversation in the desktop app:** Claude runs the scripts for you. If it says Python or an add-on is missing, it will tell you how to install them.
    - Without Python, Claude cannot finish a stage's checks. It will tell you so, and the stage will not be marked done.
 6. *Optional:* an email connector (Gmail or Outlook) in Claude, for the mailbox check.
 
@@ -66,8 +66,8 @@ This was built for one real job search and used every day on it. This public ver
 
 1. **Download** [job-search-full-automation-main.zip](https://github.com/trotics/job-search-full-automation/archive/refs/heads/main.zip) and unzip it somewhere easy to find, for example your Documents folder.
 2. **Open the folder in Claude.**
-   - **Cowork** (recommended): in the Claude desktop app, start a new Cowork task and choose the unzipped folder as the folder Claude works in.
-   - **Claude Code:** open the unzipped folder as your project.
+   - **In the Claude desktop app** (recommended): start a new conversation. Under the message box, choose **Work in a folder**, pick the unzipped folder, and allow Claude to edit the files in it. (On a Mac, click Allow if macOS asks for permission.)
+   - **In Claude Code:** open the unzipped folder as your project.
 3. **Say:** "Hey, look at this folder and set me up."
 
 Claude reads `START-HERE.md` in the folder and does the rest with you, one step at a time:
@@ -77,9 +77,11 @@ Claude reads `START-HERE.md` in the folder and does the rest with you, one step 
 - it asks about your resume and checks your browser;
 - it starts the setup interview.
 
-It asks before running anything. No separate Skill install is needed: in Claude Code the Skill loads from the folder by itself, and in Cowork Claude reads the Skill's instruction files straight from the folder.
+It asks before running anything. No separate Skill install is needed: in Claude Code the Skill loads from the folder by itself, and in a conversation Claude reads the Skill's instruction files straight from the folder.
 
-Next time, open the same folder and say what you want ("Run a sweep", "Let's apply").
+Next time, start a conversation in the same folder (Work in a folder) and say what you want ("Run a sweep", "Let's apply").
+
+The folder has to be on a computer with the Claude desktop app. Claude on the web and the phone app cannot open a folder on your computer (see "Where it runs").
 
 ### Step by step (if you prefer, or if the quick way gets stuck)
 
@@ -89,7 +91,7 @@ Download it here: **[job-search-full-automation-main.zip](https://github.com/tro
 
 #### Step 2. Add the Skill to Claude (optional when you work in this folder)
 
-**In the Claude app (chat or Cowork):**
+**In the Claude app:**
 
 1. In **Settings**, make sure **code execution** is turned on. Skills need it.
 2. Open **Customize**, then **Skills**.
@@ -101,7 +103,7 @@ Download it here: **[job-search-full-automation-main.zip](https://github.com/tro
 
 #### Step 3. Give Claude your folder
 
-- **Cowork:** start a new task and choose your job search folder as the folder Claude works in.
+- **Claude desktop app:** start a new conversation, choose **Work in a folder** under the message box, and pick your job search folder.
 - **Claude Code:** open your job search folder as the project.
 
 Put your resume in the `my-files` folder and name it `resume.pdf`.
@@ -145,7 +147,7 @@ Claude reads each employer's own career site, adds listings that fit to your tra
 
 ## Where it runs
 
-| | Claude desktop app (Cowork or Claude Code) on Windows or Mac | Claude on the web (claude.ai in a browser, including Safari on an iPad) | Claude iPhone and iPad app |
+| | Claude desktop app (a conversation working in your folder, or Claude Code) on Windows or Mac | Claude on the web (claude.ai in a browser, including Safari on an iPad) | Claude iPhone and iPad app |
 |---|---|---|---|
 | Intake, resume, company research, interview prep, outreach drafts | Yes, tested | Should work: Skills run in Claude on the web. Not tested yet | Not confirmed |
 | Fit call on a posting link you paste | Yes | Should work. Not tested yet | Not confirmed |
