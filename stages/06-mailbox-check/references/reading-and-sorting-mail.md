@@ -40,4 +40,4 @@ One list, before writing anything, for example: "Example Health Co, Clinical Acc
 
 ## What gets written
 
-Only what the user approved: `status` (if changed) and one history line per listing, ending "from email dated YYYY-MM-DD, approved by the user". Never set Applied from an email: Applied comes only from the apply stage or the user.
+Only what the user approved: `status` (if changed) and one history line per listing, ending "from email dated YYYY-MM-DD, approved by the user". When several approved emails concern one listing (for example a confirmation and an interview request), combine them into that one line, naming each email's date. Never set Applied from an email: Applied comes only from the apply stage or the user.

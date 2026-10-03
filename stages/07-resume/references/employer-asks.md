@@ -11,6 +11,7 @@ Before writing, look at what employers actually ask for in real postings for the
    1. Listings already in the tracker for this role that have `postingText` saved.
    2. Postings on employers' own career sites, found by web search, for this role and level in or near the user's allowed places (or remote roles open to them). Posted in the last six months where possible.
    3. Postings the user pastes or attaches.
+   Use only postings for the target role and level. If one is for a different kind of job (for example a role the user's rules list as out), say so and leave it out, or ask for another.
    Never open LinkedIn. Job aggregators may be used to find which employers post the role; read the posting itself on the employer's own site when you can.
 3. **Read each posting and note**, with the posting it came from:
    - Must-have credentials: licenses, degrees, certifications, clearances.

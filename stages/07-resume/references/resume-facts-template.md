@@ -24,7 +24,7 @@ Last approved by the user: [YYYY-MM-DD]
 
 <!-- Built from 3 to 5 real postings for the target role, then confirmed by the user. -->
 
-- Based on: [postings / N postings plus example / user description plus example / default]
+- Based on: [exactly one of: postings / N postings plus example / user description plus example / default. Postings the user pasted count as postings. A note in brackets after it is fine, for example "postings (3 pasted by the user)"]
 - Built and confirmed by the user: [YYYY-MM-DD]
 - Postings used:
   - Posting: [company] | [title] | [link] | [date posted or read]

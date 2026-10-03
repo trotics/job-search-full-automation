@@ -14,6 +14,7 @@ Fails if:
     the resume's sections are out of the order saved there, or the resume uses a posting term marked there as not in the facts.
 Exit code 0 means every check passed.
 """
+import os
 import re
 import sys
 
@@ -138,7 +139,8 @@ def main():
             m = re.search(r"(?m)^- " + re.escape(name) + r":\s*(.*)$", p)
             v = m.group(1).strip() if m else ""
             return "" if v.startswith("[") else v
-        src = field("Based on").lower()
+        # A note in brackets after the value is fine, for example "postings (3 pasted by the user)".
+        src = re.sub(r"\s*\(.*\)\s*$", "", field("Based on").lower())
         postings = [l for l in re.findall(r"(?m)^\s+- Posting:\s*(.*)$", p) if l.strip() and not l.strip().startswith("[")]
         example = field("Closest example")
         if not src:
@@ -166,7 +168,9 @@ def main():
                 problems.append("uses %r, which the facts file marks as not in the facts" % term)
 
     # Page count.
-    if "--pdf" in a:
+    if "--pdf" in a and not os.path.isfile(a[a.index("--pdf") + 1]):
+        problems.append("no PDF at %s yet: build it with tools/build_resume.py, then run this check again" % a[a.index("--pdf") + 1])
+    elif "--pdf" in a:
         pdf = open(a[a.index("--pdf") + 1], "rb").read()
         pages = len(re.findall(rb"/Type\s*/Page[^s]", pdf))
         years = int(a[a.index("--years") + 1]) if "--years" in a else 0

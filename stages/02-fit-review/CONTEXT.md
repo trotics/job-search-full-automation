@@ -59,4 +59,4 @@ Decide whether one posting goes in the tracker. A sweep runs this for every new 
 |----------|----------|--------|
 | New listing | Tracker, `listings` | One row at To apply |
 | Skipped line | Tracker, `coverage.skipped` | Title, req id, reason |
-| Close calls | The sweep report, or `output/[YYYY-MM-DD]-fit-report.md` when run alone | The seven-part shape in `fit-outcomes.md` |
+| Fit report | Inside a sweep: the sweep report. Run alone: `output/[YYYY-MM-DD]-fit-report.md`, always | Each posting and its result; close calls in the seven-part shape in `fit-outcomes.md` |

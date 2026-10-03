@@ -50,9 +50,9 @@ What to suggest when a session ends, so the person always knows what to say next
 
 ## A returning person with no request
 
-Look at the tracker and suggest the one most useful thing:
+Find the tracker in `my-setup.md` and read `listings` and `coverage` as `tracker-access.md` says (no snapshot needed: this only reads). An employer with no `coverage` row has never been swept. Then suggest the one most useful thing:
 
-1. A deadline or an interview coming up: deal with it first.
+1. A deadline or an interview coming up: name it with its date first, then "Say 'Prep me for my interview with [company] on [day]'" (or, for an assessment or a reply to send, what to do and by when).
 2. Listings at To apply: "Say 'Let's apply'."
 3. Applications in and no mailbox check in the last week: "Say 'Check my email'."
 4. No sweep in the last week: "Say 'Run a sweep'."

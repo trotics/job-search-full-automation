@@ -16,15 +16,25 @@ A Claude artifact page the user published from `tracker/tracker-page.html`, with
 
 `tracker/my-tracker.xlsx`, a copy of `tracker/spreadsheet/job-search-tracker.xlsx`, with tabs of the same names and the same columns.
 
-- Read and write it with `tools/sheet.py`, or with Python and openpyxl.
+- Read it with `tools/sheet.py list tracker/my-tracker.xlsx <tab>` (every row) or `show ... <tab> <id>` (one row). Write it with `tools/sheet.py apply`, or with Python and openpyxl.
+- Changes files for `sheet.py apply` hold personal data: save them as `tracker/backups/<stamp>-changes.json`.
 - Ask the user to close the file in Excel before a session writes to it. If it is open, saving fails with a message saying so.
 - If a row changed since you read it, stop and read it again.
+
+## Direct requests
+
+When the person asks for a tracker change outside a stage, take a snapshot first and run the check with `--stage user` afterwards.
+
+- **A status change:** read the row fresh, change `status`, and append a history line: `YYYY-MM-DD status set to <status> at the user's request.`
+- **A job they applied to on their own:** add the employer first if it is not on the target list (`adding-employers.md`), then add a `listings` row with every column `check_tracker.py` requires: `id` (`<company-slug>-<req id or short title slug>`, unique), `company` (as in `companies`), `title`, `location`, `url`, `industry`, `pay` (or "not posted"), `why` (one line, for example "Applied by the user outside a session"), `teaches` ("Not read." if unknown), `priority`, `status` `Applied`, `appliedDate` (the date they give), `postingText` (the posting if they have it; otherwise "Not saved: applied outside a session"), and `history`: `YYYY-MM-DD added at the user's request; applied on their own on YYYY-MM-DD.` Leave `yourNotes` empty.
 
 ## Backups and snapshots
 
 All tracker backups and snapshots go in `tracker/backups/`. Git never shares that folder.
 
-**Before more than five writes in one session**, save a copy of the whole tracker:
+Snapshots get a dated name, so no session overwrites another: `<stamp>` below means the session's start time and stage, for example `2026-10-03-0915-sweep`. Every `before` snapshot is a full copy of the tracker, so it is also the session's backup.
+
+**Before more than five writes in one session** on the spreadsheet, also save a copy of the file, so it is easy to restore. For the artifact tracker the `before` snapshot is enough. Either kind can also be backed up on its own at any time:
 
 - Artifact: list every collection with `ArtifactData` (`out_dir` set to a new folder under `tracker/backups/`), then combine them with `python tools/check_tracker.py snapshot-dir <that folder> tracker/backups/tracker-backup-<YYYY-MM-DD>-<HHMM>.json`.
 - Spreadsheet: `python tools/sheet.py backup tracker/my-tracker.xlsx`.
@@ -36,23 +46,23 @@ Every stage that writes ends with a check: `tools/check_tracker.py` compares a s
 **Spreadsheet:**
 
 ```
-python tools/check_tracker.py snapshot tracker/my-tracker.xlsx tracker/backups/before.json
+python tools/check_tracker.py snapshot tracker/my-tracker.xlsx tracker/backups/<stamp>-before.json
   (the session runs)
-python tools/check_tracker.py snapshot tracker/my-tracker.xlsx tracker/backups/after.json
-python tools/check_tracker.py check tracker/backups/before.json tracker/backups/after.json --stage sweep
+python tools/check_tracker.py snapshot tracker/my-tracker.xlsx tracker/backups/<stamp>-after.json
+python tools/check_tracker.py check tracker/backups/<stamp>-before.json tracker/backups/<stamp>-after.json --stage sweep
 ```
 
-**Artifact:** list each of the 5 collections with `ArtifactData` (`list`, with `out_dir` set to `tracker/backups/before-db`). That saves one file per row. Then combine them:
+**Artifact:** list each of the 5 collections with `ArtifactData` (`list`, with `out_dir` set to `tracker/backups/<stamp>-before-db`). That saves one file per row. Then combine them:
 
 ```
-python tools/check_tracker.py snapshot-dir tracker/backups/before-db tracker/backups/before.json
+python tools/check_tracker.py snapshot-dir tracker/backups/<stamp>-before-db tracker/backups/<stamp>-before.json
   (the session runs)
-  (list the 5 collections again with out_dir tracker/backups/after-db)
-python tools/check_tracker.py snapshot-dir tracker/backups/after-db tracker/backups/after.json
-python tools/check_tracker.py check tracker/backups/before.json tracker/backups/after.json --stage sweep
+  (list the 5 collections again with out_dir tracker/backups/<stamp>-after-db)
+python tools/check_tracker.py snapshot-dir tracker/backups/<stamp>-after-db tracker/backups/<stamp>-after.json
+python tools/check_tracker.py check tracker/backups/<stamp>-before.json tracker/backups/<stamp>-after.json --stage sweep
 ```
 
-The same `before.json` also serves as the backup for bulk writes. Use a fresh `after-db` folder each time, so rows deleted during a session do not linger from an earlier run.
+Use the stage's own name in `--stage`. A fresh `after-db` folder each time keeps rows deleted during a session from lingering from an earlier run.
 
 The `--stage` choices are `intake`, `sweep`, `fit`, `apply`, `outreach`, `prep`, `mailbox`, `resume`, `research` and `user` (a change the user asked for directly).
 

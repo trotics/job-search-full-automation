@@ -3,9 +3,11 @@
 Commands:
   python tools/sheet.py backup  tracker/my-tracker.xlsx
   python tools/sheet.py show    tracker/my-tracker.xlsx listings <id>
-  python tools/sheet.py apply   tracker/my-tracker.xlsx changes.json
+  python tools/sheet.py list    tracker/my-tracker.xlsx listings          (every row of a tab, as JSON)
+  python tools/sheet.py apply   tracker/my-tracker.xlsx tracker/backups/<stamp>-changes.json
 
-changes.json is a list of changes, applied in order:
+The changes file holds personal data: keep it in tracker/backups/, which git never shares.
+It is a list of changes, applied in order:
   {"tab": "listings", "op": "add",    "id": "acme-r12", "fields": {...}}       new row (id must be new)
   {"tab": "listings", "op": "update", "id": "acme-r12", "fields": {"status": "expired"}}
   {"tab": "listings", "op": "history","id": "acme-r12", "entry": "2026-03-14 posting removed on the employer's site."}
@@ -105,6 +107,17 @@ def show(path, tab, rid):
         print("%s: %s" % (h, ws.cell(row=rows[rid], column=j).value or ""))
 
 
+def list_tab(path, tab):
+    ws = load_workbook(path, data_only=True)[tab]
+    header = [c.value for c in ws[1]]
+    rows = []
+    for r in range(2, ws.max_row + 1):
+        if ws.cell(row=r, column=1).value in (None, ""):
+            continue
+        rows.append({h: ws.cell(row=r, column=j).value or "" for j, h in enumerate(header, start=1) if h})
+    print(json.dumps(rows, indent=1, ensure_ascii=False, default=str))
+
+
 def main():
     a = sys.argv[1:]
     if len(a) < 2:
@@ -114,6 +127,8 @@ def main():
         backup(a[1])
     elif a[0] == "show":
         show(a[1], a[2], a[3])
+    elif a[0] == "list":
+        list_tab(a[1], a[2])
     elif a[0] == "apply":
         with open(a[2], encoding="utf-8") as f:
             apply(a[1], json.load(f))

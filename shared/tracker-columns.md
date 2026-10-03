@@ -15,7 +15,7 @@ One row per employer.
 | `careersSite` | Link to the employer's own job board. | Both |
 | `tier` | `A`, `B` or `C`. What each letter means is in `settings`. | Both |
 | `industry` | The employer's industry, using the same words as `settings.industryOrder` where it fits. | Both |
-| `keepAnyway` | `yes` keeps this employer in sweeps even if its industry is excluded. Otherwise `no`. | You |
+| `keepAnyway` | `yes` keeps this employer in sweeps even if its industry is excluded. Otherwise `no`. | You (Claude sets `yes` only when you ask for it) |
 | `onHold` | `yes` means sweep it, but do not apply without your go-ahead. Otherwise `no`. | You |
 | `added` | Date the employer was added, `YYYY-MM-DD`. | Claude |
 
