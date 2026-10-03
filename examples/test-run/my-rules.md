@@ -57,7 +57,7 @@ Last updated: 2026-09-20
 - Fit calls: decide by my rules; list anything about taste in the report.
 - Apply: Human review before every submission. Auto-submit is off unless I turn it on for one session in writing.
 - Outreach: drafts when I start it by name.
-- Mailbox check: on, using my Gmail connector.
+- Mailbox check: on, using my email connector.
 
 ## 9. Writing style
 

@@ -121,7 +121,7 @@ The person should be able to answer both in one message.
 ### Derived fields (do not ask)
 
 #### `{{PYTHON_COMMAND}}`
-Follow `shared/python-setup.md`: find the command that works (`python`, `python3` or `py`), install the add-ons, and run the self-test. Write the command, or "none" if the person chose to continue without Python.
+If there is no `tools/` folder (the Skill alone, without the full workspace folder), write "none (Skill only)", skip the self-test, and tell the person the checks need the full folder from GitHub. Otherwise follow `shared/python-setup.md`: find the command that works (`python`, `python3` or `py`), install the add-ons, and run the self-test. Write the command, or "none" if the person chose to continue without Python.
 
 #### `{{APPLY_BROWSER}}`
 Check whether the Claude in Chrome tools are available to you. Write "Claude in Chrome" or "not connected yet". If not connected, tell them: applying works best with the Claude in Chrome extension, because it can upload their resume (`stages/03-apply/references/claude-in-chrome-setup.md`). Sweeps and everything else work without it. This is not a blocker for today.
@@ -211,7 +211,7 @@ Rules for any session that hands reading work to research helpers.
 
 - About **6 employers per helper**, and a cap of about 50 tool calls each. A board with more than about 200 jobs goes alone or with very small boards. Helpers given 11 or more employers silently dropped some.
 - Each helper loads its browser tools once, **opens its own tab** (never a shared one), and closes only its own tab.
-- Each helper writes its final findings to a file as well as returning them (a hand-back can be lost), and returns at most about 20 KB.
+- Each helper writes its final findings to a file in the stage's `output/` folder as well as returning them (a hand-back can be lost), and returns at most about 20 KB.
 - Every finding carries: job number, title, location as written, the employer's own job address, the board's work-type tag, pay if posted, and the **quoted requirement lines**. If the requirements could not be read, the helper says so.
 - Give helpers only confirmed board addresses, or have them find the board from the careers page first.
 - Helpers only read: no tracker writes, no applications, no sign-ins, no bot-check workarounds.
@@ -241,7 +241,7 @@ System settings for this job search, filled in once by setup. Every stage reads 
 
 ## Next steps
 
-What to suggest when a session ends, so the person always knows what to say next. Suggest only; never start the next stage yourself. Keep it to one or two lines, with the exact words to say in quotes, and pick the line that fits what just happened.
+What to suggest when a session ends, so the person always knows what to say next. Wherever a line says "Check my email" and `my-setup.md` shows no email connector, say instead: "In a few days, paste any employer replies here and say 'Check these emails' (or connect your email in Claude's settings)." Suggest only; never start the next stage yourself. Keep it to one or two lines, with the exact words to say in quotes, and pick the line that fits what just happened.
 
 ### After the interview
 
@@ -271,13 +271,15 @@ What to suggest when a session ends, so the person always knows what to say next
 
 ### After applying
 
+- A dry run: "Say 'Apply to the [company] [title] listing' when you want to do it for real."
 - Listings still at To apply: "Say 'Let's apply' to keep going."
 - Applications went in: "In a few days, say 'Check my email' to catch replies."
 - Their rules ask for outreach drafts: "Say 'Run outreach on the [company] listing' if you want a note to the hiring manager."
 
 ### After outreach
 
-"Send the drafts yourself when you are ready. In a few days, say 'Check my email'."
+- The listing is still at To apply: "Apply first: say 'Apply to the [company] [title] listing'. Then send the drafts yourself."
+- Otherwise: "Send the drafts yourself when you are ready. In a few days, say 'Check my email'."
 
 ### After interview prep
 
@@ -287,13 +289,15 @@ What to suggest when a session ends, so the person always knows what to say next
 
 - An interview was found: "Say 'Prep me for my interview with [company] on [day]'."
 - Deadlines (assessments, scheduling): list them first, with dates.
-- Nothing new: "Say 'Run a sweep' to look for new listings."
+- A rejection: one kind line, then the next most useful thing below.
+- Listings still at To apply: "Say 'Let's apply'."
+- Nothing new and no sweep in the last week: "Say 'Run a sweep' to look for new listings."
 
 ### A returning person with no request
 
-Find the tracker in `my-setup.md` and read `listings` and `coverage` as `tracker-access.md` says (no snapshot needed: this only reads). An employer with no `coverage` row has never been swept. Then suggest the one most useful thing:
+Find the tracker in `my-setup.md` and read `listings` and `coverage` as `tracker-access.md` says (no snapshot needed: this only reads). An employer with no `coverage` row has never been swept, unless its industry is excluded (those are skipped on purpose and do not count). Then suggest the one most useful thing:
 
-1. A deadline or an interview coming up: name it with its date first, then "Say 'Prep me for my interview with [company] on [day]'" (or, for an assessment or a reply to send, what to do and by when).
+1. A deadline or an interview coming up (a listing at Interview whose newest history line gives a future date, or a deadline in the latest mailbox report): name it with its date first. If no prep file for it exists in `stages/05-interview-prep/output/`, add "Say 'Prep me for my interview with [company] on [day]'"; if one exists, just wish them luck. For an assessment or a reply to send, say what to do and by when.
 2. Listings at To apply: "Say 'Let's apply'."
 3. Applications in and no mailbox check in the last week: "Say 'Check my email'."
 4. No sweep in the last week: "Say 'Run a sweep'."
@@ -361,6 +365,7 @@ Copy any of these into a session. Words in [brackets] are yours to fill in. Each
 
 - "Check my email for employer replies."
 - "Check my email since [date]."
+- "Check these emails: [paste the employer replies]." (No email connector needed)
 
 ---
 
@@ -431,7 +436,7 @@ Each of these happened during real use of this system. Read this list before any
 
 Stable rules for every stage. They work together with the user's own rules, `my-rules.md` (saved by the intake interview), which holds everything personal: target roles, place, pay, industries, experience stretch, hard noes, employers on hold, autonomy and writing style. Where this file says "the user's rules", it means `my-rules.md`.
 
-If the tracker and a file disagree on status, the tracker wins. If anything disagrees with this file or `my-rules.md`, those win. If this file and `my-rules.md` disagree, `my-rules.md` wins for the user's own preferences (roles, place, pay, industries) and this file wins for safety. Safety rules never bend.
+If the tracker and a file disagree on status, the tracker wins. If anything disagrees with this file or `my-rules.md`, those win. If this file and `my-rules.md` disagree, `my-rules.md` wins for the user's own preferences (roles, place, pay, industries) and this file wins for safety. Safety rules never bend. For tools and connections (tracker, Python, browser, email connector), `my-setup.md` wins: it records what setup actually found.
 
 When two rules conflict and nothing here settles it, the newest dated rule in `my-rules.md` wins, and you tell the user about the conflict. Safety rules (section 9) always win.
 
@@ -517,7 +522,7 @@ Any grant of extra autonomy lasts for one session only. Past grants never carry 
 - Never enter a Social Security number or other government ID, driver's license, bank account or card number.
 - Never solve or try to get past a CAPTCHA, bot check or one-time code.
 - Never send an email, message or form on the user's behalf. The only exception is submitting an application after the user's review, or under auto-submit the user turned on for this session.
-- Assessments, aptitude tests, criminal-history questions, non-compete and non-solicitation questions are the user's to answer.
+- Assessments, aptitude tests, criminal-history questions, and whether they would sign a future non-compete or non-solicitation agreement are the user's to answer. Whether they are bound by one now comes from the answer bank.
 - Never contact the user's current employer. Never use the user's work email, work phone or work accounts.
 - **Site terms.** LinkedIn and some job boards forbid automated access in their terms of use. This system never automates LinkedIn in any way: no scraping, no automated profile visits, no messages, and no opening linkedin.com pages. The user is responsible for following each site's terms.
 
@@ -630,7 +635,7 @@ One row per employer.
 | `tier` | `A`, `B` or `C`. What each letter means is in `settings`. | Both |
 | `industry` | The employer's industry, using the same words as `settings.industryOrder` where it fits. | Both |
 | `keepAnyway` | `yes` keeps this employer in sweeps even if its industry is excluded. Otherwise `no`. | You (Claude sets `yes` only when you ask for it) |
-| `onHold` | `yes` means sweep it, but do not apply without your go-ahead. Otherwise `no`. | You |
+| `onHold` | `yes` means sweep it, but do not apply without your go-ahead. Otherwise `no`. | You (Claude sets it from your rules when adding an employer) |
 | `added` | Date the employer was added, `YYYY-MM-DD`. | Claude |
 
 ### coverage: one row per employer, per sweep record
@@ -670,7 +675,7 @@ The `id` matches the employer's `id` in `companies`.
 | `status` | Where it stands. See the list below. | Both, under the rules |
 | `appliedDate` | Date the application went in, `YYYY-MM-DD`. | Claude |
 | `postingText` | The full text of the posting, saved so it survives after the posting comes down. | Claude |
-| `reviewReason` | Why a listing at Review fit needs your call. | Claude |
+| `reviewReason` | Why a listing at Review fit needs your call. | You (Claude only at your request) |
 | `history` | Dated log of everything sessions did. **Add only, never change or delete.** Entries are separated by ` \| `, and each starts with a `YYYY-MM-DD` date. An entry never contains the `\|` character itself (write `/` instead). | Claude (append only) |
 | `yourNotes` | Your own notes. **Claude never writes this.** | You |
 | `managerName`, `managerTitle`, `howIdentified`, `confidence`, `profileUrl`, `emailOrFormat`, `connectionNote`, `longMessage` | Outreach research and drafts (stage 04). Drafts only. You send. | Claude |
@@ -839,7 +844,7 @@ The intake interview, in order. The number in brackets is the section of `my-rul
 26. "When a posting is a close call, should I decide by your rules, or bring every close call to you?" [8]
 27. Tell the user, do not ask: "For applications, I fill in the form and you review it before anything is submitted. You can turn on auto-submit for one session by writing it out, but it is off by default." [8]
 28. "Do you want hiring-manager outreach drafts? I only draft. You send everything yourself." [8]
-29. Do not ask about email: setup already checked for a connector. If `my-setup.md` names one, write "Mailbox check: on, with [connector]". If it says "none", write "Mailbox check: off until a connector is added (pasted emails also work)" and tell the user that in one line. [8]
+29. Do not ask about email: setup already checked for a connector. If `my-setup.md` names one, write "Mailbox check: on, with [connector]". If it says "none", write "Mailbox check: pasted emails only, until a connector is added" and tell the user that in one line. [8]
 
 ### Writing style
 
@@ -907,7 +912,7 @@ Last updated: [YYYY-MM-DD]
 - Fit calls: [autonomous / bring me every call]
 - Apply: Human review before every submission. Auto-submit is off unless I turn it on for one session in writing.
 - Outreach: [off / drafts when I start it by name]
-- Mailbox check: [off / on, using my email connector]
+- Mailbox check: [pasted emails only / on, using my email connector]
 
 ### 9. Writing style
 
@@ -1320,8 +1325,8 @@ Decide whether one posting goes in the tracker. A sweep runs this for every new 
 
 ### Process
 
-1. **Employer not on the target list** (for example the user pasted a link): ask whether to add it. If yes, add it as `adding-employers.md` says, then go on. If no, give the fit call in chat only and write nothing.
-2. Take a tracker snapshot, unless a sweep already took one this session.
+1. Take a tracker snapshot, unless a sweep already took one this session.
+2. **Employer not on the target list** (for example the user pasted a link): ask whether to add it. If yes, add it as `adding-employers.md` says, then go on. If no, give the fit call in chat only and write nothing.
 3. Check in this order. The first failure decides:
    1. **Duplicate?** Same req id, or same title and location at the same employer, already in `listings`: stop, nothing to add.
    2. **Live on the employer's own site?** If not: no.
@@ -1340,7 +1345,7 @@ Decide whether one posting goes in the tracker. A sweep runs this for every new 
 
 | After Step | Agent Presents | Human Decides |
 |------------|---------------|---------------|
-| 1 | Whether to add an employer not on the target list | Add it, or a chat-only fit call |
+| 2 | Whether to add an employer not on the target list | Add it, or a chat-only fit call |
 | 3 | Each result, when the user's autonomy lines say to ask | Write it, or not |
 | 5 | Close calls that depend on taste, in the report | Apply or skip |
 
@@ -1378,7 +1383,7 @@ What to write for each result of a fit review. Column meanings are in `shared/tr
 - `pay`: the posted pay as written, or "not posted".
 - `why`: one or two sentences on the fit, any reach (years, industry), and anything the user should know.
 - `teaches`: what the role would teach the user, starting "Stated:" (the posting says so), "Not stated." or "Not read."
-- `family`: one of `settings.roleFamilies`. `track`: one of `settings.tracks`.
+- `family`: one of `settings.roleFamilies`, written without the `*`. `track`: one of `settings.tracks`.
 - `priority`: `High` (clear fit, pay at or above the floor), `Medium` (fits with a reach), `Low` (fits on paper, weaker on taste or pay), or `On hold`.
 - `postingText`: the posting's full text, copied from the employer's own page (title, location, pay, duties, requirements). This lets later stages work after the posting is taken down. If the page is too long, keep at least the duties, requirements and pay.
 - `status`: `To apply`.
@@ -1421,13 +1426,13 @@ Fill in applications for listings at To apply, live with the user. **The user re
 | Stage 07 | `../07-resume/output/resume.pdf` | The file | The resume to upload (or the user's own file saved there at setup) |
 | Stage 07 | `../07-resume/output/resume.md` | Full file | Resume text for form fields |
 | Stage 07 | `../07-resume/output/resume-[listing-id].pdf` | Only if the listing's history names it | An approved tailored resume |
-| Shared | `../../shared/rules.md` | Sections 7 to 10 | Status rules, autonomy, safety, writing |
+| Shared | `../../shared/rules.md` | Sections 5 to 10 | On-hold employers, evidence, status rules, autonomy, safety, writing |
 | Shared | `../../shared/my-setup.md` | Full file | Tracker kind and location, Python command, browser, email connector |
 | Shared | `../../shared/tracker-access.md` | Full file | Reading, writing and the check |
 | Shared | `../../shared/recurring-mistakes.md` | Full file | Read before any tracker write |
 | Shared | `../../shared/answer-bank.md` | Full file | How to use the answer bank |
 | Shared | `../../shared/next-steps.md` | "After applying" | What to suggest when the session ends |
-| Tracker | `listings`, `answers` | Listings at To apply; all answers | What to apply to, and the answers |
+| Tracker | `listings`, `answers`, `companies` | Listings at To apply; all answers; `onHold` | What to apply to, the answers, and employers on hold |
 | Reference | `references/apply-procedure.md` | Full file | Auto-submit, upload order, filling, review, recording |
 | Reference | `references/application-techniques.md` | Full file | How forms behave, upload methods, legal text, walls |
 | Reference | `references/application-platforms.md` | The platform's section | Read before each form |
@@ -1450,7 +1455,7 @@ Apply in **Claude in Chrome** when it is connected. It can upload files; the bui
 11. Run the audit below, then save the report.
 12. End by suggesting the next step in one or two lines (`next-steps.md`, "After applying"). Suggest only; do not start it.
 
-For a **dry run**, stop at step 6 and follow `apply-procedure.md`, "Dry run".
+For a **dry run**, stop at step 6 and follow `apply-procedure.md`, "Dry run", then do steps 10 to 12.
 
 ### Checkpoints
 
@@ -1478,7 +1483,7 @@ For a **dry run**, stop at step 6 and follow `apply-procedure.md`, "Dry run".
 |----------|----------|--------|
 | Applied listings | Tracker, `listings` | Status Applied, `postingText`, `appliedDate`, history with the upload method |
 | Blocked listings | Tracker, `listings` | Left at To apply, with a history entry naming the block |
-| Apply report | `output/[YYYY-MM-DD]-apply-report.md` | What went through, what is blocked and why, what needs the user |
+| Apply report | `output/[YYYY-MM-DD]-apply-report.md` (a dry run saves `output/[YYYY-MM-DD]-apply-dry-run.md` instead) | What went through, what is blocked and why, what needs the user |
 
 ---
 
@@ -1568,7 +1573,7 @@ No account. Usually several pages: consent, contact and resume, self-identificat
 - Sign-in is by a texted or emailed code (the user). One emailed code may never arrive; the text option is often more reliable.
 - Radios are web components; source dropdowns and self-identification need real clicks.
 - Text inputs on the questions page often register only when typed for real.
-- The last step can be an electronic signature: tick, type the full name, submit. Some flows have no review page: the last Next submits, so stop before it for the user's review.
+- The last step can be an electronic signature: stop there. The user ticks the box, types their name and submits. Some flows have no review page: the last Next submits, so stop before it for the user's review.
 - Some legacy ADP flows ask for the last four digits of a Social Security number and a birth date (a "rehire check"): a wall. The user decides.
 
 ### Oracle Cloud Candidate Experience
@@ -1608,7 +1613,7 @@ Add what a session learns here (with the user's OK): a new platform, a new worka
 
 - **Read every posting in full before the user creates any account.** Many promising titles turn out, once read, to be senior or out-of-scope roles. Creating accounts for those wastes the user's time.
 - **Walls are the user's** (rules 9): accounts, passwords, one-time codes, CAPTCHAs, ID numbers. Fill everything up to the wall, hand the browser over, continue after. **Never read a password field**, and leave password inputs out of every dump of a form's fields.
-- **Questions that are always the user's:** assessments and aptitude tests, criminal history and felony questions, whether they would sign a non-solicitation or confidentiality agreement, and any judgement call about their own experience ("years of comparable experience", "describe how you use AI"). Fill everything else, bring the tab forward, and let the user answer. Do not read back or log their answer.
+- **Questions that are always the user's:** assessments and aptitude tests, criminal history and felony questions, whether they would sign a future non-compete, non-solicitation or confidentiality agreement, and any judgement call about their own experience that the answer bank does not cover ("years of comparable experience" with no matching entry, "describe how you use AI"). Fill everything else, bring the tab forward, and let the user answer. Do not read back or log their answer.
 - **One tab per application.** Opening a new address in a tab that holds a half-filled form throws the form away. Open each application in its own new tab, and bring it forward when the user has to act in it.
 - **Some saved profiles submit instantly.** On some platforms, once the user is signed in, simply opening another job's apply link submits that application from the saved profile, with no form and no review. Treat opening an apply link on such a platform as submitting: do it only after the user has said yes to that specific application ("Review before submit"). Known pattern: some iCIMS boards after sign-in.
 - **Do not repeat a failing submit.** Read the error messages, fix the fields, and submit once. Repeated failed submits can trigger an emailed security code or a lockout.
@@ -1698,7 +1703,7 @@ Fill from the answer bank. These come up often; the intake collects them:
 
 ### Legal text: read it to the user first
 
-Stop and quote it to the user before anyone ticks the box or types a signature . Seen on real forms:
+Stop and quote it to the user before anyone ticks the box or types a signature. Seen on real forms:
 
 - arbitration agreements, jury or class-action waivers, invention assignment, pay withholding;
 - consent to biometric collection (photos, video, facial geometry, fingerprints);
@@ -1767,10 +1772,11 @@ Try these in order. Move to the next only if the one before it failed.
 - **Never:** "Apply with LinkedIn" or any LinkedIn import; signing in to Google Drive, Dropbox or any other account to import a file; any step that needs a password, a code or a CAPTCHA. Those are walls.
 - **Check after every upload.** The page must show the file name (or a preview), and it must be the file chosen above. If the site filled fields from the resume, check every one against the answer bank and fix any that are wrong.
 - **Hand it to the user only when a to e all failed or hit a wall.** Say which options you tried and why each failed.
+- **Claude in Chrome not connected** (`my-setup.md`): options a to e cannot run. Tell the user the full path of the file to attach, wait until they say it is attached, check the file name on the page, and record `upload: attached by the user`.
 
 ### Filling the form
 
-- Fill from the answer bank and the resume. Invent nothing. For a question the answer bank does not cover, answer only if the answer is plainly safe and true from the resume. Otherwise ask the user.
+- Fill from the answer bank and the resume. Invent nothing. For a question the answer bank does not cover, answer only if the answer is plainly safe and true from the resume. Otherwise ask the user. Questions about years of experience always go to the user unless the answer bank has the number.
 - **Optional free-text boxes** ("Why are you interested?"): leave blank unless the user's rules say to fill them. If you fill one, draft it in the user's writing style and flag it.
 - **Questions answered from the resume** rather than the answer bank: flag each one, and offer to add it to the answer bank.
 - **Pay:** the answer bank's wording where text is allowed, the single number where one is required.
@@ -1785,14 +1791,14 @@ Try these in order. Move to the next only if the one before it failed.
 
 - **Review summary:** every answer on the form, the upload (file name and method), and any auto-filled fields you corrected. Then stop. Submit only when the user says "submit" for this application, or clicks submit themselves.
 - **A failed submit:** read the errors, fix the fields, submit **once** more. Repeated failed submits can trigger a code or a lockout.
-- **After submitting:** capture the confirmation. Set `status` to `Applied` and `appliedDate` to today. Append a history entry: date, req id, title, company, location, pay if posted, the application system, the username if an account was used (never a password), the confirmation, the upload method written exactly as `upload: <method>` (for example `upload: hidden file input`; the check looks for `upload:`), and anything unusual.
+- **After submitting:** capture the confirmation. Set `status` to `Applied` and `appliedDate` to today. Append a history entry: date, req id, title, company, location, pay if posted, the application system, the username if an account was used (never a password), the confirmation ("confirmation shown", or only the last 4 digits of a long number: the check rejects runs of 13 or more digits), the upload method written exactly as `upload: <method>` (for example `upload: hidden file input`; the check looks for `upload:`), and anything unusual.
 - **Blocked while the user is away:** leave the status at To apply and append a history entry naming the exact step that blocked. Never work around it.
 - **New accounts:** add to `answers` (topic `Account`, question = the site, answer = the username). Never a password.
 - **Something new:** if an upload control behaved in a way `application-techniques.md` does not cover, tell the user and suggest a line to add there. General methods only, never employer names.
 
 ### Dry run
 
-If the user asks for a dry run, go up to the review summary and stop. Write nothing to the tracker except `postingText` and its history line. Close the browser tab without submitting.
+If the user asks for a dry run, go up to the review summary and stop. Write nothing to the tracker except `postingText` and its history line. Close the browser tab without submitting. If the posting could not be checked as still live, say "not confirmed live" in the summary. Then still run the check (`--stage apply`), save the review summary as `output/[YYYY-MM-DD]-apply-dry-run.md`, and suggest the next step.
 
 ### The report
 
@@ -1835,7 +1841,7 @@ Claude in Chrome acts only on sites the user allows. Their own sign-ins stay the
 | Source | File/Location | Section/Scope | Why |
 |--------|--------------|---------------|-----|
 | User | "Run outreach", in this session | The request | Nothing runs without it |
-| Stage 00 | `../00-intake/output/my-rules.md` | Pay, place, autonomy, writing style | Which listings qualify, and how drafts sound |
+| Stage 00 | `../00-intake/output/my-rules.md` | Pay, place, employers (never-contact list), autonomy, writing style | Which listings qualify, who never to contact, and how drafts sound |
 | Stage 07 | `../07-resume/output/resume.md` | Full file | Facts used in messages |
 | Shared | `../../shared/rules.md` | Sections 7 to 10 | Status rules, autonomy, safety, writing |
 | Shared | `../../shared/my-setup.md` | Full file | Tracker kind and location, Python command, browser, email connector |
@@ -1908,7 +1914,8 @@ Highest pay first, employers in the user's home metro before remote ones, 10 lis
 
 - The manager or director over that team, not HR or recruiting. **Web search and the employer's own pages only.**
 - Never open a linkedin.com page. Store a public profile link only if it appeared in search results. The user opens it themselves.
-- **Confidence:** **high** when a public source names them over that team or region; **medium** when the title fits but the team or region is inferred; **low** when they are only a plausible senior leader at the company.
+- **Confidence:** **high** when a public source names them over that team or region; **medium** when the title fits but the team or region is inferred; **low** when they are only a plausible senior leader at the company, or when no one was found.
+- **No one found:** leave `managerName` and `managerTitle` blank, write in `howIdentified` what was searched, set `confidence` to `low`, still draft both messages with a general greeting (for example "Hello [team] hiring team"), and say so in the report.
 - **Email:** record a work email only if it is publicly published. Otherwise note the company's email format if a public source documents it, marked "unverified". No paid lookup tools and no guessing beyond that.
 
 ### The drafts
@@ -1917,7 +1924,7 @@ Two versions per contact, in the user's writing style:
 
 - A connection note under 300 characters.
 - A longer message under 90 words, for email or after connecting.
-- Specific to the role and company. The ask is a 15-minute call about the team and what they look for. Not a referral request, and not "please look at my application". For To apply listings the user applies first, so the message can say they applied.
+- Specific to the role and company. The ask is a 15-minute call about the team and what they look for. Not a referral request, and not "please look at my application". Say the user applied only if the listing's status is Applied or later. For a listing at To apply, write "I plan to apply" (or suggest they apply first).
 
 ### What to write in the tracker
 
@@ -1947,8 +1954,8 @@ Prepare the user for a named interview. Run when the user asks.
 
 ### Process
 
-1. Confirm with the user which interview, the stage (phone screen, hiring manager, panel, onsite), and who they are meeting, if known.
-2. Read the listing with `get`. Read its `postingText`.
+1. Confirm with the user which interview, the stage (phone screen, hiring manager, panel, onsite), the date, and who they are meeting, if known. If the listing is not at Interview yet, offer to set it, and ask when they applied so `appliedDate` is filled too (a direct request, `shared/tracker-access.md`, checked with `--stage user`).
+2. Read the listing (artifact: `get`; spreadsheet: `sheet.py show`). Read its `postingText`.
 3. Build the company brief from allowed sources only, every fact linked.
 4. List the likely questions, including the hard ones the user's record invites.
 5. Map each question to a true story from the resume or the answer bank. Mark every gap.
@@ -1977,7 +1984,7 @@ Prepare the user for a named interview. Run when the user asks.
 
 | Artifact | Location | Format |
 |----------|----------|--------|
-| Prep file | `output/[company-slug]-[YYYY-MM-DD]-interview-prep.md` | Markdown, in the five parts of `prep-sources-and-format.md` |
+| Prep file | `output/[company-slug]-[interview date YYYY-MM-DD]-interview-prep.md` | Markdown, in the five parts of `prep-sources-and-format.md` |
 | History line (optional) | Tracker, `listings` | One line saying prep was done |
 
 ---
@@ -2085,6 +2092,8 @@ Read the user's email for replies from employers and suggest status updates. Run
 **Codes and passwords in email.** Verification codes, sign-in links and temporary passwords often show in message previews. Never copy them into the tracker, a report or the chat.
 
 ### Covering the window
+
+For pasted or forwarded mail, the window is simply the dates of the messages the user gave; write those in the report.
 
 - Start where the last mailbox check stopped (its history lines and report say "covered <from> to <to>"), and end now. With no earlier check, use the period the user gives, or the last 14 days. Write the window in this session's report, so the next check starts there and nothing is read twice or missed.
 - **Search every folder, not just the inbox.** Many people have rules that file job email into folders, and some mail apps split the inbox (for example Focused and Other). Search all folders by date range. Date-bounded searches one day at a time are the most reliable on a busy mailbox (for example `received:` searches in Outlook, `after:` and `before:` in Gmail).

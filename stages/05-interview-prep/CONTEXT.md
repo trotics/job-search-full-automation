@@ -18,8 +18,8 @@ Prepare the user for a named interview. Run when the user asks.
 
 ## Process
 
-1. Confirm with the user which interview, the stage (phone screen, hiring manager, panel, onsite), and who they are meeting, if known.
-2. Read the listing with `get`. Read its `postingText`.
+1. Confirm with the user which interview, the stage (phone screen, hiring manager, panel, onsite), the date, and who they are meeting, if known. If the listing is not at Interview yet, offer to set it, and ask when they applied so `appliedDate` is filled too (a direct request, `shared/tracker-access.md`, checked with `--stage user`).
+2. Read the listing (artifact: `get`; spreadsheet: `sheet.py show`). Read its `postingText`.
 3. Build the company brief from allowed sources only, every fact linked.
 4. List the likely questions, including the hard ones the user's record invites.
 5. Map each question to a true story from the resume or the answer bank. Mark every gap.
@@ -48,5 +48,5 @@ Prepare the user for a named interview. Run when the user asks.
 
 | Artifact | Location | Format |
 |----------|----------|--------|
-| Prep file | `output/[company-slug]-[YYYY-MM-DD]-interview-prep.md` | Markdown, in the five parts of `prep-sources-and-format.md` |
+| Prep file | `output/[company-slug]-[interview date YYYY-MM-DD]-interview-prep.md` | Markdown, in the five parts of `prep-sources-and-format.md` |
 | History line (optional) | Tracker, `listings` | One line saying prep was done |

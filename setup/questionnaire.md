@@ -35,7 +35,7 @@ The person should be able to answer both in one message.
 ## Derived fields (do not ask)
 
 ### `{{PYTHON_COMMAND}}`
-Follow `shared/python-setup.md`: find the command that works (`python`, `python3` or `py`), install the add-ons, and run the self-test. Write the command, or "none" if the person chose to continue without Python.
+If there is no `tools/` folder (the Skill alone, without the full workspace folder), write "none (Skill only)", skip the self-test, and tell the person the checks need the full folder from GitHub. Otherwise follow `shared/python-setup.md`: find the command that works (`python`, `python3` or `py`), install the add-ons, and run the self-test. Write the command, or "none" if the person chose to continue without Python.
 
 ### `{{APPLY_BROWSER}}`
 Check whether the Claude in Chrome tools are available to you. Write "Claude in Chrome" or "not connected yet". If not connected, tell them: applying works best with the Claude in Chrome extension, because it can upload their resume (`stages/03-apply/references/claude-in-chrome-setup.md`). Sweeps and everything else work without it. This is not a blocker for today.

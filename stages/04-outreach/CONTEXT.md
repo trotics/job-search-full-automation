@@ -7,7 +7,7 @@
 | Source | File/Location | Section/Scope | Why |
 |--------|--------------|---------------|-----|
 | User | "Run outreach", in this session | The request | Nothing runs without it |
-| Stage 00 | `../00-intake/output/my-rules.md` | Pay, place, autonomy, writing style | Which listings qualify, and how drafts sound |
+| Stage 00 | `../00-intake/output/my-rules.md` | Pay, place, employers (never-contact list), autonomy, writing style | Which listings qualify, who never to contact, and how drafts sound |
 | Stage 07 | `../07-resume/output/resume.md` | Full file | Facts used in messages |
 | Shared | `../../shared/rules.md` | Sections 7 to 10 | Status rules, autonomy, safety, writing |
 | Shared | `../../shared/my-setup.md` | Full file | Tracker kind and location, Python command, browser, email connector |

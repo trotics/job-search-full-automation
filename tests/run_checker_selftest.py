@@ -33,6 +33,10 @@ CASES = [(f.__name__[5:], f, "sweep") for f in [case_notes, case_history_rewrite
          case_new_missing_posting_text, case_new_wrong_status, case_company_misspelled, case_password_in_answers,
          case_deleted_listing, case_undated_history, case_settings_changed]]
 CASES.append(("password_in_answers_apply", case_password_in_answers, "apply"))
+def case_coverage_bad_state(d): d["coverage"][0]["sweepState"] = "finished"
+def case_coverage_manual_no_reason(d): d["coverage"][0]["sweepState"] = "manual"; d["coverage"][0]["detail"] = "site blocked"
+CASES += [("coverage_bad_state", case_coverage_bad_state, "sweep"),
+          ("coverage_manual_no_reason", case_coverage_manual_no_reason, "sweep")]
 def case_applied_no_upload_method(d):
     l = L(d, "kestrel-telehealth-kt-3315"); l["status"] = "Applied"; l["appliedDate"] = "2026-09-30"
     l["history"] += " | 2026-09-30 applied, req KT-3315, confirmation KT-1."

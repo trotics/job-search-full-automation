@@ -20,7 +20,9 @@ def package_files():
     files = [("SKILL.md", os.path.join(ROOT, "tools", "package", "SKILL.md")),
              ("CONTEXT.md", os.path.join(ROOT, "CONTEXT.md")),
              ("setup/questionnaire.md", os.path.join(ROOT, "setup", "questionnaire.md")),
-             ("tracker/tracker-page.html", os.path.join(ROOT, "tracker", "tracker-page.html"))]
+             ("tracker/tracker-page.html", os.path.join(ROOT, "tracker", "tracker-page.html")),
+             ("tracker/spreadsheet/job-search-tracker.xlsx",
+              os.path.join(ROOT, "tracker", "spreadsheet", "job-search-tracker.xlsx"))]
     for name in sorted(os.listdir(os.path.join(ROOT, "shared"))):
         if name == "my-setup.md":  # the person's own filled-in copy, never packaged
             continue

@@ -8,7 +8,7 @@ Add what a session learns here (with the user's OK): a new platform, a new worka
 
 - **Read every posting in full before the user creates any account.** Many promising titles turn out, once read, to be senior or out-of-scope roles. Creating accounts for those wastes the user's time.
 - **Walls are the user's** (rules 9): accounts, passwords, one-time codes, CAPTCHAs, ID numbers. Fill everything up to the wall, hand the browser over, continue after. **Never read a password field**, and leave password inputs out of every dump of a form's fields.
-- **Questions that are always the user's:** assessments and aptitude tests, criminal history and felony questions, whether they would sign a non-solicitation or confidentiality agreement, and any judgement call about their own experience ("years of comparable experience", "describe how you use AI"). Fill everything else, bring the tab forward, and let the user answer. Do not read back or log their answer.
+- **Questions that are always the user's:** assessments and aptitude tests, criminal history and felony questions, whether they would sign a future non-compete, non-solicitation or confidentiality agreement, and any judgement call about their own experience that the answer bank does not cover ("years of comparable experience" with no matching entry, "describe how you use AI"). Fill everything else, bring the tab forward, and let the user answer. Do not read back or log their answer.
 - **One tab per application.** Opening a new address in a tab that holds a half-filled form throws the form away. Open each application in its own new tab, and bring it forward when the user has to act in it.
 - **Some saved profiles submit instantly.** On some platforms, once the user is signed in, simply opening another job's apply link submits that application from the saved profile, with no form and no review. Treat opening an apply link on such a platform as submitting: do it only after the user has said yes to that specific application ("Review before submit"). Known pattern: some iCIMS boards after sign-in.
 - **Do not repeat a failing submit.** Read the error messages, fix the fields, and submit once. Repeated failed submits can trigger an emailed security code or a lockout.
@@ -98,7 +98,7 @@ Fill from the answer bank. These come up often; the intake collects them:
 
 ## Legal text: read it to the user first
 
-Stop and quote it to the user before anyone ticks the box or types a signature . Seen on real forms:
+Stop and quote it to the user before anyone ticks the box or types a signature. Seen on real forms:
 
 - arbitration agreements, jury or class-action waivers, invention assignment, pay withholding;
 - consent to biometric collection (photos, video, facial geometry, fingerprints);

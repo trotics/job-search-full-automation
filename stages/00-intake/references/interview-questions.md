@@ -61,7 +61,7 @@ The intake interview, in order. The number in brackets is the section of `my-rul
 26. "When a posting is a close call, should I decide by your rules, or bring every close call to you?" [8]
 27. Tell the user, do not ask: "For applications, I fill in the form and you review it before anything is submitted. You can turn on auto-submit for one session by writing it out, but it is off by default." [8]
 28. "Do you want hiring-manager outreach drafts? I only draft. You send everything yourself." [8]
-29. Do not ask about email: setup already checked for a connector. If `my-setup.md` names one, write "Mailbox check: on, with [connector]". If it says "none", write "Mailbox check: off until a connector is added (pasted emails also work)" and tell the user that in one line. [8]
+29. Do not ask about email: setup already checked for a connector. If `my-setup.md` names one, write "Mailbox check: on, with [connector]". If it says "none", write "Mailbox check: pasted emails only, until a connector is added" and tell the user that in one line. [8]
 
 ## Writing style
 

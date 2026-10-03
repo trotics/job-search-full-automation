@@ -56,3 +56,4 @@ Copy any of these into a session. Words in [brackets] are yours to fill in. Each
 
 - "Check my email for employer replies."
 - "Check my email since [date]."
+- "Check these emails: [paste the employer replies]." (No email connector needed)

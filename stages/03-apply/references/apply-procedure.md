@@ -37,10 +37,11 @@ Try these in order. Move to the next only if the one before it failed.
 - **Never:** "Apply with LinkedIn" or any LinkedIn import; signing in to Google Drive, Dropbox or any other account to import a file; any step that needs a password, a code or a CAPTCHA. Those are walls.
 - **Check after every upload.** The page must show the file name (or a preview), and it must be the file chosen above. If the site filled fields from the resume, check every one against the answer bank and fix any that are wrong.
 - **Hand it to the user only when a to e all failed or hit a wall.** Say which options you tried and why each failed.
+- **Claude in Chrome not connected** (`my-setup.md`): options a to e cannot run. Tell the user the full path of the file to attach, wait until they say it is attached, check the file name on the page, and record `upload: attached by the user`.
 
 ## Filling the form
 
-- Fill from the answer bank and the resume. Invent nothing. For a question the answer bank does not cover, answer only if the answer is plainly safe and true from the resume. Otherwise ask the user.
+- Fill from the answer bank and the resume. Invent nothing. For a question the answer bank does not cover, answer only if the answer is plainly safe and true from the resume. Otherwise ask the user. Questions about years of experience always go to the user unless the answer bank has the number.
 - **Optional free-text boxes** ("Why are you interested?"): leave blank unless the user's rules say to fill them. If you fill one, draft it in the user's writing style and flag it.
 - **Questions answered from the resume** rather than the answer bank: flag each one, and offer to add it to the answer bank.
 - **Pay:** the answer bank's wording where text is allowed, the single number where one is required.
@@ -55,14 +56,14 @@ Try these in order. Move to the next only if the one before it failed.
 
 - **Review summary:** every answer on the form, the upload (file name and method), and any auto-filled fields you corrected. Then stop. Submit only when the user says "submit" for this application, or clicks submit themselves.
 - **A failed submit:** read the errors, fix the fields, submit **once** more. Repeated failed submits can trigger a code or a lockout.
-- **After submitting:** capture the confirmation. Set `status` to `Applied` and `appliedDate` to today. Append a history entry: date, req id, title, company, location, pay if posted, the application system, the username if an account was used (never a password), the confirmation, the upload method written exactly as `upload: <method>` (for example `upload: hidden file input`; the check looks for `upload:`), and anything unusual.
+- **After submitting:** capture the confirmation. Set `status` to `Applied` and `appliedDate` to today. Append a history entry: date, req id, title, company, location, pay if posted, the application system, the username if an account was used (never a password), the confirmation ("confirmation shown", or only the last 4 digits of a long number: the check rejects runs of 13 or more digits), the upload method written exactly as `upload: <method>` (for example `upload: hidden file input`; the check looks for `upload:`), and anything unusual.
 - **Blocked while the user is away:** leave the status at To apply and append a history entry naming the exact step that blocked. Never work around it.
 - **New accounts:** add to `answers` (topic `Account`, question = the site, answer = the username). Never a password.
 - **Something new:** if an upload control behaved in a way `application-techniques.md` does not cover, tell the user and suggest a line to add there. General methods only, never employer names.
 
 ## Dry run
 
-If the user asks for a dry run, go up to the review summary and stop. Write nothing to the tracker except `postingText` and its history line. Close the browser tab without submitting.
+If the user asks for a dry run, go up to the review summary and stop. Write nothing to the tracker except `postingText` and its history line. Close the browser tab without submitting. If the posting could not be checked as still live, say "not confirmed live" in the summary. Then still run the check (`--stage apply`), save the review summary as `output/[YYYY-MM-DD]-apply-dry-run.md`, and suggest the next step.
 
 ## The report
 

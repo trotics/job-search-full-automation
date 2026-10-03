@@ -59,7 +59,7 @@ Pipeline Status: job-search-full-automation   (setup: DONE)
 
 ## Every session
 
-1. Read `shared/rules.md` and `stages/00-intake/output/my-rules.md` (when it exists). They apply to every stage. Safety rules (rules section 9) apply from the first minute: never create accounts, type passwords, enter ID or bank numbers, solve CAPTCHAs, send messages, or submit an application without the person's review.
+1. Read `shared/rules.md` and `stages/00-intake/output/my-rules.md` (when it exists). They apply to every stage. Safety rules (rules section 9) apply from the first minute: never create accounts, type passwords, enter ID or bank numbers, solve CAPTCHAs, send messages, open LinkedIn, contact their current employer, or submit an application without the person's review.
 2. Route the task with `CONTEXT.md`, then load only that stage's `CONTEXT.md` and the inputs its table names.
 3. Do only the task asked. Never start another stage on your own. Every stage is started by the person in a live session; nothing runs on a schedule.
 4. A stage is done only when its Audit passes. Say plainly which checks did not.

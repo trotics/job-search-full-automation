@@ -2,7 +2,7 @@
 
 Stable rules for every stage. They work together with the user's own rules, `my-rules.md` (saved by the intake interview), which holds everything personal: target roles, place, pay, industries, experience stretch, hard noes, employers on hold, autonomy and writing style. Where this file says "the user's rules", it means `my-rules.md`.
 
-If the tracker and a file disagree on status, the tracker wins. If anything disagrees with this file or `my-rules.md`, those win. If this file and `my-rules.md` disagree, `my-rules.md` wins for the user's own preferences (roles, place, pay, industries) and this file wins for safety. Safety rules never bend.
+If the tracker and a file disagree on status, the tracker wins. If anything disagrees with this file or `my-rules.md`, those win. If this file and `my-rules.md` disagree, `my-rules.md` wins for the user's own preferences (roles, place, pay, industries) and this file wins for safety. Safety rules never bend. For tools and connections (tracker, Python, browser, email connector), `my-setup.md` wins: it records what setup actually found.
 
 When two rules conflict and nothing here settles it, the newest dated rule in `my-rules.md` wins, and you tell the user about the conflict. Safety rules (section 9) always win.
 
@@ -88,7 +88,7 @@ Any grant of extra autonomy lasts for one session only. Past grants never carry 
 - Never enter a Social Security number or other government ID, driver's license, bank account or card number.
 - Never solve or try to get past a CAPTCHA, bot check or one-time code.
 - Never send an email, message or form on the user's behalf. The only exception is submitting an application after the user's review, or under auto-submit the user turned on for this session.
-- Assessments, aptitude tests, criminal-history questions, non-compete and non-solicitation questions are the user's to answer.
+- Assessments, aptitude tests, criminal-history questions, and whether they would sign a future non-compete or non-solicitation agreement are the user's to answer. Whether they are bound by one now comes from the answer bank.
 - Never contact the user's current employer. Never use the user's work email, work phone or work accounts.
 - **Site terms.** LinkedIn and some job boards forbid automated access in their terms of use. This system never automates LinkedIn in any way: no scraping, no automated profile visits, no messages, and no opening linkedin.com pages. The user is responsible for following each site's terms.
 

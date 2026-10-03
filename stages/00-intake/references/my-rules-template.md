@@ -56,7 +56,7 @@ Last updated: [YYYY-MM-DD]
 - Fit calls: [autonomous / bring me every call]
 - Apply: Human review before every submission. Auto-submit is off unless I turn it on for one session in writing.
 - Outreach: [off / drafts when I start it by name]
-- Mailbox check: [off / on, using my email connector]
+- Mailbox check: [pasted emails only / on, using my email connector]
 
 ## 9. Writing style
 

@@ -10,13 +10,13 @@ Fill in applications for listings at To apply, live with the user. **The user re
 | Stage 07 | `../07-resume/output/resume.pdf` | The file | The resume to upload (or the user's own file saved there at setup) |
 | Stage 07 | `../07-resume/output/resume.md` | Full file | Resume text for form fields |
 | Stage 07 | `../07-resume/output/resume-[listing-id].pdf` | Only if the listing's history names it | An approved tailored resume |
-| Shared | `../../shared/rules.md` | Sections 7 to 10 | Status rules, autonomy, safety, writing |
+| Shared | `../../shared/rules.md` | Sections 5 to 10 | On-hold employers, evidence, status rules, autonomy, safety, writing |
 | Shared | `../../shared/my-setup.md` | Full file | Tracker kind and location, Python command, browser, email connector |
 | Shared | `../../shared/tracker-access.md` | Full file | Reading, writing and the check |
 | Shared | `../../shared/recurring-mistakes.md` | Full file | Read before any tracker write |
 | Shared | `../../shared/answer-bank.md` | Full file | How to use the answer bank |
 | Shared | `../../shared/next-steps.md` | "After applying" | What to suggest when the session ends |
-| Tracker | `listings`, `answers` | Listings at To apply; all answers | What to apply to, and the answers |
+| Tracker | `listings`, `answers`, `companies` | Listings at To apply; all answers; `onHold` | What to apply to, the answers, and employers on hold |
 | Reference | `references/apply-procedure.md` | Full file | Auto-submit, upload order, filling, review, recording |
 | Reference | `references/application-techniques.md` | Full file | How forms behave, upload methods, legal text, walls |
 | Reference | `references/application-platforms.md` | The platform's section | Read before each form |
@@ -39,7 +39,7 @@ Apply in **Claude in Chrome** when it is connected. It can upload files; the bui
 11. Run the audit below, then save the report.
 12. End by suggesting the next step in one or two lines (`next-steps.md`, "After applying"). Suggest only; do not start it.
 
-For a **dry run**, stop at step 6 and follow `apply-procedure.md`, "Dry run".
+For a **dry run**, stop at step 6 and follow `apply-procedure.md`, "Dry run", then do steps 10 to 12.
 
 ## Checkpoints
 
@@ -67,4 +67,4 @@ For a **dry run**, stop at step 6 and follow `apply-procedure.md`, "Dry run".
 |----------|----------|--------|
 | Applied listings | Tracker, `listings` | Status Applied, `postingText`, `appliedDate`, history with the upload method |
 | Blocked listings | Tracker, `listings` | Left at To apply, with a history entry naming the block |
-| Apply report | `output/[YYYY-MM-DD]-apply-report.md` | What went through, what is blocked and why, what needs the user |
+| Apply report | `output/[YYYY-MM-DD]-apply-report.md` (a dry run saves `output/[YYYY-MM-DD]-apply-dry-run.md` instead) | What went through, what is blocked and why, what needs the user |

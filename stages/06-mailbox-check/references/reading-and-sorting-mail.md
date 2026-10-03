@@ -12,6 +12,8 @@
 
 ## Covering the window
 
+For pasted or forwarded mail, the window is simply the dates of the messages the user gave; write those in the report.
+
 - Start where the last mailbox check stopped (its history lines and report say "covered <from> to <to>"), and end now. With no earlier check, use the period the user gives, or the last 14 days. Write the window in this session's report, so the next check starts there and nothing is read twice or missed.
 - **Search every folder, not just the inbox.** Many people have rules that file job email into folders, and some mail apps split the inbox (for example Focused and Other). Search all folders by date range. Date-bounded searches one day at a time are the most reliable on a busy mailbox (for example `received:` searches in Outlook, `after:` and `before:` in Gmail).
 - Look for each employer that has a listing at Applied or later, by company name and by the application system's sender (messages often come from the platform, not the employer).

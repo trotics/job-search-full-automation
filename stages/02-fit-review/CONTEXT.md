@@ -19,8 +19,8 @@ Decide whether one posting goes in the tracker. A sweep runs this for every new 
 
 ## Process
 
-1. **Employer not on the target list** (for example the user pasted a link): ask whether to add it. If yes, add it as `adding-employers.md` says, then go on. If no, give the fit call in chat only and write nothing.
-2. Take a tracker snapshot, unless a sweep already took one this session.
+1. Take a tracker snapshot, unless a sweep already took one this session.
+2. **Employer not on the target list** (for example the user pasted a link): ask whether to add it. If yes, add it as `adding-employers.md` says, then go on. If no, give the fit call in chat only and write nothing.
 3. Check in this order. The first failure decides:
    1. **Duplicate?** Same req id, or same title and location at the same employer, already in `listings`: stop, nothing to add.
    2. **Live on the employer's own site?** If not: no.
@@ -39,7 +39,7 @@ Decide whether one posting goes in the tracker. A sweep runs this for every new 
 
 | After Step | Agent Presents | Human Decides |
 |------------|---------------|---------------|
-| 1 | Whether to add an employer not on the target list | Add it, or a chat-only fit call |
+| 2 | Whether to add an employer not on the target list | Add it, or a chat-only fit call |
 | 3 | Each result, when the user's autonomy lines say to ask | Write it, or not |
 | 5 | Close calls that depend on taste, in the report | Apply or skip |
 

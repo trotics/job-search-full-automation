@@ -10,7 +10,7 @@ What to write for each result of a fit review. Column meanings are in `shared/tr
 - `pay`: the posted pay as written, or "not posted".
 - `why`: one or two sentences on the fit, any reach (years, industry), and anything the user should know.
 - `teaches`: what the role would teach the user, starting "Stated:" (the posting says so), "Not stated." or "Not read."
-- `family`: one of `settings.roleFamilies`. `track`: one of `settings.tracks`.
+- `family`: one of `settings.roleFamilies`, written without the `*`. `track`: one of `settings.tracks`.
 - `priority`: `High` (clear fit, pay at or above the floor), `Medium` (fits with a reach), `Low` (fits on paper, weaker on taste or pay), or `On hold`.
 - `postingText`: the posting's full text, copied from the employer's own page (title, location, pay, duties, requirements). This lets later stages work after the posting is taken down. If the page is too long, keep at least the duties, requirements and pay.
 - `status`: `To apply`.

@@ -1,6 +1,6 @@
 # Next steps
 
-What to suggest when a session ends, so the person always knows what to say next. Suggest only; never start the next stage yourself. Keep it to one or two lines, with the exact words to say in quotes, and pick the line that fits what just happened.
+What to suggest when a session ends, so the person always knows what to say next. Wherever a line says "Check my email" and `my-setup.md` shows no email connector, say instead: "In a few days, paste any employer replies here and say 'Check these emails' (or connect your email in Claude's settings)." Suggest only; never start the next stage yourself. Keep it to one or two lines, with the exact words to say in quotes, and pick the line that fits what just happened.
 
 ## After the interview
 
@@ -30,13 +30,15 @@ What to suggest when a session ends, so the person always knows what to say next
 
 ## After applying
 
+- A dry run: "Say 'Apply to the [company] [title] listing' when you want to do it for real."
 - Listings still at To apply: "Say 'Let's apply' to keep going."
 - Applications went in: "In a few days, say 'Check my email' to catch replies."
 - Their rules ask for outreach drafts: "Say 'Run outreach on the [company] listing' if you want a note to the hiring manager."
 
 ## After outreach
 
-"Send the drafts yourself when you are ready. In a few days, say 'Check my email'."
+- The listing is still at To apply: "Apply first: say 'Apply to the [company] [title] listing'. Then send the drafts yourself."
+- Otherwise: "Send the drafts yourself when you are ready. In a few days, say 'Check my email'."
 
 ## After interview prep
 
@@ -46,13 +48,15 @@ What to suggest when a session ends, so the person always knows what to say next
 
 - An interview was found: "Say 'Prep me for my interview with [company] on [day]'."
 - Deadlines (assessments, scheduling): list them first, with dates.
-- Nothing new: "Say 'Run a sweep' to look for new listings."
+- A rejection: one kind line, then the next most useful thing below.
+- Listings still at To apply: "Say 'Let's apply'."
+- Nothing new and no sweep in the last week: "Say 'Run a sweep' to look for new listings."
 
 ## A returning person with no request
 
-Find the tracker in `my-setup.md` and read `listings` and `coverage` as `tracker-access.md` says (no snapshot needed: this only reads). An employer with no `coverage` row has never been swept. Then suggest the one most useful thing:
+Find the tracker in `my-setup.md` and read `listings` and `coverage` as `tracker-access.md` says (no snapshot needed: this only reads). An employer with no `coverage` row has never been swept, unless its industry is excluded (those are skipped on purpose and do not count). Then suggest the one most useful thing:
 
-1. A deadline or an interview coming up: name it with its date first, then "Say 'Prep me for my interview with [company] on [day]'" (or, for an assessment or a reply to send, what to do and by when).
+1. A deadline or an interview coming up (a listing at Interview whose newest history line gives a future date, or a deadline in the latest mailbox report): name it with its date first. If no prep file for it exists in `stages/05-interview-prep/output/`, add "Say 'Prep me for my interview with [company] on [day]'"; if one exists, just wish them luck. For an assessment or a reply to send, say what to do and by when.
 2. Listings at To apply: "Say 'Let's apply'."
 3. Applications in and no mailbox check in the last week: "Say 'Check my email'."
 4. No sweep in the last week: "Say 'Run a sweep'."

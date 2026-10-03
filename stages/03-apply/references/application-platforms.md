@@ -82,7 +82,7 @@ No account. Usually several pages: consent, contact and resume, self-identificat
 - Sign-in is by a texted or emailed code (the user). One emailed code may never arrive; the text option is often more reliable.
 - Radios are web components; source dropdowns and self-identification need real clicks.
 - Text inputs on the questions page often register only when typed for real.
-- The last step can be an electronic signature: tick, type the full name, submit. Some flows have no review page: the last Next submits, so stop before it for the user's review.
+- The last step can be an electronic signature: stop there. The user ticks the box, types their name and submits. Some flows have no review page: the last Next submits, so stop before it for the user's review.
 - Some legacy ADP flows ask for the last four digits of a Social Security number and a birth date (a "rehire check"): a wall. The user decides.
 
 ## Oracle Cloud Candidate Experience

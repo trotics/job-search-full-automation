@@ -16,7 +16,7 @@ One row per employer.
 | `tier` | `A`, `B` or `C`. What each letter means is in `settings`. | Both |
 | `industry` | The employer's industry, using the same words as `settings.industryOrder` where it fits. | Both |
 | `keepAnyway` | `yes` keeps this employer in sweeps even if its industry is excluded. Otherwise `no`. | You (Claude sets `yes` only when you ask for it) |
-| `onHold` | `yes` means sweep it, but do not apply without your go-ahead. Otherwise `no`. | You |
+| `onHold` | `yes` means sweep it, but do not apply without your go-ahead. Otherwise `no`. | You (Claude sets it from your rules when adding an employer) |
 | `added` | Date the employer was added, `YYYY-MM-DD`. | Claude |
 
 ## coverage: one row per employer, per sweep record
@@ -56,7 +56,7 @@ The `id` matches the employer's `id` in `companies`.
 | `status` | Where it stands. See the list below. | Both, under the rules |
 | `appliedDate` | Date the application went in, `YYYY-MM-DD`. | Claude |
 | `postingText` | The full text of the posting, saved so it survives after the posting comes down. | Claude |
-| `reviewReason` | Why a listing at Review fit needs your call. | Claude |
+| `reviewReason` | Why a listing at Review fit needs your call. | You (Claude only at your request) |
 | `history` | Dated log of everything sessions did. **Add only, never change or delete.** Entries are separated by ` \| `, and each starts with a `YYYY-MM-DD` date. An entry never contains the `\|` character itself (write `/` instead). | Claude (append only) |
 | `yourNotes` | Your own notes. **Claude never writes this.** | You |
 | `managerName`, `managerTitle`, `howIdentified`, `confidence`, `profileUrl`, `emailOrFormat`, `connectionNote`, `longMessage` | Outreach research and drafts (stage 04). Drafts only. You send. | Claude |

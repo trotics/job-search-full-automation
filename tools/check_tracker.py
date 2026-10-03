@@ -6,10 +6,10 @@ Works with both trackers:
     with the `snapshot-dir` command.
 
 Commands:
-  python tools/check_tracker.py snapshot tracker/my-tracker.xlsx tracker/backups/before.json
-  python tools/check_tracker.py snapshot-dir tracker/backups/before-db tracker/backups/before.json   (artifact: after ArtifactData list with out_dir)
-  python tools/check_tracker.py check tracker/backups/before.json tracker/backups/after.json --stage sweep
-  python tools/check_tracker.py validate tracker/backups/after.json
+  python tools/check_tracker.py snapshot tracker/my-tracker.xlsx tracker/backups/<stamp>-before.json
+  python tools/check_tracker.py snapshot-dir tracker/backups/<stamp>-before-db tracker/backups/<stamp>-before.json   (artifact: after ArtifactData list with out_dir)
+  python tools/check_tracker.py check tracker/backups/<stamp>-before.json tracker/backups/<stamp>-after.json --stage sweep
+  python tools/check_tracker.py validate tracker/backups/<stamp>-after.json
 
 Stages: intake, sweep, fit, apply, outreach, prep, mailbox, resume, research, user.
 Exit code 0 means every check passed.
@@ -145,7 +145,7 @@ def split_list(v):
     return [x.strip() for x in str(v or "").split(";") if x.strip()]
 
 
-def validate(snap, problems, only_ids=None, only_companies=None):
+def validate(snap, problems, only_ids=None, only_companies=None, only_coverage=None):
     names = {norm(c.get("company")): c.get("company") for c in snap["companies"].values()}
     settings = next(iter(snap["settings"].values()), {}) if snap["settings"] else {}
     families = [f.rstrip("*").strip() for f in split_list(settings.get("roleFamilies"))]
@@ -200,6 +200,18 @@ def validate(snap, problems, only_ids=None, only_companies=None):
         for col in ("keepAnyway", "onHold"):
             if c.get(col) and str(c[col]).lower() not in ("yes", "no"):
                 problems.append("company %s: %s must be yes or no" % (cid, col))
+
+    for vid, v in snap["coverage"].items():
+        if only_coverage is not None and vid not in only_coverage:
+            continue
+        if vid not in snap["companies"]:
+            problems.append("coverage %s: no company with that id" % vid)
+        if v.get("sweepState") and v["sweepState"] not in ("done", "partial", "not swept", "manual"):
+            problems.append("coverage %s: sweepState %r must be done, partial, not swept or manual" % (vid, v["sweepState"]))
+        if v.get("result") and v["result"] not in ("HIT", "NONE", "LEAD", "PENDING"):
+            problems.append("coverage %s: result %r must be HIT, NONE, LEAD or PENDING" % (vid, v["result"]))
+        if v.get("sweepState") == "manual" and not str(v.get("detail", "")).startswith("MANUAL:"):
+            problems.append("coverage %s: a manual employer's detail must start with MANUAL:" % vid)
 
     for aid, a in snap["answers"].items():
         for pat, what in SECRET_PATTERNS:
@@ -290,7 +302,8 @@ def check(before, after, stage, problems):
 
     changed_companies = {k for k, v in after["companies"].items() if before["companies"].get(k) != v}
     validate(after, problems, only_ids=new_ids | {k for k in a if k in b and a[k] != b[k]},
-             only_companies=changed_companies)
+             only_companies=changed_companies,
+             only_coverage={k for k, v in after["coverage"].items() if before["coverage"].get(k) != v})
     return new_ids
 
 

@@ -178,7 +178,7 @@
    "sweepState": "done",
    "result": "NONE",
    "detail": "2026-09-29 read every posting on the employer's own site. Nothing fit. ",
-   "skipped": "Clinical Specialist, Infusion Systems, LIS-905: Territory covers Calder and three neighboring states; multi-state territories are out. Also travel 60% to 70%, a hard no.",
+   "skipped": "Clinical Specialist, Infusion Systems, LIS-905: Infusion pumps are hardware, and medical devices are in only on the software side. Also: territory covers Calder and three neighboring states; multi-state territories are out. Also travel 60% to 70%, a hard no.",
    "sweepProgress": ""
   },
   {
@@ -189,7 +189,7 @@
    "sweepState": "done",
    "result": "HIT",
    "detail": "2026-09-29 read every posting on the employer's own site. Added: Account Executive, Health Systems. ",
-   "skipped": "Enterprise Account Executive, KT-3301: Requires 7+ years of enterprise sales; beyond Maya's stretch of two years, and clinical experience is not accepted instead.",
+   "skipped": "Enterprise Account Executive, KT-3301: An enterprise role above entry to mid level. Also: requires 7+ years of enterprise sales; beyond Maya's stretch of two years, and clinical experience is not accepted instead.",
    "sweepProgress": ""
   },
   {
