@@ -6,6 +6,8 @@ A free set of instructions (a "Skill") that turns Claude (and only Claude) into 
 
 **It automates the research, the tracking and the form-filling. You stay in charge of every submission and every message.**
 
+**See it in action:** [a guided walkthrough](https://claude.ai/artifact/XEFBtevswxWhwLyfWV2gfD) follows a made-up user from the first interview to an interview prep file. It works on a phone; tap Play on any step.
+
 This was built for one real job search and used every day on it. This public version has none of that person's data in it. Everything personal comes from a short interview Claude runs with you the first time.
 
 ---
@@ -62,7 +64,7 @@ This was built for one real job search and used every day on it. This public ver
 
 ### Step 1. Download this folder
 
-On the GitHub page, click **Code**, then **Download ZIP**. Unzip it somewhere easy to find, for example your Documents folder. This folder is now your **job search folder**.
+Download it here: **[job-search-full-automation-main.zip](https://github.com/trotics/job-search-full-automation/archive/refs/heads/main.zip)**. (Or, on [the GitHub page](https://github.com/trotics/job-search-full-automation), click **Code**, then **Download ZIP**.) Unzip it somewhere easy to find, for example your Documents folder. It unzips to a folder called `job-search-full-automation-main`; you can rename it. This folder is now your **job search folder**.
 
 ### Step 2. Add the Skill to Claude
 
