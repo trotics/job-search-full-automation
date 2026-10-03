@@ -20,6 +20,7 @@ What to suggest when a session ends, so the person always knows what to say next
 - A company deep dive before applying or an interview: "Say 'Apply to the [company] [title] listing'" or "Say 'Prep me for my interview with [company]'".
 - An industry map: "Say 'Add these employers to my target list: [names]'" for any they liked.
 - Role research: if the role fits, "Say 'I want to change my rules: add [title]'".
+- Career path: "Say 'Update my career direction'" if they want a new next step; otherwise the next most useful thing from "A returning person with no request".
 
 ## After a sweep or a fit call
 
@@ -33,7 +34,7 @@ What to suggest when a session ends, so the person always knows what to say next
 
 - A dry run: "Say 'Apply to the [company] [title] listing' when you want to do it for real."
 - A fill sheet was given (no browser): "Fill it in and submit in your browser, then tell me 'I submitted it' with the confirmation, and I will mark it Applied."
-- Listings still at To apply: "Say 'Let's apply' to keep going."
+- Listings still at To apply: "Say 'Let's apply' to keep going." (If there is no `resume.pdf` yet: "Say 'Build my resume' first.")
 - Applications went in: "In a few days, say 'Check my email' to catch replies."
 - Their rules ask for outreach drafts: "Say 'Run outreach on the [company] listing' if you want a note to the hiring manager."
 
@@ -71,6 +72,7 @@ What to suggest when a session ends, so the person always knows what to say next
 
 Find the tracker in `my-setup.md` and read `listings` and `coverage` as `tracker-access.md` says (no snapshot needed: this only reads). An employer with no `coverage` row has never been swept, unless its industry is excluded (those are skipped on purpose and do not count). Then suggest the one most useful thing:
 
+0. A listing at Offer with "accepted" in its history: congratulate them and ask whether to pause the search before suggesting anything else.
 1. A deadline or an interview coming up (a listing at Interview whose newest history line gives a future date, or a deadline in the latest mailbox report): name it with its date first. If no prep file for it exists in `stages/05-interview-prep/output/`, add "Say 'Prep me for my interview with [company] on [day]'"; if one exists, just wish them luck. For an assessment or a reply to send, say what to do and by when.
 2. Things waiting on the person: close calls in the latest sweep or fit report that are not decided yet (not in `listings` or `coverage.skipped` and not marked decided in their report; recording a decision: `stages/02-fit-review/references/fit-outcomes.md`), and employers whose `coverage` says `manual` or `LEAD`. Name them in one line each and ask them to decide or open the site.
 3. Listings at To apply: "Say 'Let's apply'."

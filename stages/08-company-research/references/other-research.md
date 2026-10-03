@@ -39,5 +39,5 @@ For "What's my next career step?" Uses `shared/career-direction.md` and the user
 4. Posted pay at each level, as in part D.
 5. Ask whether to update "Next step" in their rules. A change goes through the intake stage.
 
-Without web search: use the `postingText` of tracker listings at those levels, plus the ladder in `shared/career-direction.md`. Write "Based on: N tracker postings, no web search" at the top, say that pay at each level is unknown unless those postings show it, and state nothing unsourced as fact.
+Without web search: use the `postingText` of tracker listings at those levels, the posting facts quoted in close calls and skips in `stages/02-fit-review/output/` and `stages/01-sweep/output/`, and the ladder in `shared/career-direction.md`. Write "Based on: N tracker postings, no web search" at the top, say that pay at each level is unknown unless those postings show it, and state nothing unsourced as fact.
 

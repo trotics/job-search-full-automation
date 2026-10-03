@@ -122,4 +122,5 @@ Some career sites show a bot check that never clears in an automated browser. Th
 | Emailed sign-in link | ClearCompany (second visit) | User |
 | CAPTCHA at submit | iCIMS (hCaptcha), Jobvite, BambooHR, Cornerstone (first time), Phenom (invisible) | User |
 | Birth date, Social Security number, ID digits | some ClearCompany and ADP flows, some tax-credit surveys | User decides |
+| Professional license number | various, in licensed trades and health care | User |
 | Bot check on the careers site | various | User, in their own browser |

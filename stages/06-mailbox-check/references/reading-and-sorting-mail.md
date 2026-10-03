@@ -21,7 +21,7 @@ For pasted or forwarded mail, the window is simply the dates of the messages the
 
 ## Matching
 
-Match each message to one listing: same company and, where the message names it, the same title or req id. If a message could match more than one listing, do not guess. Ask the user.
+Match each message to one listing: same company and, where the message names it, the same title or req id. If a message could match more than one listing, do not guess. Ask the user. If it matches no listing (for example an employer reaching out first), change nothing: list it for the user, with any date first.
 
 ## Sorting each match
 

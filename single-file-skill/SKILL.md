@@ -232,23 +232,35 @@ Eight levels, plus a top rung for chief roles. Most fields use some version of t
 | L8 | Executive | "VP", "senior VP", "general manager", owns a business unit or a whole function across the company |
 | L9 | Chief | "Chief ... officer", "president", company-wide profit and loss |
 
-Two tracks run side by side above L3: **individual contributor** and **people leader** (L5 to L8). For individual roles above L4, use scope as the guide: several teams or 8+ years is an L5 equivalent, a whole function is an L6 or L7 equivalent. A small team with no hiring or budget ownership is L5; hiring or a budget makes it L6. An individual role matches a next step only on the same track: an IC L5 is not a match for a "first team lead" goal. Principal, staff, expert or individual "director" roles with no reports take the level their scope, required years and pay match (L4 to L7), marked "IC track" in `why`. Moving between tracks at the same scope is a **track switch**, not a step: bring it to the person as a close call. Moving from L4 to a first L5 role is a step up.
+Two tracks run above L3: **individual contributor** (IC) and **people leader** (L5 to L8).
+
+- Judge IC roles above L4 by scope: several teams or 8+ years is L5; a whole function is L6 or L7.
+- A team lead with no hiring or budget is L5; hiring or a budget makes it L6.
+- Principal, staff, expert or individual "director" roles with no reports take the level their scope, required years and pay give (L4 to L7). Mark them "IC track" in `why`.
+- An IC role never matches a people-leader next step (an IC L5 is not a match for a "first team lead" goal).
+- From L4, a first L5 leader role is a plain **step up**, not a track switch. From L3 or below it follows the step table like any other role (a stretch from L3).
+- From L5 up, a move to the other track at the same level is a **track switch**; at a higher level it is written "Track switch and step up (IC L6 to L7)". Both are close calls.
 
 **Senior VP and executive VP** stay at L8, a stronger L8 rather than a new level. **L9** chief roles are a step up for an L8, a stretch for L7, and out of reach below that.
 
 Title words mislead across employers ("manager" can mean no reports; "associate" can mean experienced in law or consulting). **Judge a posting by its duties, scope and required years first, the title last.** When duties and title disagree, say so in `why`. When required years and duties point to different levels, go by the required years, unless the duties include supervising people or owning a budget or profit and loss; then go by the duties.
 
-An internship is below L1 for anyone who has finished school: treat it as a step down. For a current student, an internship is the same level (L1).
+An internship is below L1 for anyone who has finished school: treat it as a step down. For a current student, an internship is the same level (L1). A returnship (a paid program for people coming back after a gap) is judged by its duties, not as an internship.
+
+**Small employers, government and trades.** Under about 50 staff, read "head of", "director" or "VP" by reports and budget; with no reports it is an individual role at the level its required years give, and the "whole function" rule does not apply. For United States federal grades, "one year at the next lower grade" means that grade's level, not one year: roughly GS-7 L1, GS-9 L2, GS-11 L3, GS-12 L4, GS-13 L4 or L5, GS-14 L6, GS-15 L7. Numbered titles ("Analyst III") follow the employer's own series, not the ladder's numbers. An "associate" asking an MBA or a law degree is L2 or L3. A role that runs a shift or a crew with no hiring or budget (charge nurse, foreman) is L5: a step up from L4 and a stretch from L3 in the same work.
 
 ### Placing the person
 
-The intake interview sets three lines in section 1 of `my-rules.md`:
+The intake interview sets four lines in section 1 of `my-rules.md`:
 
-- **Current level:** worked out from their history, not asked as a label. Use years in the field, the highest title held, whether they led or managed people (how many), and the size of what they owned (accounts, budget, projects). Show the result and the reason in one line, for example "L3 Experienced: 5 years, owns a book of 40 accounts, no direct reports", and let the person correct it.
-- **Next step:** the level and role they want next, in their own words, for example "L4 Senior account manager" or "L5 first team lead role". "Same level, new field" is a valid answer.
+- **Current level:** worked out from their history, not asked as a label. Use years in the field, the highest title held, whether they led or managed people (how many), and the size of what they owned (accounts, budget, projects). Use the posting tie-breaks: years decide, unless they managed people or owned a budget; then the duties decide. Count staff who reported to them, not students, patients or clients. Show the result and the reason in one line, for example "L3 Experienced: 5 years, owns a book of 40 accounts, no direct reports", and let the person correct it.
+- **Next step:** the level and role they want next, in their own words, for example "L4 Senior account manager" or "L5 first team lead role". "Same level, new field" is a valid answer. Map each role they name to its ladder level and confirm it with them; if a named role sits at a different level than they said, say so and write both.
 - **Step down allowed:** yes or no, and when (for example "only to change fields", or "only above my pay floor").
+- **Step up allowed:** yes, or "not right now" for someone happy at their level; then a step up is a close call, never added on its own.
 
-**Career changers** have two levels: their level in the old field and their **starting level in the new field**. The new-field level is usually one to three steps lower, rising with transferable experience (a nurse moving into healthcare sales starts around L2 in sales, not L1, because clinical knowledge transfers). Write both, and judge postings against the new-field level.
+**Career changers** have two levels: their level in the old field and their **starting level in the new field**. The new-field level is usually one to three steps lower, rising with transferable experience (a nurse moving into healthcare sales starts around L2 in sales, not L1, because clinical knowledge transfers). Write both, with one new-field level, not a range, and judge postings against it. Changing fields is not itself a step down: "step down allowed" means below the new-field level.
+
+**Returning after a gap** of two years or more: place them at the last level they held, do not count the gap years as experience, and ask (interview question 2b) whether they will return one level lower.
 
 ### Judging a posting's step
 
@@ -257,8 +269,8 @@ Place each posting on the ladder (duties, scope, years, then title), then compar
 | Step | Rule | What fit review does |
 |---|---|---|
 | **Step down** (lower than current) | Allowed only if the person's rules say so | Otherwise a no (check 3). If allowed, say why it is worth it in `why`. |
-| **Same level** | Always allowed | Normal fit. |
-| **Step up** (one level higher) | Always allowed, and preferred when it matches their next step | Raise priority one band only when it matches their next step and pay and place fit (`fit-outcomes.md`). |
+| **Same level** | Always allowed | Normal fit (at most Medium when the person's next step is above their current level). |
+| **Step up** (one level higher) | Allowed. If the person's rules say "not right now", a close call | Raise priority one band only when it matches their next step and pay and place fit (`fit-outcomes.md`). |
 | **Stretch** (two levels higher) | The person decides | A close call for the person, never added on its own; lean Skip when most required duties do not match their real experience. |
 | **Out of reach** (three or more higher) | Not a target | A no, unless the person asks. |
 | **Track switch** (same scope, other track) | Allowed only with the person's yes | A close call for the person. |
@@ -277,7 +289,7 @@ The system helps the person climb, not just find jobs at their current level:
 - **Resume:** for a step-up resume, read postings at the next level, and lead each job with the facts that show next-level scope (leading, training, owning results, cross-team work). Only facts the person confirmed.
 - **Interview prep:** for a step up, prepare the likely question "Why are you ready for this level?", answered with true stories of work already done at that level.
 - **Career path research:** "What's my next career step?" (company research part E) maps the person's current role to the next one or two levels, from real postings: what those roles require, what the person already has, the gaps, and how to close each gap (a skill, a certification, a project at work).
-- **Review the direction** when the person lands a job, gets promoted, or every six months: offer to update the three lines in `my-rules.md`. After a new job, also offer to add the new employer to the never-contact list as their current employer (section 7), put it on hold in the target list, and close or keep their other open listings, one at a time with their yes.
+- **Review the direction** when the person lands a job, gets promoted, or every six months: offer to update the four career lines in `my-rules.md`. After a new job, also offer to add the new employer to the never-contact list as their current employer (section 7), put it on hold in the target list, and close or keep their other open listings, one at a time with their yes. Rules changes go through the intake stage with a dated line; tracker changes are direct requests checked with `--stage user`.
 
 ### Examples
 
@@ -379,6 +391,7 @@ What to suggest when a session ends, so the person always knows what to say next
 - A company deep dive before applying or an interview: "Say 'Apply to the [company] [title] listing'" or "Say 'Prep me for my interview with [company]'".
 - An industry map: "Say 'Add these employers to my target list: [names]'" for any they liked.
 - Role research: if the role fits, "Say 'I want to change my rules: add [title]'".
+- Career path: "Say 'Update my career direction'" if they want a new next step; otherwise the next most useful thing from "A returning person with no request".
 
 ### After a sweep or a fit call
 
@@ -392,7 +405,7 @@ What to suggest when a session ends, so the person always knows what to say next
 
 - A dry run: "Say 'Apply to the [company] [title] listing' when you want to do it for real."
 - A fill sheet was given (no browser): "Fill it in and submit in your browser, then tell me 'I submitted it' with the confirmation, and I will mark it Applied."
-- Listings still at To apply: "Say 'Let's apply' to keep going."
+- Listings still at To apply: "Say 'Let's apply' to keep going." (If there is no `resume.pdf` yet: "Say 'Build my resume' first.")
 - Applications went in: "In a few days, say 'Check my email' to catch replies."
 - Their rules ask for outreach drafts: "Say 'Run outreach on the [company] listing' if you want a note to the hiring manager."
 
@@ -430,6 +443,7 @@ What to suggest when a session ends, so the person always knows what to say next
 
 Find the tracker in `my-setup.md` and read `listings` and `coverage` as `tracker-access.md` says (no snapshot needed: this only reads). An employer with no `coverage` row has never been swept, unless its industry is excluded (those are skipped on purpose and do not count). Then suggest the one most useful thing:
 
+0. A listing at Offer with "accepted" in its history: congratulate them and ask whether to pause the search before suggesting anything else.
 1. A deadline or an interview coming up (a listing at Interview whose newest history line gives a future date, or a deadline in the latest mailbox report): name it with its date first. If no prep file for it exists in `stages/05-interview-prep/output/`, add "Say 'Prep me for my interview with [company] on [day]'"; if one exists, just wish them luck. For an assessment or a reply to send, say what to do and by when.
 2. Things waiting on the person: close calls in the latest sweep or fit report that are not decided yet (not in `listings` or `coverage.skipped` and not marked decided in their report; recording a decision: `stages/02-fit-review/references/fit-outcomes.md`), and employers whose `coverage` says `manual` or `LEAD`. Name them in one line each and ask them to decide or open the site.
 3. Listings at To apply: "Say 'Let's apply'."
@@ -631,7 +645,7 @@ When two rules conflict and nothing here settles it, the newest dated rule in `m
 
 - The user's rules set a **pay floor** and say what counts toward it (for example base salary only, or total pay including commission or bonus).
 - The top of the posted range, or the posted total pay, must reach the floor. A whole range under the floor is a no.
-- **Hourly pay:** for a full-time role, multiply the hourly rate by 2,080 hours to compare with a yearly floor, and say so in `why`. For part-time, compare only if the user's rules allow part-time.
+- **Hourly pay:** for a full-time role or a full-time contract, multiply the hourly rate by 2,080 hours to compare with a yearly floor (or divide yearly pay by 2,080 to compare with an hourly floor), and say so in `why`. A part-time or contract role takes its level from its duties, not its hours. If the user's rules say nothing about part-time, compare the hourly rate with the floor's hourly equivalent (the floor divided by 2,080); if it passes, the role is a close call showing the yearly pay at the posted hours. Contract roles pass unless the user's rules list them as a hard no; give the length in `why`.
 - No posted pay: decide whether the floor is plausible from the role type, level and anything else posted. Never invent a figure. Write "not posted" in `pay` and give your reasoning in `why`.
 - How the user states pay on forms comes from the answer bank (`answers`, topic Pay). Never make up a number.
 
@@ -699,7 +713,7 @@ Any grant of extra autonomy lasts for one session only. Past grants never carry 
 ### 9. Safety
 
 - Never create an account, set or enter a password, or read a password field.
-- Never enter a Social Security number or other government ID, driver's license, bank account or card number.
+- Never enter a Social Security number or other government ID, driver's license, professional license number, bank account or card number. The user types these.
 - Never solve or try to get past a CAPTCHA, bot check or one-time code.
 - Never send an email, message or form on the user's behalf. The only exception is submitting an application after the user's review, or under auto-submit the user turned on for this session.
 - Assessments, aptitude tests, criminal-history questions, and whether they would sign a future non-compete or non-solicitation agreement are the user's to answer. Whether they are bound by one now comes from the answer bank.
@@ -981,9 +995,10 @@ The intake interview, in order. The number in brackets is the section of `my-rul
 ### Target roles
 
 1. "What kind of job are you looking for? Name a few titles if you can." [1]
-2. "What is the highest job title you have held, and did you lead or manage anyone? How many, and what did you own (accounts, budget, projects)?" Ask question 17 (years of experience) now too. From both, work out their current level as `shared/career-direction.md` says, show it with the reason, and let them correct it. [1]
-2a. "Where do you want to go next: the next level up, the same level somewhere better, or a new field? Name the role if you can." Career changers: also work out their starting level in the new field. [1]
-2b. "Would you take a step down in level? If so, when (for example only to change fields, or only above your pay floor)?" For someone looking for their first job, skip this and write "no (entry level)". [1]
+2. "What is the highest job title you have held, and did you lead or manage anyone? How many, and what did you own (accounts, budget, projects)?" Ask question 17 (years of experience) now too, and "Any gap of two years or more since then?" From both, work out their current level as `shared/career-direction.md` says, show it with the reason, and let them correct it. [1]
+2a. "Where do you want to go next: the next level up, the same level somewhere better, or a new field? Name the role if you can." Career changers: also work out their starting level in the new field. [1] If they are aiming up, also ask: "Should same-level roles (for example your current title) stay on your list?" and write the answer into "Roles I want".
+2b. "Would you take a step down in level? If so, when (for example only to change fields, or only above your pay floor)?" For someone looking for their first job, skip this and write "no (entry level)". If they had a gap of two years or more, also ask whether they would return one level lower. [1]
+2c. "Are you open to a step up now, or happy at your current level for this search?" Skip it when their next step (2a) is a step up: then step ups are allowed. [1]
 3. "Are there roles with similar titles that you do not want? For example, a title that sounds right but is really support or admin work." [1]
 4. "In a sentence or two, what does a good fit look like to you?" [1]
 
@@ -1054,6 +1069,7 @@ Last updated: [YYYY-MM-DD]
 - Current level: [L1 to L9 from shared/career-direction.md, with the reason; career changers: old-field level and new-field level]
 - Next step: [the level and role they want next, in their words]
 - Step down allowed: [no / yes, and when]
+- Step up allowed: [yes / not right now]
 - Roles that are out even if the title sounds close: [list]
 - What a good role looks like, in my words: [one or two sentences]
 
@@ -1464,7 +1480,7 @@ The detail behind each step of the sweep. Board-by-board reading is in `board-te
 2. **Search by department, not only by title.** Open the board's categories that hold the user's target roles (for example Sales, Customer Service, Operations, Finance) and read every entry to mid level posting in them; titles vary too much between employers for a title search alone. Then read every posting that could match the user's target roles, with its requirements in full, and its **own** location text (many boards misreport location).
 3. Large boards: read them in parts and record how far you got in `sweepProgress`, with `sweepState` `partial`.
 4. A posting is new if no row in `listings` has its job number, or its title and location at that employer.
-5. **If the site will not load,** first try the known workarounds (the board's public feed, an alternate host, the sitemap). If they fail, do not try to get past anything. Set `sweepState` to `manual`, `result` to `LEAD`, and start `detail` with today's date and "MANUAL:" plus the link and which kind of failure it was: a **bot check** (the user can usually open it in their own browser), a **browser refusal** (the browser tool will not open the site), or a **structural absence** (the employer has no postings of its own). Never remove an employer from the target list because its site was hard to reach.
+5. **If the site will not load,** first try the known workarounds (the board's public feed, an alternate host, the sitemap). If they fail, do not try to get past anything. Set `sweepState` to `manual`, `result` to `LEAD`, and start `detail` with today's date and "MANUAL:" plus the link and which kind of failure it was: a **bot check** (the user can usually open it in their own browser), a **browser refusal** (the browser tool will not open the site), or a **structural absence** (the employer has no postings of its own). Never remove an employer from the target list because its site was hard to reach. If only some postings are blocked while the rest of the board reads, read the rest, set `sweepState` to `manual` and `result` to `LEAD`, and name the blocked links in `detail`.
 
 ### The coverage row
 
@@ -1526,13 +1542,13 @@ Decide whether one posting goes in the tracker. A sweep runs this for every new 
 3. Check in this order. The first failure decides:
    1. **Duplicate?** Same req id, or same title and location at the same employer, already in `listings`: stop, nothing to add.
    2. **Live on the employer's own site?** If the site shows it gone: no. If you cannot open the site (no browser, or the person pasted the text), judge it on the pasted text, say "not confirmed live", and ask for the employer's link before writing a listing.
-   3. **Target role and level?** Not one of the user's target roles, one of their "out" roles, a step down they do not allow, or out of reach: no. A stretch, a track switch, or a level that is unclear between two steps is a close call (rules 1, `career-direction.md`).
+   3. **Target role and level?** Not one of the user's target roles, one of their "out" roles, a step down they do not allow, or out of reach: no. A stretch, a track switch, a step up when step ups are "not right now", or an unclear level whose two readings give different results is a close call (rules 1, `career-direction.md`).
    4. **Industry and product?** An "out" industry, or an excluded industry without `keepAnyway`: no (rules 1).
    5. **Place?** Fails the user's place rules: no (rules 4).
    6. **Pay?** Under the floor: no. No posted pay: decide plausibility and write the reasoning (rules 2).
    7. **Hard requirements?** License before hire, a specific degree the user lacks, any hard no in the user's rules: no. Required years inside the user's stretch never fail it on their own (rules 3).
    8. **On-hold employer?** Add the listing, set `priority` to `On hold`, and say so in `why`.
-4. Follow the user's autonomy lines in `my-rules.md`: if they want to be asked before listings are written, show each result and wait for their yes before writing. "Bring me every close call" applies only to close calls; clear fits are written as usual.
+4. Follow the user's autonomy lines in `my-rules.md`: if they want to be asked before listings are written, show each result and wait for their yes before writing. "Bring me every close call" applies only to close calls; clear fits are written as usual. Level close calls (a stretch, a track switch, a step up when step ups are "not right now", an unclear level with different results) always go to the person, even when fit calls are autonomous.
 5. Write the result as `references/fit-outcomes.md` says: a new listing, a skipped line, or a report item for the user.
 6. If no sweep is running, take an after snapshot and run the check with `--stage fit`.
 7. If no sweep is running: ask once what this session taught (`lessons.md`) and add any lesson the person approves, then end by suggesting the next step (`next-steps.md`, "After a sweep or a fit call"). Inside a sweep, the sweep does this.
@@ -1580,8 +1596,14 @@ What to write for each result of a fit review. Column meanings are in `shared/tr
 - `pay`: the posted pay as written, or "not posted".
 - `why`: starts with the career step (for example "Step up (L3 to L4):", "Same level (L3):", "Stretch (L4 to L6):" or "Track switch (L6 to IC L6):", `shared/career-direction.md`), then one or two sentences on the fit, any reach (years, industry), and anything the user should know.
 - `teaches`: what the role would teach the user, starting "Stated:" (the posting says so), "Not stated." or "Not read." When it builds toward their next step, say how.
-- `family`: one of `settings.roleFamilies`, written without the `*`. `track`: one of `settings.tracks`.
-- `priority`: `High` (clear fit, pay at or above the floor), `Medium` (fits with a reach), `Low` (fits on paper, weaker on taste or pay), or `On hold`. A step up that matches the user's next step moves up one band (Low to Medium, Medium to High), but never to High when `why` names a years reach. A stretch the person chose to apply to is Medium.
+- `family`: one of `settings.roleFamilies`, written without the `*`. `track`: one of `settings.tracks` (the search, usually `Main`; the IC or leader track goes in `why`).
+- `priority`, decided in this order:
+  1. On-hold employer: `On hold`.
+  2. A stretch, or a step up while step ups are "not right now", that the person chose to apply to: `Medium`.
+  3. Otherwise the base band: `High` for a clear fit with pay at or above the floor, `Medium` for a fit with a reach, `Low` when it fits on paper but is weaker on taste or pay.
+  4. A step up that matches the person's next step: raise one band, but not to `High` when `why` names a years reach.
+  5. When the person's next step is above their current level (one level or more), a same-level listing, or a step up that does not match that next step: at most `Medium`.
+  6. An unclear level ("level unclear" in `why`): no raise.
 - `postingText`: the posting's full text, copied from the employer's own page (title, location, pay, duties, requirements). This lets later stages work after the posting is taken down. If the page is too long, keep at least the duties, requirements and pay.
 - `status`: `To apply`.
 - `history`: `YYYY-MM-DD added from the employer's own site by fit review.` If it was judged on pasted text: `YYYY-MM-DD added from pasted posting text by fit review; not confirmed live on the employer's site.`, and `why` ends with "Not confirmed live."
@@ -1939,6 +1961,7 @@ Some career sites show a bot check that never clears in an automated browser. Th
 | Emailed sign-in link | ClearCompany (second visit) | User |
 | CAPTCHA at submit | iCIMS (hCaptcha), Jobvite, BambooHR, Cornerstone (first time), Phenom (invisible) | User |
 | Birth date, Social Security number, ID digits | some ClearCompany and ADP flows, some tax-credit surveys | User decides |
+| Professional license number | various, in licensed trades and health care | User |
 | Bot check on the careers site | various | User, in their own browser |
 
 ---
@@ -2332,7 +2355,7 @@ For pasted or forwarded mail, the window is simply the dates of the messages the
 
 ### Matching
 
-Match each message to one listing: same company and, where the message names it, the same title or req id. If a message could match more than one listing, do not guess. Ask the user.
+Match each message to one listing: same company and, where the message names it, the same title or req id. If a message could match more than one listing, do not guess. Ask the user. If it matches no listing (for example an employer reaching out first), change nothing: list it for the user, with any date first.
 
 ### Sorting each match
 
@@ -2942,7 +2965,7 @@ For "What's my next career step?" Uses `shared/career-direction.md` and the user
 4. Posted pay at each level, as in part D.
 5. Ask whether to update "Next step" in their rules. A change goes through the intake stage.
 
-Without web search: use the `postingText` of tracker listings at those levels, plus the ladder in `shared/career-direction.md`. Write "Based on: N tracker postings, no web search" at the top, say that pay at each level is unknown unless those postings show it, and state nothing unsourced as fact.
+Without web search: use the `postingText` of tracker listings at those levels, the posting facts quoted in close calls and skips in `stages/02-fit-review/output/` and `stages/01-sweep/output/`, and the ladder in `shared/career-direction.md`. Write "Based on: N tracker postings, no web search" at the top, say that pay at each level is unknown unless those postings show it, and state nothing unsourced as fact.
 
 ---
 

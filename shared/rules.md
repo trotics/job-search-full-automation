@@ -17,7 +17,7 @@ When two rules conflict and nothing here settles it, the newest dated rule in `m
 
 - The user's rules set a **pay floor** and say what counts toward it (for example base salary only, or total pay including commission or bonus).
 - The top of the posted range, or the posted total pay, must reach the floor. A whole range under the floor is a no.
-- **Hourly pay:** for a full-time role, multiply the hourly rate by 2,080 hours to compare with a yearly floor, and say so in `why`. For part-time, compare only if the user's rules allow part-time.
+- **Hourly pay:** for a full-time role or a full-time contract, multiply the hourly rate by 2,080 hours to compare with a yearly floor (or divide yearly pay by 2,080 to compare with an hourly floor), and say so in `why`. A part-time or contract role takes its level from its duties, not its hours. If the user's rules say nothing about part-time, compare the hourly rate with the floor's hourly equivalent (the floor divided by 2,080); if it passes, the role is a close call showing the yearly pay at the posted hours. Contract roles pass unless the user's rules list them as a hard no; give the length in `why`.
 - No posted pay: decide whether the floor is plausible from the role type, level and anything else posted. Never invent a figure. Write "not posted" in `pay` and give your reasoning in `why`.
 - How the user states pay on forms comes from the answer bank (`answers`, topic Pay). Never make up a number.
 
@@ -85,7 +85,7 @@ Any grant of extra autonomy lasts for one session only. Past grants never carry 
 ## 9. Safety
 
 - Never create an account, set or enter a password, or read a password field.
-- Never enter a Social Security number or other government ID, driver's license, bank account or card number.
+- Never enter a Social Security number or other government ID, driver's license, professional license number, bank account or card number. The user types these.
 - Never solve or try to get past a CAPTCHA, bot check or one-time code.
 - Never send an email, message or form on the user's behalf. The only exception is submitting an application after the user's review, or under auto-submit the user turned on for this session.
 - Assessments, aptitude tests, criminal-history questions, and whether they would sign a future non-compete or non-solicitation agreement are the user's to answer. Whether they are bound by one now comes from the answer bank.

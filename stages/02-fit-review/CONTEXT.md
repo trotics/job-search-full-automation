@@ -27,13 +27,13 @@ Decide whether one posting goes in the tracker. A sweep runs this for every new 
 3. Check in this order. The first failure decides:
    1. **Duplicate?** Same req id, or same title and location at the same employer, already in `listings`: stop, nothing to add.
    2. **Live on the employer's own site?** If the site shows it gone: no. If you cannot open the site (no browser, or the person pasted the text), judge it on the pasted text, say "not confirmed live", and ask for the employer's link before writing a listing.
-   3. **Target role and level?** Not one of the user's target roles, one of their "out" roles, a step down they do not allow, or out of reach: no. A stretch, a track switch, or a level that is unclear between two steps is a close call (rules 1, `career-direction.md`).
+   3. **Target role and level?** Not one of the user's target roles, one of their "out" roles, a step down they do not allow, or out of reach: no. A stretch, a track switch, a step up when step ups are "not right now", or an unclear level whose two readings give different results is a close call (rules 1, `career-direction.md`).
    4. **Industry and product?** An "out" industry, or an excluded industry without `keepAnyway`: no (rules 1).
    5. **Place?** Fails the user's place rules: no (rules 4).
    6. **Pay?** Under the floor: no. No posted pay: decide plausibility and write the reasoning (rules 2).
    7. **Hard requirements?** License before hire, a specific degree the user lacks, any hard no in the user's rules: no. Required years inside the user's stretch never fail it on their own (rules 3).
    8. **On-hold employer?** Add the listing, set `priority` to `On hold`, and say so in `why`.
-4. Follow the user's autonomy lines in `my-rules.md`: if they want to be asked before listings are written, show each result and wait for their yes before writing. "Bring me every close call" applies only to close calls; clear fits are written as usual.
+4. Follow the user's autonomy lines in `my-rules.md`: if they want to be asked before listings are written, show each result and wait for their yes before writing. "Bring me every close call" applies only to close calls; clear fits are written as usual. Level close calls (a stretch, a track switch, a step up when step ups are "not right now", an unclear level with different results) always go to the person, even when fit calls are autonomous.
 5. Write the result as `references/fit-outcomes.md` says: a new listing, a skipped line, or a report item for the user.
 6. If no sweep is running, take an after snapshot and run the check with `--stage fit`.
 7. If no sweep is running: ask once what this session taught (`lessons.md`) and add any lesson the person approves, then end by suggesting the next step (`next-steps.md`, "After a sweep or a fit call"). Inside a sweep, the sweep does this.

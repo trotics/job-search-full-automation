@@ -10,8 +10,14 @@ What to write for each result of a fit review. Column meanings are in `shared/tr
 - `pay`: the posted pay as written, or "not posted".
 - `why`: starts with the career step (for example "Step up (L3 to L4):", "Same level (L3):", "Stretch (L4 to L6):" or "Track switch (L6 to IC L6):", `shared/career-direction.md`), then one or two sentences on the fit, any reach (years, industry), and anything the user should know.
 - `teaches`: what the role would teach the user, starting "Stated:" (the posting says so), "Not stated." or "Not read." When it builds toward their next step, say how.
-- `family`: one of `settings.roleFamilies`, written without the `*`. `track`: one of `settings.tracks`.
-- `priority`: `High` (clear fit, pay at or above the floor), `Medium` (fits with a reach), `Low` (fits on paper, weaker on taste or pay), or `On hold`. A step up that matches the user's next step moves up one band (Low to Medium, Medium to High), but never to High when `why` names a years reach. A stretch the person chose to apply to is Medium.
+- `family`: one of `settings.roleFamilies`, written without the `*`. `track`: one of `settings.tracks` (the search, usually `Main`; the IC or leader track goes in `why`).
+- `priority`, decided in this order:
+  1. On-hold employer: `On hold`.
+  2. A stretch, or a step up while step ups are "not right now", that the person chose to apply to: `Medium`.
+  3. Otherwise the base band: `High` for a clear fit with pay at or above the floor, `Medium` for a fit with a reach, `Low` when it fits on paper but is weaker on taste or pay.
+  4. A step up that matches the person's next step: raise one band, but not to `High` when `why` names a years reach.
+  5. When the person's next step is above their current level (one level or more), a same-level listing, or a step up that does not match that next step: at most `Medium`.
+  6. An unclear level ("level unclear" in `why`): no raise.
 - `postingText`: the posting's full text, copied from the employer's own page (title, location, pay, duties, requirements). This lets later stages work after the posting is taken down. If the page is too long, keep at least the duties, requirements and pay.
 - `status`: `To apply`.
 - `history`: `YYYY-MM-DD added from the employer's own site by fit review.` If it was judged on pasted text: `YYYY-MM-DD added from pasted posting text by fit review; not confirmed live on the employer's site.`, and `why` ends with "Not confirmed live."

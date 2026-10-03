@@ -18,23 +18,35 @@ Eight levels, plus a top rung for chief roles. Most fields use some version of t
 | L8 | Executive | "VP", "senior VP", "general manager", owns a business unit or a whole function across the company |
 | L9 | Chief | "Chief ... officer", "president", company-wide profit and loss |
 
-Two tracks run side by side above L3: **individual contributor** and **people leader** (L5 to L8). For individual roles above L4, use scope as the guide: several teams or 8+ years is an L5 equivalent, a whole function is an L6 or L7 equivalent. A small team with no hiring or budget ownership is L5; hiring or a budget makes it L6. An individual role matches a next step only on the same track: an IC L5 is not a match for a "first team lead" goal. Principal, staff, expert or individual "director" roles with no reports take the level their scope, required years and pay match (L4 to L7), marked "IC track" in `why`. Moving between tracks at the same scope is a **track switch**, not a step: bring it to the person as a close call. Moving from L4 to a first L5 role is a step up.
+Two tracks run above L3: **individual contributor** (IC) and **people leader** (L5 to L8).
+
+- Judge IC roles above L4 by scope: several teams or 8+ years is L5; a whole function is L6 or L7.
+- A team lead with no hiring or budget is L5; hiring or a budget makes it L6.
+- Principal, staff, expert or individual "director" roles with no reports take the level their scope, required years and pay give (L4 to L7). Mark them "IC track" in `why`.
+- An IC role never matches a people-leader next step (an IC L5 is not a match for a "first team lead" goal).
+- From L4, a first L5 leader role is a plain **step up**, not a track switch. From L3 or below it follows the step table like any other role (a stretch from L3).
+- From L5 up, a move to the other track at the same level is a **track switch**; at a higher level it is written "Track switch and step up (IC L6 to L7)". Both are close calls.
 
 **Senior VP and executive VP** stay at L8, a stronger L8 rather than a new level. **L9** chief roles are a step up for an L8, a stretch for L7, and out of reach below that.
 
 Title words mislead across employers ("manager" can mean no reports; "associate" can mean experienced in law or consulting). **Judge a posting by its duties, scope and required years first, the title last.** When duties and title disagree, say so in `why`. When required years and duties point to different levels, go by the required years, unless the duties include supervising people or owning a budget or profit and loss; then go by the duties.
 
-An internship is below L1 for anyone who has finished school: treat it as a step down. For a current student, an internship is the same level (L1).
+An internship is below L1 for anyone who has finished school: treat it as a step down. For a current student, an internship is the same level (L1). A returnship (a paid program for people coming back after a gap) is judged by its duties, not as an internship.
+
+**Small employers, government and trades.** Under about 50 staff, read "head of", "director" or "VP" by reports and budget; with no reports it is an individual role at the level its required years give, and the "whole function" rule does not apply. For United States federal grades, "one year at the next lower grade" means that grade's level, not one year: roughly GS-7 L1, GS-9 L2, GS-11 L3, GS-12 L4, GS-13 L4 or L5, GS-14 L6, GS-15 L7. Numbered titles ("Analyst III") follow the employer's own series, not the ladder's numbers. An "associate" asking an MBA or a law degree is L2 or L3. A role that runs a shift or a crew with no hiring or budget (charge nurse, foreman) is L5: a step up from L4 and a stretch from L3 in the same work.
 
 ## Placing the person
 
-The intake interview sets three lines in section 1 of `my-rules.md`:
+The intake interview sets four lines in section 1 of `my-rules.md`:
 
-- **Current level:** worked out from their history, not asked as a label. Use years in the field, the highest title held, whether they led or managed people (how many), and the size of what they owned (accounts, budget, projects). Show the result and the reason in one line, for example "L3 Experienced: 5 years, owns a book of 40 accounts, no direct reports", and let the person correct it.
-- **Next step:** the level and role they want next, in their own words, for example "L4 Senior account manager" or "L5 first team lead role". "Same level, new field" is a valid answer.
+- **Current level:** worked out from their history, not asked as a label. Use years in the field, the highest title held, whether they led or managed people (how many), and the size of what they owned (accounts, budget, projects). Use the posting tie-breaks: years decide, unless they managed people or owned a budget; then the duties decide. Count staff who reported to them, not students, patients or clients. Show the result and the reason in one line, for example "L3 Experienced: 5 years, owns a book of 40 accounts, no direct reports", and let the person correct it.
+- **Next step:** the level and role they want next, in their own words, for example "L4 Senior account manager" or "L5 first team lead role". "Same level, new field" is a valid answer. Map each role they name to its ladder level and confirm it with them; if a named role sits at a different level than they said, say so and write both.
 - **Step down allowed:** yes or no, and when (for example "only to change fields", or "only above my pay floor").
+- **Step up allowed:** yes, or "not right now" for someone happy at their level; then a step up is a close call, never added on its own.
 
-**Career changers** have two levels: their level in the old field and their **starting level in the new field**. The new-field level is usually one to three steps lower, rising with transferable experience (a nurse moving into healthcare sales starts around L2 in sales, not L1, because clinical knowledge transfers). Write both, and judge postings against the new-field level.
+**Career changers** have two levels: their level in the old field and their **starting level in the new field**. The new-field level is usually one to three steps lower, rising with transferable experience (a nurse moving into healthcare sales starts around L2 in sales, not L1, because clinical knowledge transfers). Write both, with one new-field level, not a range, and judge postings against it. Changing fields is not itself a step down: "step down allowed" means below the new-field level.
+
+**Returning after a gap** of two years or more: place them at the last level they held, do not count the gap years as experience, and ask (interview question 2b) whether they will return one level lower.
 
 ## Judging a posting's step
 
@@ -43,8 +55,8 @@ Place each posting on the ladder (duties, scope, years, then title), then compar
 | Step | Rule | What fit review does |
 |---|---|---|
 | **Step down** (lower than current) | Allowed only if the person's rules say so | Otherwise a no (check 3). If allowed, say why it is worth it in `why`. |
-| **Same level** | Always allowed | Normal fit. |
-| **Step up** (one level higher) | Always allowed, and preferred when it matches their next step | Raise priority one band only when it matches their next step and pay and place fit (`fit-outcomes.md`). |
+| **Same level** | Always allowed | Normal fit (at most Medium when the person's next step is above their current level). |
+| **Step up** (one level higher) | Allowed. If the person's rules say "not right now", a close call | Raise priority one band only when it matches their next step and pay and place fit (`fit-outcomes.md`). |
 | **Stretch** (two levels higher) | The person decides | A close call for the person, never added on its own; lean Skip when most required duties do not match their real experience. |
 | **Out of reach** (three or more higher) | Not a target | A no, unless the person asks. |
 | **Track switch** (same scope, other track) | Allowed only with the person's yes | A close call for the person. |
@@ -63,7 +75,7 @@ The system helps the person climb, not just find jobs at their current level:
 - **Resume:** for a step-up resume, read postings at the next level, and lead each job with the facts that show next-level scope (leading, training, owning results, cross-team work). Only facts the person confirmed.
 - **Interview prep:** for a step up, prepare the likely question "Why are you ready for this level?", answered with true stories of work already done at that level.
 - **Career path research:** "What's my next career step?" (company research part E) maps the person's current role to the next one or two levels, from real postings: what those roles require, what the person already has, the gaps, and how to close each gap (a skill, a certification, a project at work).
-- **Review the direction** when the person lands a job, gets promoted, or every six months: offer to update the three lines in `my-rules.md`. After a new job, also offer to add the new employer to the never-contact list as their current employer (section 7), put it on hold in the target list, and close or keep their other open listings, one at a time with their yes.
+- **Review the direction** when the person lands a job, gets promoted, or every six months: offer to update the four career lines in `my-rules.md`. After a new job, also offer to add the new employer to the never-contact list as their current employer (section 7), put it on hold in the target list, and close or keep their other open listings, one at a time with their yes. Rules changes go through the intake stage with a dated line; tracker changes are direct requests checked with `--stage user`.
 
 ## Examples
 
