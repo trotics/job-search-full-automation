@@ -26,17 +26,21 @@ FILLER = ["results-driven", "results driven", "detail-oriented", "detail oriente
 STOCK = base64.b64decode(
     "ZGVsdmUKbGV2ZXJhZ2UKc2VhbWxlc3MKcm9idXN0CnVubG9jawpnYW1lLWNoYW5nZXIKZ2FtZSBjaGFuZ2VyCmluIHRvZGF5J3MgZmFzdC1wYWNlZAppdCdzIGltcG9ydGFudCB0byBub3RlCmVsZXZhdGUKZW1wb3dlcgpzdHJlYW1saW5lCmhhcm5lc3MKbmF2aWdhdGUgdGhlIGNvbXBsZXhpdGllcw=="
 ).decode().split("\n")
+# (pattern, what, flags). Patterns aim at personal details, not normal resume text
+# ("patients age 65", "40 clients in court" and "a single platform" must pass).
 PERSONAL = [
-    (r"\b(date of birth|DOB|born on|birthday)\b", "birth date"),
-    (r"\bage\s*:?\s*\d{2}\b|\b\d{2} years old\b", "age"),
-    (r"\bmarital status\b|\b(married|single|divorced|widowed)\s*(,|\||;|$)|\bstatus:\s*(married|single|divorced)\b", "marital status"),
-    (r"\b\d{3}-\d{2}-\d{4}\b", "Social Security number"),
-    (r"\b\d{1,5}\s+\w+(\s\w+)?\s+(Street|St|Avenue|Ave|Road|Rd|Drive|Dr|Lane|Ln|Boulevard|Blvd|Court|Ct|Way)\b\.?", "street address"),
-    (r"\blicen[cs]e\s*(no\.?|number|#)\s*:?\s*\w+", "license number"),
-    (r"\b(nationality|citizenship:|religion)\b", "nationality or religion"),
-    (r"\b(salary history|previous salary|current salary)\b", "salary history"),
+    (r"\b(date of birth|DOB|born on|birthday)\b", "birth date", re.I),
+    (r"\bage\s*:\s*\d{2}\b|\bI am \d{2}\b|\b\d{2} years old\b", "age", re.I),
+    (r"\bmarital status\b|\b(married|single|divorced|widowed)\s*(,|\||;|$)|\bstatus:\s*(married|single|divorced)\b", "marital status", re.I | re.M),
+    (r"\b\d{3}-\d{2}-\d{4}\b", "Social Security number", 0),
+    (r"\b\d{1,5}\s+[A-Z][a-z]+(\s[A-Z][a-z]+)?\s+(Street|St|Avenue|Ave|Road|Rd|Drive|Dr|Lane|Ln|Boulevard|Blvd|Court|Ct|Way)\b\.?", "street address", 0),
+    (r"\blicen[cs]e\s*(no\.?|number|#)\s*:?\s*\w+", "license number", re.I),
+    (r"\b(nationality|citizenship:|religion)\b", "nationality or religion", re.I),
+    (r"\b(salary history|previous salary|current salary)\b", "salary history", re.I),
 ]
-REQUIRED = ["Summary", "Experience", "Education", "Skills"]
+# Education is optional: many jobs need no degree, and a user without one must never invent a heading.
+REQUIRED = ["Summary", "Experience", "Skills"]
+EMPTY = {"none", "n/a", "na", "-", "no", ""}
 NUM = re.compile(r"\$?\d[\d,]*(?:\.\d+)?%?")
 WORDS = {w: str(i) for i, w in enumerate("zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty".split())}
 
@@ -67,6 +71,7 @@ def main():
     # The "What employers ask for" section describes postings, not the user. Nothing in it counts as a fact about the user.
     user_facts = re.sub(r"(?ms)^## What employers ask for\s*$.*?(?=^## |\Z)", "", facts)
     facts_norm = norm(user_facts)
+    facts_low = re.sub(r"\s+", " ", user_facts.lower())
     problems = []
     lines = resume.splitlines()
 
@@ -76,7 +81,8 @@ def main():
             problems.append("%s found" % name)
     low = resume.lower()
     for p in FILLER + STOCK:
-        if re.search(r"\b" + re.escape(p), low):
+        # Whole words only, so "Microsoft Dynamics" is not mistaken for "dynamic".
+        if re.search(r"\b" + re.escape(p) + r"\b", low):
             problems.append("filler or stock phrase: %r" % p)
     first_person = re.compile(r"(?<![A-Za-z'])(I|me|my|mine|we|our|My|We|Our|he|she|him|her|his|hers|He|She|His|Her)(?![A-Za-z'])")
     # A capital I after words like Level or Phase is a Roman numeral ("Level I trauma center"), not a pronoun.
@@ -91,8 +97,8 @@ def main():
             break
 
     # Personal data.
-    for pat, what in PERSONAL:
-        if re.search(pat, resume, re.I):
+    for pat, what, flags in PERSONAL:
+        if re.search(pat, resume, flags):
             problems.append("personal data that does not belong on a resume: %s" % what)
 
     # Headings.
@@ -122,7 +128,9 @@ def main():
         elif l.startswith("- ") and section.startswith("skills"):
             items = l[2:].split(":", 1)[-1]
             for item in re.split(r",|;", items):
-                if norm(item) and norm(item) not in facts_norm:
+                # A skill must appear in the facts as a whole word or phrase, so "MIG" does not match inside "migration".
+                phrase = re.sub(r"\s+", " ", item.strip().lower())
+                if phrase and not re.search(r"(?<![a-z0-9])" + re.escape(phrase) + r"(?![a-z0-9])", facts_low):
                     problems.append("line %d: skill %r is not in the facts file" % (i, item.strip()))
         elif l.startswith("- ") and len(l) > 222:
             problems.append("line %d: bullet longer than about two lines (%d characters)" % (i, len(l) - 2))
@@ -166,7 +174,7 @@ def main():
             seen = [h.lower() for h in heads if h.lower() in order]
             if seen != [h for h in order if h in seen]:
                 problems.append("sections out of the saved order: resume has %s, the facts file says %s" % (seen, order))
-        for term in [t.strip() for t in re.split(r",|;", field("Terms the postings use that are not in your facts (never used unless added to the facts first)")) if t.strip()]:
+        for term in [t.strip() for t in re.split(r",|;", field("Terms the postings use that are not in your facts (never used unless added to the facts first)")) if t.strip().lower().rstrip(".") not in EMPTY]:
             if re.search(r"\b" + re.escape(term.lower()) + r"\b", low):
                 problems.append("uses %r, which the facts file marks as not in the facts" % term)
 

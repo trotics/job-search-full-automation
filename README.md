@@ -140,7 +140,7 @@ The instructions themselves are plain text files. If you want to try another AI 
 - **"Check my email"**: after you have applied to a few places.
 - **"Prep me for my interview with [company] on [day]"**: the prep file is saved in `reports/`.
 - **"Change my rules"**: reruns only the parts of the interview you want to change.
-- **Changing statuses yourself:** you can change a status on the tracker page any time. It adds a dated line to that listing's history. Avoid doing it while Claude is in the middle of a session; do it before or after, so the session's check only sees the session's own changes.
+- **Changing statuses or notes yourself:** you can change a status or type in Your notes on the tracker page any time. A status change adds a dated line to that listing's history. Avoid doing either while Claude is in the middle of a session; do it before or after. If you do, the session's check will say so, and Claude will tell you rather than touch your change.
 - **"Suggest employers that fit my background"**, **"Tell me about [company]"**, **"Build my resume"**: see `skill/job-search/references/prompts.md` for the full list of things you can say.
 
 ## Safety notes

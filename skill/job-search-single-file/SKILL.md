@@ -98,6 +98,7 @@ When two rules conflict and nothing here settles it, the newest dated rule in `m
 
 - The user's rules set a **pay floor** and say what counts toward it (for example base salary only, or total pay including commission or bonus).
 - The top of the posted range, or the posted total pay, must reach the floor. A whole range under the floor is a no.
+- **Hourly pay:** for a full-time role, multiply the hourly rate by 2,080 hours to compare with a yearly floor, and say so in `why`. For part-time, compare only if the user's rules allow part-time.
 - No posted pay: decide whether the floor is plausible from the role type, level and anything else posted. Never invent a figure. Write "not posted" in `pay` and give your reasoning in `why`.
 - How the user states pay on forms comes from the answer bank (`answers`, topic Pay). Never make up a number.
 
@@ -139,11 +140,12 @@ Column names are in `references/tracker-columns.md`. They are the same in the ar
   - The mailbox check (stage 06) may set **Followed up**, **Interview**, **Rejected** or **Offer**, only after the user says yes to each change in that session.
   - The user may ask for any status change directly.
   - Nothing else changes a status.
-- Never change a listing at Applied, Followed up, Interview or Offer except as above.
-- **Re-read before writing.** Read the row fresh just before you change it, and write only the fields you changed. If the row changed since you last read it, stop and read it again.
+- Never change the status of a listing at Applied, Followed up, Interview or Offer except as above. On those listings sessions may only append history lines, and stage 04 may fill the outreach columns.
+- **Re-read before writing.** Read the row fresh just before you change it, and write only the fields you changed. In the artifact tracker, pass the `version` you read as `if_version` on every write to an existing row; the database refuses the write if the row changed since ("version_mismatch"). Then read it again and redo the write against what it holds now. In the spreadsheet, if the row changed since you read it, stop and read it again.
 - **Back up before bulk writes.** Before writing more than five rows in one session, save a copy of the whole tracker to `backups/`:
-  - Artifact: list every collection with `ArtifactData` and save them together as `backups/tracker-backup-<YYYY-MM-DD>-<HHMM>.json`.
+  - Artifact: list every collection with `ArtifactData` (`out_dir` set to a new folder under `backups/`), then combine them with `python tools/check_tracker.py snapshot-dir <that folder> backups/tracker-backup-<YYYY-MM-DD>-<HHMM>.json`.
   - Spreadsheet: copy the file to `backups/tracker-backup-<YYYY-MM-DD>-<HHMM>.xlsx`.
+- **When a check fails because of something the user did** (they typed a note, or changed a status on the tracker page during the session), tell the user. Never undo their change, and never write `yourNotes` to make a check pass.
 - **Check by script.** Before and after any session that writes, save a snapshot and run `tools/check_tracker.py` (see `references/tracker-columns.md`). A stage is not done until the check passes.
 
 ### 8. Autonomy
@@ -274,7 +276,7 @@ Ask them in this order. The number in brackets is the section of `my-rules.md` i
 1. Write the full `my-rules.md` from the template and the answers. Use the user's own words where you can.
 2. **Show the whole file** to the user and ask: "Is this right? Tell me anything to change, or say approve." Make changes and show the whole file again until they approve.
 3. Only after approval, save it to `my-files/my-rules.md`.
-4. Write the tracker's `settings` record (see `references/tracker-columns.md`). Show the values first and save after the user says yes:
+4. Write the tracker's `settings` record (see `references/tracker-columns.md`). Take a snapshot first (`references/tracker-columns.md`, "Checking by script"). Show the values first and save after the user says yes. The record's id is `main`. In the spreadsheet it already exists (the template has it), so **update** that row (`tools/sheet.py` op `update`, id `main`). In a new artifact tracker it does not exist yet, so create it with `set`. Afterwards, and again after any answer bank entries in step 5, take an after snapshot and run `python tools/check_tracker.py check backups/before.json backups/after.json --stage intake`. The fields:
    - `tierA`, `tierB`, `tierC`: what each employer tier means for this user. Default: A "Employer based in my home metro", B "Employer elsewhere with jobs open to my area", C "Other allowed place".
    - `industryOrder`: the "in" industries, most wanted first.
    - `excludedIndustries`: from question 17.
@@ -287,7 +289,7 @@ Ask them in this order. The number in brackets is the section of `my-rules.md` i
    - **"Yes, but I want it improved"**: run `stages/07-resume.md`, starting from their file. Their resume is a source of facts, and nothing changes without their yes.
    - **"No" or "I need a new one"**: run `stages/07-resume.md` from the start.
    Tell them they can skip this for now and say "build my resume" any time.
-7. **Employers.** Ask: "Do you already have a list of employers you want to work for?" If yes, add them with sweep step 0. If no, or they want more, offer stage 08 part A ("suggest employers that fit my background"). Do not start it unless they say yes.
+7. **Employers.** Ask: "Do you already have a list of employers you want to work for?" If yes, add them with sweep step 1. If no, or they want more, offer stage 08 part A ("suggest employers that fit my background"). Do not start it unless they say yes.
 8. Point them to `references/prompts.md` for what to say in later sessions.
 
 ### Outputs
@@ -318,7 +320,7 @@ Check employers for new listings, and confirm that listings already in the track
 
 ### Tracker access
 
-- **Artifact:** read `companies`, `coverage`, `listings` and `settings` with `ArtifactData` (`list`). Write one row at a time with `update` (or `set` for a new row), after reading it fresh.
+- **Artifact:** read `companies`, `coverage`, `listings` and `settings` with `ArtifactData` (`list`). Write one row at a time with `update` (or `set` for a new row), after reading it fresh and passing its `version` as `if_version` (a new row needs none).
 - **Spreadsheet:** read and write the tabs of the same names in `my-files/job-search-tracker.xlsx` with `tools/sheet.py` or openpyxl. Ask the user to close the file in Excel first.
 
 ### Inputs
@@ -329,9 +331,9 @@ Check employers for new listings, and confirm that listings already in the track
 
 ### Steps
 
-0. **Adding employers (only when the user asks).** For each employer the user names, or each one you find for them by web search that fits their rules, find its own careers site. Add a `companies` row with `id` (the name in lowercase with hyphens, for example `example-health-co`; check no other row uses it), `company`, `careersSite`, `tier`, `industry`, `keepAnyway` no, `onHold` (yes if on hold in the user's rules), `added` today. Show the list to the user before saving it.
-1. Read the scope. Skip employers whose `industry` is in `settings.excludedIndustries` unless `keepAnyway` is yes.
-2. Take a snapshot of the tracker (see `references/tracker-columns.md`, "Checking by script"). If this run may write more than five rows, take a backup too (rules 7).
+0. **Snapshot first.** Before writing anything, including step 1, take a snapshot of the tracker (see `references/tracker-columns.md`, "Checking by script"). If this run may write more than five rows, take a backup too (rules 7).
+1. **Adding employers (only when the user asks).** For each employer the user names, or each one you find for them by web search that fits their rules, find its own careers site. Add a `companies` row with `id` (the name in lowercase with hyphens, for example `example-health-co`; check no other row uses it), `company`, `careersSite`, `tier`, `industry`, `keepAnyway` no, `onHold` (yes if on hold in the user's rules), `added` today. Show the list to the user before saving it.
+2. Read the scope. Skip employers whose `industry` is in `settings.excludedIndustries` unless `keepAnyway` is yes.
 3. For each employer in scope:
    1. Open its own careers site or applicant tracking system. Never sign in, never create an account.
    2. Read every posting that could match the user's target roles. Read the requirements in full.
@@ -381,6 +383,8 @@ Decide whether one posting goes in the tracker. The sweep calls this for every n
 - `rules.md` and `my-files/my-rules.md`.
 - The posting, read on the employer's own site: title, location detail, pay, requirements, work type (full-time, part-time, contract).
 - The tracker: existing listings for that employer, to avoid duplicates.
+- **Employer not on the target list** (for example the user pasted a link): ask the user whether to add the employer. If yes, add its `companies` row first, exactly as sweep step 1 says, then review the posting. If no, give the fit call in chat only and write nothing.
+- Take a snapshot before writing, and after writing run `python tools/check_tracker.py check backups/before.json backups/after.json --stage fit` (snapshots: `references/tracker-columns.md`, "Checking by script").
 
 ### Steps
 
@@ -443,7 +447,7 @@ Apply in **Claude in Chrome** when it is connected. It can upload files. The app
 
 ### Tracker access
 
-- **Artifact:** read `listings` and `answers` with `ArtifactData`. Write the listing's `status`, `postingText`, `appliedDate` and `history` with `update`, after reading the row fresh. Add new accounts to `answers` with `set`.
+- **Artifact:** read `listings` and `answers` with `ArtifactData`. Write the listing's `status`, `postingText`, `appliedDate` and `history` with `update`, after reading the row fresh and passing its `version` as `if_version`. Add new accounts to `answers` with `set`.
 - **Spreadsheet:** the same tabs and columns in `my-files/job-search-tracker.xlsx`.
 
 ### Inputs
@@ -480,7 +484,7 @@ Apply in **Claude in Chrome** when it is connected. It can upload files. The app
 11. **Legal text** (arbitration, waivers, non-compete, non-solicitation, broad permission to contact past employers): quote it to the user. **Never tick a legal agreement box yourself**, in any mode. The user reads it and ticks it, or decides not to apply.
 12. **Walls** (create account, password, verification code, CAPTCHA, Social Security number or other ID): fill everything up to the wall, then hand the browser to the user. Continue after they are through. Never do the wall step yourself, and never read what they typed.
 13. **Review before submit.** Show the user a summary of every answer on the form, including the upload (file name and method) and any auto-filled fields you corrected, and stop. Submit only when the user says "submit" for this application, or clicks submit themselves. Under auto-submit, still post the summary in the chat as you submit.
-14. **After submitting:** capture the confirmation (confirmation page text or number). Set `status` to `Applied` and `appliedDate` to today. Append a history entry: date, req id, title, company, location, pay if posted, the application system used, the username if an account was used (never a password), the confirmation, the upload method (for example "upload: hidden file input"), and anything unusual.
+14. **After submitting:** capture the confirmation (confirmation page text or number). Set `status` to `Applied` and `appliedDate` to today. Append a history entry: date, req id, title, company, location, pay if posted, the application system used, the username if an account was used (never a password), the confirmation, the upload method written exactly as `upload: <method>` (for example `upload: hidden file input`; the check looks for `upload:`), and anything unusual.
 15. **If blocked and the user has stepped away** (for example they left the session at a wall): leave the status at To apply and append a history entry naming the exact step that blocked. Never work around the block.
 16. Add any new account to `answers` (topic `Account`, question = the site, answer = the username). Never a password.
 17. If an upload control behaved in a way `references/application-techniques.md` does not cover, tell the user and suggest a line to add there. General methods only, never employer names.
@@ -522,7 +526,7 @@ A short, specific note to the person who runs the team can get an application re
 
 ### Tracker access
 
-- **Artifact:** read `listings` with `ArtifactData`. Write only the outreach columns and one history line, with `update`, after reading the row fresh.
+- **Artifact:** read `listings` with `ArtifactData`. Write only the outreach columns and one history line, with `update`, after reading the row fresh and passing its `version` as `if_version`.
 - **Spreadsheet:** the same columns in the `listings` tab of `my-files/job-search-tracker.xlsx`.
 
 ### Inputs
@@ -603,7 +607,7 @@ Do not use as fact: anonymous review sites, aggregator job listings, social medi
 ### Outputs
 
 - A prep file saved to `reports/interview-prep-<company-slug>-<YYYY-MM-DD>.md`, in the user's job search folder. Give the user the path.
-- No tracker writes, except one history line saying prep was done, if the user wants it.
+- No tracker writes, except one history line saying prep was done, if the user wants it. For that line, take a snapshot before and after and run `python tools/check_tracker.py check backups/before.json backups/after.json --stage prep` (snapshots: `references/tracker-columns.md`, "Checking by script").
 
 ### Done when
 
@@ -623,7 +627,7 @@ Read the user's email for replies from employers and suggest status updates. Run
 
 ### Tracker access
 
-- **Artifact:** read `listings` and `companies` with `ArtifactData`. After the user says yes, write `status` and `history` with `update`, after reading the row fresh.
+- **Artifact:** read `listings` and `companies` with `ArtifactData`. After the user says yes, write `status` and `history` with `update`, after reading the row fresh and passing its `version` as `if_version`.
 - **Spreadsheet:** the same tabs and columns in `my-files/job-search-tracker.xlsx`.
 
 ### Inputs
@@ -642,6 +646,7 @@ Read the user's email for replies from employers and suggest status updates. Run
    - **Interview request or scheduling:** propose `Interview`, with the date, time, format and names in the history line.
    - **Rejection:** propose `Rejected`.
    - **Offer:** propose `Offer`.
+   - **A follow-up the user sent** (found in their sent mail, to an employer with a listing at Applied): propose `Followed up`.
    - **Assessment or next step that is not an interview:** no status change. Offer a history line and tell the user.
    - **A reply about a listing still at To apply** (for example the user applied outside a session): no status change from this stage. Tell the user, and offer a history line. The user can then set the status directly (`python tools/check_tracker.py check backups/before.json backups/after.json --stage user`).
 5. **Show the user every proposed change in one list** before writing anything, for example: "Example Health Co, Clinical Account Executive: Applied to Interview. Email from 2026-03-14 asks for a call on 3/18 at 10am with the regional manager." Wait for the user to say yes, no, or change it for each one.
@@ -690,7 +695,7 @@ Build the user's resume from facts they state, shaped by what real postings for 
 Write to `my-files/resume-facts.md`, using the template. Ask **one question at a time** and wait for each answer.
 
 1. If the user has a resume, read it first and fill in what it already says. Then show each job's facts and ask: "Is all of this true and current? Anything to add or remove?"
-2. For each job, newest first:
+2. For each job, newest first (after all jobs: work out the years of experience from the dates, compare with what the user says, and if they differ ask which number to use and what it counts; write it on the "Years of experience" line):
    1. "What was your job title, the employer, the city, and the start and end month and year?"
    2. "In a few sentences, what did you do day to day? Who did you serve or sell to?"
    3. "What are you proudest of in this job? Results, numbers, awards, promotions, things you built or fixed."
@@ -711,7 +716,7 @@ Before writing, look at what employers actually ask for in real postings for the
 
 **Every user gets a resume, in any field.** If a step below cannot be done, go to the next fallback. Never stop the resume because postings are hard to find.
 
-1. **Pick the target.** Take the main target role and level from `my-rules.md`. If the user has two quite different targets, ask which one this resume is for. One resume per target.
+1. **Pick the target.** Take the main target role and level from `my-rules.md`. If the user has two quite different targets, ask which one this resume is for. One resume per target. A resume for a second target goes to `my-files/resumes/resume-<target>.md` and `.pdf` (for example `resume-quality-inspector.md`), never over `my-files/resume.md`.
 2. **Gather 3 to 5 real postings for that role**, newest first, in this order of preference:
    1. Listings already in the tracker for this role that have `postingText` saved.
    2. Postings on employers' own career sites, found by web search, for this role and level in or near the user's allowed places (or remote roles open to them). Posted in the last six months where possible.
@@ -749,7 +754,7 @@ Before writing, look at what employers actually ask for in real postings for the
 2. Follow every rule in "General rules" and the "What employers ask for" section saved in the facts file. The resume's sections must come in the section order in "What employers ask for".
 3. Draft **one section at a time**, in the section order in "What employers ask for" (contact line and summary always first). Show each one and get a yes or changes before the next.
 4. Then show the whole resume, and run the checks:
-   - `python tools/check_resume.py my-files/resume.md --facts my-files/resume-facts.md`
+   - `python tools/check_resume.py my-files/resume.md --facts my-files/resume-facts.md --pdf my-files/resume.pdf --years <years from the facts file>` (run it again after step 5 builds the PDF; `--years` sets the page limit)
    - Fix everything it reports. Do not show the resume as final until it passes.
 5. Build the PDF: `python tools/build_resume.py my-files/resume.md my-files/resume.pdf`. If the user already had a `resume.pdf`, first copy it to `backups/resume-before-<YYYY-MM-DD>.pdf`.
 6. Check the page count the build reports: one page for under ten years of experience, two at most otherwise. If it is over, cut the oldest or weakest bullets (ask the user which), never the font size below the minimum.
@@ -762,8 +767,8 @@ Before writing, look at what employers actually ask for in real postings for the
    - **Allowed:** reorder bullets, choose which facts to show, shorten bullets, rewrite the summary for this role, use the posting's own words for a skill **only where the facts show that skill**.
    - **Not allowed:** any fact, number, tool, title or skill not in the facts file. Changed dates or titles. Copying sentences from the posting.
 3. Show what changed compared with the main resume, in a short list.
-4. Run the same checks, then build `my-files/resumes/resume-<listing id>.pdf`.
-5. After the user approves it, add a history line to the listing: `YYYY-MM-DD tailored resume approved: resume-<listing id>.pdf`. Stage 03 uploads that file for that listing instead of `resume.pdf`.
+4. Write the tailored text to `my-files/resumes/resume-<listing id>.md`, run the same checks on it, then build `my-files/resumes/resume-<listing id>.pdf`. Never overwrite `my-files/resume.md`.
+5. After the user approves it, take a snapshot, add a history line to the listing: `YYYY-MM-DD tailored resume approved: resume-<listing id>.pdf`, then run `python tools/check_tracker.py check backups/before.json backups/after.json --stage resume`. Stage 03 uploads that file for that listing instead of `resume.pdf`.
 
 ### Outputs
 
@@ -814,7 +819,7 @@ Ready-to-use wording for each is in `references/prompts.md`.
 
 ### A. Find employers (target list building)
 
-1. **Start from the rules.** Read the user's target roles, industries "in", place rules and excluded industries. Say in one line what you will look for, for example: "Health tech and digital health employers with offices in Larkfield, or remote roles open to Calder."
+1. **Start from the rules.** Read the user's target roles, industries "in", place rules and excluded industries. Say in one line what you will look for, for example: "Health tech employers with offices in [your city], or remote roles open to people in [your state]."
 2. **Search in this order**, and note which source each name came from:
    1. Local lists: largest employers, fastest growing, best places to work, published by local business journals, newspapers, chambers of commerce and economic development agencies for the user's metro.
    2. Industry lists: association member directories, conference exhibitor and sponsor lists, and "top companies" lists for each industry the user wants.
@@ -822,7 +827,7 @@ Ready-to-use wording for each is in `references/prompts.md`.
    4. Remote-friendly employers: companies in the user's industries whose own careers pages show remote roles open to the user's state.
    5. Job search engines, read by hand from public search results, **only to learn company names** that post the user's target titles nearby. Never as proof that a job exists.
 3. **Check every candidate** before showing it:
-   - Its own careers site exists and opens. Record the link.
+   - Its own careers site exists and opens. Record the link. A redirect to the company's own careers subdomain, or to the job board the company itself links to (Workday, Greenhouse, Lever, Ashby and the like), counts as its own site. If the careers link you tried does not open, find the real one from the company's own home page; never guess, and leave the employer out until you have it.
    - Its industry, in the words of `settings.industryOrder` where it fits.
    - It has a presence the user's place rules allow: an office in the home metro, a territory covering it, or remote roles open to the user's state. Say which, with a link.
    - It is not already on the target list (exact name), not excluded, not the current employer, not on the never-contact list.
@@ -928,7 +933,7 @@ The `id` matches the employer's `id` in `companies`.
 | `reqId` | The employer's requisition or job number. | Claude |
 | `industry` | Same as the employer's. | Claude |
 | `track` | One of `settings.tracks`. Most people have one track. | Claude |
-| `family` | The kind of role, one of `settings.roleFamilies`. | Claude |
+| `family` | The kind of role, one of `settings.roleFamilies`, written without the `*` (the `*` only marks targets in settings). | Claude |
 | `posted` | Date posted, as shown. | Claude |
 | `pay` | Posted pay exactly as written, or "not posted". | Claude |
 | `why` | One or two sentences on why it fits, and any reach. | Claude |
@@ -938,11 +943,11 @@ The `id` matches the employer's `id` in `companies`.
 | `appliedDate` | Date the application went in, `YYYY-MM-DD`. | Claude |
 | `postingText` | The full text of the posting, saved so it survives after the posting comes down. | Claude |
 | `reviewReason` | Why a listing at Review fit needs your call. | Claude |
-| `history` | Dated log of everything sessions did. **Add only, never change or delete.** Entries are separated by ` \| `. | Claude (append only) |
+| `history` | Dated log of everything sessions did. **Add only, never change or delete.** Entries are separated by ` \| `, and each starts with a `YYYY-MM-DD` date. An entry never contains the `\|` character itself (write `/` instead). | Claude (append only) |
 | `yourNotes` | Your own notes. **Claude never writes this.** | You |
 | `managerName`, `managerTitle`, `howIdentified`, `confidence`, `profileUrl`, `emailOrFormat`, `connectionNote`, `longMessage` | Outreach research and drafts (stage 04). Drafts only. You send. | Claude |
 
-**Status values:** `To apply`, `Applied`, `Followed up`, `Interview`, `Offer`, `Review fit`, `On hold`, `Rejected` (the employer said no), `Closed` (you passed), `expired` (the posting came down), `filled` (the employer says it is filled).
+**Status values:** `To apply`, `Applied`, `Followed up`, `Interview`, `Offer`, `Review fit` (set only by you, for a listing you want to think over; fit review never creates listings at this status), `On hold`, `Rejected` (the employer said no), `Closed` (you passed), `expired` (the posting came down), `filled` (the employer says it is filled).
 
 Listings at **Applied, Followed up, Interview or Offer** are never changed by a sweep, ever.
 
@@ -967,9 +972,9 @@ The `id` is `main`. Lists are separated by `; ` (semicolon and space).
 |---|---|---|
 | `id` | Always `main`. | `main` |
 | `tierA`, `tierB`, `tierC` | What each employer tier means for you. | `Employer based in my home metro` |
-| `industryOrder` | Industries you want, most wanted first. The tracker groups listings in this order. | `Health tech; Medical software; Health insurance` |
+| `industryOrder` | Industries you want, most wanted first. The tracker groups listings in this order. | `Logistics software; Manufacturing; Public utilities` |
 | `excludedIndustries` | Industries hidden from the main views and skipped in sweeps. | `Staffing; Retail` |
-| `roleFamilies` | Kinds of role. A `*` after a name marks a target family. | `Account executive*; Clinical specialist*; Customer success` |
+| `roleFamilies` | Kinds of role. A `*` after a name marks a target family. | `Quality inspector*; Operations analyst*; Shift supervisor` |
 | `tracks` | Separate searches, if you run more than one. Most people have one. | `Main` |
 | `priorities` | Priority groups, in work order. | `High; Medium; Low; On hold` |
 
@@ -986,9 +991,19 @@ python tools/check_tracker.py snapshot my-files/job-search-tracker.xlsx backups/
 python tools/check_tracker.py check backups/before.json backups/after.json --stage sweep
 ```
 
-**Artifact:** list each collection (`companies`, `coverage`, `listings`, `answers`, `settings`) with `ArtifactData`, and save the results together as one JSON file shaped like `{"companies": [...], "coverage": [...], "listings": [...], "answers": [...], "settings": [...]}`. Do this before and after, then run the same `check` command on the two files.
+**Artifact:** list each of the 5 collections (`companies`, `coverage`, `listings`, `answers`, `settings`) with `ArtifactData` (`list`, with `out_dir` set to `backups/before-db`). That saves one file per row. Then combine them:
 
-The `--stage` choices are `sweep`, `fit`, `apply`, `outreach`, `prep`, `mailbox`, `resume`, `research` and `user` (a change the user asked for directly).
+```
+python tools/check_tracker.py snapshot-dir backups/before-db backups/before.json
+  (the session runs)
+  (list the 5 collections again with out_dir backups/after-db)
+python tools/check_tracker.py snapshot-dir backups/after-db backups/after.json
+python tools/check_tracker.py check backups/before.json backups/after.json --stage sweep
+```
+
+The same `before.json` also serves as the backup rules.md section 7 asks for. Use a fresh `after-db` folder each time, so rows deleted during a session do not linger from an earlier run.
+
+The `--stage` choices are `intake`, `sweep`, `fit`, `apply`, `outreach`, `prep`, `mailbox`, `resume`, `research` and `user` (a change the user asked for directly).
 
 ---
 
@@ -1039,7 +1054,7 @@ Try them in the order stage 03 gives (a to e). What each looks like on the page:
 
 ### How to tell an upload worked
 
-- The page shows `resume.pdf` (or a preview of its contents) next to the control.
+- The page shows the file chosen in stage 03 (`resume.pdf`, or the approved tailored `resume-<listing id>.pdf`), or a preview of its contents, next to the control.
 - If the control shows a different file name, a size of 0, or an error, the upload failed. Try the next method.
 - Some forms only read the file when the next page loads. Check again after moving on.
 
@@ -1162,18 +1177,18 @@ If the user keeps their own resume (they opted out of stage 07), `my-files/resum
 ---
 
 ## Jordan Reyes
-Larkfield, Calder | jordan.reyes@example.com | (555) 010-0199
+[City], [State] | jordan.reyes@example.com | (555) 010-0199
 
 ### Summary
 Operations coordinator with 5 years in a regional hospital system, moving into software customer success. Runs scheduling and vendor work for 3 clinics, and trained 40 staff on a new scheduling system.
 
 ### Experience
-#### Operations Coordinator | Example Regional Health | Larkfield, Calder | 2022 to Present
+#### Operations Coordinator | Example Regional Health | [City], [State] | 2022 to Present
 - Run day-to-day scheduling and vendor contracts for 3 outpatient clinics.
 - Led staff training when the clinics moved to a new scheduling system; trained 40 staff in 6 weeks.
 - Cut appointment no-shows by 20% with a reminder call process.
 
-#### Front Desk Lead | Example Family Clinic | Larkfield, Calder | 2020 to 2022
+#### Front Desk Lead | Example Family Clinic | [City], [State] | 2020 to 2022
 - Led a front desk team of 4.
 - Handled insurance checks and patient questions for about 60 visits a day.
 
@@ -1202,7 +1217,7 @@ Rules for every resume stage 07 writes, for any job in any field. "General rules
 
 **Format (so application systems can read it)**
 - One column. No tables, text boxes, graphics, icons, photos, charts or skill-level bars.
-- Standard headings: Summary, Experience, Education, Licenses and Certifications (if any), Skills. Optional: Volunteer Work, Languages, Military Service, Projects, Portfolio. Their order comes from the "What employers ask for" section of the user's facts file; the default order is Summary, Experience, Education, Licenses and Certifications, Skills.
+- Standard headings: Summary, Experience, Education (only if the user has any), Licenses and Certifications (if any), Skills. Optional: Volunteer Work, Languages, Military Service, Projects, Portfolio. Their order comes from the "What employers ask for" section of the user's facts file; the default order is Summary, Experience, Education, Licenses and Certifications, Skills.
 - Plain fonts. The build script uses Helvetica, 10 to 11 point for body text, never below 9.5.
 - Length: one page for under ten years of experience, two pages at most.
 - Dates in one style throughout: "Mar 2021 to Present" or "2021 to Present". Words, not dashes.
@@ -1246,7 +1261,7 @@ What usually goes first on a resume for some common jobs. For a real user, this 
 - Skills: CRM and prospecting tools the user actually used.
 
 **Healthcare (clinical)**
-- Licenses and Certifications move up, directly under the summary. Use full names (Registered Nurse, State of Calder; Basic Life Support).
+- Licenses and Certifications move up, directly under the summary. Use full names (for example "Registered Nurse, [State]" and "Basic Life Support").
 - Each role names the setting (intensive care, outpatient clinic), unit size or patient load if known, and specialties.
 - Results are about safety, quality, training and process: audits passed, protocols adopted, staff trained.
 
@@ -1303,7 +1318,7 @@ City, State | email@example.com | (555) 010-0000 | optional link
 Two or three lines of plain text.
 
 ### Licenses and Certifications
-- Registered Nurse, State of Calder
+- [License name], [State]
 
 ### Experience
 #### Job Title | Employer | City, State | 2023 to Present
@@ -1318,6 +1333,8 @@ Two or three lines of plain text.
 ```
 
 Headings use `##`. Jobs and schools use `###` with ` | ` between title, employer, place and dates. Bullets start with `- `.
+
+If the user chose not to show a school year, leave it off: `### Degree, Field | School`. If the user has no degree or diploma to show, leave the Education section out; never invent one.
 
 ---
 
@@ -1343,7 +1360,7 @@ Last approved by the user: [YYYY-MM-DD]
 
 - Role: [the role this resume is for]
 - Career changer: [yes / no]
-- Years of experience to state on the resume: [number, and what it counts, for example "6, hospital nursing since Jun 2020"]
+- Years of experience to state on the resume: [number, and what it counts, for example "8, warehouse operations since Mar 2018"]
 
 ### What employers ask for
 
@@ -1432,7 +1449,7 @@ Copy any of these into a session. Words in [brackets] are yours to fill in. Each
 - "Tell me about [company]." (Part B, deep dive)
 - "Map the [industry] employers around [place]." (Part C)
 - "What does a [title] do, and what does it pay around here?" (Part D)
-- "Add these employers to my target list: [names]." (Sweep step 0)
+- "Add these employers to my target list: [names]." (Sweep step 1)
 
 ### Sweeps and fit (stages 01 and 02)
 

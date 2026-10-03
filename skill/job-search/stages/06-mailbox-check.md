@@ -6,7 +6,7 @@ Read the user's email for replies from employers and suggest status updates. Run
 
 ## Tracker access
 
-- **Artifact:** read `listings` and `companies` with `ArtifactData`. After the user says yes, write `status` and `history` with `update`, after reading the row fresh.
+- **Artifact:** read `listings` and `companies` with `ArtifactData`. After the user says yes, write `status` and `history` with `update`, after reading the row fresh and passing its `version` as `if_version`.
 - **Spreadsheet:** the same tabs and columns in `my-files/job-search-tracker.xlsx`.
 
 ## Inputs
@@ -25,6 +25,7 @@ Read the user's email for replies from employers and suggest status updates. Run
    - **Interview request or scheduling:** propose `Interview`, with the date, time, format and names in the history line.
    - **Rejection:** propose `Rejected`.
    - **Offer:** propose `Offer`.
+   - **A follow-up the user sent** (found in their sent mail, to an employer with a listing at Applied): propose `Followed up`.
    - **Assessment or next step that is not an interview:** no status change. Offer a history line and tell the user.
    - **A reply about a listing still at To apply** (for example the user applied outside a session): no status change from this stage. Tell the user, and offer a history line. The user can then set the status directly (`python tools/check_tracker.py check backups/before.json backups/after.json --stage user`).
 5. **Show the user every proposed change in one list** before writing anything, for example: "Example Health Co, Clinical Account Executive: Applied to Interview. Email from 2026-03-14 asks for a call on 3/18 at 10am with the regional manager." Wait for the user to say yes, no, or change it for each one.

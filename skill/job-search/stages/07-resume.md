@@ -23,7 +23,7 @@ Build the user's resume from facts they state, shaped by what real postings for 
 Write to `my-files/resume-facts.md`, using the template. Ask **one question at a time** and wait for each answer.
 
 1. If the user has a resume, read it first and fill in what it already says. Then show each job's facts and ask: "Is all of this true and current? Anything to add or remove?"
-2. For each job, newest first:
+2. For each job, newest first (after all jobs: work out the years of experience from the dates, compare with what the user says, and if they differ ask which number to use and what it counts; write it on the "Years of experience" line):
    1. "What was your job title, the employer, the city, and the start and end month and year?"
    2. "In a few sentences, what did you do day to day? Who did you serve or sell to?"
    3. "What are you proudest of in this job? Results, numbers, awards, promotions, things you built or fixed."
@@ -44,7 +44,7 @@ Before writing, look at what employers actually ask for in real postings for the
 
 **Every user gets a resume, in any field.** If a step below cannot be done, go to the next fallback. Never stop the resume because postings are hard to find.
 
-1. **Pick the target.** Take the main target role and level from `my-rules.md`. If the user has two quite different targets, ask which one this resume is for. One resume per target.
+1. **Pick the target.** Take the main target role and level from `my-rules.md`. If the user has two quite different targets, ask which one this resume is for. One resume per target. A resume for a second target goes to `my-files/resumes/resume-<target>.md` and `.pdf` (for example `resume-quality-inspector.md`), never over `my-files/resume.md`.
 2. **Gather 3 to 5 real postings for that role**, newest first, in this order of preference:
    1. Listings already in the tracker for this role that have `postingText` saved.
    2. Postings on employers' own career sites, found by web search, for this role and level in or near the user's allowed places (or remote roles open to them). Posted in the last six months where possible.
@@ -82,7 +82,7 @@ Before writing, look at what employers actually ask for in real postings for the
 2. Follow every rule in "General rules" and the "What employers ask for" section saved in the facts file. The resume's sections must come in the section order in "What employers ask for".
 3. Draft **one section at a time**, in the section order in "What employers ask for" (contact line and summary always first). Show each one and get a yes or changes before the next.
 4. Then show the whole resume, and run the checks:
-   - `python tools/check_resume.py my-files/resume.md --facts my-files/resume-facts.md`
+   - `python tools/check_resume.py my-files/resume.md --facts my-files/resume-facts.md --pdf my-files/resume.pdf --years <years from the facts file>` (run it again after step 5 builds the PDF; `--years` sets the page limit)
    - Fix everything it reports. Do not show the resume as final until it passes.
 5. Build the PDF: `python tools/build_resume.py my-files/resume.md my-files/resume.pdf`. If the user already had a `resume.pdf`, first copy it to `backups/resume-before-<YYYY-MM-DD>.pdf`.
 6. Check the page count the build reports: one page for under ten years of experience, two at most otherwise. If it is over, cut the oldest or weakest bullets (ask the user which), never the font size below the minimum.
@@ -95,8 +95,8 @@ Before writing, look at what employers actually ask for in real postings for the
    - **Allowed:** reorder bullets, choose which facts to show, shorten bullets, rewrite the summary for this role, use the posting's own words for a skill **only where the facts show that skill**.
    - **Not allowed:** any fact, number, tool, title or skill not in the facts file. Changed dates or titles. Copying sentences from the posting.
 3. Show what changed compared with the main resume, in a short list.
-4. Run the same checks, then build `my-files/resumes/resume-<listing id>.pdf`.
-5. After the user approves it, add a history line to the listing: `YYYY-MM-DD tailored resume approved: resume-<listing id>.pdf`. Stage 03 uploads that file for that listing instead of `resume.pdf`.
+4. Write the tailored text to `my-files/resumes/resume-<listing id>.md`, run the same checks on it, then build `my-files/resumes/resume-<listing id>.pdf`. Never overwrite `my-files/resume.md`.
+5. After the user approves it, take a snapshot, add a history line to the listing: `YYYY-MM-DD tailored resume approved: resume-<listing id>.pdf`, then run `python tools/check_tracker.py check backups/before.json backups/after.json --stage resume`. Stage 03 uploads that file for that listing instead of `resume.pdf`.
 
 ## Outputs
 

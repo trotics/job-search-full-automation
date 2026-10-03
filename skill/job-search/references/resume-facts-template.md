@@ -18,7 +18,7 @@ Last approved by the user: [YYYY-MM-DD]
 
 - Role: [the role this resume is for]
 - Career changer: [yes / no]
-- Years of experience to state on the resume: [number, and what it counts, for example "6, hospital nursing since Jun 2020"]
+- Years of experience to state on the resume: [number, and what it counts, for example "8, warehouse operations since Mar 2018"]
 
 ## What employers ask for
 

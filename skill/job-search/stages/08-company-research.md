@@ -25,7 +25,7 @@ Ready-to-use wording for each is in `references/prompts.md`.
 
 ## A. Find employers (target list building)
 
-1. **Start from the rules.** Read the user's target roles, industries "in", place rules and excluded industries. Say in one line what you will look for, for example: "Health tech and digital health employers with offices in Larkfield, or remote roles open to Calder."
+1. **Start from the rules.** Read the user's target roles, industries "in", place rules and excluded industries. Say in one line what you will look for, for example: "Health tech employers with offices in [your city], or remote roles open to people in [your state]."
 2. **Search in this order**, and note which source each name came from:
    1. Local lists: largest employers, fastest growing, best places to work, published by local business journals, newspapers, chambers of commerce and economic development agencies for the user's metro.
    2. Industry lists: association member directories, conference exhibitor and sponsor lists, and "top companies" lists for each industry the user wants.
@@ -33,7 +33,7 @@ Ready-to-use wording for each is in `references/prompts.md`.
    4. Remote-friendly employers: companies in the user's industries whose own careers pages show remote roles open to the user's state.
    5. Job search engines, read by hand from public search results, **only to learn company names** that post the user's target titles nearby. Never as proof that a job exists.
 3. **Check every candidate** before showing it:
-   - Its own careers site exists and opens. Record the link.
+   - Its own careers site exists and opens. Record the link. A redirect to the company's own careers subdomain, or to the job board the company itself links to (Workday, Greenhouse, Lever, Ashby and the like), counts as its own site. If the careers link you tried does not open, find the real one from the company's own home page; never guess, and leave the employer out until you have it.
    - Its industry, in the words of `settings.industryOrder` where it fits.
    - It has a presence the user's place rules allow: an office in the home metro, a territory covering it, or remote roles open to the user's state. Say which, with a link.
    - It is not already on the target list (exact name), not excluded, not the current employer, not on the never-contact list.

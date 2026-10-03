@@ -82,6 +82,8 @@ def apply(path, changes):
             entry = ch["entry"].strip()
             if not re.match(r"\d{4}-\d{2}-\d{2}\s", entry):
                 sys.exit("change %d: history entry must start with a YYYY-MM-DD date" % n)
+            if "|" in entry:
+                sys.exit("change %d: a history entry may not contain the | character (it separates entries); use / instead" % n)
             cell = ws.cell(row=rows[rid], column=header.index("history") + 1)
             old = str(cell.value or "")
             cell.value = (old + " | " + entry) if old.strip() else entry

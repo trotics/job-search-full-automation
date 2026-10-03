@@ -2,18 +2,20 @@
 
 Works with both trackers:
   - Spreadsheet: take snapshots with the `snapshot` command.
-  - Artifact: list each collection with ArtifactData and save them together as one JSON file:
-    {"companies": [...], "coverage": [...], "listings": [...], "answers": [...], "settings": [...]}
+  - Artifact: list each collection with ArtifactData (out_dir set to a folder), then combine the files
+    with the `snapshot-dir` command.
 
 Commands:
   python tools/check_tracker.py snapshot my-files/job-search-tracker.xlsx backups/before.json
+  python tools/check_tracker.py snapshot-dir backups/before-db backups/before.json   (artifact: after ArtifactData list with out_dir)
   python tools/check_tracker.py check backups/before.json backups/after.json --stage sweep
   python tools/check_tracker.py validate backups/after.json
 
-Stages: sweep, fit, apply, outreach, prep, mailbox, resume, research, user.
+Stages: intake, sweep, fit, apply, outreach, prep, mailbox, resume, research, user.
 Exit code 0 means every check passed.
 """
 import json
+import os
 import re
 import sys
 
@@ -30,9 +32,11 @@ SECRET_PATTERNS = [
     (re.compile(r"password\s*[:=]", re.I), "looks like a stored password"),
     (re.compile(r"\b\d{13,19}\b"), "long number that could be a card or account number"),
 ]
+DATE_START = re.compile(r"\s*\d{4}-\d{2}-\d{2}\s")
 
 # Which columns each stage may change on a listing that already existed.
 STAGE_FIELDS = {
+    "intake": set(),
     "sweep": {"status", "history"},
     "fit": {"history"},
     "apply": {"status", "history", "postingText", "appliedDate"},
@@ -45,6 +49,7 @@ STAGE_FIELDS = {
 }
 # Which status moves each stage may make on an existing listing.
 STAGE_MOVES = {
+    "intake": set(),
     "sweep": {("To apply", "expired"), ("To apply", "filled")},
     "fit": set(),
     "apply": {("To apply", "Applied"), ("To apply", "expired"), ("To apply", "filled")},
@@ -55,6 +60,13 @@ STAGE_MOVES = {
     "research": set(),
     "resume": set(),
     "user": None,
+}
+# Which stages may write each of the other collections.
+WRITERS = {
+    "companies": {"sweep", "fit", "research", "user"},
+    "coverage": {"sweep", "fit", "user"},
+    "answers": {"intake", "apply", "user"},
+    "settings": {"intake", "user"},
 }
 
 
@@ -74,7 +86,7 @@ def load(path):
     for name in COLLECTIONS:
         rows = raw.get(name, [])
         if isinstance(rows, dict):  # {"docs": [...]} or {id: {...}}
-            rows = rows.get("docs", [dict(v, id=k) for k, v in rows.items()])
+            rows = rows["docs"] if "docs" in rows else [dict(v, id=k) for k, v in rows.items()]
         snap[name] = {str(r["id"]): r for r in (flatten(x) for x in rows)}
     return snap
 
@@ -93,6 +105,28 @@ def snapshot_xlsx(xlsx_path, out_path):
                     continue
                 rows.append({h: ("" if v is None else str(v)) for h, v in zip(header, r) if h})
         out[name] = rows
+    write_snapshot(out, out_path)
+
+
+def snapshot_dir(folder, out_path):
+    """Combine the files ArtifactData writes with out_dir (<folder>/<collection>/<id>.json) into one snapshot."""
+    out = {}
+    for name in COLLECTIONS:
+        rows = []
+        sub = os.path.join(folder, name)
+        if os.path.isdir(sub):
+            for f in sorted(os.listdir(sub)):
+                if f.endswith(".json"):
+                    with open(os.path.join(sub, f), encoding="utf-8") as fh:
+                        row = flatten(json.load(fh))
+                    row["id"] = f[:-5]
+                    rows.append(row)
+        out[name] = rows
+    write_snapshot(out, out_path)
+
+
+def write_snapshot(out, out_path):
+    os.makedirs(os.path.dirname(os.path.abspath(out_path)), exist_ok=True)
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(out, f, indent=1, ensure_ascii=False)
     print("Snapshot saved:", out_path, {k: len(v) for k, v in out.items()})
@@ -102,8 +136,22 @@ def norm(s):
     return re.sub(r"[^a-z0-9]", "", str(s or "").lower())
 
 
-def validate(snap, problems, only_ids=None):
+def entries(history):
+    """History entries are separated by ' | '. An entry itself never contains '|'."""
+    return [e for e in str(history or "").split("|") if e.strip()]
+
+
+def split_list(v):
+    return [x.strip() for x in str(v or "").split(";") if x.strip()]
+
+
+def validate(snap, problems, only_ids=None, only_companies=None):
     names = {norm(c.get("company")): c.get("company") for c in snap["companies"].values()}
+    settings = next(iter(snap["settings"].values()), {}) if snap["settings"] else {}
+    families = [f.rstrip("*").strip() for f in split_list(settings.get("roleFamilies"))]
+    tracks = split_list(settings.get("tracks"))
+    priorities = split_list(settings.get("priorities")) or ["High", "Medium", "Low", "On hold"]
+
     for lid, l in snap["listings"].items():
         if only_ids is not None and lid not in only_ids:
             continue
@@ -113,11 +161,17 @@ def validate(snap, problems, only_ids=None):
         if l.get("company") and norm(l["company"]) in names and names[norm(l["company"])] != l["company"]:
             problems.append("listing %s: company spelled %r but target list says %r" % (lid, l["company"], names[norm(l["company"])]))
         if l.get("company") and norm(l["company"]) not in names:
-            problems.append("listing %s: company %r is not on the target list" % (lid, l["company"]))
-        for e in [x for x in str(l.get("history", "")).split("|") if x.strip()]:
-            if not re.match(r"\s*\d{4}-\d{2}-\d{2}\s", e):
+            problems.append("listing %s: company %r is not on the target list (add the employer first)" % (lid, l["company"]))
+        for e in entries(l.get("history")):
+            if not DATE_START.match(e):
                 problems.append("listing %s: history entry %r does not start with a YYYY-MM-DD date" % (lid, e.strip()[:40]))
-        for col in ("history", "why", "postingText", "answer"):
+        if l.get("priority") and l["priority"] not in priorities:
+            problems.append("listing %s: priority %r is not one of %s" % (lid, l["priority"], priorities))
+        if families and l.get("family") and l["family"] not in families:
+            problems.append("listing %s: family %r is not in settings.roleFamilies %s (write it without the *)" % (lid, l["family"], families))
+        if tracks and l.get("track") and l["track"] not in tracks:
+            problems.append("listing %s: track %r is not in settings.tracks %s" % (lid, l["track"], tracks))
+        for col in ("history", "why", "postingText"):
             for pat, what in SECRET_PATTERNS:
                 if pat.search(str(l.get(col, ""))):
                     problems.append("listing %s: %s %s" % (lid, col, what))
@@ -128,6 +182,25 @@ def validate(snap, problems, only_ids=None):
             if key in seen:
                 problems.append("listings %s and %s: same company and req id" % (seen[key], lid))
             seen[key] = lid
+
+    seen_names = {}
+    for cid, c in snap["companies"].items():
+        n = norm(c.get("company"))
+        if n in seen_names:
+            problems.append("companies %s and %s: same company name" % (seen_names[n], cid))
+        seen_names[n] = cid
+        if only_companies is not None and cid not in only_companies:
+            continue
+        if not re.fullmatch(r"[a-z0-9-]+", cid):
+            problems.append("company %s: id must be lowercase letters, numbers and hyphens" % cid)
+        if not str(c.get("company", "")).strip():
+            problems.append("company %s: no company name" % cid)
+        if c.get("tier") and c["tier"] not in ("A", "B", "C"):
+            problems.append("company %s: tier %r must be A, B or C" % (cid, c["tier"]))
+        for col in ("keepAnyway", "onHold"):
+            if c.get(col) and str(c[col]).lower() not in ("yes", "no"):
+                problems.append("company %s: %s must be yes or no" % (cid, col))
+
     for aid, a in snap["answers"].items():
         for pat, what in SECRET_PATTERNS:
             if pat.search(str(a.get("answer", ""))) or pat.search(str(a.get("useWhen", ""))):
@@ -148,23 +221,25 @@ def check(before, after, stage, problems):
         new = a.get(lid)
         if new is None:
             continue
-        # Universal: yourNotes never written by a session.
+        # Universal: yourNotes is never written by a session.
         if str(old.get("yourNotes", "")) != str(new.get("yourNotes", "")):
-            problems.append("listing %s: yourNotes changed (sessions never write it)" % lid)
+            problems.append("listing %s: yourNotes changed. Sessions never write it. If the user typed a note "
+                            "during the session, that note is theirs: report it and NEVER undo it." % lid)
         # Universal: history is append-only.
         oh, nh = str(old.get("history", "")), str(new.get("history", ""))
         if not nh.startswith(oh):
             problems.append("listing %s: history was rewritten, not appended to" % lid)
         changed = {k for k in set(old) | set(new)
-                   if str(old.get(k, "")) != str(new.get(k, "")) and k not in ("yourNotes",)}
+                   if str(old.get(k, "")) != str(new.get(k, "")) and k != "yourNotes"}
         if changed and nh == oh and stage != "user":
             problems.append("listing %s: changed %s with no history entry" % (lid, sorted(changed)))
+        added = []
         if nh.startswith(oh) and nh != oh:
-            added = [e for e in nh[len(oh):].split("|") if e.strip()]
+            added = entries(nh[len(oh):])
             if oh.strip() and not nh[len(oh):].lstrip().startswith("|"):
                 problems.append("listing %s: new history entry not separated by ' | '" % lid)
             for e in added:
-                if not re.match(r"\s*\d{4}-\d{2}-\d{2}\s", e):
+                if not DATE_START.match(e):
                     problems.append("listing %s: history entry %r does not start with a YYYY-MM-DD date" % (lid, e.strip()[:40]))
         if allowed_fields is not None:
             extra = changed - allowed_fields
@@ -180,8 +255,10 @@ def check(before, after, stage, problems):
                 problems.append("listing %s: set to Applied without postingText saved" % lid)
             if not str(new.get("appliedDate", "")).strip():
                 problems.append("listing %s: set to Applied without appliedDate" % lid)
-            if "upload:" not in str(new.get("history", ""))[len(str(old.get("history", ""))):].lower():
-                problems.append("listing %s: set to Applied without the upload method in history" % lid)
+            if "upload:" not in " ".join(added).lower():
+                problems.append("listing %s: set to Applied without 'upload: <method>' in the new history entry" % lid)
+        if stage == "mailbox" and os_ != ns and "approved by the user" not in " ".join(added).lower():
+            problems.append("listing %s: mailbox status change without 'approved by the user' in the history entry" % lid)
 
     new_ids = set(a) - set(b)
     for lid in sorted(new_ids):
@@ -199,19 +276,21 @@ def check(before, after, stage, problems):
         if not re.fullmatch(r"[a-z0-9-]+", lid):
             problems.append("new listing %s: id must be lowercase letters, numbers and hyphens" % lid)
 
-    # Other collections: only some stages write them.
-    writers = {"companies": {"sweep", "research", "user"}, "coverage": {"sweep", "fit", "user"},
-               "answers": {"apply", "user"}, "settings": {"user"}}
-    for name, ok in writers.items():
+    for name, ok in WRITERS.items():
         if before[name] != after[name] and stage not in ok:
             problems.append("%s changed, but stage %s does not write it" % (name, stage))
+    for cid in before["companies"]:
+        if cid not in after["companies"] and stage != "user":
+            problems.append("company %s was deleted" % cid)
     for cid, old in before["coverage"].items():
         new = after["coverage"].get(cid)
         if new and str(old.get("detail", "")) and old.get("detail") != new.get("detail"):
             if str(old.get("detail", "")).strip() not in str(new.get("detail", "")):
                 problems.append("coverage %s: earlier detail was not kept" % cid)
 
-    validate(after, problems, only_ids=new_ids | {k for k in a if k in b and a[k] != b[k]})
+    changed_companies = {k for k, v in after["companies"].items() if before["companies"].get(k) != v}
+    validate(after, problems, only_ids=new_ids | {k for k in a if k in b and a[k] != b[k]},
+             only_companies=changed_companies)
     return new_ids
 
 
@@ -224,10 +303,12 @@ def main():
     if cmd == "snapshot":
         snapshot_xlsx(args[1], args[2])
         return
+    if cmd == "snapshot-dir":
+        snapshot_dir(args[1], args[2])
+        return
     problems = []
     if cmd == "validate":
         validate(load(args[1]), problems)
-        label = "validate"
     elif cmd == "check":
         stage = args[args.index("--stage") + 1] if "--stage" in args else None
         if stage not in STAGE_FIELDS:
@@ -237,7 +318,6 @@ def main():
         changed = [k for k in after["listings"] if k in before["listings"] and after["listings"][k] != before["listings"][k]]
         print("Stage: %s | listings before %d, after %d | new %d | changed %d" % (
             stage, len(before["listings"]), len(after["listings"]), len(new_ids), len(changed)))
-        label = "check"
     else:
         sys.exit("Unknown command " + cmd)
     for p in problems:

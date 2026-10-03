@@ -12,6 +12,8 @@ Decide whether one posting goes in the tracker. The sweep calls this for every n
 - `rules.md` and `my-files/my-rules.md`.
 - The posting, read on the employer's own site: title, location detail, pay, requirements, work type (full-time, part-time, contract).
 - The tracker: existing listings for that employer, to avoid duplicates.
+- **Employer not on the target list** (for example the user pasted a link): ask the user whether to add the employer. If yes, add its `companies` row first, exactly as sweep step 1 says, then review the posting. If no, give the fit call in chat only and write nothing.
+- Take a snapshot before writing, and after writing run `python tools/check_tracker.py check backups/before.json backups/after.json --stage fit` (snapshots: `references/tracker-columns.md`, "Checking by script").
 
 ## Steps
 

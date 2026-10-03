@@ -78,6 +78,64 @@ d["companies"].append({"id": "wrenford-digital-health", "company": "Wrenford Dig
 code, _ = run(d, "research")
 print("%-28s expect PASS -> %s" % ("research adds an employer", "PASS" if code == 0 else "FAIL"))
 ok &= code == 0
+# More cases: (name, change, stage, expect pass?). Stages other than sweep start from the tracker after the sweep.
+def fit_adds_company_and_listing(d):
+    d["companies"].append({"id": "new-health-co", "company": "New Health Co", "careersSite": "https://new-health.example/jobs",
+                           "tier": "B", "industry": "Health tech", "keepAnyway": "no", "onHold": "no", "added": "2026-09-30"})
+    d["listings"].append(dict(L(d, "kestrel-telehealth-kt-3315"), id="new-health-co-nh-1", company="New Health Co", reqId="NH-1",
+                              history="2026-09-30 added from the employer's own site by fit review."))
+def mailbox(approved):
+    def f(d):
+        l = L(d, APPLIED); l["status"] = "Interview"
+        l["history"] += " | 2026-09-30 interview request for 10/3 at 9am" + (", from email dated 2026-09-30, approved by the user." if approved else ".")
+    return f
+def intake_settings(d): d["settings"][0]["tierA"] = "Employer in my home city"
+def intake_touches_listing(d):
+    l = L(d, "kestrel-telehealth-kt-3315"); l["priority"] = "Low"; l["history"] += " | 2026-09-30 priority changed."
+def bad_tier(d): d["companies"][0]["tier"] = "Z"
+def family_with_star(d):
+    l = L(d, "kestrel-telehealth-kt-3315"); l["family"] = "Account executive*"; l["history"] += " | 2026-09-30 family set."
+MORE = [
+    ("fit adds employer + listing", fit_adds_company_and_listing, "fit", True),
+    ("mailbox change with approval", mailbox(True), "mailbox", True),
+    ("mailbox change, no approval text", mailbox(False), "mailbox", False),
+    ("intake writes settings", intake_settings, "intake", True),
+    ("intake touches a listing", intake_touches_listing, "intake", False),
+    ("employer tier not A/B/C", bad_tier, "user", False),
+    ("family written with the *", family_with_star, "user", False),
+]
+for name, fn, stage, expect in MORE:
+    d = copy.deepcopy(good); fn(d); code, out = run(d, stage)
+    got = code == 0
+    first = [l for l in out.splitlines() if "FAIL " in l][:1]
+    print("%-28s expect %s -> %s  %s" % (name, "PASS" if expect else "FAIL", "PASS" if got else "FAIL",
+                                         "" if got == expect and expect else (first[0].strip() if first else "")))
+    ok &= got == expect
+
+# Snapshot formats: {"docs": [...]} and {id: {...}} load the same as a plain list, and snapshot-dir round-trips.
+import shutil
+sys.path.insert(0, os.path.join(ROOT, "tools"))
+import check_tracker as ct
+docs = {k: {"docs": v} for k, v in good.items()}
+byid = {k: {r["id"]: {x: y for x, y in r.items() if x != "id"} for r in v} for k, v in good.items()}
+p1, p2 = os.path.join(BUILD, "shape-docs.json"), os.path.join(BUILD, "shape-byid.json")
+json.dump(docs, open(p1, "w", encoding="utf-8")); json.dump(byid, open(p2, "w", encoding="utf-8"))
+same_shapes = ct.load(p1) == ct.load(p2) == ct.load(os.path.join(SD, "tracker-after-fit.json"))
+folder = os.path.join(BUILD, "snapdir")
+shutil.rmtree(folder, ignore_errors=True)
+for col, rows in good.items():
+    os.makedirs(os.path.join(folder, col))
+    for r in rows:
+        json.dump({k: v for k, v in r.items() if k != "id"}, open(os.path.join(folder, col, r["id"] + ".json"), "w", encoding="utf-8"))
+p3 = os.path.join(BUILD, "snapdir.json")
+import contextlib, io
+with contextlib.redirect_stdout(io.StringIO()):
+    ct.snapshot_dir(folder, p3)
+roundtrip = ct.load(p3) == ct.load(os.path.join(SD, "tracker-after-fit.json"))
+print("%-28s expect PASS -> %s" % ("snapshot shapes load alike", "PASS" if same_shapes else "FAIL"))
+print("%-28s expect PASS -> %s" % ("snapshot-dir round trip", "PASS" if roundtrip else "FAIL"))
+ok &= same_shapes and roundtrip
+
 d = copy.deepcopy(good); good_apply(d); code, _ = run(d, "apply")
 print("%-28s expect PASS -> %s" % ("good apply", "PASS" if code == 0 else "FAIL"))
 ok &= code == 0

@@ -6,6 +6,7 @@ Usage:
 """
 import csv
 import json
+from datetime import datetime
 import os
 import sys
 
@@ -40,6 +41,10 @@ GUIDE = [
 
 def build(data, path):
     wb = Workbook()
+    # Fixed, neutral file properties: no build time, no computer user name.
+    wb.properties.created = wb.properties.modified = datetime(2026, 1, 1)
+    wb.properties.creator = "Job Search Full Automation"
+    wb.properties.lastModifiedBy = None
     guide = wb.active
     guide.title = "read me"
     for i, (a, b) in enumerate(GUIDE, start=1):

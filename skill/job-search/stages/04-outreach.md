@@ -10,7 +10,7 @@ A short, specific note to the person who runs the team can get an application re
 
 ## Tracker access
 
-- **Artifact:** read `listings` with `ArtifactData`. Write only the outreach columns and one history line, with `update`, after reading the row fresh.
+- **Artifact:** read `listings` with `ArtifactData`. Write only the outreach columns and one history line, with `update`, after reading the row fresh and passing its `version` as `if_version`.
 - **Spreadsheet:** the same columns in the `listings` tab of `my-files/job-search-tracker.xlsx`.
 
 ## Inputs

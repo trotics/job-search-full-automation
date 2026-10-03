@@ -47,7 +47,7 @@ The `id` matches the employer's `id` in `companies`.
 | `reqId` | The employer's requisition or job number. | Claude |
 | `industry` | Same as the employer's. | Claude |
 | `track` | One of `settings.tracks`. Most people have one track. | Claude |
-| `family` | The kind of role, one of `settings.roleFamilies`. | Claude |
+| `family` | The kind of role, one of `settings.roleFamilies`, written without the `*` (the `*` only marks targets in settings). | Claude |
 | `posted` | Date posted, as shown. | Claude |
 | `pay` | Posted pay exactly as written, or "not posted". | Claude |
 | `why` | One or two sentences on why it fits, and any reach. | Claude |
@@ -57,11 +57,11 @@ The `id` matches the employer's `id` in `companies`.
 | `appliedDate` | Date the application went in, `YYYY-MM-DD`. | Claude |
 | `postingText` | The full text of the posting, saved so it survives after the posting comes down. | Claude |
 | `reviewReason` | Why a listing at Review fit needs your call. | Claude |
-| `history` | Dated log of everything sessions did. **Add only, never change or delete.** Entries are separated by ` \| `. | Claude (append only) |
+| `history` | Dated log of everything sessions did. **Add only, never change or delete.** Entries are separated by ` \| `, and each starts with a `YYYY-MM-DD` date. An entry never contains the `\|` character itself (write `/` instead). | Claude (append only) |
 | `yourNotes` | Your own notes. **Claude never writes this.** | You |
 | `managerName`, `managerTitle`, `howIdentified`, `confidence`, `profileUrl`, `emailOrFormat`, `connectionNote`, `longMessage` | Outreach research and drafts (stage 04). Drafts only. You send. | Claude |
 
-**Status values:** `To apply`, `Applied`, `Followed up`, `Interview`, `Offer`, `Review fit`, `On hold`, `Rejected` (the employer said no), `Closed` (you passed), `expired` (the posting came down), `filled` (the employer says it is filled).
+**Status values:** `To apply`, `Applied`, `Followed up`, `Interview`, `Offer`, `Review fit` (set only by you, for a listing you want to think over; fit review never creates listings at this status), `On hold`, `Rejected` (the employer said no), `Closed` (you passed), `expired` (the posting came down), `filled` (the employer says it is filled).
 
 Listings at **Applied, Followed up, Interview or Offer** are never changed by a sweep, ever.
 
@@ -86,9 +86,9 @@ The `id` is `main`. Lists are separated by `; ` (semicolon and space).
 |---|---|---|
 | `id` | Always `main`. | `main` |
 | `tierA`, `tierB`, `tierC` | What each employer tier means for you. | `Employer based in my home metro` |
-| `industryOrder` | Industries you want, most wanted first. The tracker groups listings in this order. | `Health tech; Medical software; Health insurance` |
+| `industryOrder` | Industries you want, most wanted first. The tracker groups listings in this order. | `Logistics software; Manufacturing; Public utilities` |
 | `excludedIndustries` | Industries hidden from the main views and skipped in sweeps. | `Staffing; Retail` |
-| `roleFamilies` | Kinds of role. A `*` after a name marks a target family. | `Account executive*; Clinical specialist*; Customer success` |
+| `roleFamilies` | Kinds of role. A `*` after a name marks a target family. | `Quality inspector*; Operations analyst*; Shift supervisor` |
 | `tracks` | Separate searches, if you run more than one. Most people have one. | `Main` |
 | `priorities` | Priority groups, in work order. | `High; Medium; Low; On hold` |
 
@@ -105,6 +105,16 @@ python tools/check_tracker.py snapshot my-files/job-search-tracker.xlsx backups/
 python tools/check_tracker.py check backups/before.json backups/after.json --stage sweep
 ```
 
-**Artifact:** list each collection (`companies`, `coverage`, `listings`, `answers`, `settings`) with `ArtifactData`, and save the results together as one JSON file shaped like `{"companies": [...], "coverage": [...], "listings": [...], "answers": [...], "settings": [...]}`. Do this before and after, then run the same `check` command on the two files.
+**Artifact:** list each of the 5 collections (`companies`, `coverage`, `listings`, `answers`, `settings`) with `ArtifactData` (`list`, with `out_dir` set to `backups/before-db`). That saves one file per row. Then combine them:
 
-The `--stage` choices are `sweep`, `fit`, `apply`, `outreach`, `prep`, `mailbox`, `resume`, `research` and `user` (a change the user asked for directly).
+```
+python tools/check_tracker.py snapshot-dir backups/before-db backups/before.json
+  (the session runs)
+  (list the 5 collections again with out_dir backups/after-db)
+python tools/check_tracker.py snapshot-dir backups/after-db backups/after.json
+python tools/check_tracker.py check backups/before.json backups/after.json --stage sweep
+```
+
+The same `before.json` also serves as the backup rules.md section 7 asks for. Use a fresh `after-db` folder each time, so rows deleted during a session do not linger from an earlier run.
+
+The `--stage` choices are `intake`, `sweep`, `fit`, `apply`, `outreach`, `prep`, `mailbox`, `resume`, `research` and `user` (a change the user asked for directly).

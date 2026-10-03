@@ -17,7 +17,7 @@ Apply in **Claude in Chrome** when it is connected. It can upload files. The app
 
 ## Tracker access
 
-- **Artifact:** read `listings` and `answers` with `ArtifactData`. Write the listing's `status`, `postingText`, `appliedDate` and `history` with `update`, after reading the row fresh. Add new accounts to `answers` with `set`.
+- **Artifact:** read `listings` and `answers` with `ArtifactData`. Write the listing's `status`, `postingText`, `appliedDate` and `history` with `update`, after reading the row fresh and passing its `version` as `if_version`. Add new accounts to `answers` with `set`.
 - **Spreadsheet:** the same tabs and columns in `my-files/job-search-tracker.xlsx`.
 
 ## Inputs
@@ -54,7 +54,7 @@ Apply in **Claude in Chrome** when it is connected. It can upload files. The app
 11. **Legal text** (arbitration, waivers, non-compete, non-solicitation, broad permission to contact past employers): quote it to the user. **Never tick a legal agreement box yourself**, in any mode. The user reads it and ticks it, or decides not to apply.
 12. **Walls** (create account, password, verification code, CAPTCHA, Social Security number or other ID): fill everything up to the wall, then hand the browser to the user. Continue after they are through. Never do the wall step yourself, and never read what they typed.
 13. **Review before submit.** Show the user a summary of every answer on the form, including the upload (file name and method) and any auto-filled fields you corrected, and stop. Submit only when the user says "submit" for this application, or clicks submit themselves. Under auto-submit, still post the summary in the chat as you submit.
-14. **After submitting:** capture the confirmation (confirmation page text or number). Set `status` to `Applied` and `appliedDate` to today. Append a history entry: date, req id, title, company, location, pay if posted, the application system used, the username if an account was used (never a password), the confirmation, the upload method (for example "upload: hidden file input"), and anything unusual.
+14. **After submitting:** capture the confirmation (confirmation page text or number). Set `status` to `Applied` and `appliedDate` to today. Append a history entry: date, req id, title, company, location, pay if posted, the application system used, the username if an account was used (never a password), the confirmation, the upload method written exactly as `upload: <method>` (for example `upload: hidden file input`; the check looks for `upload:`), and anything unusual.
 15. **If blocked and the user has stepped away** (for example they left the session at a wall): leave the status at To apply and append a history entry naming the exact step that blocked. Never work around the block.
 16. Add any new account to `answers` (topic `Account`, question = the site, answer = the username). Never a password.
 17. If an upload control behaved in a way `references/application-techniques.md` does not cover, tell the user and suggest a line to add there. General methods only, never employer names.

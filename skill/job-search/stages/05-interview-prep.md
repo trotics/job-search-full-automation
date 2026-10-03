@@ -31,7 +31,7 @@ Do not use as fact: anonymous review sites, aggregator job listings, social medi
 ## Outputs
 
 - A prep file saved to `reports/interview-prep-<company-slug>-<YYYY-MM-DD>.md`, in the user's job search folder. Give the user the path.
-- No tracker writes, except one history line saying prep was done, if the user wants it.
+- No tracker writes, except one history line saying prep was done, if the user wants it. For that line, take a snapshot before and after and run `python tools/check_tracker.py check backups/before.json backups/after.json --stage prep` (snapshots: `references/tracker-columns.md`, "Checking by script").
 
 ## Done when
 

@@ -15,6 +15,7 @@ When two rules conflict and nothing here settles it, the newest dated rule in `m
 
 - The user's rules set a **pay floor** and say what counts toward it (for example base salary only, or total pay including commission or bonus).
 - The top of the posted range, or the posted total pay, must reach the floor. A whole range under the floor is a no.
+- **Hourly pay:** for a full-time role, multiply the hourly rate by 2,080 hours to compare with a yearly floor, and say so in `why`. For part-time, compare only if the user's rules allow part-time.
 - No posted pay: decide whether the floor is plausible from the role type, level and anything else posted. Never invent a figure. Write "not posted" in `pay` and give your reasoning in `why`.
 - How the user states pay on forms comes from the answer bank (`answers`, topic Pay). Never make up a number.
 
@@ -56,11 +57,12 @@ Column names are in `references/tracker-columns.md`. They are the same in the ar
   - The mailbox check (stage 06) may set **Followed up**, **Interview**, **Rejected** or **Offer**, only after the user says yes to each change in that session.
   - The user may ask for any status change directly.
   - Nothing else changes a status.
-- Never change a listing at Applied, Followed up, Interview or Offer except as above.
-- **Re-read before writing.** Read the row fresh just before you change it, and write only the fields you changed. If the row changed since you last read it, stop and read it again.
+- Never change the status of a listing at Applied, Followed up, Interview or Offer except as above. On those listings sessions may only append history lines, and stage 04 may fill the outreach columns.
+- **Re-read before writing.** Read the row fresh just before you change it, and write only the fields you changed. In the artifact tracker, pass the `version` you read as `if_version` on every write to an existing row; the database refuses the write if the row changed since ("version_mismatch"). Then read it again and redo the write against what it holds now. In the spreadsheet, if the row changed since you read it, stop and read it again.
 - **Back up before bulk writes.** Before writing more than five rows in one session, save a copy of the whole tracker to `backups/`:
-  - Artifact: list every collection with `ArtifactData` and save them together as `backups/tracker-backup-<YYYY-MM-DD>-<HHMM>.json`.
+  - Artifact: list every collection with `ArtifactData` (`out_dir` set to a new folder under `backups/`), then combine them with `python tools/check_tracker.py snapshot-dir <that folder> backups/tracker-backup-<YYYY-MM-DD>-<HHMM>.json`.
   - Spreadsheet: copy the file to `backups/tracker-backup-<YYYY-MM-DD>-<HHMM>.xlsx`.
+- **When a check fails because of something the user did** (they typed a note, or changed a status on the tracker page during the session), tell the user. Never undo their change, and never write `yourNotes` to make a check pass.
 - **Check by script.** Before and after any session that writes, save a snapshot and run `tools/check_tracker.py` (see `references/tracker-columns.md`). A stage is not done until the check passes.
 
 ## 8. Autonomy

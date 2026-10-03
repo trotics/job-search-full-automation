@@ -80,7 +80,7 @@ Ask them in this order. The number in brackets is the section of `my-rules.md` i
 1. Write the full `my-rules.md` from the template and the answers. Use the user's own words where you can.
 2. **Show the whole file** to the user and ask: "Is this right? Tell me anything to change, or say approve." Make changes and show the whole file again until they approve.
 3. Only after approval, save it to `my-files/my-rules.md`.
-4. Write the tracker's `settings` record (see `references/tracker-columns.md`). Show the values first and save after the user says yes:
+4. Write the tracker's `settings` record (see `references/tracker-columns.md`). Take a snapshot first (`references/tracker-columns.md`, "Checking by script"). Show the values first and save after the user says yes. The record's id is `main`. In the spreadsheet it already exists (the template has it), so **update** that row (`tools/sheet.py` op `update`, id `main`). In a new artifact tracker it does not exist yet, so create it with `set`. Afterwards, and again after any answer bank entries in step 5, take an after snapshot and run `python tools/check_tracker.py check backups/before.json backups/after.json --stage intake`. The fields:
    - `tierA`, `tierB`, `tierC`: what each employer tier means for this user. Default: A "Employer based in my home metro", B "Employer elsewhere with jobs open to my area", C "Other allowed place".
    - `industryOrder`: the "in" industries, most wanted first.
    - `excludedIndustries`: from question 17.
@@ -93,7 +93,7 @@ Ask them in this order. The number in brackets is the section of `my-rules.md` i
    - **"Yes, but I want it improved"**: run `stages/07-resume.md`, starting from their file. Their resume is a source of facts, and nothing changes without their yes.
    - **"No" or "I need a new one"**: run `stages/07-resume.md` from the start.
    Tell them they can skip this for now and say "build my resume" any time.
-7. **Employers.** Ask: "Do you already have a list of employers you want to work for?" If yes, add them with sweep step 0. If no, or they want more, offer stage 08 part A ("suggest employers that fit my background"). Do not start it unless they say yes.
+7. **Employers.** Ask: "Do you already have a list of employers you want to work for?" If yes, add them with sweep step 1. If no, or they want more, offer stage 08 part A ("suggest employers that fit my background"). Do not start it unless they say yes.
 8. Point them to `references/prompts.md` for what to say in later sessions.
 
 ## Outputs

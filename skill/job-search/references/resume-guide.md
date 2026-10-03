@@ -12,7 +12,7 @@ Rules for every resume stage 07 writes, for any job in any field. "General rules
 
 **Format (so application systems can read it)**
 - One column. No tables, text boxes, graphics, icons, photos, charts or skill-level bars.
-- Standard headings: Summary, Experience, Education, Licenses and Certifications (if any), Skills. Optional: Volunteer Work, Languages, Military Service, Projects, Portfolio. Their order comes from the "What employers ask for" section of the user's facts file; the default order is Summary, Experience, Education, Licenses and Certifications, Skills.
+- Standard headings: Summary, Experience, Education (only if the user has any), Licenses and Certifications (if any), Skills. Optional: Volunteer Work, Languages, Military Service, Projects, Portfolio. Their order comes from the "What employers ask for" section of the user's facts file; the default order is Summary, Experience, Education, Licenses and Certifications, Skills.
 - Plain fonts. The build script uses Helvetica, 10 to 11 point for body text, never below 9.5.
 - Length: one page for under ten years of experience, two pages at most.
 - Dates in one style throughout: "Mar 2021 to Present" or "2021 to Present". Words, not dashes.
@@ -56,7 +56,7 @@ What usually goes first on a resume for some common jobs. For a real user, this 
 - Skills: CRM and prospecting tools the user actually used.
 
 **Healthcare (clinical)**
-- Licenses and Certifications move up, directly under the summary. Use full names (Registered Nurse, State of Calder; Basic Life Support).
+- Licenses and Certifications move up, directly under the summary. Use full names (for example "Registered Nurse, [State]" and "Basic Life Support").
 - Each role names the setting (intensive care, outpatient clinic), unit size or patient load if known, and specialties.
 - Results are about safety, quality, training and process: audits passed, protocols adopted, staff trained.
 
@@ -113,7 +113,7 @@ City, State | email@example.com | (555) 010-0000 | optional link
 Two or three lines of plain text.
 
 ## Licenses and Certifications
-- Registered Nurse, State of Calder
+- [License name], [State]
 
 ## Experience
 ### Job Title | Employer | City, State | 2023 to Present
@@ -128,3 +128,5 @@ Two or three lines of plain text.
 ```
 
 Headings use `##`. Jobs and schools use `###` with ` | ` between title, employer, place and dates. Bullets start with `- `.
+
+If the user chose not to show a school year, leave it off: `### Degree, Field | School`. If the user has no degree or diploma to show, leave the Education section out; never invent one.

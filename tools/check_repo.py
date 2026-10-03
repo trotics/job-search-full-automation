@@ -54,8 +54,22 @@ def load_banned(path):
 
 
 def repo_files():
+    """Files git would share: tracked files plus new files git does not ignore.
+    Your own my-files/, reports/ and backups/ are ignored by git, so they are never shared and not checked."""
+    try:
+        out = subprocess.run(["git", "ls-files", "--cached", "--others", "--exclude-standard", "-z"],
+                             cwd=ROOT, capture_output=True, check=True).stdout.decode("utf-8", "replace")
+        for rel in sorted(set(p for p in out.split("\0") if p)):
+            path = os.path.join(ROOT, rel)
+            if os.path.isfile(path):
+                yield path
+        return
+    except (OSError, subprocess.CalledProcessError):
+        pass
+    # No git: check every file except the folders git would ignore.
+    ignored = SKIP_DIRS | {"my-files", "reports", "backups", "build"}
     for dirpath, dirnames, filenames in os.walk(ROOT):
-        dirnames[:] = [d for d in dirnames if d not in SKIP_DIRS]
+        dirnames[:] = [d for d in dirnames if d not in ignored]
         for name in filenames:
             yield os.path.join(dirpath, name)
 

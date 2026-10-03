@@ -27,7 +27,7 @@ Copy any of these into a session. Words in [brackets] are yours to fill in. Each
 - "Tell me about [company]." (Part B, deep dive)
 - "Map the [industry] employers around [place]." (Part C)
 - "What does a [title] do, and what does it pay around here?" (Part D)
-- "Add these employers to my target list: [names]." (Sweep step 0)
+- "Add these employers to my target list: [names]." (Sweep step 1)
 
 ## Sweeps and fit (stages 01 and 02)
 

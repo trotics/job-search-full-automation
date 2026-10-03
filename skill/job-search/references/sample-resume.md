@@ -7,18 +7,18 @@ If the user keeps their own resume (they opted out of stage 07), `my-files/resum
 ---
 
 # Jordan Reyes
-Larkfield, Calder | jordan.reyes@example.com | (555) 010-0199
+[City], [State] | jordan.reyes@example.com | (555) 010-0199
 
 ## Summary
 Operations coordinator with 5 years in a regional hospital system, moving into software customer success. Runs scheduling and vendor work for 3 clinics, and trained 40 staff on a new scheduling system.
 
 ## Experience
-### Operations Coordinator | Example Regional Health | Larkfield, Calder | 2022 to Present
+### Operations Coordinator | Example Regional Health | [City], [State] | 2022 to Present
 - Run day-to-day scheduling and vendor contracts for 3 outpatient clinics.
 - Led staff training when the clinics moved to a new scheduling system; trained 40 staff in 6 weeks.
 - Cut appointment no-shows by 20% with a reminder call process.
 
-### Front Desk Lead | Example Family Clinic | Larkfield, Calder | 2020 to 2022
+### Front Desk Lead | Example Family Clinic | [City], [State] | 2020 to 2022
 - Led a front desk team of 4.
 - Handled insurance checks and patient questions for about 60 visits a day.
 

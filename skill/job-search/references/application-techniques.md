@@ -15,7 +15,7 @@ Try them in the order stage 03 gives (a to e). What each looks like on the page:
 
 ## How to tell an upload worked
 
-- The page shows `resume.pdf` (or a preview of its contents) next to the control.
+- The page shows the file chosen in stage 03 (`resume.pdf`, or the approved tailored `resume-<listing id>.pdf`), or a preview of its contents, next to the control.
 - If the control shows a different file name, a size of 0, or an error, the upload failed. Try the next method.
 - Some forms only read the file when the next page loads. Check again after moving on.
 

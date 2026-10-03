@@ -6,6 +6,8 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 EX = os.path.join(ROOT, "examples", "test-run", "resume")
 BUILD = os.path.join(ROOT, "tests", "build")
+if not os.path.isdir(EX):
+    sys.exit("This self-test uses the made-up example in examples/test-run/resume/, which is missing from this copy.")
 GOOD = open(os.path.join(EX, "resume.md"), encoding="utf-8").read()
 
 CASES = [
@@ -66,6 +68,15 @@ POSTINGS_CASES = [
     # Normal resume text that must not be flagged.
     ("ok: Roman numeral (Level I)", lambda s: s.replace("in a 24-bed unit", "in a 24-bed Level I trauma unit"), None, True),
     ("ok: the word 'single'", lambda s: s.replace("on problems after go-live", "on a single list of problems after go-live"), None, True),
+    # Normal text the second review found falsely flagged.
+    ("ok: 'patients age 65'", lambda s: s.replace("2 critically ill patients", "2 critically ill patients age 65 and over"), lambda f: f.replace("Results:", "Results (patients age 65 and over):", 1), True),
+    ("ok: '40 clients in court'", lambda s: s.replace("on a 32-bed unit", "on a 32-bed unit, 4 nurses in court"), lambda f: f.replace("Results:", "Results (4 nurses in court):", 1), True),
+    ("ok: no Education section", lambda s: s[:s.index("## Education")] + s[s.index("## Skills"):], lambda f: f.replace("Section order: Summary, Licenses and Certifications, Experience, Education, Skills", "Section order: Summary, Licenses and Certifications, Experience, Skills"), True),
+    ("ok: 'None' in not-in-facts line", None, lambda f: f.replace("quota, demos, telehealth, virtual nursing, acute care, B2B sales, book of accounts", "None"), True),
+    ("ok: 'Microsoft Dynamics' skill", lambda s: s.replace("Vendor communication,", "Vendor communication, Microsoft Dynamics,"), lambda f: f.replace("- Vendor communication", "- Vendor communication\n- Microsoft Dynamics"), True),
+    ("short skill inside a word", lambda s: s.replace("Vendor communication,", "Vendor communication, MIG,"), lambda f: f.replace("- Vendor communication", "- Vendor communication (migration of charts)"), False),
+    ("real street address", lambda s: s.replace("Larkfield, Calder | maya", "418 Alder Street, Larkfield, Calder | maya"), None, False),
+    ("real age", lambda s: s.replace("Larkfield, Calder | maya", "Larkfield, Calder | Age: 32 | maya"), None, False),
 ]
 
 
