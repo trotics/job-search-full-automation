@@ -15,6 +15,7 @@ Research sessions the user starts by asking: (A) find employers, (B) a company d
 | Shared | `../../shared/adding-employers.md` | Full file | Part A: checking and writing each employer |
 | Shared | `../../shared/helpers.md` | Full file | Only if you use research helpers |
 | Shared | `../../shared/prompts.md` | "Finding employers and researching them" | Wording the user can use |
+| Shared | `../../shared/next-steps.md` | "After company research" | What to suggest when the session ends |
 | Tracker | `companies`, `settings` | All rows | The target list, tiers, industry words |
 | Previous runs | `output/` | "Checked and not added" and "Leads" lists | So earlier work is not repeated |
 | Reference | `references/research-rules.md` | Full file | Sources, links, names, size, the four kinds |
@@ -30,7 +31,7 @@ Research sessions the user starts by asking: (A) find employers, (B) a company d
 5. **[Checkpoint]** Part A: show the candidates in one table for the user to approve, drop or change.
 6. Part A: write only the approved employers, take an after snapshot, and run the check with `--stage research`.
 7. Run the audit below, then save the report.
-8. Part A: offer a sweep of the new employers. Do not start one unless the user says yes.
+8. End by suggesting the next step in one or two lines (`next-steps.md`, "After company research"). Suggest only; do not start it.
 
 ## Checkpoints
 
@@ -48,6 +49,7 @@ Research sessions the user starts by asking: (A) find employers, (B) a company d
 | Part A approval | Every new employer was approved by the user and has its own careers site link |
 | Part A names | No new employer matches an existing name, an excluded industry or a never-contact entry |
 | Check | Part A: `check_tracker.py --stage research` passes |
+| Next step | The session ended with the next thing to say, in quotes |
 
 ## Outputs
 

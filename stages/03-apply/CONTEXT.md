@@ -15,6 +15,7 @@ Fill in applications for listings at To apply, live with the user. **The user re
 | Shared | `../../shared/tracker-access.md` | Full file | Reading, writing and the check |
 | Shared | `../../shared/recurring-mistakes.md` | Full file | Read before any tracker write |
 | Shared | `../../shared/answer-bank.md` | Full file | How to use the answer bank |
+| Shared | `../../shared/next-steps.md` | "After applying" | What to suggest when the session ends |
 | Tracker | `listings`, `answers` | Listings at To apply; all answers | What to apply to, and the answers |
 | Reference | `references/apply-procedure.md` | Full file | Auto-submit, upload order, filling, review, recording |
 | Reference | `references/application-techniques.md` | Full file | How forms behave, upload methods, legal text, walls |
@@ -36,6 +37,7 @@ Apply in **Claude in Chrome** when it is connected. It can upload files; the bui
 9. Pick the next listing and repeat from step 2, as long as the user wants. Do not take a new snapshot.
 10. Take an after snapshot and run the check with `--stage apply`.
 11. Run the audit below, then save the report.
+12. End by suggesting the next step in one or two lines (`next-steps.md`, "After applying"). Suggest only; do not start it.
 
 For a **dry run**, stop at step 6 and follow `apply-procedure.md`, "Dry run".
 
@@ -57,6 +59,7 @@ For a **dry run**, stop at step 6 and follow `apply-procedure.md`, "Dry run".
 | Safety | No password, code or ID number was typed by the session or written anywhere. No LinkedIn or cloud-account import was used |
 | Cover letters | None went out without the user's sign-off |
 | Check | `check_tracker.py --stage apply` passes, and `yourNotes` is untouched |
+| Next step | The session ended with the next thing to say, in quotes |
 
 ## Outputs
 

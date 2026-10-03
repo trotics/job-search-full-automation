@@ -14,6 +14,7 @@ Check employers for new listings, and confirm that listings already in the track
 | Shared | `../../shared/recurring-mistakes.md` | Full file | Read before any tracker write |
 | Shared | `../../shared/adding-employers.md` | Full file | Only when the user asks to add employers |
 | Shared | `../../shared/helpers.md` | Full file | Only if you use research helpers |
+| Shared | `../../shared/next-steps.md` | "After a sweep or a fit call" | What to suggest when the session ends |
 | Tracker | `companies`, `coverage`, `listings`, `settings` | All rows in scope | The target list and what is known |
 | Stage 02 | `../02-fit-review/CONTEXT.md` | Full file | Run for every new posting |
 | Reference | `references/sweep-procedure.md` | Full file | Scope, reading, coverage rows, rechecks, budget |
@@ -31,6 +32,7 @@ Check employers for new listings, and confirm that listings already in the track
 7. Recheck each listing in scope at To apply (`sweep-procedure.md`, "Rechecking listings").
 8. Take an after snapshot and run the check with `--stage sweep`. Fix anything it reports.
 9. Run the audit below, then save the report.
+10. End by suggesting the next step in one or two lines (`next-steps.md`, "After a sweep or a fit call"). Suggest only; do not start it.
 
 ## Checkpoints
 
@@ -52,6 +54,7 @@ Stage 02 follows the user's autonomy lines and asks before writing when they say
 | Evidence | No status change rests on aggregator evidence |
 | User's notes | `yourNotes` untouched on every row (`check_tracker.py`) |
 | Backup | Taken if more than five rows were written |
+| Next step | The session ended with the next thing to say, in quotes |
 
 ## Outputs
 

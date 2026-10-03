@@ -26,6 +26,7 @@ This one file holds everything: the routing, the rules, the stage contracts and 
 4. Route the task with `CONTEXT.md`, then load only that stage's `CONTEXT.md` and the inputs its table names.
 5. Do only the task asked. Never start another stage on your own. Nothing runs on a schedule or unattended.
 6. A stage is done only when its Audit passes. Say plainly which checks did not.
+7. End every session with the next thing to say (`shared/next-steps.md`).
 
 ## Scripts
 
@@ -69,6 +70,7 @@ A job search system for one person. Set up once, then run any stage when the per
 | Recurring mistakes | `shared/recurring-mistakes.md` | Read before any tracker write |
 | Helpers | `shared/helpers.md` | Rules for research helpers (subagents) |
 | Prompts | `shared/prompts.md` | What the person can say to start each stage |
+| Next steps | `shared/next-steps.md` | What to suggest when a session ends, and to a returning person |
 | Python setup | `shared/python-setup.md` | Installing and checking Python |
 | Tracker page | `tracker/tracker-page.html` | The page published as the person's tracker |
 | Scripts | `tools/` | `check_tracker.py`, `check_resume.py`, `build_resume.py`, `sheet.py` |
@@ -230,6 +232,70 @@ System settings for this job search, filled in once by setup. Every stage reads 
 - **Email connector:** {{EMAIL_CONNECTOR}}
 - **Resume choice:** {{RESUME_CHOICE}}
 - **Set up on:** {{SETUP_DATE}}
+
+---
+
+<!-- shared/next-steps.md -->
+
+## Next steps
+
+What to suggest when a session ends, so the person always knows what to say next. Suggest only; never start the next stage yourself. Keep it to one or two lines, with the exact words to say in quotes, and pick the line that fits what just happened.
+
+### After the interview
+
+- They chose "build new" or "improve mine" for the resume: "Say 'Build my resume'. After that, 'Suggest employers that fit my background'."
+- They have a resume and no employers yet: "Say 'Suggest employers that fit my background', then 'Run a sweep'."
+- They have a resume and just added employers: "Say 'Run a sweep'."
+
+### After the resume
+
+- No employers on the target list yet: "Say 'Suggest employers that fit my background'."
+- Listings at To apply: "Say 'Let's apply'. Your new resume will be used."
+- Otherwise: "Say 'Run a sweep'."
+
+### After company research
+
+- Employers were added: offer a sweep of them ("Say 'Sweep [names]'").
+- A company deep dive before applying or an interview: "Say 'Apply to the [company] [title] listing'" or "Say 'Prep me for my interview with [company]'".
+- An industry map: "Say 'Add these employers to my target list: [names]'" for any they liked.
+- Role research: if the role fits, "Say 'I want to change my rules: add [title]'".
+
+### After a sweep or a fit call
+
+- New listings at To apply: give the count, then "Say 'Let's apply' when you have time to sit with it."
+- Manual employers: list them, and ask the person to open those sites in their own browser when they can.
+- Close calls in the report: ask the person to decide each one.
+- Nothing new: "Nothing fit this time. Say 'Suggest employers that fit my background' for more employers, or run another sweep in about a week."
+
+### After applying
+
+- Listings still at To apply: "Say 'Let's apply' to keep going."
+- Applications went in: "In a few days, say 'Check my email' to catch replies."
+- Their rules ask for outreach drafts: "Say 'Run outreach on the [company] listing' if you want a note to the hiring manager."
+
+### After outreach
+
+"Send the drafts yourself when you are ready. In a few days, say 'Check my email'."
+
+### After interview prep
+
+"Good luck. After the interview, say 'Check my email' to log the next step."
+
+### After the mailbox check
+
+- An interview was found: "Say 'Prep me for my interview with [company] on [day]'."
+- Deadlines (assessments, scheduling): list them first, with dates.
+- Nothing new: "Say 'Run a sweep' to look for new listings."
+
+### A returning person with no request
+
+Look at the tracker and suggest the one most useful thing:
+
+1. A deadline or an interview coming up: deal with it first.
+2. Listings at To apply: "Say 'Let's apply'."
+3. Applications in and no mailbox check in the last week: "Say 'Check my email'."
+4. No sweep in the last week: "Say 'Run a sweep'."
+5. Otherwise: "Say 'Suggest employers that fit my background'."
 
 ---
 
@@ -648,6 +714,7 @@ Set up a new user's rules, or change an existing user's rules. Ends with `my-rul
 | Shared | `../../shared/recurring-mistakes.md` | Full file | Read before any tracker write |
 | Shared | `../../shared/adding-employers.md` | Full file | If the user already has a list of employers |
 | Shared | `../../shared/prompts.md` | Full file | What to say in later sessions |
+| Shared | `../../shared/next-steps.md` | "After the interview" | What to suggest when the session ends |
 | Reference | `references/interview-questions.md` | Full file | The questions, in order, and how to ask them |
 | Reference | `references/my-rules-template.md` | Full file | The shape of the finished file |
 | Reference | `references/settings-and-answers.md` | Full file | The settings record and the starter answer bank |
@@ -665,7 +732,7 @@ Set up a new user's rules, or change an existing user's rules. Ends with `my-rul
 8. Take an after snapshot and run the check with `--stage intake`.
 9. **Resume.** If `my-setup.md` says "use mine", confirm the file is saved as `stages/07-resume/output/resume.pdf`, and offer to make the text copy `stages/07-resume/output/resume.md` from it for filling forms (show the copy before saving; do not rewrite or critique the resume). Otherwise tell the user to say "Build my resume" when they are ready.
 10. **Employers.** Ask: "Do you already have a list of employers you want to work for?" If yes, add them as `adding-employers.md` says. If no, or they want more, tell them they can say "Suggest employers that fit my background".
-11. Tell the user the next step in one line, usually: "Say 'Suggest employers that fit my background', then 'Run a sweep'." Point them to `shared/prompts.md`.
+11. End by suggesting the next step in one or two lines (`next-steps.md`, "After the interview"). Suggest only; do not start it. Point them to `shared/prompts.md` for everything else they can say.
 
 ### Checkpoints
 
@@ -683,7 +750,7 @@ Set up a new user's rules, or change an existing user's rules. Ends with `my-rul
 | Approval | The user saw the complete `my-rules.md` and said approve before it was saved |
 | Settings | `settings` was saved after the user said yes, and `check_tracker.py --stage intake` passes |
 | Safety | No password, ID number or bank detail was asked for or stored |
-| Next step | The user knows the next step and where the prompts list is |
+| Next step | The session ended with the next thing to say, in quotes |
 
 ### Outputs
 
@@ -902,6 +969,7 @@ Check employers for new listings, and confirm that listings already in the track
 | Shared | `../../shared/recurring-mistakes.md` | Full file | Read before any tracker write |
 | Shared | `../../shared/adding-employers.md` | Full file | Only when the user asks to add employers |
 | Shared | `../../shared/helpers.md` | Full file | Only if you use research helpers |
+| Shared | `../../shared/next-steps.md` | "After a sweep or a fit call" | What to suggest when the session ends |
 | Tracker | `companies`, `coverage`, `listings`, `settings` | All rows in scope | The target list and what is known |
 | Stage 02 | `../02-fit-review/CONTEXT.md` | Full file | Run for every new posting |
 | Reference | `references/sweep-procedure.md` | Full file | Scope, reading, coverage rows, rechecks, budget |
@@ -919,6 +987,7 @@ Check employers for new listings, and confirm that listings already in the track
 7. Recheck each listing in scope at To apply (`sweep-procedure.md`, "Rechecking listings").
 8. Take an after snapshot and run the check with `--stage sweep`. Fix anything it reports.
 9. Run the audit below, then save the report.
+10. End by suggesting the next step in one or two lines (`next-steps.md`, "After a sweep or a fit call"). Suggest only; do not start it.
 
 ### Checkpoints
 
@@ -940,6 +1009,7 @@ Stage 02 follows the user's autonomy lines and asks before writing when they say
 | Evidence | No status change rests on aggregator evidence |
 | User's notes | `yourNotes` untouched on every row (`check_tracker.py`) |
 | Backup | Taken if more than five rows were written |
+| Next step | The session ended with the next thing to say, in quotes |
 
 ### Outputs
 
@@ -1232,6 +1302,7 @@ Decide whether one posting goes in the tracker. A sweep runs this for every new 
 | Shared | `../../shared/tracker-access.md` | Full file | Reading, writing and the check |
 | Shared | `../../shared/recurring-mistakes.md` | Full file | Read before any tracker write |
 | Shared | `../../shared/adding-employers.md` | Full file | When the employer is not on the target list |
+| Shared | `../../shared/next-steps.md` | "After a sweep or a fit call" | What to suggest when the session ends |
 | Tracker | `listings`, `companies`, `settings` | That employer's rows | Duplicates, spelling, settings lists |
 | Reference | `references/fit-outcomes.md` | Full file | What to write for each result |
 
@@ -1251,6 +1322,7 @@ Decide whether one posting goes in the tracker. A sweep runs this for every new 
 4. Follow the user's autonomy lines in `my-rules.md`: if they want to be asked before listings are written, or want every close call, show the result and wait for their yes before writing.
 5. Write the result as `references/fit-outcomes.md` says: a new listing, a skipped line, or a report item for the user.
 6. If no sweep is running, take an after snapshot and run the check with `--stage fit`.
+7. If no sweep is running, end by suggesting the next step (`next-steps.md`, "After a sweep or a fit call"). Inside a sweep, the sweep does this.
 
 ### Checkpoints
 
@@ -1268,6 +1340,7 @@ Decide whether one posting goes in the tracker. A sweep runs this for every new 
 | No Review fit | No listing was created at Review fit; close calls are in the report instead |
 | Columns | Every new listing has every column in `fit-outcomes.md`, including `postingText`, and a unique `id` |
 | Check | `check_tracker.py` passes (`--stage fit`, or the sweep's own check) |
+| Next step | The session ended with the next thing to say, in quotes |
 
 ### Outputs
 
@@ -1341,6 +1414,7 @@ Fill in applications for listings at To apply, live with the user. **The user re
 | Shared | `../../shared/tracker-access.md` | Full file | Reading, writing and the check |
 | Shared | `../../shared/recurring-mistakes.md` | Full file | Read before any tracker write |
 | Shared | `../../shared/answer-bank.md` | Full file | How to use the answer bank |
+| Shared | `../../shared/next-steps.md` | "After applying" | What to suggest when the session ends |
 | Tracker | `listings`, `answers` | Listings at To apply; all answers | What to apply to, and the answers |
 | Reference | `references/apply-procedure.md` | Full file | Auto-submit, upload order, filling, review, recording |
 | Reference | `references/application-techniques.md` | Full file | How forms behave, upload methods, legal text, walls |
@@ -1362,6 +1436,7 @@ Apply in **Claude in Chrome** when it is connected. It can upload files; the bui
 9. Pick the next listing and repeat from step 2, as long as the user wants. Do not take a new snapshot.
 10. Take an after snapshot and run the check with `--stage apply`.
 11. Run the audit below, then save the report.
+12. End by suggesting the next step in one or two lines (`next-steps.md`, "After applying"). Suggest only; do not start it.
 
 For a **dry run**, stop at step 6 and follow `apply-procedure.md`, "Dry run".
 
@@ -1383,6 +1458,7 @@ For a **dry run**, stop at step 6 and follow `apply-procedure.md`, "Dry run".
 | Safety | No password, code or ID number was typed by the session or written anywhere. No LinkedIn or cloud-account import was used |
 | Cover letters | None went out without the user's sign-off |
 | Check | `check_tracker.py --stage apply` passes, and `yourNotes` is untouched |
+| Next step | The session ended with the next thing to say, in quotes |
 
 ### Outputs
 
@@ -1753,6 +1829,7 @@ Claude in Chrome acts only on sites the user allows. Their own sign-ins stay the
 | Shared | `../../shared/my-setup.md` | Full file | Tracker kind and location, Python command, browser, email connector |
 | Shared | `../../shared/tracker-access.md` | Full file | Reading, writing and the check |
 | Shared | `../../shared/recurring-mistakes.md` | Full file | Read before any tracker write |
+| Shared | `../../shared/next-steps.md` | "After outreach" | What to suggest when the session ends |
 | Tracker | `listings`, `companies` | Qualifying listings | What to research |
 | Reference | `references/outreach-rules.md` | Full file | Qualifying listings, sources, confidence, drafts |
 
@@ -1766,6 +1843,7 @@ Claude in Chrome acts only on sites the user allows. Their own sign-ins stay the
 6. Save the outreach columns and one history line per listing worked.
 7. Take an after snapshot and run the check with `--stage outreach`.
 8. Run the audit below, then save the report.
+9. End by suggesting the next step in one or two lines (`next-steps.md`, "After outreach"). Suggest only; do not start it.
 
 ### Checkpoints
 
@@ -1783,6 +1861,7 @@ Claude in Chrome acts only on sites the user allows. Their own sign-ins stay the
 | Length | Every connection note is under 300 characters and every message under 90 words |
 | Style | No em dashes or en dashes in any draft |
 | Columns | Only the outreach columns and history were written (`check_tracker.py --stage outreach`) |
+| Next step | The session ended with the next thing to say, in quotes |
 
 ### Outputs
 
@@ -1850,6 +1929,7 @@ Prepare the user for a named interview. Run when the user asks.
 | Shared | `../../shared/my-setup.md` | Full file | Tracker kind and location, Python command, browser, email connector |
 | Shared | `../../shared/tracker-access.md` | Full file | Only for the optional history line |
 | Shared | `../../shared/recurring-mistakes.md` | Full file | Read before any tracker write |
+| Shared | `../../shared/next-steps.md` | "After interview prep" | What to suggest when the session ends |
 | Tracker | `listings` (that listing), `answers` (Work history) | One row; work history entries | The saved posting, the history, the user's record |
 | Reference | `references/prep-sources-and-format.md` | Full file | Which sources count, and what the file holds |
 
@@ -1863,6 +1943,7 @@ Prepare the user for a named interview. Run when the user asks.
 6. Add questions for the user to ask, and the logistics from the listing's history.
 7. Run the audit below, then save the file and give the user its path.
 8. If the user wants it, add one history line saying prep was done, with a snapshot before and after and the check with `--stage prep`.
+9. End by suggesting the next step in one or two lines (`next-steps.md`, "After interview prep"). Suggest only; do not start it.
 
 ### Checkpoints
 
@@ -1878,6 +1959,7 @@ Prepare the user for a named interview. Run when the user asks.
 | Company facts | Every fact about the company has a link to an allowed source |
 | Stories | Every story is one the user has stated or the resume shows |
 | Saved | The file is saved in `output/` and the user has the path |
+| Next step | The session ended with the next thing to say, in quotes |
 
 ### Outputs
 
@@ -1931,6 +2013,7 @@ Read the user's email for replies from employers and suggest status updates. Run
 | Shared | `../../shared/my-setup.md` | Full file | Tracker kind and location, Python command, browser, email connector |
 | Shared | `../../shared/tracker-access.md` | Full file | Reading, writing and the check |
 | Shared | `../../shared/recurring-mistakes.md` | Full file | Read before any tracker write |
+| Shared | `../../shared/next-steps.md` | "After the mailbox check" | What to suggest when the session ends |
 | Tracker | `listings`, `companies` | Listings at Applied, Followed up, Interview; To apply only to notice a reply | What a message can match |
 | Reference | `references/reading-and-sorting-mail.md` | Full file | Ways in, the window, matching, sorting, what gets written |
 
@@ -1945,6 +2028,7 @@ Read the user's email for replies from employers and suggest status updates. Run
 7. Write only what the user approved: `status` and one history line per listing.
 8. Take an after snapshot and run the check with `--stage mailbox`.
 9. Run the audit below, then save the report.
+10. End by suggesting the next step in one or two lines (`next-steps.md`, "After the mailbox check"). Suggest only; do not start it.
 
 ### Checkpoints
 
@@ -1963,6 +2047,7 @@ Read the user's email for replies from employers and suggest status updates. Run
 | Secrets | No code, sign-in link or password was copied anywhere |
 | Window | The window covered is written in the report |
 | Check | `check_tracker.py --stage mailbox` passes, and `yourNotes` is untouched |
+| Next step | The session ended with the next thing to say, in quotes |
 
 ### Outputs
 
@@ -2038,6 +2123,7 @@ Build the user's resume from facts they state, shaped by what real postings for 
 | Shared | `../../shared/rules.md` | Section 10 | Writing rules |
 | Shared | `../../shared/tracker-access.md` | Full file | Only for a tailored version's history line |
 | Shared | `../../shared/recurring-mistakes.md` | Full file | Read before any tracker write |
+| Shared | `../../shared/next-steps.md` | "After the resume" | What to suggest when the session ends |
 | User | Their current resume, if any (`output/resume.pdf` or pasted) | Full content | A source of facts only |
 | Tracker | `listings` | `postingText` of listings for the target role | Real postings, and the listing for a tailored version |
 | Reference | `references/fact-questions.md` | Full file | Collecting the facts |
@@ -2059,6 +2145,7 @@ Build the user's resume from facts they state, shaped by what real postings for 
 8. Back up any earlier PDF, build `output/resume.pdf`, check the page count, and run the check again.
 9. **[Checkpoint]** The user opens and approves the PDF.
 10. For a tailored version, follow `writing-and-tailoring.md`, "A tailored version for one listing".
+11. End by suggesting the next step in one or two lines (`next-steps.md`, "After the resume"). Suggest only; do not start it.
 
 ### Checkpoints
 
@@ -2081,6 +2168,7 @@ Build the user's resume from facts they state, shaped by what real postings for 
 | Style | `check_resume.py` passes: no dashes, no pronouns, no personal data that does not belong, sensible bullets, standard headings |
 | Length | The page count is within the limit |
 | Approval | The user approved the final PDF, and any earlier `resume.pdf` was backed up first |
+| Next step | The session ended with the next thing to say, in quotes |
 
 ### Outputs
 
@@ -2470,6 +2558,7 @@ Research sessions the user starts by asking: (A) find employers, (B) a company d
 | Shared | `../../shared/adding-employers.md` | Full file | Part A: checking and writing each employer |
 | Shared | `../../shared/helpers.md` | Full file | Only if you use research helpers |
 | Shared | `../../shared/prompts.md` | "Finding employers and researching them" | Wording the user can use |
+| Shared | `../../shared/next-steps.md` | "After company research" | What to suggest when the session ends |
 | Tracker | `companies`, `settings` | All rows | The target list, tiers, industry words |
 | Previous runs | `output/` | "Checked and not added" and "Leads" lists | So earlier work is not repeated |
 | Reference | `references/research-rules.md` | Full file | Sources, links, names, size, the four kinds |
@@ -2485,7 +2574,7 @@ Research sessions the user starts by asking: (A) find employers, (B) a company d
 5. **[Checkpoint]** Part A: show the candidates in one table for the user to approve, drop or change.
 6. Part A: write only the approved employers, take an after snapshot, and run the check with `--stage research`.
 7. Run the audit below, then save the report.
-8. Part A: offer a sweep of the new employers. Do not start one unless the user says yes.
+8. End by suggesting the next step in one or two lines (`next-steps.md`, "After company research"). Suggest only; do not start it.
 
 ### Checkpoints
 
@@ -2503,6 +2592,7 @@ Research sessions the user starts by asking: (A) find employers, (B) a company d
 | Part A approval | Every new employer was approved by the user and has its own careers site link |
 | Part A names | No new employer matches an existing name, an excluded industry or a never-contact entry |
 | Check | Part A: `check_tracker.py --stage research` passes |
+| Next step | The session ended with the next thing to say, in quotes |
 
 ### Outputs
 

@@ -12,6 +12,7 @@ Set up a new user's rules, or change an existing user's rules. Ends with `my-rul
 | Shared | `../../shared/recurring-mistakes.md` | Full file | Read before any tracker write |
 | Shared | `../../shared/adding-employers.md` | Full file | If the user already has a list of employers |
 | Shared | `../../shared/prompts.md` | Full file | What to say in later sessions |
+| Shared | `../../shared/next-steps.md` | "After the interview" | What to suggest when the session ends |
 | Reference | `references/interview-questions.md` | Full file | The questions, in order, and how to ask them |
 | Reference | `references/my-rules-template.md` | Full file | The shape of the finished file |
 | Reference | `references/settings-and-answers.md` | Full file | The settings record and the starter answer bank |
@@ -29,7 +30,7 @@ Set up a new user's rules, or change an existing user's rules. Ends with `my-rul
 8. Take an after snapshot and run the check with `--stage intake`.
 9. **Resume.** If `my-setup.md` says "use mine", confirm the file is saved as `stages/07-resume/output/resume.pdf`, and offer to make the text copy `stages/07-resume/output/resume.md` from it for filling forms (show the copy before saving; do not rewrite or critique the resume). Otherwise tell the user to say "Build my resume" when they are ready.
 10. **Employers.** Ask: "Do you already have a list of employers you want to work for?" If yes, add them as `adding-employers.md` says. If no, or they want more, tell them they can say "Suggest employers that fit my background".
-11. Tell the user the next step in one line, usually: "Say 'Suggest employers that fit my background', then 'Run a sweep'." Point them to `shared/prompts.md`.
+11. End by suggesting the next step in one or two lines (`next-steps.md`, "After the interview"). Suggest only; do not start it. Point them to `shared/prompts.md` for everything else they can say.
 
 ## Checkpoints
 
@@ -47,7 +48,7 @@ Set up a new user's rules, or change an existing user's rules. Ends with `my-rul
 | Approval | The user saw the complete `my-rules.md` and said approve before it was saved |
 | Settings | `settings` was saved after the user said yes, and `check_tracker.py --stage intake` passes |
 | Safety | No password, ID number or bank detail was asked for or stored |
-| Next step | The user knows the next step and where the prompts list is |
+| Next step | The session ended with the next thing to say, in quotes |
 
 ## Outputs
 

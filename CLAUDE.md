@@ -55,7 +55,7 @@ Pipeline Status: job-search-full-automation   (setup: DONE)
 
 - **Setup not done** (`shared/my-setup.md` is missing or has `{{` placeholders): run `setup`, which ends by starting stage 00.
 - **Setup done, no `stages/00-intake/output/my-rules.md`:** run stage 00.
-- **Both exist:** a returning user. Ask what they want to do today, and offer the common choices from `shared/prompts.md` ("Run a sweep", "Let's apply", "Build my resume", "Check my email").
+- **Both exist:** a returning user. If they did not say what they want, look at the tracker and suggest the one most useful thing (`shared/next-steps.md`, "A returning person with no request"), then mention the other common choices from `shared/prompts.md`.
 
 ## Every session
 
@@ -63,6 +63,7 @@ Pipeline Status: job-search-full-automation   (setup: DONE)
 2. Route the task with `CONTEXT.md`, then load only that stage's `CONTEXT.md` and the inputs its table names.
 3. Do only the task asked. Never start another stage on your own. Every stage is started by the person in a live session; nothing runs on a schedule.
 4. A stage is done only when its Audit passes. Say plainly which checks did not.
+5. End every session with the next thing to say (`shared/next-steps.md`).
 
 ## Do not
 

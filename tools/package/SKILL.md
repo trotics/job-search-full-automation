@@ -22,6 +22,7 @@ The person stays in charge. Never submit an application without their review, ne
 4. Route the task with `CONTEXT.md`, then load only that stage's `CONTEXT.md` and the inputs its table names.
 5. Do only the task asked. Never start another stage on your own. Nothing runs on a schedule or unattended.
 6. A stage is done only when its Audit passes. Say plainly which checks did not.
+7. End every session with the next thing to say (`shared/next-steps.md`).
 
 ## Scripts
 

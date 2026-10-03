@@ -13,6 +13,7 @@ Decide whether one posting goes in the tracker. A sweep runs this for every new 
 | Shared | `../../shared/tracker-access.md` | Full file | Reading, writing and the check |
 | Shared | `../../shared/recurring-mistakes.md` | Full file | Read before any tracker write |
 | Shared | `../../shared/adding-employers.md` | Full file | When the employer is not on the target list |
+| Shared | `../../shared/next-steps.md` | "After a sweep or a fit call" | What to suggest when the session ends |
 | Tracker | `listings`, `companies`, `settings` | That employer's rows | Duplicates, spelling, settings lists |
 | Reference | `references/fit-outcomes.md` | Full file | What to write for each result |
 
@@ -32,6 +33,7 @@ Decide whether one posting goes in the tracker. A sweep runs this for every new 
 4. Follow the user's autonomy lines in `my-rules.md`: if they want to be asked before listings are written, or want every close call, show the result and wait for their yes before writing.
 5. Write the result as `references/fit-outcomes.md` says: a new listing, a skipped line, or a report item for the user.
 6. If no sweep is running, take an after snapshot and run the check with `--stage fit`.
+7. If no sweep is running, end by suggesting the next step (`next-steps.md`, "After a sweep or a fit call"). Inside a sweep, the sweep does this.
 
 ## Checkpoints
 
@@ -49,6 +51,7 @@ Decide whether one posting goes in the tracker. A sweep runs this for every new 
 | No Review fit | No listing was created at Review fit; close calls are in the report instead |
 | Columns | Every new listing has every column in `fit-outcomes.md`, including `postingText`, and a unique `id` |
 | Check | `check_tracker.py` passes (`--stage fit`, or the sweep's own check) |
+| Next step | The session ended with the next thing to say, in quotes |
 
 ## Outputs
 
