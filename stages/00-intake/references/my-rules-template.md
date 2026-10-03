@@ -8,7 +8,9 @@ Last updated: [YYYY-MM-DD]
 ## 1. Target roles
 
 - Roles I want: [titles or kinds of role]
-- Seniority: [entry, mid, senior, or a range]
+- Current level: [L1 to L9 from shared/career-direction.md, with the reason; career changers: old-field level and new-field level]
+- Next step: [the level and role they want next, in their words]
+- Step down allowed: [no / yes, and when]
 - Roles that are out even if the title sounds close: [list]
 - What a good role looks like, in my words: [one or two sentences]
 

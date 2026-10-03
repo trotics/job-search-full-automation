@@ -1,6 +1,6 @@
 # Stage 08: Company research
 
-Research sessions the user starts by asking: (A) find employers, (B) a company deep dive, (C) an industry map, or (D) role research. Only part A writes to the tracker, and only after the user approves each employer.
+Research sessions the user starts by asking: (A) find employers, (B) a company deep dive, (C) an industry map, (D) role research, or (E) a career path. Only part A writes to the tracker, and only after the user approves each employer.
 
 ## Inputs
 
@@ -17,15 +17,16 @@ Research sessions the user starts by asking: (A) find employers, (B) a company d
 | Shared | `../../shared/prompts.md` | "Finding employers and researching them" | Wording the user can use |
 | Shared | `../../shared/next-steps.md` | "After company research" | What to suggest when the session ends |
 | Shared | `../../shared/lessons.md` | Full file | Learning from this session |
-| Tracker | `companies`, `settings` | All rows | The target list, tiers, industry words |
+| Tracker | `companies`, `settings`, `listings` | All rows; `postingText` for part E | The target list, tiers, industry words, postings by level |
 | Previous runs | `output/` | "Checked and not added" and "Leads" lists | So earlier work is not repeated |
-| Reference | `references/research-rules.md` | Full file | Sources, links, names, size, the four kinds |
+| Reference | `references/research-rules.md` | Full file | Sources, links, names, size, the five kinds |
 | Reference | `references/find-employers.md` | Full file | Part A |
-| Reference | `references/other-research.md` | The part asked for | Parts B, C and D |
+| Reference | `references/other-research.md` | The part asked for | Parts B, C, D and E |
+| Shared | `../../shared/career-direction.md` | Full file | Part E, and judging levels in part A |
 
 ## Process
 
-1. Name the kind (A, B, C or D) and say in one line what you will look for.
+1. Name the kind (A, B, C, D or E) and say in one line what you will look for.
 2. For part A, agree a target number with the user and take a tracker snapshot.
 3. Research from allowed sources only, every fact linked (`research-rules.md`).
 4. Part A: check every candidate, and stop at the target, at low yield, or at the budget (`find-employers.md`).
@@ -62,3 +63,4 @@ Research sessions the user starts by asking: (A) find employers, (B) a company d
 | Company report (B) | `output/[company-slug]-company-research.md` | The six parts of B, every source linked |
 | Industry map (C) | `output/[industry-slug]-industry-map.md` | Employers by type, every source linked |
 | Role report (D) | `output/[title-slug]-role-research.md` | Duties, requirements, posted pay, next roles, every source linked |
+| Career path (E) | `output/[YYYY-MM-DD]-career-path.md` | Next levels on each track, requirements, gaps and how to close them, posted pay, every source linked |

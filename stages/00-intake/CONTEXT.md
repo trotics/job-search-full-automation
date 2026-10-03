@@ -7,6 +7,7 @@ Set up a new user's rules, or change an existing user's rules. Ends with `my-rul
 | Source | File/Location | Section/Scope | Why |
 |--------|--------------|---------------|-----|
 | Shared | `../../shared/rules.md` | Full file | The general rules, to explain them when asked |
+| Shared | `../../shared/career-direction.md` | "The ladder", "Placing the person" | Working out current level and next step |
 | Shared | `../../shared/my-setup.md` | Full file | Tracker kind and location, Python command, browser, email connector |
 | Shared | `../../shared/tracker-access.md` | Full file | Reading, writing and the check around the tracker writes |
 | Shared | `../../shared/recurring-mistakes.md` | Full file | Read before any tracker write |

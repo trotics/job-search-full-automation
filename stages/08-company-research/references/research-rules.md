@@ -11,7 +11,7 @@ Rules for every research session.
 - **Helpers:** if you use research helpers, follow `shared/helpers.md`. The main session checks every result and does every write.
 - **Size:** about 25 candidates per session at most, so each one gets checked properly.
 
-## The four kinds
+## The five kinds
 
 | Kind | The user says something like | Writes to the tracker |
 |---|---|---|
@@ -19,3 +19,4 @@ Rules for every research session.
 | B. Company deep dive | "Tell me about [company]" | Nothing (a report only) |
 | C. Industry map | "Map the [industry] employers around [place]" | Nothing, unless the user then asks to add some (run A for those) |
 | D. Role research | "What does a [title] do, and what does it pay around here?" | Nothing (a report only) |
+| E. Career path | "What's my next career step?" | Nothing (a report only) |

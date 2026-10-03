@@ -73,6 +73,7 @@ A job search system for one person. Set up once, then run any stage when the per
 | Recurring mistakes | `shared/recurring-mistakes.md` | Read before any tracker write |
 | Helpers | `shared/helpers.md` | Rules for research helpers (subagents) |
 | Prompts | `shared/prompts.md` | What the person can say to start each stage |
+| Career direction | `shared/career-direction.md` | The career ladder (L1 to L9), how each posting's level is judged, and advancement |
 | Lessons | `shared/lessons.md` | How each session adds what it learned to the notes and the mistakes list |
 | Next steps | `shared/next-steps.md` | What to suggest when a session ends, and to a returning person |
 | Python setup | `shared/python-setup.md` | Installing and checking Python |
@@ -209,6 +210,81 @@ Any extra autonomy the user grants (for example auto-submit) lasts for one sessi
 
 ---
 
+<!-- shared/career-direction.md -->
+
+## Career direction
+
+How the system places a person on the career ladder, judges every posting against where they are and where they want to go, and helps them move up. It works the same for a first job and for an executive search.
+
+### The ladder
+
+Eight levels, plus a top rung for chief roles. Most fields use some version of them; the words differ, the steps do not.
+
+| Level | Name | Typical signs in a person's history or a posting |
+|---|---|---|
+| L1 | Entry | First job in the field, trainee, "junior", "I"; "coordinator", "assistant" or "associate" asking 0 to 2 years; does assigned tasks under direction |
+| L2 | Developing | "II", "specialist", 2 to 4 years required, owns tasks with some guidance |
+| L3 | Experienced | No prefix or "III", 4 to 7 years, owns a whole area or a book of work alone |
+| L4 | Senior | "Senior", "lead" (individual work), 6+ years, handles the hardest cases, trains others informally |
+| L5 | Team lead or supervisor | "Supervisor", "team lead", "manager" of a small team, assigns and checks others' work |
+| L6 | Manager | "Manager" with direct reports, owns hiring, a budget or a team's results |
+| L7 | Senior manager or director | "Senior manager", "director", "head of", managers report to them (team leads reporting to a manager keep it at L6), sets plans for a function |
+| L8 | Executive | "VP", "senior VP", "general manager", owns a business unit or a whole function across the company |
+| L9 | Chief | "Chief ... officer", "president", company-wide profit and loss |
+
+Two tracks run side by side above L3: **individual contributor** and **people leader** (L5 to L8). Principal, staff, expert or individual "director" roles with no reports take the level their scope, required years and pay match (L4 to L7), marked "IC track" in `why`. Moving between tracks at the same scope is a **track switch**, not a step: bring it to the person as a close call. Moving from L4 to a first L5 role is a step up.
+
+**Senior VP and executive VP** stay at L8, a stronger L8 rather than a new level. **L9** chief roles are a step up for an L8, a stretch for L7, and out of reach below that.
+
+Title words mislead across employers ("manager" can mean no reports; "associate" can mean experienced in law or consulting). **Judge a posting by its duties, scope and required years first, the title last.** When duties and title disagree, say so in `why`. When required years and duties point to different levels, go by the required years, unless the duties include supervising people or owning a budget or profit and loss; then go by the duties.
+
+An internship is below L1 for anyone who has finished school: treat it as a step down. For a current student, an internship is the same level (L1).
+
+### Placing the person
+
+The intake interview sets three lines in section 1 of `my-rules.md`:
+
+- **Current level:** worked out from their history, not asked as a label. Use years in the field, the highest title held, whether they led or managed people (how many), and the size of what they owned (accounts, budget, projects). Show the result and the reason in one line, for example "L3 Experienced: 5 years, owns a book of 40 accounts, no direct reports", and let the person correct it.
+- **Next step:** the level and role they want next, in their own words, for example "L4 Senior account manager" or "L5 first team lead role". "Same level, new field" is a valid answer.
+- **Step down allowed:** yes or no, and when (for example "only to change fields", or "only above my pay floor").
+
+**Career changers** have two levels: their level in the old field and their **starting level in the new field**. The new-field level is usually one to three steps lower, rising with transferable experience (a nurse moving into healthcare sales starts around L2 in sales, not L1, because clinical knowledge transfers). Write both, and judge postings against the new-field level.
+
+### Judging a posting's step
+
+Place each posting on the ladder (duties, scope, years, then title), then compare with the person's current level:
+
+| Step | Rule | What fit review does |
+|---|---|---|
+| **Step down** (lower than current) | Allowed only if the person's rules say so | Otherwise a no (check 3). If allowed, say why it is worth it in `why`. |
+| **Same level** | Always allowed | Normal fit. |
+| **Step up** (one level higher) | Always allowed, and preferred when it matches their next step | Raise priority one band only when it matches their next step and pay and place fit (`fit-outcomes.md`). |
+| **Stretch** (two levels higher) | Allowed only when most required duties match the person's real experience | A close call for the person, never added on its own. |
+| **Out of reach** (three or more higher) | Not a target | A no, unless the person asks. |
+| **Track switch** (same scope, other track) | Allowed only with the person's yes | A close call for the person. |
+
+Start every `why` with the step, for example "Step up (L3 to L4): ...", so the person can scan the tracker by direction.
+
+Inside the stretch on required years (rules section 3), years alone never fail a step up.
+
+### Advancement
+
+The system helps the person climb, not just find jobs at their current level:
+
+- **Fit review:** a posting that builds toward the person's next step ranks above one that does not, at the same pay. Record in `teaches` what the role would add toward that next step (for example "Stated: leads a team of 4, which builds toward the L5 goal").
+- **Resume:** for a step-up resume, read postings at the next level, and lead each job with the facts that show next-level scope (leading, training, owning results, cross-team work). Only facts the person confirmed.
+- **Interview prep:** for a step up, prepare the likely question "Why are you ready for this level?", answered with true stories of work already done at that level.
+- **Career path research:** "What's my next career step?" (company research part E) maps the person's current role to the next one or two levels, from real postings: what those roles require, what the person already has, the gaps, and how to close each gap (a skill, a certification, a project at work).
+- **Review the direction** when the person lands a job, gets promoted, or every six months: offer to update the three lines in `my-rules.md`. After a new job, also offer to add the new employer to the never-contact list as their current employer (section 7), put it on hold in the target list, and close or keep their other open listings, one at a time with their yes.
+
+### Examples
+
+- **Entry level:** a graduate with internships is L1. Postings at L1 and L2 fit; L2 is a step up. "Senior" postings are out of reach.
+- **Experienced, aiming to lead:** an L4 senior analyst whose next step is "L5 team lead". L5 postings are step ups and rank high; L6 manager roles are stretches brought as close calls; L4 roles are same level and still fit.
+- **Executive:** an L7 director whose next step is "L8 VP". Most L7 roles are same level; L8 roles are step ups; L6 roles are step downs and are a no unless they allow it.
+
+---
+
 <!-- shared/helpers.md -->
 
 ## Working with helpers (subagents)
@@ -332,6 +408,7 @@ What to suggest when a session ends, so the person always knows what to say next
 
 ### After a direct change
 
+- A job accepted or a promotion: congratulate them, then "Say 'Update my career direction' so I aim at your next step." After a new job, also offer the updates in `career-direction.md`, "Advancement" (new employer as current employer, other open listings).
 - A rejection or a closed listing: one kind line, then the next most useful thing from "A returning person with no request".
 - Anything else: confirm what changed in one line, then the same.
 
@@ -435,6 +512,8 @@ Copy any of these into a session. Words in [brackets] are yours to fill in. Each
 - "Tell me about [company]." (Part B, deep dive)
 - "Map the [industry] employers around [place]." (Part C)
 - "What does a [title] do, and what does it pay around here?" (Part D)
+- "What's my next career step?" (Part E: the next levels up, what they need, and how to close the gaps)
+- "Update my career direction." (Stage 00: your current level and next step)
 - "Add these employers to my target list: [names]." (Adds them to your target list)
 
 ### Sweeps and fit (stages 01 and 02)
@@ -541,7 +620,7 @@ When two rules conflict and nothing here settles it, the newest dated rule in `m
 
 ### 1. What counts as a target role
 
-- A role is a target only if it matches the **target roles** and **seniority** in the user's rules.
+- A role is a target only if it matches the **target roles** in the user's rules and its **level** is allowed by `career-direction.md` (same level, a step up, or a stretch brought to the user; a step down only if their rules allow it).
 - Roles the user's rules list as **out** are out, even when the title sounds close.
 - **Industries and products:** an employer or posting in an industry the user's rules list as **out** is a no. An industry listed as **in** is a yes on this check. An industry on neither list: decide from the user's stated reasons, and if it is a real judgment call, list it in the report for the user rather than adding it.
 - **Excluded industries in the tracker.** The `settings` record lists `excludedIndustries`. Employers in those industries are skipped in sweeps unless their `keepAnyway` column says yes. Only the user reopens an industry.
@@ -781,6 +860,8 @@ The `id` matches the employer's `id` in `companies`.
 
 **Status values:** `To apply`, `Applied`, `Followed up`, `Interview`, `Offer`, `Review fit` (set only by you, for a listing you want to think over; fit review never creates listings at this status), `On hold`, `Rejected` (the employer said no), `Closed` (you passed), `expired` (the posting came down), `filled` (the employer says it is filled).
 
+An accepted offer stays at `Offer`, with "accepted" and the date in `history`.
+
 Listings at **Applied, Followed up, Interview or Offer** are never changed by a sweep, ever.
 
 ### answers: your answer bank
@@ -825,6 +906,7 @@ Set up a new user's rules, or change an existing user's rules. Ends with `my-rul
 | Source | File/Location | Section/Scope | Why |
 |--------|--------------|---------------|-----|
 | Shared | `../../shared/rules.md` | Full file | The general rules, to explain them when asked |
+| Shared | `../../shared/career-direction.md` | "The ladder", "Placing the person" | Working out current level and next step |
 | Shared | `../../shared/my-setup.md` | Full file | Tracker kind and location, Python command, browser, email connector |
 | Shared | `../../shared/tracker-access.md` | Full file | Reading, writing and the check around the tracker writes |
 | Shared | `../../shared/recurring-mistakes.md` | Full file | Read before any tracker write |
@@ -897,7 +979,9 @@ The intake interview, in order. The number in brackets is the section of `my-rul
 ### Target roles
 
 1. "What kind of job are you looking for? Name a few titles if you can." [1]
-2. "What level: entry, mid, senior, or a range?" [1]
+2. "What is the highest job title you have held, and did you lead or manage anyone? How many, and what did you own (accounts, budget, projects)?" Ask question 17 (years of experience) now too. From both, work out their current level as `shared/career-direction.md` says, show it with the reason, and let them correct it. [1]
+2a. "Where do you want to go next: the next level up, the same level somewhere better, or a new field? Name the role if you can." Career changers: also work out their starting level in the new field. [1]
+2b. "Would you take a step down in level? If so, when (for example only to change fields, or only above your pay floor)?" For someone looking for their first job, skip this and write "no (entry level)". [1]
 3. "Are there roles with similar titles that you do not want? For example, a title that sounds right but is really support or admin work." [1]
 4. "In a sentence or two, what does a good fit look like to you?" [1]
 
@@ -965,7 +1049,9 @@ Last updated: [YYYY-MM-DD]
 ### 1. Target roles
 
 - Roles I want: [titles or kinds of role]
-- Seniority: [entry, mid, senior, or a range]
+- Current level: [L1 to L9 from shared/career-direction.md, with the reason; career changers: old-field level and new-field level]
+- Next step: [the level and role they want next, in their words]
+- Step down allowed: [no / yes, and when]
 - Roles that are out even if the title sounds close: [list]
 - What a good role looks like, in my words: [one or two sentences]
 
@@ -1420,6 +1506,7 @@ Decide whether one posting goes in the tracker. A sweep runs this for every new 
 | User or sweep | The posting, read on the employer's own site, or pasted by the user | Title, location detail, pay, requirements, work type | What is being judged |
 | Stage 00 | `../00-intake/output/my-rules.md` | Full file | The user's rules |
 | Shared | `../../shared/rules.md` | Sections 1 to 6 | The checks |
+| Shared | `../../shared/career-direction.md` | Full file | Placing postings on the ladder, the step, `why` prefix, priority |
 | Shared | `../../shared/my-setup.md` | Full file | Tracker kind and location, Python command, browser, email connector |
 | Shared | `../../shared/tracker-access.md` | Full file | Reading, writing and the check |
 | Shared | `../../shared/recurring-mistakes.md` | Full file | Read before any tracker write |
@@ -1437,7 +1524,7 @@ Decide whether one posting goes in the tracker. A sweep runs this for every new 
 3. Check in this order. The first failure decides:
    1. **Duplicate?** Same req id, or same title and location at the same employer, already in `listings`: stop, nothing to add.
    2. **Live on the employer's own site?** If the site shows it gone: no. If you cannot open the site (no browser, or the person pasted the text), judge it on the pasted text, say "not confirmed live", and ask for the employer's link before writing a listing.
-   3. **Target role?** Not one of the user's target roles, or one of their "out" roles: no (rules 1).
+   3. **Target role and level?** Not one of the user's target roles, one of their "out" roles, a step down they do not allow, or out of reach: no. A stretch or a track switch is a close call (rules 1, `career-direction.md`).
    4. **Industry and product?** An "out" industry, or an excluded industry without `keepAnyway`: no (rules 1).
    5. **Place?** Fails the user's place rules: no (rules 4).
    6. **Pay?** Under the floor: no. No posted pay: decide plausibility and write the reasoning (rules 2).
@@ -1489,10 +1576,10 @@ What to write for each result of a fit review. Column meanings are in `shared/tr
 - `company`: spelled exactly as in `companies`.
 - `title`, `location` (the posting's own location detail), `url` (employer's own site), `reqId`, `industry`, `posted` (date as shown, or blank).
 - `pay`: the posted pay as written, or "not posted".
-- `why`: one or two sentences on the fit, any reach (years, industry), and anything the user should know.
-- `teaches`: what the role would teach the user, starting "Stated:" (the posting says so), "Not stated." or "Not read."
+- `why`: starts with the career step (for example "Step up (L3 to L4):", "Same level (L3):" or "Track switch (L6 to IC L6):", `shared/career-direction.md`), then one or two sentences on the fit, any reach (years, industry), and anything the user should know.
+- `teaches`: what the role would teach the user, starting "Stated:" (the posting says so), "Not stated." or "Not read." When it builds toward their next step, say how.
 - `family`: one of `settings.roleFamilies`, written without the `*`. `track`: one of `settings.tracks`.
-- `priority`: `High` (clear fit, pay at or above the floor), `Medium` (fits with a reach), `Low` (fits on paper, weaker on taste or pay), or `On hold`.
+- `priority`: `High` (clear fit, pay at or above the floor), `Medium` (fits with a reach), `Low` (fits on paper, weaker on taste or pay), or `On hold`. A step up that matches the user's next step moves up one band (Low to Medium, Medium to High), but never to High when `why` names a years reach.
 - `postingText`: the posting's full text, copied from the employer's own page (title, location, pay, duties, requirements). This lets later stages work after the posting is taken down. If the page is too long, keep at least the duties, requirements and pay.
 - `status`: `To apply`.
 - `history`: `YYYY-MM-DD added from the employer's own site by fit review.` If it was judged on pasted text: `YYYY-MM-DD added from pasted posting text by fit review; not confirmed live on the employer's site.`, and `why` ends with "Not confirmed live."
@@ -1518,7 +1605,7 @@ For example a commission-only role when the user's rules say nothing about commi
 
 When the person answers a close call (in the session or a later one), record it, so it is never asked again. Take a snapshot first and check with `--stage fit` after.
 
-- **Apply:** first re-open the posting on the employer's own site to confirm it is live and copy `postingText` (if it cannot be opened, ask for the employer's link first, as in the CONTEXT step on pasted postings, and record "not confirmed live"). Then write the listing as in "Pass", with history `YYYY-MM-DD added after the user's close-call decision` plus `; not confirmed live on the employer's site` when it was judged on pasted text, ending with a period If the employer has a `coverage` row, set its `result` to `HIT`, unless another close call there is still waiting (then leave `LEAD`).
+- **Apply:** first re-open the posting on the employer's own site to confirm it is live and copy `postingText` (if it cannot be opened, ask for the employer's link first, as in the CONTEXT step on pasted postings, and record "not confirmed live"). Then write the listing as in "Pass", with history `YYYY-MM-DD added after the user's close-call decision` plus `; not confirmed live on the employer's site` when it was judged on pasted text, ending with a period. If the employer has a `coverage` row, set its `result` to `HIT`, unless another close call there is still waiting (then leave `LEAD`).
 - **Skip:** if the employer has a `coverage` row, add `title, req id: skipped by the user's decision YYYY-MM-DD` to its `skipped` and set `result` to `NONE` unless something else there is still waiting. Keep every earlier line of `skipped` when you add one (read the cell fresh and write it back with the new line at the end), and add a dated line to the start of `detail` saying the close call was decided, keeping older text after "Earlier:" (`shared/tracker-columns.md`). If it has no coverage row, do not create one: add `YYYY-MM-DD decided: skip` under that close call in its report instead (with no folder, give the updated report as a download so the mark is kept).
 
 A close call that is already a listing and that the person now drops is a status change to `Closed`: do it as a direct request with its own snapshot and a `--stage user` check (`shared/tracker-access.md`, "Direct requests"), not inside the `--stage fit` check.
@@ -2145,7 +2232,7 @@ Do not use as fact: anonymous review sites, aggregator job listings, social medi
 ### The prep file
 
 1. **Company brief:** what they sell, to whom, how the team does its work, recent news, and where this role sits. Every fact gets a link.
-2. **Likely questions:** from the posting's requirements and the interview stage, including the hard ones the user's record invites (a short stint, a career change, a gap, missing industry experience).
+2. **Likely questions:** from the posting's requirements and the interview stage, including the hard ones the user's record invites (a short stint, a career change, a gap, missing industry experience). For a step up (the listing's `why` says so), include "Why are you ready for this level?", answered with true stories that already show next-level scope (people led, results owned, decisions made).
 3. **The user's stories:** each likely question mapped to a true story from the resume or the answer bank's work history. Invent nothing. Mark any gap so the user can fill it.
 4. **Questions for the user to ask** the interviewer.
 5. **Logistics** from the listing's history: time, format, recording notices, who to contact.
@@ -2281,6 +2368,7 @@ Build the user's resume from facts they state, shaped by what real postings for 
 | Stage 00 | `../00-intake/output/my-rules.md` | Target roles, industries, place, writing style | What the resume is for |
 | Shared | `../../shared/my-setup.md` | Full file | Tracker kind and location, Python command, browser, email connector |
 | Shared | `../../shared/rules.md` | Section 10 | Writing rules |
+| Shared | `../../shared/career-direction.md` | Full file | Judge posting levels and aim the resume at the next step |
 | Shared | `../../shared/tracker-access.md` | Full file | Only for a tailored version's history line |
 | Shared | `../../shared/recurring-mistakes.md` | Full file | Read before any tracker write |
 | Shared | `../../shared/next-steps.md` | "After the resume" | What to suggest when the session ends |
@@ -2325,7 +2413,7 @@ Build the user's resume from facts they state, shaped by what real postings for 
 | Facts first | The user approved the facts file before any resume was written |
 | Employer asks | A confirmed "What employers ask for" section is saved, from 3 to 5 real postings or a named fallback |
 | Terms | No term from the postings was used unless it is in the facts file |
-| Facts only | Every number, title, date, tool and skill on the resume is in the facts file (`check_resume.py`) |
+| Facts only | Every number, title, date, tool and skill on the resume is in the facts file (`check_resume.py`), and every scope claim (people led, budget, profit and loss, reporting line) matches a confirmed fact; the script cannot catch these, so read them by hand |
 | Style | `check_resume.py` passes: no dashes, no pronouns, no personal data that does not belong, sensible bullets, standard headings |
 | Length | The page count is within the limit |
 | Approval | The user approved the final PDF, and any earlier `resume.pdf` was backed up first |
@@ -2354,7 +2442,7 @@ Before writing, look at what employers actually ask for in real postings for the
 
 ### Steps
 
-1. **Pick the target.** Take the main target role and level from the user's rules. If the user has two quite different targets, ask which one this resume is for. One resume per target. A resume for a second target is saved as `resume-<target>.md` and `.pdf` (for example `resume-quality-inspector.md`), never over `resume.md`.
+1. **Pick the target.** Take the main target role from the user's rules, at the level of their next step when it is a step up (`shared/career-direction.md`), so the resume reads at the level they are aiming for. If the user has two quite different targets, ask which one this resume is for. One resume per target. A resume for a second target is saved as `resume-<target>.md` and `.pdf` (for example `resume-quality-inspector.md`), never over `resume.md`.
 2. **Gather 3 to 5 real postings for that role**, newest first, in this order of preference:
    1. Listings already in the tracker for this role that have `postingText` saved.
    2. Postings on employers' own career sites, found by web search, for this role and level in or near the user's allowed places (or remote roles open to them). Posted in the last six months where possible.
@@ -2681,7 +2769,7 @@ If the user opted out (setup's resume choice "use mine"), do not rewrite or crit
 ### Writing the main resume
 
 1. Write `<out>/resume.md` in the exact format in `resume-guide.md` ("File format"). `sample-resume.md` shows a finished one.
-2. Follow every rule in "General rules" and the "What employers ask for" section saved in the facts file. The resume's sections come in that section order.
+2. Follow every rule in "General rules" and the "What employers ask for" section saved in the facts file. The resume's sections come in that section order. For a step-up resume, lead each job with the confirmed facts that show next-level scope: leading or training people, owning results, cross-team work (`shared/career-direction.md`, "Advancement").
 3. Draft **one section at a time**, in that order (contact line and summary always first). Show each one and get a yes or changes before the next.
 4. Show the whole resume, and check the text:
    `python tools/check_resume.py <out>/resume.md --facts <out>/resume-facts.md`
@@ -2707,7 +2795,7 @@ If the user opted out (setup's resume choice "use mine"), do not rewrite or crit
 
 ## Stage 08: Company research
 
-Research sessions the user starts by asking: (A) find employers, (B) a company deep dive, (C) an industry map, or (D) role research. Only part A writes to the tracker, and only after the user approves each employer.
+Research sessions the user starts by asking: (A) find employers, (B) a company deep dive, (C) an industry map, (D) role research, or (E) a career path. Only part A writes to the tracker, and only after the user approves each employer.
 
 ### Inputs
 
@@ -2724,15 +2812,16 @@ Research sessions the user starts by asking: (A) find employers, (B) a company d
 | Shared | `../../shared/prompts.md` | "Finding employers and researching them" | Wording the user can use |
 | Shared | `../../shared/next-steps.md` | "After company research" | What to suggest when the session ends |
 | Shared | `../../shared/lessons.md` | Full file | Learning from this session |
-| Tracker | `companies`, `settings` | All rows | The target list, tiers, industry words |
+| Tracker | `companies`, `settings`, `listings` | All rows; `postingText` for part E | The target list, tiers, industry words, postings by level |
 | Previous runs | `output/` | "Checked and not added" and "Leads" lists | So earlier work is not repeated |
-| Reference | `references/research-rules.md` | Full file | Sources, links, names, size, the four kinds |
+| Reference | `references/research-rules.md` | Full file | Sources, links, names, size, the five kinds |
 | Reference | `references/find-employers.md` | Full file | Part A |
-| Reference | `references/other-research.md` | The part asked for | Parts B, C and D |
+| Reference | `references/other-research.md` | The part asked for | Parts B, C, D and E |
+| Shared | `../../shared/career-direction.md` | Full file | Part E, and judging levels in part A |
 
 ### Process
 
-1. Name the kind (A, B, C or D) and say in one line what you will look for.
+1. Name the kind (A, B, C, D or E) and say in one line what you will look for.
 2. For part A, agree a target number with the user and take a tracker snapshot.
 3. Research from allowed sources only, every fact linked (`research-rules.md`).
 4. Part A: check every candidate, and stop at the target, at low yield, or at the budget (`find-employers.md`).
@@ -2769,6 +2858,7 @@ Research sessions the user starts by asking: (A) find employers, (B) a company d
 | Company report (B) | `output/[company-slug]-company-research.md` | The six parts of B, every source linked |
 | Industry map (C) | `output/[industry-slug]-industry-map.md` | Employers by type, every source linked |
 | Role report (D) | `output/[title-slug]-role-research.md` | Duties, requirements, posted pay, next roles, every source linked |
+| Career path (E) | `output/[YYYY-MM-DD]-career-path.md` | Next levels on each track, requirements, gaps and how to close them, posted pay, every source linked |
 
 ---
 
@@ -2807,7 +2897,7 @@ Four lists, so the next session can pick up where this one stopped:
 
 <!-- stages/08-company-research/references/other-research.md -->
 
-## B, C and D: reports only
+## B, C, D and E: reports only
 
 ### B. Company deep dive
 
@@ -2838,6 +2928,18 @@ For one job title the user asks about.
 3. Pay: only pay **posted by employers** for this role in the user's area or remote roles open to them. Give the range and the number of postings it comes from. If fewer than three postings show pay, say so. Never estimate a number without a posting behind it.
 4. Typical next roles, if postings or employers' own career pages say so.
 
+### E. Career path
+
+For "What's my next career step?" Uses `shared/career-direction.md` and the user's current level and next step in `my-rules.md`.
+
+1. The next one or two levels up from the user's current role, on both tracks where both exist (senior individual contributor, and team lead or manager), with real titles employers use, from three or more of their own postings each, linked.
+2. For each: what those postings require, what the user already has (facts only), and the gaps.
+3. How to close each gap: a skill to build, a certification, a project to take on at work, or a bridge role. Name the source for every requirement.
+4. Posted pay at each level, as in part D.
+5. Ask whether to update "Next step" in their rules. A change goes through the intake stage.
+
+Without web search: use the `postingText` of tracker listings at those levels, plus the ladder in `shared/career-direction.md`. Write "Based on: N tracker postings, no web search" at the top, say that pay at each level is unknown unless those postings show it, and state nothing unsourced as fact.
+
 ---
 
 <!-- stages/08-company-research/references/research-rules.md -->
@@ -2855,7 +2957,7 @@ Rules for every research session.
 - **Helpers:** if you use research helpers, follow `shared/helpers.md`. The main session checks every result and does every write.
 - **Size:** about 25 candidates per session at most, so each one gets checked properly.
 
-### The four kinds
+### The five kinds
 
 | Kind | The user says something like | Writes to the tracker |
 |---|---|---|
@@ -2863,3 +2965,4 @@ Rules for every research session.
 | B. Company deep dive | "Tell me about [company]" | Nothing (a report only) |
 | C. Industry map | "Map the [industry] employers around [place]" | Nothing, unless the user then asks to add some (run A for those) |
 | D. Role research | "What does a [title] do, and what does it pay around here?" | Nothing (a report only) |
+| E. Career path | "What's my next career step?" | Nothing (a report only) |

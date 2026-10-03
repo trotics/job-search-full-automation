@@ -63,6 +63,8 @@ The `id` matches the employer's `id` in `companies`.
 
 **Status values:** `To apply`, `Applied`, `Followed up`, `Interview`, `Offer`, `Review fit` (set only by you, for a listing you want to think over; fit review never creates listings at this status), `On hold`, `Rejected` (the employer said no), `Closed` (you passed), `expired` (the posting came down), `filled` (the employer says it is filled).
 
+An accepted offer stays at `Offer`, with "accepted" and the date in `history`.
+
 Listings at **Applied, Followed up, Interview or Offer** are never changed by a sweep, ever.
 
 ## answers: your answer bank

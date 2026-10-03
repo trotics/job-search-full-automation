@@ -6,7 +6,7 @@ Before writing, look at what employers actually ask for in real postings for the
 
 ## Steps
 
-1. **Pick the target.** Take the main target role and level from the user's rules. If the user has two quite different targets, ask which one this resume is for. One resume per target. A resume for a second target is saved as `resume-<target>.md` and `.pdf` (for example `resume-quality-inspector.md`), never over `resume.md`.
+1. **Pick the target.** Take the main target role from the user's rules, at the level of their next step when it is a step up (`shared/career-direction.md`), so the resume reads at the level they are aiming for. If the user has two quite different targets, ask which one this resume is for. One resume per target. A resume for a second target is saved as `resume-<target>.md` and `.pdf` (for example `resume-quality-inspector.md`), never over `resume.md`.
 2. **Gather 3 to 5 real postings for that role**, newest first, in this order of preference:
    1. Listings already in the tracker for this role that have `postingText` saved.
    2. Postings on employers' own career sites, found by web search, for this role and level in or near the user's allowed places (or remote roles open to them). Posted in the last six months where possible.

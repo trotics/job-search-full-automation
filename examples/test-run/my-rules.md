@@ -5,7 +5,9 @@ Last updated: 2026-09-20
 ## 1. Target roles
 
 - Roles I want: clinical sales specialist; account executive at a health tech company; sales development representative if the pay clears my floor.
-- Seniority: entry to mid.
+- Current level: L4 Senior in nursing (6 years, charge nurse duties, trained 30 nurses); in sales, her new field, L2 Developing, because clinical knowledge transfers.
+- Next step: L3 account executive or clinical sales specialist with her own territory.
+- Step down allowed: yes, to L2 in sales, only above my pay floor.
 - Roles that are out even if the title sounds close: implementation or training roles with no sales quota; customer success with no quota; anything that is really a nursing job.
 - What a good role looks like, in my words: selling software that makes nurses' work easier, to hospitals, where my bedside years count.
 

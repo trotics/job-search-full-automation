@@ -51,6 +51,7 @@ What to suggest when a session ends, so the person always knows what to say next
 
 ## After a direct change
 
+- A job accepted or a promotion: congratulate them, then "Say 'Update my career direction' so I aim at your next step." After a new job, also offer the updates in `career-direction.md`, "Advancement" (new employer as current employer, other open listings).
 - A rejection or a closed listing: one kind line, then the next most useful thing from "A returning person with no request".
 - Anything else: confirm what changed in one line, then the same.
 

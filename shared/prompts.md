@@ -27,6 +27,8 @@ Copy any of these into a session. Words in [brackets] are yours to fill in. Each
 - "Tell me about [company]." (Part B, deep dive)
 - "Map the [industry] employers around [place]." (Part C)
 - "What does a [title] do, and what does it pay around here?" (Part D)
+- "What's my next career step?" (Part E: the next levels up, what they need, and how to close the gaps)
+- "Update my career direction." (Stage 00: your current level and next step)
 - "Add these employers to my target list: [names]." (Adds them to your target list)
 
 ## Sweeps and fit (stages 01 and 02)

@@ -13,7 +13,9 @@ The intake interview, in order. The number in brackets is the section of `my-rul
 ## Target roles
 
 1. "What kind of job are you looking for? Name a few titles if you can." [1]
-2. "What level: entry, mid, senior, or a range?" [1]
+2. "What is the highest job title you have held, and did you lead or manage anyone? How many, and what did you own (accounts, budget, projects)?" Ask question 17 (years of experience) now too. From both, work out their current level as `shared/career-direction.md` says, show it with the reason, and let them correct it. [1]
+2a. "Where do you want to go next: the next level up, the same level somewhere better, or a new field? Name the role if you can." Career changers: also work out their starting level in the new field. [1]
+2b. "Would you take a step down in level? If so, when (for example only to change fields, or only above your pay floor)?" For someone looking for their first job, skip this and write "no (entry level)". [1]
 3. "Are there roles with similar titles that you do not want? For example, a title that sounds right but is really support or admin work." [1]
 4. "In a sentence or two, what does a good fit look like to you?" [1]
 

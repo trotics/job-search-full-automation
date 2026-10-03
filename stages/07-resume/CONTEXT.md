@@ -11,6 +11,7 @@ Build the user's resume from facts they state, shaped by what real postings for 
 | Stage 00 | `../00-intake/output/my-rules.md` | Target roles, industries, place, writing style | What the resume is for |
 | Shared | `../../shared/my-setup.md` | Full file | Tracker kind and location, Python command, browser, email connector |
 | Shared | `../../shared/rules.md` | Section 10 | Writing rules |
+| Shared | `../../shared/career-direction.md` | Full file | Judge posting levels and aim the resume at the next step |
 | Shared | `../../shared/tracker-access.md` | Full file | Only for a tailored version's history line |
 | Shared | `../../shared/recurring-mistakes.md` | Full file | Read before any tracker write |
 | Shared | `../../shared/next-steps.md` | "After the resume" | What to suggest when the session ends |
@@ -55,7 +56,7 @@ Build the user's resume from facts they state, shaped by what real postings for 
 | Facts first | The user approved the facts file before any resume was written |
 | Employer asks | A confirmed "What employers ask for" section is saved, from 3 to 5 real postings or a named fallback |
 | Terms | No term from the postings was used unless it is in the facts file |
-| Facts only | Every number, title, date, tool and skill on the resume is in the facts file (`check_resume.py`) |
+| Facts only | Every number, title, date, tool and skill on the resume is in the facts file (`check_resume.py`), and every scope claim (people led, budget, profit and loss, reporting line) matches a confirmed fact; the script cannot catch these, so read them by hand |
 | Style | `check_resume.py` passes: no dashes, no pronouns, no personal data that does not belong, sensible bullets, standard headings |
 | Length | The page count is within the limit |
 | Approval | The user approved the final PDF, and any earlier `resume.pdf` was backed up first |

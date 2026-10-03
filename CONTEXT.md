@@ -34,6 +34,7 @@ A job search system for one person. Set up once, then run any stage when the per
 | Recurring mistakes | `shared/recurring-mistakes.md` | Read before any tracker write |
 | Helpers | `shared/helpers.md` | Rules for research helpers (subagents) |
 | Prompts | `shared/prompts.md` | What the person can say to start each stage |
+| Career direction | `shared/career-direction.md` | The career ladder (L1 to L9), how each posting's level is judged, and advancement |
 | Lessons | `shared/lessons.md` | How each session adds what it learned to the notes and the mistakes list |
 | Next steps | `shared/next-steps.md` | What to suggest when a session ends, and to a returning person |
 | Python setup | `shared/python-setup.md` | Installing and checking Python |

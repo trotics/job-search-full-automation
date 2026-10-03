@@ -148,7 +148,7 @@ def main():
         elif src == "postings":
             if not 3 <= len(postings) <= 5:
                 problems.append("'What employers ask for' section: source is postings but %d postings are listed (need 3 to 5)" % len(postings))
-        elif "postings plus example" in src:
+        elif re.search(r"postings? plus example", src):
             if not postings or not example:
                 problems.append("'What employers ask for' section: fallback needs the postings found and a closest example")
         elif "user description plus example" in src:

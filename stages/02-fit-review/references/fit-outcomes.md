@@ -8,10 +8,10 @@ What to write for each result of a fit review. Column meanings are in `shared/tr
 - `company`: spelled exactly as in `companies`.
 - `title`, `location` (the posting's own location detail), `url` (employer's own site), `reqId`, `industry`, `posted` (date as shown, or blank).
 - `pay`: the posted pay as written, or "not posted".
-- `why`: one or two sentences on the fit, any reach (years, industry), and anything the user should know.
-- `teaches`: what the role would teach the user, starting "Stated:" (the posting says so), "Not stated." or "Not read."
+- `why`: starts with the career step (for example "Step up (L3 to L4):", "Same level (L3):" or "Track switch (L6 to IC L6):", `shared/career-direction.md`), then one or two sentences on the fit, any reach (years, industry), and anything the user should know.
+- `teaches`: what the role would teach the user, starting "Stated:" (the posting says so), "Not stated." or "Not read." When it builds toward their next step, say how.
 - `family`: one of `settings.roleFamilies`, written without the `*`. `track`: one of `settings.tracks`.
-- `priority`: `High` (clear fit, pay at or above the floor), `Medium` (fits with a reach), `Low` (fits on paper, weaker on taste or pay), or `On hold`.
+- `priority`: `High` (clear fit, pay at or above the floor), `Medium` (fits with a reach), `Low` (fits on paper, weaker on taste or pay), or `On hold`. A step up that matches the user's next step moves up one band (Low to Medium, Medium to High), but never to High when `why` names a years reach.
 - `postingText`: the posting's full text, copied from the employer's own page (title, location, pay, duties, requirements). This lets later stages work after the posting is taken down. If the page is too long, keep at least the duties, requirements and pay.
 - `status`: `To apply`.
 - `history`: `YYYY-MM-DD added from the employer's own site by fit review.` If it was judged on pasted text: `YYYY-MM-DD added from pasted posting text by fit review; not confirmed live on the employer's site.`, and `why` ends with "Not confirmed live."
@@ -37,7 +37,7 @@ For example a commission-only role when the user's rules say nothing about commi
 
 When the person answers a close call (in the session or a later one), record it, so it is never asked again. Take a snapshot first and check with `--stage fit` after.
 
-- **Apply:** first re-open the posting on the employer's own site to confirm it is live and copy `postingText` (if it cannot be opened, ask for the employer's link first, as in the CONTEXT step on pasted postings, and record "not confirmed live"). Then write the listing as in "Pass", with history `YYYY-MM-DD added after the user's close-call decision` plus `; not confirmed live on the employer's site` when it was judged on pasted text, ending with a period If the employer has a `coverage` row, set its `result` to `HIT`, unless another close call there is still waiting (then leave `LEAD`).
+- **Apply:** first re-open the posting on the employer's own site to confirm it is live and copy `postingText` (if it cannot be opened, ask for the employer's link first, as in the CONTEXT step on pasted postings, and record "not confirmed live"). Then write the listing as in "Pass", with history `YYYY-MM-DD added after the user's close-call decision` plus `; not confirmed live on the employer's site` when it was judged on pasted text, ending with a period. If the employer has a `coverage` row, set its `result` to `HIT`, unless another close call there is still waiting (then leave `LEAD`).
 - **Skip:** if the employer has a `coverage` row, add `title, req id: skipped by the user's decision YYYY-MM-DD` to its `skipped` and set `result` to `NONE` unless something else there is still waiting. Keep every earlier line of `skipped` when you add one (read the cell fresh and write it back with the new line at the end), and add a dated line to the start of `detail` saying the close call was decided, keeping older text after "Earlier:" (`shared/tracker-columns.md`). If it has no coverage row, do not create one: add `YYYY-MM-DD decided: skip` under that close call in its report instead (with no folder, give the updated report as a download so the mark is kept).
 
 A close call that is already a listing and that the person now drops is a status change to `Closed`: do it as a direct request with its own snapshot and a `--stage user` check (`shared/tracker-access.md`, "Direct requests"), not inside the `--stage fit` check.

@@ -8,7 +8,7 @@ When two rules conflict and nothing here settles it, the newest dated rule in `m
 
 ## 1. What counts as a target role
 
-- A role is a target only if it matches the **target roles** and **seniority** in the user's rules.
+- A role is a target only if it matches the **target roles** in the user's rules and its **level** is allowed by `career-direction.md` (same level, a step up, or a stretch brought to the user; a step down only if their rules allow it).
 - Roles the user's rules list as **out** are out, even when the title sounds close.
 - **Industries and products:** an employer or posting in an industry the user's rules list as **out** is a no. An industry listed as **in** is a yes on this check. An industry on neither list: decide from the user's stated reasons, and if it is a real judgment call, list it in the report for the user rather than adding it.
 - **Excluded industries in the tracker.** The `settings` record lists `excludedIndustries`. Employers in those industries are skipped in sweeps unless their `keepAnyway` column says yes. Only the user reopens an industry.

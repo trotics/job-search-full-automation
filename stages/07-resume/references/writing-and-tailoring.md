@@ -9,7 +9,7 @@ If the user opted out (setup's resume choice "use mine"), do not rewrite or crit
 ## Writing the main resume
 
 1. Write `<out>/resume.md` in the exact format in `resume-guide.md` ("File format"). `sample-resume.md` shows a finished one.
-2. Follow every rule in "General rules" and the "What employers ask for" section saved in the facts file. The resume's sections come in that section order.
+2. Follow every rule in "General rules" and the "What employers ask for" section saved in the facts file. The resume's sections come in that section order. For a step-up resume, lead each job with the confirmed facts that show next-level scope: leading or training people, owning results, cross-team work (`shared/career-direction.md`, "Advancement").
 3. Draft **one section at a time**, in that order (contact line and summary always first). Show each one and get a yes or changes before the next.
 4. Show the whole resume, and check the text:
    `python tools/check_resume.py <out>/resume.md --facts <out>/resume-facts.md`

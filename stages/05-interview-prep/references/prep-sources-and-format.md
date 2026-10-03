@@ -17,7 +17,7 @@ Do not use as fact: anonymous review sites, aggregator job listings, social medi
 ## The prep file
 
 1. **Company brief:** what they sell, to whom, how the team does its work, recent news, and where this role sits. Every fact gets a link.
-2. **Likely questions:** from the posting's requirements and the interview stage, including the hard ones the user's record invites (a short stint, a career change, a gap, missing industry experience).
+2. **Likely questions:** from the posting's requirements and the interview stage, including the hard ones the user's record invites (a short stint, a career change, a gap, missing industry experience). For a step up (the listing's `why` says so), include "Why are you ready for this level?", answered with true stories that already show next-level scope (people led, results owned, decisions made).
 3. **The user's stories:** each likely question mapped to a true story from the resume or the answer bank's work history. Invent nothing. Mark any gap so the user can fill it.
 4. **Questions for the user to ask** the interviewer.
 5. **Logistics** from the listing's history: time, format, recording notices, who to contact.
