@@ -43,6 +43,7 @@ Try these in order. Move to the next only if the one before it failed.
 
 - Fill from the answer bank and the resume. Invent nothing. For a question the answer bank does not cover, answer only if the answer is plainly safe and true from the resume. Otherwise ask the user. Questions about years of experience always go to the user unless the answer bank has the number.
 - **Optional free-text boxes** ("Why are you interested?"): leave blank unless the user's rules say to fill them. If you fill one, draft it in the user's writing style and flag it.
+- **Required free-text boxes:** draft them in the user's writing style from the resume and the posting, and get the user's OK on that text before it goes in.
 - **Questions answered from the resume** rather than the answer bank: flag each one, and offer to add it to the answer bank.
 - **Pay:** the answer bank's wording where text is allowed, the single number where one is required.
 - **Voluntary questions** (gender, race, veteran, disability): from the answer bank. With no entry, choose "I don't wish to answer" or the closest option, and tell the user.
@@ -60,6 +61,15 @@ Try these in order. Move to the next only if the one before it failed.
 - **Blocked while the user is away:** leave the status at To apply and append a history entry naming the exact step that blocked. Never work around it.
 - **New accounts:** add to `answers` (topic `Account`, question = the site, answer = the username). Never a password.
 - **Something new:** if an upload control behaved in a way `application-techniques.md` does not cover, tell the user and suggest a line to add there. General methods only, never employer names.
+
+## No browser Claude can use
+
+If no browser tool works in this session (for example a chat with no desktop app), Claude cannot open or fill the form. Then:
+
+1. Still save the posting text and re-check the fit, from the posting the person pastes.
+2. Give the review summary as a **fill sheet**: every answer for the form, in order, the file to attach, the legal text to read, and the walls that are theirs.
+3. The person fills it in and submits in their own browser. Claude never claims to have submitted anything.
+4. When they say they submitted, ask for the confirmation, then record `Applied` and `appliedDate`, with a history entry that says "submitted by the user from a fill sheet" and `upload: attached by the user`. Until then the listing stays at To apply.
 
 ## Dry run
 

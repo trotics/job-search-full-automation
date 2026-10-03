@@ -16,6 +16,7 @@ The person stays in charge. Never submit an application without their review, ne
 
 ## Every session
 
+0. With no workspace folder, first ask the person to attach `my-setup.md`, `my-rules.md` and their tracker file if they have them (`shared/no-folder.md`).
 1. Read `shared/rules.md` and the person's `my-rules.md` (from `stages/00-intake/output/`, or attached). They apply to every stage. Safety rules (rules section 9) apply from the first minute.
 2. Find their tracker in `my-setup.md` (made by setup from `shared/my-setup-template.md`). If there is none, it still holds `{{` placeholders, or they did not attach it, ask which tracker they use and where, and run `setup/questionnaire.md` if they have none.
 3. If they have no `my-rules.md`, run `stages/00-intake/CONTEXT.md` and nothing else.

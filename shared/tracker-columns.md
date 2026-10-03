@@ -30,7 +30,7 @@ The `id` matches the employer's `id` in `companies`.
 | `industry` | Same as `companies`. | Claude |
 | `sweepDate` | Date of the last sweep, `YYYY-MM-DD`. | Claude |
 | `sweepState` | `done`, `partial`, `not swept` or `manual` (the site could not be read and needs you). | Claude |
-| `result` | `HIT` (listing added), `NONE` (nothing fit), `LEAD` (something needs you), `PENDING` (not finished). | Claude |
+| `result` | `HIT` (listing added), `NONE` (nothing fit), `LEAD` (something needs you, including a site you must open yourself), `PENDING` (not finished). | Claude |
 | `detail` | What the sweep found. Newest first. Older findings are kept after "Earlier:". | Claude |
 | `skipped` | One line per posting that did not fit: title, req id, reason. | Claude |
 | `sweepProgress` | Optional note on a partial sweep, for example "read 2 of 5 pages". | Claude |

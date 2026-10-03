@@ -14,6 +14,6 @@ Check whether tools named `mcp__claude-in-chrome__*` are available in the sessio
 
 ## How this workspace uses it
 
-Only the apply stage needs it. Sweeps, research and everything else work in the built-in browser. If it is not connected, applying can still fill forms, but the user attaches the resume by hand.
+Only the apply stage needs it. Sweeps, research and everything else work in the built-in browser. If it is not connected, applying can still fill forms in the built-in browser, but the user attaches the resume by hand. With no browser at all, applying uses a fill sheet (`apply-procedure.md`, "No browser Claude can use").
 
 Claude in Chrome acts only on sites the user allows. Their own sign-ins stay theirs: never sign out, change settings, or act beyond the application in front of you.

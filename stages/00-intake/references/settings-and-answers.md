@@ -6,7 +6,7 @@ What the intake writes to the tracker after `my-rules.md` is approved. Column me
 
 The record's id is `main`. In the spreadsheet it already exists (the template has it), so **update** that row (`tools/sheet.py` op `update`, id `main`). In a new artifact tracker it does not exist yet, so create it with `set`. Show the values first and save after the user says yes.
 
-- `tierA`, `tierB`, `tierC`: what each employer tier means for this user. Work them out from section 2 (Place) of `my-rules.md`; the user approves them with the other settings. Default when the place rules give nothing more: A "Employer based in my home metro", B "Employer elsewhere with jobs open to my area", C "Other allowed place" (for example a nearby city allowed only above a pay bar).
+- `tierA`, `tierB`, `tierC`: what each employer tier means for this user. Work them out from section 2 (Place) of `my-rules.md`; the user approves them with the other settings. Default when the place rules give nothing more: A "Employer based in my home metro", B "Employer elsewhere with jobs open to my area", C "Other allowed place" (for example a nearby city allowed only above a pay bar). For someone who works only remotely: A "Remote roles open to my state, employer nearby or in my state", B "Remote roles open to my state, employer elsewhere", C "Remote roles with limits I need to check".
 - `industryOrder`: the "in" industries, most wanted first.
 - `excludedIndustries`: from interview question 16.
 - `roleFamilies`: the kinds of role from questions 1 to 3, with a `*` after the ones that are targets.

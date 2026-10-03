@@ -2,7 +2,7 @@
 
 How every stage reads, writes, backs up and checks the tracker. Which tracker the user has, and where, is in `my-setup.md`. Every column is described in `tracker-columns.md`.
 
-Run every command from the workspace root (the folder that holds `CLAUDE.md`). Use the Python command saved in `my-setup.md` (`python`, `python3` or `py`).
+Run every command from the workspace root (the folder that holds `CLAUDE.md`). Use the Python command saved in `my-setup.md` (`python`, `python3` or `py`). In a chat with no folder, follow `no-folder.md`, "Scripts", instead.
 
 ## Artifact tracker (main)
 
@@ -34,7 +34,7 @@ All tracker backups and snapshots go in `tracker/backups/`. Git never shares tha
 
 Snapshots get a dated name, so no session overwrites another: `<stamp>` below means the session's start time and stage, for example `2026-10-03-0915-sweep`. Every `before` snapshot is a full copy of the tracker, so it is also the session's backup.
 
-**Before more than five writes in one session** on the spreadsheet, also save a copy of the file, so it is easy to restore. For the artifact tracker the `before` snapshot is enough. Either kind can also be backed up on its own at any time:
+**Before more than five writes in one session** (count rows written, not commands) on the spreadsheet, also save a copy of the file, so it is easy to restore. For the artifact tracker the `before` snapshot is enough. Either kind can also be backed up on its own at any time:
 
 - Artifact: list every collection with `ArtifactData` (`out_dir` set to a new folder under `tracker/backups/`), then combine them with `python tools/check_tracker.py snapshot-dir <that folder> tracker/backups/tracker-backup-<YYYY-MM-DD>-<HHMM>.json`.
 - Spreadsheet: `python tools/sheet.py backup tracker/my-tracker.xlsx`.
