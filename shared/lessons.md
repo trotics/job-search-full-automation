@@ -23,3 +23,7 @@ Show the person the exact line you would add and where. Add it only after they s
 - General methods only: never employer names, the person's details or dates in the shared or reference files.
 - A lesson never weakens a safety rule (`rules.md` section 9) or the rule that the person reviews every application. If a lesson seems to call for that, tell the person instead of writing it.
 - With no folder, give the changed file as a download (`no-folder.md`).
+
+## Share it
+
+After adding a general lesson about a job board or an application form, offer once: "Want to share this with everyone who uses this system? Open an issue at https://github.com/trotics/job-search-full-automation/issues with just the general method (no employer names or personal details)."

@@ -29,7 +29,7 @@ The most common platform. Board addresses look like `<tenant>.wd<N>.myworkdayjob
 ## Greenhouse
 
 - `boards-api.greenhouse.io/v1/boards/<token>/jobs?content=true` returns every posting with full text. Load `boards-api.greenhouse.io` in the tab first, then fetch.
-- Find the token in the careers page's embed script: `boards.greenhouse.io/embed/job_board/js?for=<token>`. Tokens are often not the company's obvious name.
+- Find the token in the careers page's embed script: `boards.greenhouse.io/embed/job_board/js?for=<token>`, in the page's job links (`job-boards.greenhouse.io/<token>/jobs/<id>`), or in its network requests to `boards-api.greenhouse.io/v1/boards/<token>/`. Tokens are often not the company's obvious name.
 - The same job number can be shared by copies of a job in several locations; log the job's own id.
 - A `job-boards.greenhouse.io` job link that redirects to the employer's general careers page means the job is closed.
 - Some boards turn over fast: a job can vanish between two reads minutes apart. Confirm twice before marking it gone.
@@ -37,6 +37,8 @@ The most common platform. Board addresses look like `<tenant>.wd<N>.myworkdayjob
 ## Ashby
 
 `api.ashbyhq.com/posting-api/job-board/<slug>?includeCompensation=true` returns the whole board with plain-text descriptions, `isListed` and `publishedAt`. Fetch it from a tab on `api.ashbyhq.com`.
+
+- The feed's `location` can be an office label such as "HQ" on a remote job. Read the posting's own "Location:" line in the description, and `secondaryLocations`, before judging place.
 
 ## Lever
 

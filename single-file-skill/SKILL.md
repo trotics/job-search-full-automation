@@ -253,6 +253,10 @@ Show the person the exact line you would add and where. Add it only after they s
 - A lesson never weakens a safety rule (`rules.md` section 9) or the rule that the person reviews every application. If a lesson seems to call for that, tell the person instead of writing it.
 - With no folder, give the changed file as a download (`no-folder.md`).
 
+### Share it
+
+After adding a general lesson about a job board or an application form, offer once: "Want to share this with everyone who uses this system? Open an issue at https://github.com/trotics/job-search-full-automation/issues with just the general method (no employer names or personal details)."
+
 ---
 
 <!-- shared/my-setup-template.md -->
@@ -1171,7 +1175,7 @@ The most common platform. Board addresses look like `<tenant>.wd<N>.myworkdayjob
 ### Greenhouse
 
 - `boards-api.greenhouse.io/v1/boards/<token>/jobs?content=true` returns every posting with full text. Load `boards-api.greenhouse.io` in the tab first, then fetch.
-- Find the token in the careers page's embed script: `boards.greenhouse.io/embed/job_board/js?for=<token>`. Tokens are often not the company's obvious name.
+- Find the token in the careers page's embed script: `boards.greenhouse.io/embed/job_board/js?for=<token>`, in the page's job links (`job-boards.greenhouse.io/<token>/jobs/<id>`), or in its network requests to `boards-api.greenhouse.io/v1/boards/<token>/`. Tokens are often not the company's obvious name.
 - The same job number can be shared by copies of a job in several locations; log the job's own id.
 - A `job-boards.greenhouse.io` job link that redirects to the employer's general careers page means the job is closed.
 - Some boards turn over fast: a job can vanish between two reads minutes apart. Confirm twice before marking it gone.
@@ -1179,6 +1183,8 @@ The most common platform. Board addresses look like `<tenant>.wd<N>.myworkdayjob
 ### Ashby
 
 `api.ashbyhq.com/posting-api/job-board/<slug>?includeCompensation=true` returns the whole board with plain-text descriptions, `isListed` and `publishedAt`. Fetch it from a tab on `api.ashbyhq.com`.
+
+- The feed's `location` can be an office label such as "HQ" on a remote job. Read the posting's own "Location:" line in the description, and `secondaryLocations`, before judging place.
 
 ### Lever
 

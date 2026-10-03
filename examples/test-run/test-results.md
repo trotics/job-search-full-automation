@@ -154,3 +154,14 @@ What broke while building it, and the fixes:
 
 Not run live: it needs real web searches, and every place and employer in this test is made up. What was tested: the tracker checker lets the research stage add an employer, and fails it if it tries to add or change a listing (`tests/run_checker_selftest.py`). The first live run should be a short part A session ("find 5 employers for my target list"), checked by hand against the stage 08 Audit table.
 
+## 8. Live run on real employer sites
+
+Run with a made-up user (a customer success manager looking for remote roles in the United States) against the real, public career sites of three remote-first software employers, and the artifact tracker in a private Claude account. Read only: nothing was typed into an application and nothing was submitted.
+
+- **Artifact tracker:** published `tracker/tracker-page.html` as a private artifact with a database, saved settings and three answer bank entries with `ArtifactData`, then snapshotted it with `out_dir` and `snapshot-dir`. `check_tracker.py --stage intake`: PASS.
+- **Adding employers:** each careers site was found from the employer's own home page: one runs on Greenhouse, one on Ashby, one is the employer's own jobs page. `--stage research`: PASS.
+- **Sweep:** read 211 postings from the Greenhouse feed, 11 from the Ashby feed, and the five customer success postings on the employer's own page. Added two listings at To apply with their posting text, wrote three coverage rows with skipped lines, and put three close calls in the report for the user. `--stage sweep`: PASS.
+- **Location trap seen live:** the Ashby feed gave one remote job the location "HQ"; the posting's own text said "Location: USA & Canada". The board notes now say so.
+- **Apply (read only):** the real form had 13 fields, including a plain resume file input (upload option a works there with Claude in Chrome) and a required question confirming the job is open only to people in the United States or Canada. The fill sheet came from the answer bank; contact details, sponsorship and employment-agreement questions went to the user, as the rules say.
+- **Not checked:** how the tracker page looks with these rows, because the test browser is not signed in to Claude. The page reads the same data shape as the local test page (`tests/build_local_test.py`).
+
