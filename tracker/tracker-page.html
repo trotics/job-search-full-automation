@@ -1,0 +1,937 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Job Board & Application Center</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --ground:#F1EEF6; --surface:#FBFAFD; --sunk:#E9E5F1; --raise:#F6F4FA;
+  --ink:#2B2740; --ink-2:#514B68; --muted:#847D9B; --hair:#DEDAE9; --hair-2:#CFC9DE;
+  --accent:#7E6BB8; --accent-ink:#FFFFFF; --accent-soft:#E9E4F3;
+  --good:#5C8A74; --good-soft:#E4EFE9;
+  --warn:#9E7B4A; --warn-soft:#F3EDE3;
+  --dead:#A8687A; --dead-soft:#F3E6EA;
+  --display:"Schibsted Grotesk","Helvetica Neue",Arial,sans-serif;
+  --body:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#1F1C2B; --surface:#272336; --sunk:#302B42; --raise:#231F31;
+    --ink:#E8E4F1; --ink-2:#BDB6D0; --muted:#8B849F; --hair:#3A3550; --hair-2:#4A4463;
+    --accent:#B3A4DD; --accent-ink:#1F1C2B; --accent-soft:#35304A;
+    --good:#8FBCA6; --good-soft:#263630;
+    --warn:#CDB088; --warn-soft:#3A3226;
+    --dead:#CF98AA; --dead-soft:#3C2B33;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#1F1C2B; --surface:#272336; --sunk:#302B42; --raise:#231F31;
+    --ink:#E8E4F1; --ink-2:#BDB6D0; --muted:#8B849F; --hair:#3A3550; --hair-2:#4A4463;
+    --accent:#B3A4DD; --accent-ink:#1F1C2B; --accent-soft:#35304A;
+    --good:#8FBCA6; --good-soft:#263630;
+    --warn:#CDB088; --warn-soft:#3A3226;
+    --dead:#CF98AA; --dead-soft:#3C2B33;
+}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font-family:var(--body);font-size:14px;line-height:1.5;margin:0}
+.wrap{max-width:960px;margin:0 auto;padding-inline:20px;padding-block:28px 72px}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* masthead */
+.mast{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:10px 24px;
+  padding-bottom:16px;border-bottom:2px solid var(--accent)}
+h1{font-family:var(--display);font-size:26px;font-weight:700;letter-spacing:-.015em;line-height:1.1;margin:0;text-wrap:balance}
+.sub{color:var(--ink-2);font-size:13px;margin:6px 0 0;max-width:64ch}
+.stamp{font-family:var(--mono);font-size:11px;color:var(--muted);white-space:nowrap}
+
+/* pipeline strip */
+.pipes{display:grid;gap:8px;margin:18px 0 6px}
+.pipe{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border:1px solid var(--hair);border-radius:6px;overflow:hidden;background:var(--surface)}
+.pipe.dormant{background:var(--raise);grid-template-columns:repeat(6,minmax(0,1fr))}
+.pcell{background:transparent;padding:10px 12px;cursor:pointer;border:0;border-left:1px solid var(--hair);text-align:left;font:inherit;color:inherit;
+  display:flex;flex-direction:column;gap:1px;min-width:0}
+.pcell:first-child{border-left:0}
+.pcell:hover{background:var(--sunk)}
+.pcell[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.pcell[aria-pressed="true"] .plab{color:var(--accent-ink);opacity:.85}
+.pnum{font-family:var(--mono);font-size:20px;font-weight:500;line-height:1.15;font-variant-numeric:tabular-nums}
+.pipe.dormant .pnum{font-size:15px}
+.plab{font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.filterhint{font-size:12px;color:var(--muted);margin:4px 0 14px;min-height:18px}
+.filterhint b{color:var(--ink);font-weight:600}
+.linkbtn{font:600 12px var(--body);color:var(--accent);background:none;border:0;cursor:pointer;padding:0;margin-left:8px;
+  text-decoration:underline;text-underline-offset:2px}
+
+/* tabs */
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--hair);margin-bottom:14px;flex-wrap:wrap}
+.tab{font-family:var(--display);font-size:13.5px;font-weight:600;padding:9px 12px;background:none;border:0;
+  border-bottom:2px solid transparent;color:var(--muted);cursor:pointer;margin-bottom:-1px}
+.tab:hover{color:var(--ink)}
+.tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+
+/* filters */
+.toolbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin:0 0 18px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:500 12px var(--body);padding:5px 11px;border-radius:4px;cursor:pointer;
+  border:1px solid var(--hair-2);background:var(--surface);color:var(--ink-2)}
+.chip:hover{border-color:var(--accent)}
+.chip[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.chip .n{font-family:var(--mono);opacity:.65;margin-left:6px;font-size:11px}
+.toggle{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ink-2);cursor:pointer;user-select:none}
+.toggle input{accent-color:var(--accent);width:15px;height:15px;margin:0}
+.toolbar-r{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.sortlab{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--ink-2)}
+.sortlab select{font:500 12px var(--body);padding:5px 8px;border-radius:4px;border:1px solid var(--hair-2);background:var(--surface);color:var(--ink)}
+.subchips{display:flex;gap:6px;flex-wrap:wrap;margin:-8px 0 16px}
+.searchrow{margin:14px 0 10px;position:relative}
+.searchrow input.search{margin:0;padding-right:34px}
+.searchrow .clr{position:absolute;right:6px;top:50%;transform:translateY(-50%);font:600 13px var(--body);color:var(--muted);background:none;border:0;cursor:pointer;padding:4px 8px}
+.searchrow .clr:hover{color:var(--ink)}
+.chip.rej[aria-pressed="true"]{background:var(--dead);border-color:var(--dead);color:var(--surface)}
+
+/* vertical section */
+.vsec{margin-top:26px}
+.vsec:first-of-type{margin-top:6px}
+.vhead{display:flex;align-items:baseline;gap:10px;width:100%;padding:0 0 7px;border:0;border-bottom:1px solid var(--hair-2);
+  background:none;color:inherit;font:inherit;text-align:left;cursor:pointer}
+.chev{display:inline-block;width:10px;font-size:10px;color:var(--muted);transition:transform .15s}
+.chev.closed{transform:rotate(-90deg)}
+.vname{font-family:var(--display);font-size:17px;font-weight:700;letter-spacing:-.005em}
+.vmeta{margin-left:auto;display:flex;gap:10px;align-items:baseline;font-size:11.5px;color:var(--muted);white-space:nowrap}
+.vmeta .tgt{color:var(--accent);font-weight:600}
+.vbody{padding-top:4px}
+
+/* family sub-group */
+.fam{margin-top:12px}
+.famhead{display:flex;align-items:center;gap:8px;margin:0 0 6px;padding-left:2px}
+.famdot{width:8px;height:8px;border-radius:50%;border:1.5px solid var(--muted);flex-shrink:0}
+.famdot.target{background:var(--accent);border-color:var(--accent)}
+.famname{font-family:var(--display);font-size:11.5px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-2)}
+.famtag{font-size:10px;font-weight:600;color:var(--accent);background:var(--accent-soft);padding:1px 6px;border-radius:3px}
+.famcount{font-family:var(--mono);font-size:11px;color:var(--muted)}
+
+/* listing row */
+.rows{display:grid;gap:6px}
+.row{display:block;background:var(--surface);border:1px solid var(--hair);border-radius:6px}
+.row.flag{box-shadow:inset 3px 0 0 var(--warn)}
+.bandhead{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.bandhead .bdesc{font-size:12px;color:var(--muted)}
+.rk{font-family:var(--mono);font-size:11px;font-weight:500;color:var(--accent);background:var(--accent-soft);padding:1px 6px;border-radius:3px;font-variant-numeric:tabular-nums;letter-spacing:0}
+.co{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.co .lane{font-family:var(--body);font-weight:500;color:var(--muted);letter-spacing:0;font-size:11.5px}
+.rmain{padding:12px 16px 12px;min-width:0;display:grid;gap:8px}
+.rtop{display:flex;align-items:flex-start;gap:12px}
+.who{flex:1;min-width:0}
+.co{font-family:var(--display);font-size:12px;font-weight:600;color:var(--accent);letter-spacing:.02em}
+.co .trk{font-family:var(--body);font-weight:500;color:var(--muted);letter-spacing:0;margin-left:6px}
+.title{font-size:15px;font-weight:600;line-height:1.3;margin-top:1px;text-wrap:balance}
+.facts{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12px;color:var(--ink-2)}
+.facts .id{font-family:var(--mono);color:var(--muted);font-size:11.5px;max-width:20ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.facts .posted{font-family:var(--mono);color:var(--muted);font-size:11.5px}
+.facts .pay{font-weight:500}
+.facts .pay.ok{color:var(--good)}
+.facts .pay.warn{color:var(--warn)}
+.notes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 20px}
+.note-b{font-size:12.5px;color:var(--ink-2);line-height:1.5}
+.note-b .lab{display:block;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:1px}
+.note-b.teach .lab{color:var(--accent)}
+.note-b.nr{color:var(--muted);font-style:italic}
+.note-b.review{white-space:pre-line;background:var(--warn-soft);border-radius:4px;padding:8px 10px}
+.note-b.review .lab{color:var(--warn)}
+.rfoot{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+a.apply{font:600 12px var(--body);color:var(--accent);background:var(--accent-soft);text-decoration:none;
+  padding:6px 11px;border-radius:4px;white-space:nowrap}
+a.apply:hover{background:var(--accent);color:var(--accent-ink)}
+textarea.note{display:block;width:100%;min-height:34px;resize:vertical;font:13px/1.45 var(--body);padding:7px 9px;border-radius:4px;overflow:hidden;
+  border:1px solid var(--hair);background:var(--raise);color:var(--ink)}
+textarea.note::placeholder{color:var(--muted)}
+.notewrap{flex:1;min-width:200px;display:grid;gap:3px}
+.notewrap .lab{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.rfoot{align-items:flex-end}
+details.hist{border-top:1px dashed var(--hair);padding-top:6px}
+details.hist summary{cursor:pointer;list-style:none;font-size:11.5px;color:var(--muted);display:flex;gap:8px;align-items:baseline;width:max-content;max-width:100%}
+details.hist summary::-webkit-details-marker{display:none}
+details.hist summary::before{content:"\25B8";font-size:9px;transition:transform .15s}
+details.hist[open] summary::before{transform:rotate(90deg)}
+details.hist summary:hover{color:var(--ink-2)}
+details.hist summary b{font-weight:600;color:var(--ink-2)}
+ol.hlog{list-style:none;margin:8px 0 2px;padding:0;display:grid;gap:6px}
+ol.hlog li{display:grid;grid-template-columns:78px minmax(0,1fr);gap:10px;font-size:12px;line-height:1.45;color:var(--ink-2)}
+ol.hlog .hd{font-family:var(--mono);font-size:11px;color:var(--muted);padding-top:1px}
+@media (max-width:640px){ol.hlog li{grid-template-columns:1fr;gap:0}}
+
+select.st{font:500 12px var(--body);padding:5px 24px 5px 10px;border-radius:4px;cursor:pointer;flex-shrink:0;appearance:none;
+  border:1px solid var(--hair-2);color:var(--ink-2);
+  background:var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5'%3E%3Cpath d='M0 0l4 5 4-5z' fill='%23847D9B'/%3E%3C/svg%3E") no-repeat right 9px center}
+select.st[data-s="Applied"],select.st[data-s="Followed up"],select.st[data-s="Interview"],select.st[data-s="Offer"]{background-color:var(--good-soft);color:var(--good);border-color:transparent}
+select.st[data-s="Review fit"],select.st[data-s="On hold"]{background-color:var(--warn-soft);color:var(--warn);border-color:transparent}
+select.st[data-s="Rejected"],select.st[data-s="Closed"],select.st[data-s="expired"],select.st[data-s="filled"]{background-color:var(--dead-soft);color:var(--dead);border-color:transparent}
+select.st[data-s="To apply"]{border-color:var(--accent);color:var(--accent)}
+
+/* coverage + target tables */
+.tablewrap{overflow-x:auto;background:var(--surface);border:1px solid var(--hair);border-radius:6px}
+table{border-collapse:collapse;width:100%;font-size:12.5px}
+th{font-family:var(--display);font-size:10.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);
+  text-align:left;padding:9px 12px;border-bottom:1px solid var(--hair-2);white-space:nowrap;background:var(--raise)}
+td{padding:8px 12px;border-bottom:1px solid var(--hair);vertical-align:top}
+tr:last-child td{border-bottom:0}
+.dot{display:inline-block;font-size:10.5px;font-weight:600;padding:1px 7px;border-radius:3px;white-space:nowrap;letter-spacing:.02em}
+.dot.hit{background:var(--good-soft);color:var(--good)}
+.dot.none{background:var(--sunk);color:var(--muted)}
+.dot.lead{background:var(--warn-soft);color:var(--warn)}
+.dot.pending{background:var(--accent-soft);color:var(--accent)}
+.dot.unchecked{background:var(--dead-soft);color:var(--dead)}
+.dot.done{background:var(--good-soft);color:var(--good)}
+.dot.partial{background:var(--warn-soft);color:var(--warn)}
+.dot.notswept{background:var(--accent-soft);color:var(--accent)}
+.dot.manual{background:var(--dead-soft);color:var(--dead)}
+.bar.stack{display:flex;height:8px}
+.bar.stack i{flex:none}
+.bar.stack i.s-done{background:var(--good)}
+.bar.stack i.s-partial{background:var(--warn)}
+.bar.stack i.s-manual{background:var(--dead)}
+.sweepstats{display:flex;flex-wrap:wrap;gap:6px 18px;margin:2px 0 14px;font-size:12px;color:var(--muted)}
+.sweepstats b{font-family:var(--mono);color:var(--ink,inherit);font-weight:600;margin-right:4px}
+.sweepstats .key{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:6px;vertical-align:0}
+.sweepstats .k-done{background:var(--good)}.sweepstats .k-partial{background:var(--warn)}
+.sweepstats .k-notswept{background:var(--sunk);box-shadow:inset 0 0 0 1px var(--muted)}.sweepstats .k-manual{background:var(--dead)}
+.subtle{color:var(--muted);font-size:12px}
+.bar{height:6px;background:var(--sunk);border-radius:3px;overflow:hidden;margin:6px 0 6px}
+.bar i{display:block;height:100%;background:var(--accent)}
+.barlab{font-size:12px;color:var(--muted);margin-bottom:16px}
+.tier{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:500;padding:1px 6px;border-radius:3px;white-space:nowrap}
+.tier.A{background:var(--accent);color:var(--accent-ink)}
+.tier.B{background:var(--accent-soft);color:var(--accent)}
+.tier.C{background:var(--sunk);color:var(--muted)}
+.tierkey{font-size:12px;color:var(--muted);margin:0 0 12px;line-height:1.7}
+.tierkey b{color:var(--ink-2);font-weight:600}
+input.search{width:100%;font:13px var(--body);padding:8px 11px;border-radius:4px;
+  border:1px solid var(--hair-2);background:var(--surface);color:var(--ink);margin:12px 0}
+input.search::placeholder{color:var(--muted)}
+td a.site{color:var(--accent);text-decoration:none;font-size:11.5px;font-family:var(--mono);word-break:break-all}
+td a.site:hover{text-decoration:underline}
+td .cellname{font-weight:600;color:var(--ink)}
+
+.msg{background:var(--surface);border:1px dashed var(--hair-2);border-radius:6px;padding:18px;color:var(--muted);font-size:13px}
+.hint{font-size:12px;color:var(--muted);margin:14px 0 0}
+.linkrow{display:flex;justify-content:flex-end;margin-bottom:-6px}
+button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (max-width:640px){
+  .wrap{padding-inline:16px;padding-block:18px 56px}
+  h1{font-size:22px}
+  .sub{font-size:12.5px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .sub.open{display:block}
+  .pipe,.pipe.dormant{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .pcell{padding:8px 10px}
+  .pcell:nth-child(3n+1){border-left:0}
+  .pcell:nth-child(n+4){border-top:1px solid var(--hair)}
+  .pnum,.pipe.dormant .pnum{font-size:17px}
+  .plab{white-space:normal;line-height:1.2;font-size:10px}
+  .tabs{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .tab{white-space:nowrap;flex:none}
+  .toolbar{flex-direction:column;align-items:stretch}
+  .toolbar-r{justify-content:space-between;gap:10px}
+  .sortlab select,select.st,textarea.note,input.search{font-size:16px}
+  .notes{grid-template-columns:1fr}
+  .rmain{padding:10px 12px 12px}
+  .rtop{flex-direction:column;gap:8px}
+  select.st{align-self:flex-start;width:100%}
+  .title{font-size:14.5px}
+  .rfoot{flex-direction:column;align-items:stretch}
+  .notewrap{min-width:0}
+  a.apply{align-self:flex-start;padding:8px 12px}
+  .vhead{flex-wrap:wrap}
+  .vname{font-size:16px}
+  .vmeta{margin-left:0;width:100%;padding-left:20px}
+  .vmeta .extra{display:none}
+  details.hist summary{width:auto;flex-wrap:wrap}
+  td,th{padding:8px 10px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <header class="mast">
+    <div>
+      <h1>Job Board &amp; Application Center</h1>
+      <p class="sub" id="intro" title="Tap to read more">Job listings confirmed on employers' own career sites. Listings to apply to are grouped by priority. Status and your notes save as you change them, and each listing's History is the dated log of what past sessions did with it. Rejected means the employer said no; Closed means you passed. Excluded industries live on the Archive tab.</p>
+    </div>
+    <span class="stamp" id="stamp"></span>
+  </header>
+
+  <div class="pipes">
+    <div class="pipe" id="pipe"></div>
+    <div class="pipe dormant" id="pipe2"></div>
+  </div>
+  <p class="filterhint" id="filterhint"></p>
+
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" aria-selected="true" data-v="open" id="tab-open">Openings</button>
+    <button class="tab" role="tab" aria-selected="false" data-v="cover" id="tab-cover">Coverage</button>
+    <button class="tab" role="tab" aria-selected="false" data-v="targets" id="tab-targets">Target list</button>
+    <button class="tab" role="tab" aria-selected="false" data-v="answers" id="tab-answers">Answers</button>
+    <button class="tab" role="tab" aria-selected="false" data-v="archive" id="tab-archive">Archive</button>
+  </div>
+
+  <div class="searchrow" id="searchrow" hidden><input class="search" id="oq" type="search" autocomplete="off" placeholder="Search company, title or job number" aria-label="Search openings by company, title or job number"><button type="button" class="clr" id="oqclr" hidden aria-label="Clear search">&times;</button></div>
+  <div class="toolbar" id="toolbar" hidden>
+    <div class="chips" id="chips"></div>
+    <div class="toolbar-r">
+      <label class="sortlab" for="sortBy">Sort <select id="sortBy"><option value="work">Priority</option><option value="group">By industry</option><option value="latest">Latest activity</option><option value="company">Company A to Z</option><option value="status">Rejected first</option></select></label>
+      <input type="checkbox" id="onlyTarget" hidden>
+      <button type="button" class="linkbtn" id="collapseAllBtn">Collapse all</button>
+    </div>
+  </div>
+  <div class="subchips" id="subchips" hidden></div>
+  <div id="view"><div class="msg">Loading…</div></div>
+  <p class="hint" id="hint"></p>
+</div>
+<script>
+(function(){
+  var STATUSES=["To apply","Applied","Followed up","Interview","Offer","Review fit","On hold","Rejected","Closed","expired","filled"];
+  var DEAD={"Rejected":1,"Closed":1,"expired":1,"filled":1};
+  var PLAY={"Applied":1,"Followed up":1,"Interview":1,"Offer":1};
+  function isLive(s){ return !DEAD[s]; }
+  function isReview(s){ return !DEAD[s] && s!=="To apply" && !PLAY[s]; }
+  // Everything specific to one person's search comes from the settings/main record,
+  // written by the intake interview. These are the defaults for an empty database.
+  var DEFAULT_SETTINGS={tierA:"Employer based in my home metro",tierB:"Employer elsewhere with jobs open to my area",tierC:"Other allowed place",
+    industryOrder:"",excludedIndustries:"",roleFamilies:"",tracks:"Main",priorities:"High; Medium; Low; On hold"};
+  var SET={}, TRACKS=[], VERTICAL_ORDER=[], FAMILIES=[], TARGET_FAM={}, PRIORITIES=[];
+  function splitList(v){ if(Array.isArray(v)) return v.map(String); return String(v==null?"":v).split(/\s*;\s*/).map(function(x){return x.trim();}).filter(Boolean); }
+  function applySettings(doc){
+    SET={}; Object.keys(DEFAULT_SETTINGS).forEach(function(k){ var v=doc&&doc[k]; SET[k]=(v==null||String(v).trim()==="")?DEFAULT_SETTINGS[k]:v; });
+    VERTICAL_ORDER=splitList(SET.industryOrder);
+    TRACKS=splitList(SET.tracks).map(function(t){return [t,t];}); if(!TRACKS.length) TRACKS=[["Main","Main"]];
+    FAMILIES=[]; TARGET_FAM={};
+    splitList(SET.roleFamilies).forEach(function(f){ var t=/\*$/.test(f), lab=f.replace(/\s*\*$/,""); FAMILIES.push([lab,lab]); if(t) TARGET_FAM[lab]=1; });
+    PRIORITIES=splitList(SET.priorities); if(!PRIORITIES.length) PRIORITIES=splitList(DEFAULT_SETTINGS.priorities);
+    archive={verticals:splitList(SET.excludedIndustries)};
+  }
+  function defTrack(){ return TRACKS[0][0]; }
+  function yes(v){ return v===true || /^(yes|y|true|1)$/i.test(String(v==null?"":v).trim()); }
+  var PIPE_FILTERS={
+    all:{label:"all live listings (expired, filled and closed hidden)", test:function(s){return isLive(s);}},
+    apply:{label:"listings still to apply to", test:function(s){return s==="To apply";}},
+    play:{label:"listings in play (applied or further)", test:function(s){return PLAY[s]===1;}},
+    iv:{label:"listings at interview stage", test:function(s){return s==="Interview";}},
+    off:{label:"listings with an offer", test:function(s){return s==="Offer";}},
+    review:{label:"listings that need a fit call or have a non-standard status", test:function(s){return isReview(s);}},
+    expired:{label:"listings marked expired", test:function(s){return s==="expired";}},
+    filled:{label:"listings marked filled", test:function(s){return s==="filled";}},
+    rejected:{label:"listings the employer turned down after you applied", test:function(s){return s==="Rejected";}},
+    closed:{label:"closed listings: ones you passed on and ones the employer rejected", test:function(s){return s==="Closed"||s==="Rejected";}},
+    everything:{label:"every record, live or not", test:function(){return true;}}
+  };
+  function vRank(v){ var i=VERTICAL_ORDER.indexOf(v); return i<0?999:i; }
+  function famLabel(f){ var m=FAMILIES.filter(function(x){return x[0]===f;})[0]; return m?m[1]:"Not yet sorted"; }
+  function famRank(f){ for(var i=0;i<FAMILIES.length;i++){ if(FAMILIES[i][0]===f) return i; } return 99; }
+  // Priority only applies to listings still being worked (To apply or Review fit).
+  function inWork(l){ var s=l.status||"To apply"; return s==="To apply"||s==="Review fit"; }
+  function prioRank(p){ var i=PRIORITIES.indexOf(String(p||"")); return i<0?PRIORITIES.length:i; }
+  function workRank(l){ return inWork(l) ? prioRank(l.priority) : 5000; }
+
+  var loaded={}, allAnswers=[], listings=[], coverage=[], companies=[], allListings=[], allCoverage=[], allCompanies=[], archive={verticals:[]}, archTab="emp", db=null, tab="open", track="All", tier="All", q="", pipeFilter="all", sweepFilter="all";
+  var onlyTarget=false, collapsed={}, closedSub="both", sortBy="group", oq="";
+  try{ sortBy=localStorage.getItem("jb.sort2")||"work"; collapsed=JSON.parse(localStorage.getItem("jb.collapsed")||"{}")||{}; }catch(e){}
+  function saveCollapsed(){ try{ localStorage.setItem("jb.collapsed",JSON.stringify(collapsed)); }catch(e){} }
+
+  var $=function(id){return document.getElementById(id);};
+  var view=$("view"), pipe=$("pipe"), pipe2=$("pipe2"), hint=$("hint"), chips=$("chips"),
+      filterhint=$("filterhint"), subchips=$("subchips"), searchrow=$("searchrow"), oqInp=$("oq"), oqClr=$("oqclr"), sortSel=$("sortBy"), toolbar=$("toolbar"), onlyTargetBox=$("onlyTarget"), collapseAllBtn=$("collapseAllBtn"), stamp=$("stamp");
+  $("intro").addEventListener("click",function(){ this.classList.toggle("open"); });
+  onlyTargetBox.checked=onlyTarget; if(!/^(work|group|latest|company|status)$/.test(sortBy)) sortBy="work"; sortSel.value=sortBy;
+
+  function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+  function norm(s){return String(s==null?"":s).toLowerCase().replace(/[^a-z0-9]/g,"");}
+
+  // Archive: excluded industries (settings.excludedIndustries), kept in the database but out of the main views.
+  // An employer with keepAnyway = yes stays in the main views. Live listings (to apply, applied and later, on hold) always stay in the main views.
+  // Company names are matched exactly (ignoring case, spaces and punctuation), never by prefix.
+  function inList(arr,x){ var n=norm(x); return (arr||[]).some(function(a){return norm(a)===n;}); }
+  function companyOf(name){ var n=norm(name); return allCompanies.filter(function(c){ return norm(c.company)===n; })[0]||null; }
+  function archCo(name,v){ var c=companyOf(name); if(c&&yes(c.keepAnyway)) return false; var cv=(c&&c.industry)||v; return inList(archive.verticals,cv); }
+  function listingArch(l){ return !!DEAD[l.status||"To apply"] && archCo(l.company,l.industry); }
+  function applyArchive(){
+    listings=allListings.filter(function(l){return !listingArch(l);});
+    coverage=allCoverage.filter(function(c){return !archCo(c.company,c.industry);});
+    companies=allCompanies.filter(function(c){return !archCo(c.company,c.industry);});
+  }
+  function archStatus(){
+    var al=allListings.filter(listingArch), ac=allCoverage.filter(function(c){return archCo(c.company,c.industry);}), aco=allCompanies.filter(function(c){return archCo(c.company,c.industry);});
+    return {l:al,c:ac,co:aco};
+  }
+  function siteLink(site){ site=String(site||""); var href=site?(/^https?:\/\//i.test(site)?site:"https://"+site):"";
+    return href?'<a class="site" href="'+esc(href)+'" target="_blank" rel="noopener noreferrer">'+esc(site)+'</a>':''; }
+  function drawArchive(){
+    var a=archStatus();
+    var keep=allCompanies.filter(function(c){ return yes(c.keepAnyway) && inList(archive.verticals,c.industry); }).map(function(c){return c.company;});
+    var html='<p class="tierkey">Closed for now, kept for later. These industries are excluded from your search, so their employers, sweep records and closed listings live here instead of in the main views. '+
+      'Live listings from these industries (applied, interviewing, on hold) still show under Openings. To reopen an industry, ask Claude to take it off your excluded list.</p>'+
+      '<p class="barlab" style="margin:0 0 10px"><b>Excluded industries:</b> '+esc((archive.verticals||[]).join(", ")||"none")+
+      (keep.length?'<br><b>Kept in the main views anyway:</b> '+esc(keep.join(", ")):'')+'</p>';
+    html+='<div class="chips">'+[["emp","Employers",a.co.length],["reqs","Closed listings",a.l.length]].map(function(o){
+      return '<button class="chip" data-arch="'+o[0]+'" aria-pressed="'+(archTab===o[0])+'">'+o[1]+'<span class="n">'+o[2]+'</span></button>';}).join("")+'</div><div style="height:12px"></div>';
+    if(archTab==="reqs"){
+      var rows=a.l.slice().sort(function(x,y){ return String(x.company).localeCompare(String(y.company))||String(x.title).localeCompare(String(y.title)); });
+      html+=rows.length?'<div class="rows">'+rows.map(rowHtml).join("")+'</div>':'<div class="msg">No closed listings in excluded industries.</div>';
+      view.innerHTML=html; wire();
+    } else {
+      var cs=a.co.slice().sort(function(x,y){ return String(x.industry).localeCompare(String(y.industry))||String(x.company).localeCompare(String(y.company)); });
+      html+=cs.length?'<div class="tablewrap"><table><thead><tr><th>Company</th><th>Industry</th><th>Last sweep</th><th>Result</th><th>Careers site</th></tr></thead><tbody>'+
+        cs.map(function(c){ var cv=coverFor(c.company);
+          return '<tr><td><span class="cellname">'+esc(c.company)+'</span></td><td>'+esc(c.industry||"")+'</td><td class="mono">'+esc(cv&&cv.sweepDate||"")+'</td>'+
+            '<td>'+(cv&&cv.result?'<span class="dot '+esc(String(cv.result).toLowerCase())+'">'+esc(cv.result)+'</span>':'')+'</td>'+
+            '<td>'+siteLink(c.careersSite)+'</td></tr>'; }).join("")+
+        '</tbody></table></div>':'<div class="msg">No employers in excluded industries.</div>';
+      view.innerHTML=html;
+    }
+    view.querySelectorAll(".chip[data-arch]").forEach(function(b){ b.addEventListener("click",function(){ archTab=b.getAttribute("data-arch"); drawArchive(); }); });
+  }
+
+  function counts(){
+    var c={live:0,apply:0,play:0,iv:0,off:0,review:0,expired:0,filled:0,rejected:0,closed:0};
+    listings.forEach(function(l){
+      var s=l.status||"To apply";
+      if(isLive(s))c.live++;
+      if(s==="To apply")c.apply++;
+      if(PLAY[s])c.play++;
+      if(s==="Interview")c.iv++;
+      if(s==="Offer")c.off++;
+      if(isReview(s))c.review++;
+      if(s==="expired")c.expired++;
+      if(s==="filled")c.filled++;
+      if(s==="Rejected")c.rejected++;
+      if(s==="Closed")c.closed++;
+    });
+    return c;
+  }
+
+  function drawPipe(){
+    var c=counts();
+    var rowA=[["all",c.live,"Live listings"],["apply",c.apply,"To apply"],["play",c.play,"In play"],["iv",c.iv,"Interviews"],["off",c.off,"Offers"]];
+    var rowB=[["review",c.review,"Needs review"],["expired",c.expired,"Expired"],["filled",c.filled,"Filled"],["rejected",c.rejected,"Rejected"],["closed",c.closed+c.rejected,"Closed + rejected"],["everything",listings.length,"All records"]];
+    function cell(x){
+      return '<button type="button" class="pcell" id="pf-'+x[0]+'" data-f="'+x[0]+'" aria-pressed="'+(pipeFilter===x[0])+'">'+
+        '<span class="pnum">'+x[1]+'</span><span class="plab">'+x[2]+'</span></button>';
+    }
+    pipe.innerHTML=rowA.map(cell).join("");
+    pipe2.innerHTML=rowB.map(cell).join("");
+    [].slice.call(document.querySelectorAll(".pcell")).forEach(function(b){
+      b.addEventListener("click",function(){
+        var f=b.getAttribute("data-f");
+        pipeFilter=(pipeFilter===f)?"all":f;
+        if(tab!=="open") setTab("open");
+        draw();
+      });
+    });
+    var ranked=listings.filter(function(l){return l.family&&inWork(l);}).length;
+    stamp.textContent=ranked?ranked+(ranked===1?" listing":" listings")+" to work":"";
+    if(tab==="open" && oq && norm(oq)){
+      var nm=listings.filter(matchQ).length;
+      filterhint.innerHTML='Showing <b>'+nm+(nm===1?' record':' records')+'</b> matching <b>'+esc(oq)+'</b> across every status<button type="button" class="linkbtn" id="clearOq">Clear search</button>';
+      $("clearOq").addEventListener("click",function(){ setOq(""); });
+      return;
+    }
+    if(pipeFilter==="all"||tab!=="open"){ filterhint.innerHTML=""; return; }
+    filterhint.innerHTML='Showing <b>'+PIPE_FILTERS[pipeFilter].label+'</b><button type="button" class="linkbtn" id="clearPipeFilter">Show all live</button>';
+    $("clearPipeFilter").addEventListener("click",function(){ pipeFilter="all"; draw(); });
+  }
+
+  function matchQ(l){
+    if(!oq) return true;
+    var s=norm(oq); if(!s) return true;
+    return norm(l.company).indexOf(s)>=0 || norm(l.title).indexOf(s)>=0 || norm(l.reqId).indexOf(s)>=0;
+  }
+  function visible(l){
+    if(oq && norm(oq)) return matchQ(l);
+    if(track!=="All" && (l.track||defTrack())!==track) return false;
+    if(onlyTarget && !TARGET_FAM[l.family]) return false;
+    var s=l.status||"To apply";
+    if(pipeFilter==="closed"){ if(closedSub==="closed"&&s!=="Closed") return false; if(closedSub==="rejected"&&s!=="Rejected") return false; }
+    return PIPE_FILTERS[pipeFilter].test(s);
+  }
+  function drawSub(){
+    if(tab!=="open"||pipeFilter!=="closed"){ subchips.hidden=true; subchips.innerHTML=""; return; }
+    var c=counts();
+    var o=[["both","All closed",c.closed+c.rejected,""],["closed","You passed",c.closed,""],["rejected","Employer rejected",c.rejected," rej"]];
+    subchips.innerHTML=o.map(function(x){return '<button type="button" class="chip'+x[3]+'" id="sub-'+x[0]+'" data-sub="'+x[0]+'" aria-pressed="'+(closedSub===x[0])+'">'+x[1]+'<span class="n">'+x[2]+'</span></button>';}).join("");
+    subchips.hidden=false;
+    subchips.querySelectorAll(".chip").forEach(function(b){ b.addEventListener("click",function(){ closedSub=b.getAttribute("data-sub"); draw(); }); });
+  }
+  function lastDate(l){
+    var e=histEntries(l.history).filter(function(x){return x.d;}), best="";
+    e.forEach(function(x){ var d=x.d, m;
+      if(/^\d{4}-/.test(d)) m=d; else { var p=d.split("/"); var y=p[2]?(p[2].length===2?"20"+p[2]:p[2]):String(new Date().getFullYear()); m=y+"-"+("0"+p[0]).slice(-2)+"-"+("0"+p[1]).slice(-2); }
+      if(m>best) best=m; });
+    return best;
+  }
+
+  function drawChips(){
+    var base=listings.filter(function(l){ return PIPE_FILTERS[pipeFilter].test(l.status||"To apply") && (!onlyTarget||TARGET_FAM[l.family]); });
+    var html='<button class="chip" id="trk-All" data-t="All" aria-pressed="'+(track==="All")+'">All<span class="n">'+base.length+'</span></button>';
+    TRACKS.forEach(function(t){
+      var n=base.filter(function(l){return (l.track||defTrack())===t[0];}).length;
+      if(!n && track!==t[0]) return;
+      html+='<button class="chip" id="trk-'+t[0]+'" data-t="'+t[0]+'" aria-pressed="'+(track===t[0])+'">'+t[1]+'<span class="n">'+n+'</span></button>';
+    });
+    chips.innerHTML=html;
+    chips.querySelectorAll(".chip").forEach(function(b){
+      b.addEventListener("click",function(){ track=b.getAttribute("data-t"); draw(); });
+    });
+  }
+
+  function rowHtml(l){
+    var st=l.status||"To apply";
+    var teaches=String(l.teaches||"");
+    var notRead=/^Not read/.test(teaches);
+    var noPay=!l.pay||/^not posted|^not\b/i.test(String(l.pay).trim());
+    var pay=l.pay?'<span class="pay '+(noPay?'':'ok')+'">'+esc(l.pay)+'</span>':'';
+    var showTeach=teaches && !/^Not stated\.?$/i.test(teaches.trim());
+    var lane=l.track||"";
+    var rid=String(l.reqId||"");
+    return '<article class="row">'+
+      '<div class="rmain">'+
+        '<div class="rtop"><div class="who">'+
+          '<div class="co">'+(inWork(l)&&l.priority?'<span class="rk" title="Priority">'+esc(l.priority)+'</span>':'')+'<span>'+esc(l.company)+'</span>'+((l.track&&l.track!==defTrack())?'<span class="lane">'+esc(lane)+'</span>':'')+'</div>'+
+          '<div class="title">'+esc(l.title)+'</div>'+
+        '</div>'+
+        '<select class="st" id="st-'+esc(l.id)+'" data-id="'+esc(l.id)+'" data-s="'+esc(st)+'" aria-label="Status for '+esc(l.company)+' '+esc(l.title)+'">'+
+          (STATUSES.indexOf(st)<0?[st]:[]).concat(STATUSES).map(function(s){return '<option'+(s===st?' selected':'')+'>'+esc(s)+'</option>';}).join("")+
+        '</select></div>'+
+        '<div class="facts">'+
+          (l.location?'<span>'+esc(l.location)+'</span>':'')+pay+
+          (rid?'<span class="id" title="'+esc(rid)+'">'+esc(rid)+'</span>':'')+
+          (l.posted?'<span class="posted">posted '+esc(l.posted)+'</span>':'')+
+        '</div>'+
+        ((l.why||showTeach)?'<div class="notes">'+
+          (l.why?'<div class="note-b"><span class="lab">Why it fits</span>'+esc(l.why)+'</div>':'')+
+          (showTeach?'<div class="note-b teach'+(notRead?' nr':'')+'"><span class="lab">What it teaches</span>'+esc(teaches)+'</div>':'')+
+        '</div>':'')+
+        ((st==="Review fit"&&l.reviewReason)?'<div class="note-b review"><span class="lab">Why it needs your call</span>'+esc(l.reviewReason)+'</div>':'')+
+        '<div class="rfoot">'+
+          (l.url?'<a class="apply" href="'+esc(l.url)+'" target="_blank" rel="noopener noreferrer">Open posting</a>':'')+
+          '<span class="notewrap"><label class="lab" for="note-'+esc(l.id)+'">Your notes</label><textarea class="note" rows="1" id="note-'+esc(l.id)+'" data-id="'+esc(l.id)+'" placeholder="Recruiter, pay, follow-up date" aria-label="Your notes for '+esc(l.company)+'">'+esc(l.yourNotes||"")+'</textarea></span>'+
+        '</div>'+histHtml(l)+
+      '</div></article>';
+  }
+
+  // The history field is the dated log sessions append to, one entry per " | " segment. (Your own notes are yourNotes.)
+  var openHist={};
+  function histEntries(note){
+    return String(note||"").split(/\s*\|\s*/).map(function(x){return x.trim();}).filter(Boolean).map(function(x){
+      var m=x.match(/^(\d{4}-\d{2}-\d{2}|\d{1,2}\/\d{1,2}(?:\/\d{2,4})?)[:,]?\s*(.*)$/);
+      return m?{d:m[1],t:m[2]||x}:{d:"",t:x};
+    });
+  }
+  function histHtml(l){
+    var e=histEntries(l.history);
+    if(!e.length) return '';
+    var last=e.slice().reverse().filter(function(x){return x.d;})[0];
+    return '<details class="hist" id="hist-'+esc(l.id)+'" data-id="'+esc(l.id)+'"'+(openHist[l.id]?' open':'')+'>'+
+      '<summary><b>History</b><span>'+e.length+(e.length===1?' entry':' entries')+(last?' · latest '+esc(last.d):'')+'</span></summary>'+
+      '<ol class="hlog">'+e.slice().reverse().map(function(x){return '<li><span class="hd">'+esc(x.d||"")+'</span><span>'+esc(x.t)+'</span></li>';}).join("")+'</ol></details>';
+  }
+  function autosize(t){ t.style.height="auto"; t.style.height=(t.scrollHeight+2)+"px"; }
+
+  // Priority view: listings to apply to, grouped by settings.priorities in order, then everything else by status.
+  var SGROUP=[["Interview","Interviews"],["Offer","Offers"],["Followed up","Followed up"],["Applied","Applied"],["On hold","On hold"],["Review fit","Needs your call"],["Rejected","Rejected"],["Closed","You passed"],["expired","Expired"],["filled","Filled"]];
+  function drawWork(rows){
+    collapseAllBtn.hidden=false;
+    var groups=[], byK={};
+    function add(k,label,desc,order,l){ if(!byK[k]){ byK[k]={k:k,label:label,desc:desc,order:order,list:[]}; groups.push(byK[k]); } byK[k].list.push(l); }
+    rows.forEach(function(l){
+      var st=l.status||"To apply";
+      if(st==="To apply"){
+        var pi=PRIORITIES.indexOf(String(l.priority||""));
+        if(pi>=0){ var pl=PRIORITIES[pi]; add("p"+pi,(/^on hold$/i.test(pl)?"To apply: on hold":"To apply: "+pl+" priority"),(/^on hold$/i.test(pl)?"Do not apply without your go-ahead":""),pi,l); }
+        else add("pnone","To apply: no priority set","",PRIORITIES.length,l);
+        return;
+      }
+      for(var j=0;j<SGROUP.length;j++){ if(SGROUP[j][0]===st){ add("s"+j,SGROUP[j][1],"",100+j,l); return; } }
+      add("other","Other","",999,l);
+    });
+    groups.sort(function(a,b){return a.order-b.order;});
+    var html='';
+    groups.forEach(function(g){
+      var isC=!!collapsed["w:"+g.k];
+      var list=g.list.slice().sort(function(a,b){
+        if(g.order<100) return String(a.company).localeCompare(String(b.company))||String(a.title).localeCompare(String(b.title));
+        return lastDate(b).localeCompare(lastDate(a))||String(a.company).localeCompare(String(b.company)); });
+      html+='<section class="vsec"><button type="button" class="vhead" data-k="w:'+esc(g.k)+'" aria-expanded="'+(!isC)+'">'+
+        '<span class="chev'+(isC?' closed':'')+'">&#9662;</span><span class="vname">'+esc(g.label)+'</span>'+
+        '<span class="vmeta">'+(g.desc?'<span class="extra">'+esc(g.desc)+'</span>':'')+'<span class="mono">'+list.length+(list.length===1?' listing':' listings')+'</span></span>'+
+        '</button><div class="vbody"'+(isC?' hidden':'')+'><div class="rows" style="margin-top:10px">'+list.map(rowHtml).join("")+'</div></div></section>';
+    });
+    view.innerHTML=html;
+    var anyOpen=groups.some(function(g){return !collapsed["w:"+g.k];});
+    collapseAllBtn.textContent=anyOpen?"Collapse all":"Expand all";
+    wire();
+  }
+
+  function drawOpen(){
+    if(!listings.length){ view.innerHTML='<div class="msg">'+(loaded.listings?'No listings recorded yet. The sweep writes them here as it confirms them.':'Listings are loading, or the listings collection could not be read.')+'</div>'; return; }
+    var rows=listings.filter(visible);
+    if(!rows.length){ view.innerHTML='<div class="msg">'+(oq&&norm(oq)?'No company, title or job number matches that search.':'Nothing matches these filters. Clear the status filter or untick Show only priority roles to see more.')+'</div>'; return; }
+    var eff=(oq&&norm(oq))?"company":sortBy;
+    if(eff==="work"){ drawWork(rows); return; }
+    if(eff!=="group"){
+      var srt=rows.slice().sort(function(a,b){
+        if(eff==="company") return String(a.company).localeCompare(String(b.company))||String(a.title).localeCompare(String(b.title));
+        if(eff==="status"){ var ra=(a.status==="Rejected")?0:1, rb=(b.status==="Rejected")?0:1; if(ra!==rb) return ra-rb; }
+        return lastDate(b).localeCompare(lastDate(a))||String(a.company).localeCompare(String(b.company));
+      });
+      view.innerHTML='<div class="rows">'+srt.map(rowHtml).join("")+'</div>';
+      collapseAllBtn.hidden=true;
+      wire(); return;
+    }
+    collapseAllBtn.hidden=false;
+    var byV={};
+    rows.forEach(function(l){
+      var v=l.industry||"Other";
+      (byV[v]=byV[v]||[]).push(l);
+    });
+    var order=Object.keys(byV).map(function(v){
+      var list=byV[v];
+      return {v:v, list:list, best:Math.min.apply(null,list.map(workRank)),
+        tgt:list.filter(function(l){return TARGET_FAM[l.family];}).length};
+    }).sort(function(a,b){ return a.best-b.best || vRank(a.v)-vRank(b.v) || a.v.localeCompare(b.v); });
+
+    var html='';
+    order.forEach(function(g){
+      var isC=!!collapsed[g.v];
+      var fams={};
+      g.list.forEach(function(l){ var f=l.family||""; (fams[f]=fams[f]||[]).push(l); });
+      var fkeys=Object.keys(fams).sort(function(a,b){ return famRank(a)-famRank(b); });
+      html+='<section class="vsec">'+
+        '<button type="button" class="vhead" data-k="'+esc(g.v)+'" aria-expanded="'+(!isC)+'">'+
+          '<span class="chev'+(isC?' closed':'')+'">&#9662;</span>'+
+          '<span class="vname">'+esc(g.v)+'</span>'+
+          '<span class="vmeta">'+
+            '<span class="mono">'+g.list.length+(g.list.length===1?' listing':' listings')+'</span></span>'+
+        '</button><div class="vbody"'+(isC?' hidden':'')+'>';
+      fkeys.forEach(function(f){
+        var list=fams[f].slice().sort(function(a,b){ return workRank(a)-workRank(b) || String(a.company).localeCompare(String(b.company)); });
+        html+='<div class="fam"><div class="famhead">'+
+          '<span class="famdot"></span>'+
+          '<span class="famname">'+esc(famLabel(f))+'</span>'+
+          '<span class="famcount">'+list.length+'</span></div>'+
+          '<div class="rows">'+list.map(rowHtml).join("")+'</div></div>';
+      });
+      html+='</div></section>';
+    });
+    view.innerHTML=html;
+    var anyOpen=order.some(function(g){return !collapsed[g.v];});
+    collapseAllBtn.textContent=anyOpen?"Collapse all":"Expand all";
+    wire();
+  }
+
+  var SWEEP_LABEL={"done":"Done","partial":"Partial","not swept":"Not swept","manual":"Manual"};
+  function sweepOf(cv){
+    var st=cv&&cv.sweepState?String(cv.sweepState).toLowerCase():"not swept";
+    return SWEEP_LABEL[st]?st:"not swept";
+  }
+  function sweepCls(st){ return st==="not swept"?"notswept":st; }
+
+  // Sweep progress comes from each employer's coverage sweepState.
+  // Coverage holds one doc per target employer; a target employer with no
+  // coverage doc yet counts as not swept.
+  function sweepCounts(){
+    var n={"done":0,"partial":0,"not swept":0,"manual":0};
+    coverage.forEach(function(c){ n[sweepOf(c)]++; });
+    var total=Math.max(companies.length,coverage.length);
+    n["not swept"]+=Math.max(0,total-coverage.length);
+    n.total=total;
+    return n;
+  }
+
+  function drawCover(){
+    if(!coverage.length){ view.innerHTML='<div class="msg">'+(loaded.coverage?'No sweeps recorded yet. Ask Claude to run a sweep.':'Sweep records are loading, or the coverage collection could not be read.')+'</div>'; return; }
+    var n=sweepCounts(), total=n.total||1;
+    function pc(x){ return (x/total*100); }
+    var pctDone=Math.round(n.done/total*100);
+    var closed=n.done+n.manual;
+    var html='<div class="bar stack" role="img" aria-label="'+n.done+' done, '+n.partial+' partial, '+n.manual+' manual, '+n["not swept"]+' not swept">'+
+      '<i class="s-done" style="width:'+pc(n.done)+'%"></i>'+
+      '<i class="s-partial" style="width:'+pc(n.partial)+'%"></i>'+
+      '<i class="s-manual" style="width:'+pc(n.manual)+'%"></i></div>'+
+      '<p class="barlab" style="margin-bottom:6px"><b>'+n.done+' of '+n.total+'</b> employers swept ('+pctDone+'%). '+
+      closed+' of '+n.total+' finished once manual employers are counted; '+(n.total-closed)+' still to sweep.</p>'+
+      '<div class="sweepstats">'+
+        '<span><i class="key k-done"></i><b>'+n.done+'</b>done</span>'+
+        '<span><i class="key k-partial"></i><b>'+n.partial+'</b>partial</span>'+
+        '<span><i class="key k-notswept"></i><b>'+n["not swept"]+'</b>not swept</span>'+
+        '<span><i class="key k-manual"></i><b>'+n.manual+'</b>manual</span>'+
+      '</div>';
+
+    var opts=[["all","All",coverage.length],["not swept","Not swept",null],["partial","Partial",null],["done","Done",null],["manual","Manual",null]];
+    var inCov={"done":0,"partial":0,"not swept":0,"manual":0};
+    coverage.forEach(function(c){ inCov[sweepOf(c)]++; });
+    html+='<div class="chips">'+opts.map(function(o){
+      var cnt=o[2]!=null?o[2]:inCov[o[0]];
+      return '<button class="chip" data-sweep="'+o[0]+'" aria-pressed="'+(sweepFilter===o[0])+'">'+o[1]+'<span class="n">'+cnt+'</span></button>';
+    }).join("")+'</div>';
+
+    var order={"partial":0,"not swept":1,"done":2,"manual":3};
+    var rr={HIT:0,LEAD:1,PENDING:2,NONE:3};
+    var rows=coverage.filter(function(c){ return sweepFilter==="all"||sweepOf(c)===sweepFilter; })
+      .sort(function(a,b){
+        return (order[sweepOf(a)]-order[sweepOf(b)]) ||
+          String(b.sweepDate||"").localeCompare(String(a.sweepDate||"")) ||
+          ((rr[a.result]==null?9:rr[a.result])-(rr[b.result]==null?9:rr[b.result])) ||
+          String(a.company).localeCompare(String(b.company));
+      });
+    if(!rows.length){ view.innerHTML=html+'<div class="msg">No employers in this state.</div>'; wireCover(); return; }
+    html+='<div class="tablewrap"><table><thead><tr><th>Company</th><th>Sweep</th><th>Last swept</th><th>Result</th><th>What I found</th></tr></thead><tbody>';
+    rows.forEach(function(c){
+      var st=sweepOf(c);
+      var cls=(c.result||"none").toLowerCase();
+      var prog=c.sweepProgress?'<div class="subtle">'+esc(c.sweepProgress)+'</div>':'';
+      html+='<tr><td><span class="cellname">'+esc(c.company)+'</span><div class="subtle">'+esc(c.industry||"")+'</div></td>'+
+        '<td><span class="dot '+sweepCls(st)+'">'+SWEEP_LABEL[st]+'</span>'+prog+'</td>'+
+        '<td class="mono">'+esc(c.sweepDate||"")+'</td>'+
+        '<td>'+(c.result?'<span class="dot '+esc(cls)+'">'+esc(c.result)+'</span>':'')+'</td>'+
+        '<td>'+esc(c.detail||"")+skippedHtml(c.skipped)+'</td></tr>';
+    });
+    html+='</tbody></table></div>';
+    view.innerHTML=html;
+    wireCover();
+  }
+
+  function skippedHtml(sk){
+    var lines=String(sk||"").split(/\n+/).map(function(x){return x.trim();}).filter(Boolean);
+    if(!lines.length) return '';
+    return '<details class="hist" style="margin-top:6px"><summary><b>Skipped</b><span>'+lines.length+(lines.length===1?' posting':' postings')+'</span></summary>'+
+      '<ol class="hlog">'+lines.map(function(x){return '<li style="grid-template-columns:1fr"><span>'+esc(x)+'</span></li>';}).join("")+'</ol></details>';
+  }
+  function wireCover(){
+    view.querySelectorAll(".chip[data-sweep]").forEach(function(b){
+      b.addEventListener("click",function(){ sweepFilter=b.getAttribute("data-sweep"); drawCover(); });
+    });
+  }
+
+  // Match a company to its coverage record by exact name (ignoring case, spaces and punctuation).
+  function coverFor(co){
+    var n=norm(co);
+    if(!n)return null;
+    return allCoverage.filter(function(c){return norm(c.company)===n;})[0]||null;
+  }
+
+  function drawTargets(){
+    if(!companies.length){
+      view.innerHTML='<div class="msg">'+(loaded.companies?'No employers on your target list yet. Ask Claude to add the employers you want swept.':'Target list is loading, or the companies collection could not be read.')+'</div>';
+      return;
+    }
+    var tiers={A:0,B:0,C:0};
+    companies.forEach(function(c){ if(tiers[c.tier]!=null)tiers[c.tier]++; });
+
+    var html='<p class="tierkey">'+
+      '<b>Tier A</b> '+esc(SET.tierA)+' &nbsp;·&nbsp; <b>Tier B</b> '+esc(SET.tierB)+' &nbsp;·&nbsp; <b>Tier C</b> '+esc(SET.tierC)+'<br>'+
+      'The tier of an employer does not decide where a job is. Check the location on the posting itself.'+
+      '</p>';
+
+    html+='<div class="chips">'+
+      ['All','A','B','C'].map(function(t){
+        var n=t==="All"?companies.length:tiers[t];
+        var lab=t==="All"?"All":("Tier "+t);
+        return '<button class="chip" data-tier="'+t+'" aria-pressed="'+(tier===t)+'">'+lab+'<span class="n">'+n+'</span></button>';
+      }).join("")+'</div>';
+
+    html+='<input class="search" id="q" type="search" placeholder="Filter by company or industry" value="'+esc(q)+'">';
+
+    var rows=companies.filter(function(c){
+      if(tier!=="All"&&c.tier!==tier)return false;
+      if(!q)return true;
+      var s=norm(q);
+      return norm(c.company).indexOf(s)>=0 || norm(c.industry).indexOf(s)>=0;
+    });
+
+    var sc=sweepCounts();
+    html+='<p class="barlab" style="margin:0 0 10px">Showing '+rows.length+' of '+companies.length+' target companies. Swept: '+sc.done+' done, '+sc.partial+' partial, '+sc["not swept"]+' not swept, '+sc.manual+' manual.</p>';
+
+    if(!rows.length){
+      html+='<div class="msg">No companies match that filter.</div>';
+      view.innerHTML=html; wireTargets(); return;
+    }
+
+    html+='<div class="tablewrap"><table><thead><tr><th>#</th><th>Company</th><th>Tier</th><th>Industry</th><th>Swept</th><th>Careers site</th></tr></thead><tbody>';
+    rows.forEach(function(c,i){
+      var cv=coverFor(c.company);
+      var st=sweepOf(cv);
+      html+='<tr>'+
+        '<td class="mono" style="color:var(--muted)">'+(i+1)+'</td>'+
+        '<td><span class="cellname">'+esc(c.company)+'</span>'+(yes(c.onHold)?' <span class="famtag">On hold</span>':'')+'</td>'+
+        '<td><span class="tier '+esc(c.tier||"C")+'">'+esc(c.tier||"?")+'</span></td>'+
+        '<td>'+esc(c.industry||"")+'</td>'+
+        '<td><span class="dot '+sweepCls(st)+'">'+SWEEP_LABEL[st]+'</span>'+(cv&&cv.sweepDate?' <span class="subtle mono">'+esc(cv.sweepDate)+'</span>':'')+'</td>'+
+        '<td>'+siteLink(c.careersSite)+'</td>'+
+        '</tr>';
+    });
+    html+='</tbody></table></div>';
+    view.innerHTML=html;
+    wireTargets();
+  }
+
+  function wireTargets(){
+    view.querySelectorAll(".chip[data-tier]").forEach(function(b){
+      b.addEventListener("click",function(){ tier=b.getAttribute("data-tier"); drawTargets(); });
+    });
+    var inp=document.getElementById("q");
+    if(inp){
+      inp.addEventListener("input",function(){
+        q=inp.value;
+        var pos=inp.selectionStart;
+        drawTargets();
+        var again=document.getElementById("q");
+        if(again){ again.focus(); try{again.setSelectionRange(pos,pos);}catch(e){} }
+      });
+    }
+  }
+
+
+  // Answer bank: read only here. Claude adds and changes answers with you in a session.
+  var TOPICS=["Contact","Work history","Education","Pay","Voluntary","References","Links","Work authorization","Account","Other"];
+  function drawAnswers(){
+    var html='<p class="tierkey">The answers Claude uses on application forms. To add or change one, ask Claude. Never store passwords, ID numbers or bank details here.</p>';
+    if(!allAnswers.length){ view.innerHTML=html+'<div class="msg">'+(loaded.answers?'No answers saved yet. Ask Claude to start your answer bank.':'Answers are loading, or the answers collection could not be read.')+'</div>'; return; }
+    var rows=allAnswers.slice().sort(function(a,b){
+      var ta=TOPICS.indexOf(a.topic), tb=TOPICS.indexOf(b.topic); if(ta<0)ta=99; if(tb<0)tb=99;
+      return (ta-tb)||String(a.id).localeCompare(String(b.id)); });
+    html+='<div class="tablewrap"><table><thead><tr><th>Topic</th><th>Question</th><th>Answer</th><th>Use when</th><th>Updated</th></tr></thead><tbody>'+
+      rows.map(function(r){ return '<tr><td>'+esc(r.topic||"")+'</td><td>'+esc(r.question||"")+'</td><td><span class="cellname">'+esc(r.answer||"")+'</span></td><td class="subtle">'+esc(r.useWhen||"")+'</td><td class="mono subtle">'+esc(r.updated||"")+'</td></tr>'; }).join("")+
+      '</tbody></table></div>';
+    view.innerHTML=html;
+  }
+
+  function setTab(v){
+    tab=v;
+    document.querySelectorAll(".tab").forEach(function(x){ x.setAttribute("aria-selected",String(x.getAttribute("data-v")===v)); });
+  }
+
+  function draw(){
+    drawPipe();
+    toolbar.hidden = tab!=="open" || !listings.length;
+    searchrow.hidden = toolbar.hidden;
+    oqClr.hidden = !oq;
+    drawSub();
+    if(tab==="open"){ drawChips(); drawOpen(); }
+    else if(tab==="cover"){ drawCover(); }
+    else if(tab==="archive"){ drawArchive(); }
+    else if(tab==="answers"){ drawAnswers(); }
+    else { drawTargets(); }
+  }
+
+  var timers={};
+  function wire(){
+    view.querySelectorAll(".vhead").forEach(function(h){
+      h.addEventListener("click",function(){
+        var k=h.getAttribute("data-k");
+        collapsed[k]=!collapsed[k];
+        saveCollapsed();
+        drawOpen();
+      });
+    });
+    view.querySelectorAll("select.st").forEach(function(sel){
+      sel.addEventListener("change",function(){
+        var id=sel.getAttribute("data-id"), val=sel.value;
+        sel.setAttribute("data-s",val);
+        var l=allListings.filter(function(x){return x.id===id;})[0];
+        // A status change made on this page adds its own dated line to the listing's history.
+        var d=new Date(), today=d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2);
+        var old=String(l&&l.history||"").trim(), entry=today+" status set to "+val+" by you on the tracker page.";
+        var hist=old?old+" | "+entry:entry;
+        if(l){ l.status=val; l.history=hist; }
+        applyArchive();
+        drawPipe();
+        if(db) db.doc("listings/"+id).update({status:val,history:hist}).catch(function(){ hint.textContent="That status change did not save. Reload and try again."; });
+      });
+    });
+    view.querySelectorAll("textarea.note").forEach(function(inp){
+      if(inp.value) autosize(inp);
+      inp.addEventListener("input",function(){
+        autosize(inp);
+        var id=inp.getAttribute("data-id"), val=inp.value;
+        var l=allListings.filter(function(x){return x.id===id;})[0];
+        if(l) l.yourNotes=val;
+        clearTimeout(timers[id]);
+        timers[id]=setTimeout(function(){
+          if(db) db.doc("listings/"+id).update({yourNotes:val}).catch(function(){ hint.textContent="A note did not save. Reload and try again."; });
+        },600);
+      });
+    });
+    view.querySelectorAll("details.hist").forEach(function(d){
+      d.addEventListener("toggle",function(){ openHist[d.getAttribute("data-id")]=d.open; });
+    });
+  }
+
+  collapseAllBtn.addEventListener("click",function(){
+    var keys=[].map.call(view.querySelectorAll(".vhead"),function(h){return h.getAttribute("data-k");});
+    var anyOpen=keys.some(function(k){return !collapsed[k];});
+    keys.forEach(function(k){ collapsed[k]=anyOpen; });
+    saveCollapsed();
+    drawOpen();
+  });
+  function setOq(v){ oq=v; if(oqInp.value!==v) oqInp.value=v; draw(); }
+  oqInp.addEventListener("input",function(){ var pos=oqInp.selectionStart; setOq(oqInp.value); oqInp.focus(); try{oqInp.setSelectionRange(pos,pos);}catch(e){} });
+  oqInp.addEventListener("keydown",function(ev){ if(ev.key==="Escape"){ setOq(""); } });
+  oqClr.addEventListener("click",function(){ setOq(""); oqInp.focus(); });
+  sortSel.addEventListener("change",function(){
+    sortBy=sortSel.value;
+    try{ localStorage.setItem("jb.sort2",sortBy); }catch(e){}
+    draw();
+  });
+  onlyTargetBox.addEventListener("change",function(){
+    onlyTarget=onlyTargetBox.checked;
+    try{ localStorage.setItem("jb.onlyTarget",onlyTarget?"1":"0"); }catch(e){}
+    draw();
+  });
+  document.querySelectorAll(".tab").forEach(function(b){
+    b.addEventListener("click",function(){ setTab(b.getAttribute("data-v")); draw(); });
+  });
+
+  applySettings({});
+
+  // Typing in a note re-renders nothing, so live snapshots only redraw when no note field has focus.
+  function editing(){ var a=document.activeElement; return a && ((a.classList && a.classList.contains("note")) || a.id==="oq"); }
+
+  draw();
+
+  function rowsOf(snap){ return snap.docs.map(function(doc){ var o=Object.assign({},doc.data()); o.id=doc.id; return o; }); }
+  function noData(msg){ hint.textContent=msg; }
+  if(!window.claude || typeof window.claude.use!=="function"){
+    noData("No saved data here. Open this page as your published Claude artifact to see and save your tracker.");
+  } else window.claude.use("db").then(function(d){
+    if(!d){ noData("Saving is unavailable in this view, so status changes will not stick."); return; }
+    db=d;
+    d.collection("settings").onSnapshot(function(snap){
+      var docs=rowsOf(snap); applySettings(docs.filter(function(x){return x.id==="main";})[0]||docs[0]||{});
+      loaded.settings=true; applyArchive(); draw();
+    },function(){});
+    d.collection("listings").onSnapshot(function(snap){
+      allListings=rowsOf(snap); loaded.listings=true; applyArchive();
+      if(editing() && tab==="open"){ drawPipe(); return; }
+      draw();
+    },function(){ noData("Lost the connection to saved data. Reload to try again."); });
+    d.collection("coverage").onSnapshot(function(snap){
+      allCoverage=rowsOf(snap); loaded.coverage=true; applyArchive();
+      if(tab!=="open") draw();
+    },function(){});
+    d.collection("companies").onSnapshot(function(snap){
+      allCompanies=rowsOf(snap); loaded.companies=true; applyArchive();
+      draw();
+    },function(){});
+    d.collection("answers").onSnapshot(function(snap){
+      allAnswers=rowsOf(snap); loaded.answers=true;
+      if(tab==="answers") draw();
+    },function(){});
+  }).catch(function(){
+    noData("Saving is unavailable in this view, so status changes will not stick.");
+  });
+})();
+</script>
+
+
+
+</body></html>

@@ -1,0 +1,52 @@
+{
+  "settings": [
+    {"id": "main",
+     "tierA": "Employer based in the Larkfield metro",
+     "tierB": "Employer elsewhere with jobs open to Larkfield or remote in Calder",
+     "tierC": "Employer in Wrenford, allowed only above $100,000",
+     "industryOrder": "Health tech; Digital health; Health data; Health insurance; Medical devices",
+     "excludedIndustries": "Staffing; Pharmaceuticals",
+     "roleFamilies": "Clinical sales specialist*; Account executive*; Sales development*; Clinical implementation; Customer success; Other",
+     "tracks": "Main",
+     "priorities": "High; Medium; Low; On hold"}
+  ],
+  "companies": [
+    {"id": "brightline-charting", "company": "Brightline Charting", "careersSite": "https://careers.brightline-charting.example", "tier": "A", "industry": "Health tech", "keepAnyway": "no", "onHold": "no", "added": "2026-09-20"},
+    {"id": "halyard-patient-monitoring", "company": "Halyard Patient Monitoring", "careersSite": "https://jobs.halyard-monitoring.example", "tier": "B", "industry": "Health tech", "keepAnyway": "no", "onHold": "no", "added": "2026-09-20"},
+    {"id": "caregrid-scheduling", "company": "CareGrid Scheduling", "careersSite": "https://caregrid.example/careers", "tier": "A", "industry": "Health tech", "keepAnyway": "no", "onHold": "no", "added": "2026-09-20"},
+    {"id": "meridian-health-plans", "company": "Meridian Health Plans", "careersSite": "https://careers.meridian-plans.example", "tier": "A", "industry": "Health insurance", "keepAnyway": "no", "onHold": "no", "added": "2026-09-20"},
+    {"id": "northgate-medical-software", "company": "Northgate Medical Software", "careersSite": "https://northgate-med.example/jobs", "tier": "B", "industry": "Health tech", "keepAnyway": "no", "onHold": "yes", "added": "2026-09-20"},
+    {"id": "tallow-pharma", "company": "Tallow Pharma", "careersSite": "https://tallow-pharma.example/careers", "tier": "C", "industry": "Pharmaceuticals", "keepAnyway": "no", "onHold": "no", "added": "2026-09-20"},
+    {"id": "summit-nurse-staffing", "company": "Summit Nurse Staffing", "careersSite": "https://summit-staffing.example/join", "tier": "A", "industry": "Staffing", "keepAnyway": "no", "onHold": "no", "added": "2026-09-20"},
+    {"id": "lumen-infusion-systems", "company": "Lumen Infusion Systems", "careersSite": "https://lumen-infusion.example/careers", "tier": "B", "industry": "Medical devices", "keepAnyway": "no", "onHold": "no", "added": "2026-09-20"},
+    {"id": "kestrel-telehealth", "company": "Kestrel Telehealth", "careersSite": "https://kestrel-telehealth.example/careers", "tier": "B", "industry": "Digital health", "keepAnyway": "no", "onHold": "no", "added": "2026-09-20"},
+    {"id": "oakmoor-clinical-analytics", "company": "Oakmoor Clinical Analytics", "careersSite": "https://oakmoor-analytics.example/careers", "tier": "A", "industry": "Health data", "keepAnyway": "no", "onHold": "no", "added": "2026-09-20"}
+  ],
+  "coverage": [],
+  "listings": [
+    {"id": "meridian-health-plans-r5521", "company": "Meridian Health Plans", "title": "Member Sales Advisor", "location": "Larkfield, Calder (hybrid)", "url": "https://careers.meridian-plans.example/jobs/R5521", "reqId": "R5521", "industry": "Health insurance", "track": "Main", "family": "Account executive", "posted": "2026-09-02", "pay": "$58,000 base plus commission, $88,000 to $96,000 total at target", "why": "Health plan sales in Larkfield; clinical background is named as a plus.", "teaches": "Stated: plan design, Medicare rules, needs-based selling.", "priority": "High", "status": "Applied", "appliedDate": "2026-09-08", "postingText": "Member Sales Advisor. Larkfield, Calder (hybrid). Help members choose health plans...", "reviewReason": "", "history": "2026-09-05 added from the employer's own site by fit review. | 2026-09-08 applied, req R5521, Member Sales Advisor, Meridian Health Plans, Larkfield; applied through the employer's Workday site; confirmation MHP-77310.", "yourNotes": "Recruiter is Priya. Follow up 9/22 if no word.", "managerName": "", "managerTitle": "", "howIdentified": "", "confidence": "", "profileUrl": "", "emailOrFormat": "", "connectionNote": "", "longMessage": ""}
+  ],
+  "answers": [
+    {"id": "contact-name", "topic": "Contact", "question": "Full name", "answer": "Maya Ortell", "useWhen": "Always", "updated": "2026-09-20"},
+    {"id": "contact-email", "topic": "Contact", "question": "Email", "answer": "maya.ortell@example.com", "useWhen": "Always", "updated": "2026-09-20"},
+    {"id": "contact-phone", "topic": "Contact", "question": "Phone", "answer": "(555) 010-0142", "useWhen": "Always", "updated": "2026-09-20"},
+    {"id": "contact-city", "topic": "Contact", "question": "City and state", "answer": "Larkfield, Calder", "useWhen": "When a form asks for city; never a street address unless required", "updated": "2026-09-20"},
+    {"id": "work-1", "topic": "Work history", "question": "Current or most recent job", "answer": "Registered Nurse, Intensive Care Unit, Pinecrest Health System, Larkfield (2023 to present)", "useWhen": "Always", "updated": "2026-09-20"},
+    {"id": "work-2", "topic": "Work history", "question": "Previous job", "answer": "Registered Nurse, Medical-Surgical Unit, Pinecrest Health System, Larkfield (2020 to 2023)", "useWhen": "Always", "updated": "2026-09-20"},
+    {"id": "edu-1", "topic": "Education", "question": "Highest degree", "answer": "Bachelor of Science in Nursing, Calder State University, 2020", "useWhen": "Always", "updated": "2026-09-20"},
+    {"id": "license-1", "topic": "Other", "question": "Licenses", "answer": "Registered Nurse, State of Calder", "useWhen": "When a form asks about licenses. Never enter the license number; the user does that.", "updated": "2026-09-20"},
+    {"id": "pay-text", "topic": "Pay", "question": "Pay expectation (text)", "answer": "$85,000 or more in total pay, open on the split between base and commission", "useWhen": "When the form allows text", "updated": "2026-09-20"},
+    {"id": "pay-number", "topic": "Pay", "question": "Pay expectation (single number)", "answer": "85000", "useWhen": "When the form needs one number", "updated": "2026-09-20"},
+    {"id": "auth-1", "topic": "Work authorization", "question": "Authorized to work in the US without sponsorship?", "answer": "Yes", "useWhen": "Always", "updated": "2026-09-20"},
+    {"id": "vol-gender", "topic": "Voluntary", "question": "Gender", "answer": "I don't wish to answer", "useWhen": "Always", "updated": "2026-09-20"},
+    {"id": "vol-race", "topic": "Voluntary", "question": "Race or ethnicity", "answer": "I don't wish to answer", "useWhen": "Always", "updated": "2026-09-20"},
+    {"id": "vol-veteran", "topic": "Voluntary", "question": "Veteran status", "answer": "I am not a protected veteran", "useWhen": "Always", "updated": "2026-09-20"},
+    {"id": "vol-disability", "topic": "Voluntary", "question": "Disability status", "answer": "I don't wish to answer", "useWhen": "Always", "updated": "2026-09-20"},
+    {"id": "ref-1", "topic": "References", "question": "Reference 1", "answer": "Lena Hart, former charge nurse (now at Calder Valley Hospital), lena.hart@example.com", "useWhen": "First reference. Phone only if required: (555) 010-0177", "updated": "2026-09-20"},
+    {"id": "ref-2", "topic": "References", "question": "Reference 2", "answer": "Owen Pryce, nursing instructor, Calder State University, owen.pryce@example.com", "useWhen": "When two are required", "updated": "2026-09-20"},
+    {"id": "link-linkedin", "topic": "Links", "question": "LinkedIn profile", "answer": "https://www.linkedin.com/in/maya-ortell-example", "useWhen": "Only when the field is required", "updated": "2026-09-20"},
+    {"id": "start-date", "topic": "Other", "question": "Earliest start date", "answer": "Two weeks after an offer", "useWhen": "Always", "updated": "2026-09-20"},
+    {"id": "relocate", "topic": "Other", "question": "Willing to relocate?", "answer": "No", "useWhen": "Always", "updated": "2026-09-20"},
+    {"id": "acct-halyard", "topic": "Account", "question": "jobs.halyard-monitoring.example", "answer": "maya.ortell@example.com", "useWhen": "Username only. The user signs in.", "updated": "2026-09-21"}
+  ]
+}

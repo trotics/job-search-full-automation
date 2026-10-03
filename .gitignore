@@ -1,0 +1,16 @@
+# Your personal files never go in git.
+my-files/*
+!my-files/README.md
+reports/*
+!reports/README.md
+backups/*
+!backups/README.md
+
+# Test build output
+tests/build/
+
+# Local tool settings
+.claude/
+__pycache__/
+*.pyc
+~$*.xlsx

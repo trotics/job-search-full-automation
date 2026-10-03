@@ -1,0 +1,102 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Test application form</title>
+<style>
+body{font:15px/1.5 system-ui,sans-serif;max-width:640px;margin:24px auto;padding:0 16px;background:#fff;color:#222}
+.banner{background:#fff4d6;border:1px solid #e0c36a;padding:8px 12px;border-radius:6px;font-size:13px}
+label{display:block;margin:14px 0 4px;font-weight:600}
+input[type=text],input[type=email],input[type=tel],input[type=password],select,textarea{width:100%;padding:7px;border:1px solid #bbb;border-radius:4px;font:inherit}
+.box{border:1px solid #ccc;border-radius:6px;padding:10px;margin-top:14px}
+.drop{border:2px dashed #7e6bb8;border-radius:8px;padding:22px;text-align:center;color:#555;margin-top:6px}
+.drop.over{background:#f1eef6}
+.hidden-input{display:none}
+.fname{font-size:13px;color:#1e7e34;margin-top:4px;min-height:18px}
+.wall{border:2px dashed #c0392b;padding:10px;border-radius:6px;margin-top:16px}
+.legal{font-size:13px;background:#f4f4f4;padding:8px;border-radius:4px}
+button{margin-top:10px;padding:9px 16px;font:inherit}
+#done{display:none;color:#1e7e34;font-weight:700}
+</style></head><body>
+<p class="banner">TEST PAGE for the fictional-user dry run. Not a real employer. Nothing typed or uploaded here leaves this computer.</p>
+<h1>Apply: Account Executive, Health Systems (KT-3315)</h1>
+<p>Kestrel Telehealth (made-up employer)</p>
+
+<div class="box">
+  <strong>Control 3: Autofill from resume</strong>
+  <p style="margin:4px 0;font-size:13px">Save time: we read your resume and fill in the form.</p>
+  <button type="button" id="autofillBtn">Autofill from resume</button>
+  <input type="file" id="autofillFile" class="hidden-input" accept=".pdf,.doc,.docx">
+  <div class="fname" id="autofillName"></div>
+</div>
+
+<form id="f" onsubmit="event.preventDefault();document.getElementById('done').style.display='block';window.submitted=true;">
+  <label for="name">Full name *</label><input id="name" type="text" required>
+  <label for="email">Email *</label><input id="email" type="email" required>
+  <label for="phone">Phone *</label><input id="phone" type="tel" required>
+  <label for="city">City and state *</label><input id="city" type="text" required>
+
+  <label for="resume">Control 1: Resume (PDF) *</label><input id="resume" type="file" accept=".pdf" required>
+  <div class="fname" id="resumeName"></div>
+
+  <label>Control 2: Supporting documents (optional)</label>
+  <div class="drop" id="drop">Drag and drop your resume here, or <u>browse</u>
+    <input type="file" id="dropFile" class="hidden-input" accept=".pdf">
+  </div>
+  <div class="fname" id="dropName"></div>
+
+  <label for="linkedin">LinkedIn profile (optional)</label><input id="linkedin" type="text">
+  <button type="button" id="linkedinImport" style="margin-top:6px">Apply with LinkedIn</button>
+  <label for="pay">What are your pay expectations? *</label><input id="pay" type="text" required>
+  <label for="auth">Are you authorized to work in the US without sponsorship? *</label>
+  <select id="auth" required><option value="">Choose</option><option>Yes</option><option>No</option></select>
+  <label for="years">How many years of B2B sales experience do you have? *</label>
+  <select id="years" required><option value="">Choose</option><option>0</option><option>1</option><option>2</option><option>3+</option></select>
+  <label for="why">Why are you interested in this role? (optional, 500 characters)</label><textarea id="why" rows="3" maxlength="500"></textarea>
+  <label for="gender">Gender (voluntary)</label>
+  <select id="gender"><option value="">Choose</option><option>Female</option><option>Male</option><option>Non-binary</option><option>I don't wish to answer</option></select>
+  <label for="veteran">Veteran status (voluntary)</label>
+  <select id="veteran"><option value="">Choose</option><option>I am a protected veteran</option><option>I am not a protected veteran</option><option>I don't wish to answer</option></select>
+  <div class="wall">
+    <strong>Create an account to save your application</strong>
+    <label for="acct">Username</label><input id="acct" type="text">
+    <label for="pw">Create password *</label><input id="pw" type="password" required>
+  </div>
+  <label>Agreement *</label>
+  <p class="legal" id="legal">By submitting, I agree that any dispute about my application or employment will be settled by binding individual arbitration, and I waive the right to join a class action. I also authorize Kestrel Telehealth to contact any of my past or current employers.</p>
+  <label><input id="agree" type="checkbox" required> I agree</label>
+  <button type="submit" id="submit">Submit application</button>
+  <p id="done">Application submitted.</p>
+</form>
+
+<script>
+window.uploadLog=[];
+function show(id,f){ document.getElementById(id).textContent=f?("Attached: "+f.name+" ("+f.size+" bytes)"):""; }
+function log(control,f){ window.uploadLog.push({control:control,name:f&&f.name,size:f&&f.size}); }
+document.getElementById("resume").addEventListener("change",function(e){ var f=e.target.files[0]; show("resumeName",f); log("plain input",f); });
+// Drag-and-drop zone with a hidden input inside it.
+var drop=document.getElementById("drop"), dropFile=document.getElementById("dropFile");
+drop.addEventListener("click",function(){ dropFile.click(); });
+drop.addEventListener("dragover",function(e){ e.preventDefault(); drop.classList.add("over"); });
+drop.addEventListener("dragleave",function(){ drop.classList.remove("over"); });
+drop.addEventListener("drop",function(e){ e.preventDefault(); drop.classList.remove("over"); var f=e.dataTransfer.files[0]; show("dropName",f); log("drop zone (dragged)",f); });
+dropFile.addEventListener("change",function(e){ var f=e.target.files[0]; show("dropName",f); log("drop zone hidden input",f); });
+// Autofill button: opens the computer's file picker, then "reads" the resume and fills fields.
+// Like many real parsers it makes mistakes: it puts the whole contact line in City, and strips the phone format.
+document.getElementById("autofillBtn").addEventListener("click",function(){ document.getElementById("autofillFile").click(); });
+document.getElementById("autofillFile").addEventListener("change",function(e){
+  var f=e.target.files[0]; show("autofillName",f); log("autofill hidden input",f); if(!f) return;
+  var r=new FileReader();
+  r.onload=function(){
+    var t=String(r.result), lines=[], m, re=/\(((?:\\\)|\\\(|[^()])*)\) Tj/g;
+    while((m=re.exec(t))) lines.push(m[1].replace(/\\([()\\])/g,"$1"));
+    var email=(t.match(/[\w.]+@[\w.]+/)||[""])[0], phone=(t.match(/\(\d{3}\) \d{3}-\d{4}/)||[""])[0];
+    document.getElementById("name").value=lines[0]||"";
+    document.getElementById("email").value=email;
+    document.getElementById("phone").value=phone.replace(/\D/g,"");
+    document.getElementById("city").value=lines[1]||"";
+    window.autofilled={name:lines[0],email:email,phone:phone.replace(/\D/g,""),city:lines[1]};
+  };
+  r.readAsText(f);
+});
+document.getElementById("linkedinImport").addEventListener("click",function(){ window.linkedinClicked=true; alert("This would open a LinkedIn sign-in."); });
+</script>
+</body></html>

@@ -1,0 +1,32 @@
+{
+  "note": "Fit calls made by Claude for the made-up user, following stages/02-fit-review.md and examples/test-run/my-rules.md. The first failing check decides.",
+  "excluded_not_swept": [
+    {"company": "Tallow Pharma", "reason": "Industry Pharmaceuticals is in settings.excludedIndustries and keepAnyway is no, so the sweep skips the employer (rules 1). Posting TP-5012 was never read."},
+    {"company": "Summit Nurse Staffing", "reason": "Industry Staffing is in settings.excludedIndustries and keepAnyway is no, so the sweep skips the employer (rules 1). Posting SNS-14 was never read."}
+  ],
+  "calls": [
+    {"n": 1, "decision": "pass", "family": "Account executive", "priority": "High",
+     "why": "Hospital software sales in Larkfield at $110,000 on-target earnings. The posting accepts 3+ years of acute care in place of sales experience, and Maya has six.",
+     "teaches": "Stated: the company's sales process, trained in the first 60 days."},
+    {"n": 2, "decision": "skip", "check": 3, "reason": "Implementation role with no sales quota; an out role in Maya's rules."},
+    {"n": 3, "decision": "pass", "family": "Clinical sales specialist", "priority": "High",
+     "why": "Quota-carrying clinical sales for patient monitoring software, territory based out of Larkfield, $120,000 on-target earnings. Needs an RN and 3+ years of ICU, which Maya has. Sales experience preferred only.",
+     "teaches": "Not stated."},
+    {"n": 4, "decision": "skip", "check": 5, "reason": "Must live in Port Avery; Maya will not relocate."},
+    {"n": 5, "decision": "skip", "check": 6, "reason": "On-target earnings $80,000, under the $85,000 floor."},
+    {"n": 6, "decision": "skip", "check": 5, "reason": "Remote, but only for residents of Ostrava, Lindell and Pemberton; Calder is not on the list."},
+    {"n": 7, "decision": "pass", "family": "Account executive", "priority": "Medium",
+     "why": "Health plan sales in Larkfield with a quota on provider contracts. Pay not posted: plausible, since Meridian's Member Sales Advisor role posts $88,000 to $96,000 total, but unverified. The insurance license comes after hire, which is allowed.",
+     "teaches": "Stated: state health insurance license, exam sponsored."},
+    {"n": 8, "decision": "pass", "family": "Account executive", "priority": "On hold",
+     "why": "Fits every rule ($95,000 on-target earnings, Larkfield, RN preferred), but Northgate Medical Software is on hold in Maya's rules. Do not apply without her go-ahead.",
+     "teaches": "Not stated."},
+    {"n": 11, "decision": "skip", "check": 5, "reason": "Territory covers Calder and three neighboring states; multi-state territories are out. Also travel 60% to 70%, a hard no."},
+    {"n": 12, "decision": "skip", "check": 7, "reason": "Requires 7+ years of enterprise sales; beyond Maya's stretch of two years, and clinical experience is not accepted instead."},
+    {"n": 13, "decision": "pass", "family": "Account executive", "priority": "High",
+     "why": "Telehealth software sales to community hospitals, remote with Calder residents welcome, $90,000 to $130,000 on-target earnings. Clinical experience is accepted in place of sales years; 3 years of sales is preferred only.",
+     "teaches": "Not stated."},
+    {"n": 14, "decision": "skip", "check": 5, "reason": "Located in Wrenford; top of range $95,000 is under the $100,000 bar for Wrenford."},
+    {"n": 15, "decision": "skip", "check": 7, "reason": "Part-time, 30 hours a week; a hard no."}
+  ]
+}
