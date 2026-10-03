@@ -180,7 +180,7 @@ Any grant of extra autonomy lasts for one session only. Past grants never carry 
 ### 10. Writing
 
 - Follow the writing style in the user's rules.
-- Plain language. No em dashes or en dashes. No stock phrases that sound machine-written.
+- Plain language. No em dashes or en dashes.
 - Anything sent under the user's name must read like a person wrote it.
 - The resume is submitted as-is and never rewritten unless the user asks in that session. When the user asks, stage 07 builds it only from facts they approved.
 
@@ -783,7 +783,7 @@ Before writing, look at what employers actually ask for in real postings for the
 - [ ] A "What employers ask for" section is saved in the facts file, built from 3 to 5 real postings or from a named fallback, and the user confirmed it.
 - [ ] No term from the postings was used unless it is in the facts file.
 - [ ] Every number, title, date, tool and skill on the resume is in the facts file (`check_resume.py`).
-- [ ] `check_resume.py` passes: no dashes, no stock phrases, no first person, no personal data that does not belong on a resume, bullets a sensible length, standard headings.
+- [ ] `check_resume.py` passes: no dashes, no pronouns, no personal data that does not belong on a resume, bullets a sensible length, standard headings.
 - [ ] The page count is within the limit.
 - [ ] The user approved the final PDF.
 - [ ] Any earlier `resume.pdf` was backed up first.
@@ -1238,7 +1238,7 @@ Rules for every resume stage 07 writes, for any job in any field. "General rules
 - Three to six bullets for recent roles, one to three for older ones. Roles over 15 years old may be grouped under "Earlier experience" with titles only.
 - Numbers as digits ("12 nurses", "$1.2 million"). Spell out an acronym once unless everyone in the field knows it.
 
-**Words to avoid** (they read as filler and are checked by script): results-driven, detail-oriented, team player, go-getter, hard-working, self-starter, synergy, dynamic, passionate, proven track record, responsible for, duties included, think outside the box, best of breed, rockstar, ninja, guru, plus every stock phrase the project's writing rules forbid. No em dashes or en dashes.
+**Words:** no word is off limits. A label like "team player" works best next to a fact that shows it ("trained 6 apprentices"). No em dashes or en dashes.
 
 ### Default (any job)
 

@@ -33,7 +33,7 @@ Rules for every resume stage 07 writes, for any job in any field. "General rules
 - Three to six bullets for recent roles, one to three for older ones. Roles over 15 years old may be grouped under "Earlier experience" with titles only.
 - Numbers as digits ("12 nurses", "$1.2 million"). Spell out an acronym once unless everyone in the field knows it.
 
-**Words to avoid** (they read as filler and are checked by script): results-driven, detail-oriented, team player, go-getter, hard-working, self-starter, synergy, dynamic, passionate, proven track record, responsible for, duties included, think outside the box, best of breed, rockstar, ninja, guru, plus every stock phrase the project's writing rules forbid. No em dashes or en dashes.
+**Words:** no word is off limits. A label like "team player" works best next to a fact that shows it ("trained 6 apprentices"). No em dashes or en dashes.
 
 ## Default (any job)
 

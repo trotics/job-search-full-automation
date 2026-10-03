@@ -97,7 +97,7 @@ Any grant of extra autonomy lasts for one session only. Past grants never carry 
 ## 10. Writing
 
 - Follow the writing style in the user's rules.
-- Plain language. No em dashes or en dashes. No stock phrases that sound machine-written.
+- Plain language. No em dashes or en dashes.
 - Anything sent under the user's name must read like a person wrote it.
 - The resume is submitted as-is and never rewritten unless the user asks in that session. When the user asks, stage 07 builds it only from facts they approved.
 

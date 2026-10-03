@@ -111,7 +111,7 @@ Before writing, look at what employers actually ask for in real postings for the
 - [ ] A "What employers ask for" section is saved in the facts file, built from 3 to 5 real postings or from a named fallback, and the user confirmed it.
 - [ ] No term from the postings was used unless it is in the facts file.
 - [ ] Every number, title, date, tool and skill on the resume is in the facts file (`check_resume.py`).
-- [ ] `check_resume.py` passes: no dashes, no stock phrases, no first person, no personal data that does not belong on a resume, bullets a sensible length, standard headings.
+- [ ] `check_resume.py` passes: no dashes, no pronouns, no personal data that does not belong on a resume, bullets a sensible length, standard headings.
 - [ ] The page count is within the limit.
 - [ ] The user approved the final PDF.
 - [ ] Any earlier `resume.pdf` was backed up first.

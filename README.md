@@ -185,8 +185,8 @@ You need Python 3, openpyxl and reportlab (`python -m pip install -r requirement
   `python tools/build_skill_zip.py` and `python tools/build_single_file.py`.
 - Test the tracker page without publishing it: `python tests/build_local_test.py tests/sample-data/tracker-after-fit.json`, serve the folder with `python -m http.server 8791`, and open `http://localhost:8791/tests/build/tracker-test.html`. It runs against a stand-in database (`tests/stand-in-db.js`).
 - Prove the tracker checker still catches rule breaks: `python tests/run_checker_selftest.py`.
-- Prove the resume checker still catches made-up facts and filler: `python tests/run_resume_selftest.py`.
-- Before sharing your copy: `python tools/check_repo.py --banned PATH`. It checks every file, the inside of the ZIP and spreadsheet, and the git history for dashes, the stock phrases the writing rules forbid, and your own private details.
+- Prove the resume checker still catches made-up facts: `python tests/run_resume_selftest.py`.
+- Before sharing your copy: `python tools/check_repo.py --banned PATH`. It checks every file git would share, the inside of the ZIP and spreadsheet, and the git history for your own private details, and for em dashes and en dashes.
 
 ### Sharing your own copy safely
 

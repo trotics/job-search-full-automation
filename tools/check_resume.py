@@ -5,7 +5,7 @@ Usage:
 
 Fails if:
   - a number, job title, employer, school or skill on the resume is not in the facts file,
-  - there is an em dash or en dash, a filler phrase, or a pronoun ("I", "my", "she", "her"),
+  - there is an em dash or en dash, or a pronoun ("I", "my", "she", "her"),
   - personal data that does not belong on a resume appears (birth date, age, street address, ID or license numbers),
   - a bullet is longer than about two lines, or the summary is too long,
   - a standard heading is missing,
@@ -14,18 +14,9 @@ Fails if:
     the resume's sections are out of the order saved there, or the resume uses a posting term marked there as not in the facts.
 Exit code 0 means every check passed.
 """
-import base64
 import re
 import sys
 
-FILLER = ["results-driven", "results driven", "detail-oriented", "detail oriented", "team player", "go-getter",
-          "hard-working", "hardworking", "self-starter", "self starter", "synergy", "dynamic", "passionate",
-          "proven track record", "responsible for", "duties included", "think outside the box", "best of breed",
-          "rockstar", "ninja", "guru"]
-# The project's own banned stock phrases, stored encoded (see tools/check_repo.py).
-STOCK = base64.b64decode(
-    "ZGVsdmUKbGV2ZXJhZ2UKc2VhbWxlc3MKcm9idXN0CnVubG9jawpnYW1lLWNoYW5nZXIKZ2FtZSBjaGFuZ2VyCmluIHRvZGF5J3MgZmFzdC1wYWNlZAppdCdzIGltcG9ydGFudCB0byBub3RlCmVsZXZhdGUKZW1wb3dlcgpzdHJlYW1saW5lCmhhcm5lc3MKbmF2aWdhdGUgdGhlIGNvbXBsZXhpdGllcw=="
-).decode().split("\n")
 # (pattern, what, flags). Patterns aim at personal details, not normal resume text
 # ("patients age 65", "40 clients in court" and "a single platform" must pass).
 PERSONAL = [
@@ -75,15 +66,11 @@ def main():
     problems = []
     lines = resume.splitlines()
 
-    # Dashes, filler, stock phrases, first person.
+    # Dashes and pronouns. (No word list is banned: any word is fine when the facts back it up.)
     for ch, name in ((chr(0x2014), "em dash"), (chr(0x2013), "en dash")):
         if ch in resume:
             problems.append("%s found" % name)
     low = resume.lower()
-    for p in FILLER + STOCK:
-        # Whole words only, so "Microsoft Dynamics" is not mistaken for "dynamic".
-        if re.search(r"\b" + re.escape(p) + r"\b", low):
-            problems.append("filler or stock phrase: %r" % p)
     first_person = re.compile(r"(?<![A-Za-z'])(I|me|my|mine|we|our|My|We|Our|he|she|him|her|his|hers|He|She|His|Her)(?![A-Za-z'])")
     # A capital I after words like Level or Phase is a Roman numeral ("Level I trauma center"), not a pronoun.
     numeral_before = re.compile(r"(Level|Phase|Tier|Grade|Class|Stage|Type|Step|Part|Title|Unit|[A-Z][a-z]+ist|Nurse|Analyst|Engineer|Specialist|Technician|Associate|Representative)\s+$")

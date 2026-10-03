@@ -15,7 +15,6 @@ CASES = [
     ("inflated percent", lambda s: s.replace("82% to 96%", "82% to 99%")),
     ("spelled-out number not in facts", lambda s: s.replace("six years", "eight years")),
     ("em dash", lambda s: s.replace("; 14 proposed", " " + chr(0x2014) + " 14 proposed")),
-    ("filler phrase", lambda s: s.replace("Registered nurse with", "Results-driven registered nurse with")),
     ("first person", lambda s: s.replace("- Raised unit", "- I raised unit")),
     ("third person", lambda s: s.replace("14 proposed fixes adopted", "her 14 fixes adopted")),
     ("birth date", lambda s: s.replace("(555) 010-0142", "(555) 010-0142 | Date of birth: 1994")),
@@ -67,6 +66,7 @@ POSTINGS_CASES = [
     ("fallback: default", None, lambda f: f.replace("Based on: postings", "Based on: default"), True),
     # Normal resume text that must not be flagged.
     ("ok: Roman numeral (Level I)", lambda s: s.replace("in a 24-bed unit", "in a 24-bed Level I trauma unit"), None, True),
+    ("ok: words like results-driven", lambda s: s.replace("Registered nurse with", "Results-driven, passionate registered nurse with"), None, True),
     ("ok: the word 'single'", lambda s: s.replace("on problems after go-live", "on a single list of problems after go-live"), None, True),
     # Normal text the second review found falsely flagged.
     ("ok: 'patients age 65'", lambda s: s.replace("2 critically ill patients", "2 critically ill patients age 65 and over"), lambda f: f.replace("Results:", "Results (patients age 65 and over):", 1), True),

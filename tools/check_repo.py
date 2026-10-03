@@ -6,8 +6,7 @@ Checks every file in the repo, the inside of the .xlsx and .zip files, and the g
      my-files/ (which git ignores), one per line, and pass it with --banned.
      A line ending in "(whole word, case-sensitive)" matches only as a whole word with that exact case.
   2. Em dashes and en dashes.
-  3. Stock phrases the project's writing rules forbid.
-  4. Files copied unchanged from a private folder (optional: --private-folder).
+  3. Files copied unchanged from a private folder (optional: --private-folder).
 
 Usage:
   python tools/check_repo.py
@@ -16,7 +15,6 @@ Usage:
 
 Exit code 0 means clean. Anything else means a check failed.
 """
-import base64
 import hashlib
 import os
 import re
@@ -26,11 +24,6 @@ import zipfile
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Stock phrases are not personal; they are stored encoded only so this script does not flag itself.
-STOCK_B64 = (
-    "ZGVsdmUKbGV2ZXJhZ2UKc2VhbWxlc3MKcm9idXN0CnVubG9jawpnYW1lLWNoYW5nZXIKZ2FtZSBjaGFuZ2VyCmluIHRvZGF5J3MgZmFzdC1wYWNlZAppdCdzIGltcG9ydGFudCB0byBub3RlCmVsZXZhdGUKZW1wb3dlcgpzdHJlYW1saW5lCmhhcm5lc3MKbmF2aWdhdGUgdGhlIGNvbXBsZXhpdGllcw=="
-)
-STOCK = base64.b64decode(STOCK_B64).decode().split("\n")
 WHOLE = "(whole word, case-sensitive)"
 
 DASHES = {chr(0x2014): "em dash", chr(0x2013): "en dash"}
@@ -105,9 +98,6 @@ def scan_text(label, text, problems, banned, check_style=True):
         n = text.count(ch)
         if n:
             problems.append(("dash", label, "%d %s" % (n, name)))
-    for p in STOCK:
-        if re.search(r"\b" + re.escape(p.lower()), low):
-            problems.append(("phrase", label, p))
 
 
 def scan_git(problems, banned):
@@ -163,7 +153,7 @@ def main():
         print("Private strings searched: %d (from your list)" % (len(banned[0]) + len(banned[1])))
     else:
         print("Private strings: not checked (no --banned list given)")
-    for kind in ("private", "dash", "phrase", "copied"):
+    for kind in ("private", "dash", "copied"):
         hits = [p for p in problems if p[0] == kind]
         print("%-8s %d hit(s)" % (kind, len(hits)))
         for _, label, what in hits:
