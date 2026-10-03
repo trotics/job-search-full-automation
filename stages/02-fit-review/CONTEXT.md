@@ -6,7 +6,7 @@ Decide whether one posting goes in the tracker. A sweep runs this for every new 
 
 | Source | File/Location | Section/Scope | Why |
 |--------|--------------|---------------|-----|
-| User or sweep | The posting, read on the employer's own site | Title, location detail, pay, requirements, work type | What is being judged |
+| User or sweep | The posting, read on the employer's own site, or pasted by the user | Title, location detail, pay, requirements, work type | What is being judged |
 | Stage 00 | `../00-intake/output/my-rules.md` | Full file | The user's rules |
 | Shared | `../../shared/rules.md` | Sections 1 to 6 | The checks |
 | Shared | `../../shared/my-setup.md` | Full file | Tracker kind and location, Python command, browser, email connector |

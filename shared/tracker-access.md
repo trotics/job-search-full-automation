@@ -25,7 +25,7 @@ A Claude artifact page the user published from `tracker/tracker-page.html`, with
 
 When the person asks for a tracker change outside a stage, take a snapshot first and run the check with `--stage user` afterwards.
 
-- **A status change:** read the row fresh, change `status`, and append a history line: `YYYY-MM-DD status set to <status> at the user's request.`
+- **A status change:** read the row fresh, change `status`, and append a history line: `YYYY-MM-DD status set to <status> at the user's request.` When the new status is Applied, also set `appliedDate` (ask the date). After a fill sheet, use the history line in `stages/03-apply/references/apply-procedure.md`, "No browser Claude can use".
 - **A job they applied to on their own:** add the employer first if it is not on the target list (`adding-employers.md`), then add a `listings` row with every column `check_tracker.py` requires: `id` (`<company-slug>-<req id or short title slug>`, unique), `company` (as in `companies`), `title`, `location`, `url`, `industry`, `pay` (or "not posted"), `why` (one line, for example "Applied by the user outside a session"), `teaches` ("Not read." if unknown), `priority`, `status` `Applied`, `appliedDate` (the date they give), `postingText` (the posting if they have it; otherwise "Not saved: applied outside a session"), and `history`: `YYYY-MM-DD added at the user's request; applied on their own on YYYY-MM-DD.` Leave `yourNotes` empty.
 
 ## Backups and snapshots

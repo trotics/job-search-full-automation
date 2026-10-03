@@ -33,7 +33,7 @@ Try these in order. Move to the next only if the one before it failed.
 - **b. Hidden input.** If the visible control is a button or a drag-and-drop zone, find the hidden `input[type=file]` behind it (with `read_page`, `find`, or a read-only check of the page) and use the file upload tool on it.
 - **c. The computer's file picker.** If a click opened it, close it (Escape) and go back to b. Only if b finds no input: if the desktop control tool can work that dialog on this computer, use it to type the full path and confirm. If the tool's access level blocks it, stop this option.
 - **d. Paste or type.** If the form offers "paste your resume" or "enter manually", use the text of `resume.md`, and flag it in the review summary.
-- **e. Switch browsers.** If the active browser cannot upload at all (for example the built-in browser pane), move this application to Claude in Chrome and start again at a.
+- **e. Switch browsers.** If the active browser cannot upload at all (for example the built-in browser pane), move this application to Claude in Chrome, if it is connected, and start again at a.
 - **Never:** "Apply with LinkedIn" or any LinkedIn import; signing in to Google Drive, Dropbox or any other account to import a file; any step that needs a password, a code or a CAPTCHA. Those are walls.
 - **Check after every upload.** The page must show the file name (or a preview), and it must be the file chosen above. If the site filled fields from the resume, check every one against the answer bank and fix any that are wrong.
 - **Hand it to the user only when a to e all failed or hit a wall.** Say which options you tried and why each failed.
@@ -44,7 +44,7 @@ Try these in order. Move to the next only if the one before it failed.
 - Fill from the answer bank and the resume. Invent nothing. For a question the answer bank does not cover, answer only if the answer is plainly safe and true from the resume. Otherwise ask the user. Questions about years of experience always go to the user unless the answer bank has the number.
 - **Optional free-text boxes** ("Why are you interested?"): leave blank unless the user's rules say to fill them. If you fill one, draft it in the user's writing style and flag it.
 - **Required free-text boxes:** draft them in the user's writing style from the resume and the posting, and get the user's OK on that text before it goes in.
-- **Questions answered from the resume** rather than the answer bank: flag each one, and offer to add it to the answer bank.
+- **Questions answered from the resume** rather than the answer bank: flag each one, and offer to add it to the answer bank. Also offer to save any new answer the user gives during the form (for example a years-of-experience number).
 - **Pay:** the answer bank's wording where text is allowed, the single number where one is required.
 - **Voluntary questions** (gender, race, veteran, disability): from the answer bank. With no entry, choose "I don't wish to answer" or the closest option, and tell the user.
 - **Links** (LinkedIn, portfolio): only when required, from the answer bank. Never open LinkedIn.

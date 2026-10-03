@@ -15,9 +15,11 @@ In `my-setup.md`, the spreadsheet tracker's location is "my-tracker.xlsx (kept b
 
 ## Scripts
 
-The scripts are in this Skill's `tools/` folder. If code execution is on, run them from there with the full path, on the files the person attached (for example `python <skill folder>/tools/check_tracker.py snapshot my-tracker.xlsx before.json`), and give back the changed files.
+The scripts are in this Skill's `tools/` folder. If code execution is on, run them from there with the full path, on the files the person attached (for example `python <skill folder>/tools/check_tracker.py snapshot my-tracker.xlsx <stamp>-before.json`), and give back the changed files.
 
 If code execution is off or a script cannot run: edit the spreadsheet only if you can, otherwise give the person the exact rows to type in. Check the work by hand against `recurring-mistakes.md` and the stage's Audit table, and say "checked by hand; the script did not run". Never call that a passed check. Backups and snapshots made in code execution are lost when the chat ends: the downloaded tracker is the person's only backup, so remind them to keep the previous copy until the new one is saved.
+
+**The one-file Skill** (`single-file-skill/SKILL.md`) has no `tools/` and no tracker files. With code execution, build the spreadsheet with openpyxl from the tabs and columns in `tracker-columns.md` (settings has one row, id `main`), and check by hand. Without it, get the tracker from the full workspace at the link at the end of this file.
 
 ## Setup
 
@@ -32,6 +34,6 @@ Build it with `tools/build_resume.py` in code execution and give it as a downloa
 
 ## What needs the desktop app
 
-Sweeps of most career sites, and applying, need a browser Claude can control. Until the person is at a computer with the desktop app, suggest fit calls on postings they paste ("Is this a fit? [paste the posting and its link]"), resume work, company research and interview prep.
+Sweeps of most career sites need a browser Claude can control. Applying works without one through a fill sheet (`stages/03-apply/references/apply-procedure.md`, "No browser Claude can use"): Claude prepares every answer and the person submits it in their own browser. Until the person is at a computer with the desktop app, also suggest fit calls on postings they paste ("Is this a fit? [paste the posting and its link]"), resume work, company research and interview prep.
 
 The full workspace folder, with everything set up for the desktop app, is at https://github.com/trotics/job-search-full-automation.

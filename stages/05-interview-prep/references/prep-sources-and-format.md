@@ -10,6 +10,8 @@ Use only these:
 4. **Recent news** from established news outlets and trade publications, found by web search, each linked.
 5. **The user's own record:** the resume text and the answer bank's work history entries. The user's stated history is the only source for their stories.
 
+If web search is not available, build the brief from the saved posting and the listing only, and say plainly in the file what could not be researched.
+
 Do not use as fact: anonymous review sites, aggregator job listings, social media posts, or anything you cannot link. You may mention review-site themes only as "people say", and only if the user asks.
 
 ## The prep file

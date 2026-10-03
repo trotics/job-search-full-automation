@@ -35,6 +35,10 @@ CASES = [(f.__name__[5:], f, "sweep") for f in [case_notes, case_history_rewrite
 CASES.append(("password_in_answers_apply", case_password_in_answers, "apply"))
 def case_coverage_bad_state(d): d["coverage"][0]["sweepState"] = "finished"
 def case_coverage_manual_no_reason(d): d["coverage"][0]["sweepState"] = "manual"; d["coverage"][0]["detail"] = "site blocked"
+def case_grouped_card_number(d):
+    l = L(d, "kestrel-telehealth-kt-3315"); l["status"] = "Applied"; l["appliedDate"] = "2026-09-30"
+    l["history"] += " | 2026-09-30 applied, confirmation 4417-8823-1190-5521; upload: hidden file input."
+CASES.append(("grouped_card_number", case_grouped_card_number, "apply"))
 CASES += [("coverage_bad_state", case_coverage_bad_state, "sweep"),
           ("coverage_manual_no_reason", case_coverage_manual_no_reason, "sweep")]
 def case_applied_no_upload_method(d):

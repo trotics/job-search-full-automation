@@ -47,7 +47,10 @@ def main():
             info.compress_type = zipfile.ZIP_DEFLATED
             with open(full, "rb") as f:
                 # Same bytes on every computer: Windows checkouts can add CR characters.
-                z.writestr(info, f.read().replace(b"\r\n", b"\n"))
+                data = f.read()
+                if not arc.endswith(".xlsx"):  # never touch the bytes of a binary file
+                    data = data.replace(b"\r\n", b"\n")
+                z.writestr(info, data)
     print("Wrote", os.path.relpath(OUT, ROOT))
 
 

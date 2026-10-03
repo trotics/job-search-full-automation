@@ -47,7 +47,7 @@ Research sessions the user starts by asking: (A) find employers, (B) a company d
 | Links | Every fact in the report has a link to an allowed source |
 | Access | No LinkedIn page was opened, no site required a sign-in, nothing was scraped |
 | Part A approval | Every new employer was approved by the user and has its own careers site link |
-| Part A names | No new employer matches an existing name, an excluded industry or a never-contact entry |
+| Part A names | No new employer matches an existing name or a never-contact entry, and none is in an excluded industry unless the user asked to keep it (`keepAnyway` yes) |
 | Check | Part A: `check_tracker.py --stage research` passes |
 | Next step | The session ended with the next thing to say, in quotes |
 

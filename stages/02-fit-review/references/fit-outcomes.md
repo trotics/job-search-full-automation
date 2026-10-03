@@ -33,6 +33,15 @@ For example a commission-only role when the user's rules say nothing about commi
 6. **Lean:** Apply or Skip, with one sentence of reasoning.
 7. **Decide:** the one question the user needs to answer.
 
+## The person decides a close call
+
+When the person answers a close call (in the session or a later one), record it, so it is never asked again. Take a snapshot first and check with `--stage fit` after.
+
+- **Apply:** write the listing as in "Pass", with history `YYYY-MM-DD added after the user's close-call decision.` Set the employer's `coverage.result` to `HIT`.
+- **Skip:** add `title, req id, skipped by the user's decision YYYY-MM-DD` to the employer's `coverage.skipped`. Set `result` to `NONE` unless something else there is still waiting.
+
+A close call counts as decided when its req id is in `listings` or in `coverage.skipped`.
+
 ## A closed listing that is live again
 
 Do not reopen it. List it in the report. The user decides.

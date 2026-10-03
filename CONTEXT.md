@@ -18,6 +18,7 @@ A job search system for one person. Set up once, then run any stage when the per
 | Find employers, research a company, industry or role | `stages/08-company-research/CONTEXT.md` | Adds employers only after approval |
 | Add employers the person names | `shared/adding-employers.md` | Outside a stage, checked with `--stage research` |
 | A returning person with no request | `shared/next-steps.md` | "A returning person with no request": read the tracker, suggest one thing |
+| Decide a close call (apply or skip) | `stages/02-fit-review/references/fit-outcomes.md` | "The person decides a close call", checked with `--stage fit` |
 | A status change, or a job they applied to on their own | `shared/tracker-access.md` | "Direct requests", checked with `--stage user` |
 
 ## Shared Resources

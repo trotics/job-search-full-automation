@@ -40,7 +40,7 @@ Every stage folder holds `CONTEXT.md`, `references/` (how to do it) and `output/
 
 ### How `status` works
 
-Scan `stages/*/output/`. A stage whose output folder holds files other than `.gitkeep` is COMPLETE (list the file names); otherwise PENDING. Fit reviews run inside a sweep are reported in the sweep's report, so 02 can stay PENDING while 01 is COMPLETE; say so. Exceptions: if `stages/07-resume/output/` holds a resume but no `resume-facts.md`, show 07 as YOURS when `my-setup.md` says "use mine", and PENDING otherwise (an old resume waiting to be improved). Employers added outside a stage leave 08 PENDING. Also say whether setup is done (`shared/my-setup.md` exists with no `{{` left). Render:
+Scan `stages/*/output/`. A stage whose output folder holds files other than `.gitkeep` is COMPLETE (list the file names); otherwise PENDING. Fit reviews run inside a sweep are reported in the sweep's report, so 02 can stay PENDING while 01 is COMPLETE; say so. Exceptions: if `stages/07-resume/output/` holds a resume but no `resume-facts.md`, show 07 as YOURS when `my-setup.md` says "use mine", and PENDING otherwise (an old resume waiting to be improved). Employers added outside a stage leave 08 PENDING. A stage whose only output says nothing was done (for example "0 listings qualified") shows RAN, not COMPLETE. Also say whether setup is done (`shared/my-setup.md` exists with no `{{` left). Render:
 
 ```
 Pipeline Status: job-search-full-automation   (setup: DONE)

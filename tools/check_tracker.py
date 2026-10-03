@@ -31,6 +31,7 @@ SECRET_PATTERNS = [
     (re.compile(r"\b\d{3}-\d{2}-\d{4}\b"), "looks like a Social Security number"),
     (re.compile(r"password\s*[:=]", re.I), "looks like a stored password"),
     (re.compile(r"\b\d{13,19}\b"), "long number that could be a card or account number"),
+    (re.compile(r"\b\d{4}(?:[ -]\d{4}){2,3}\b"), "grouped number that could be a card or account number"),
 ]
 DATE_START = re.compile(r"\s*\d{4}-\d{2}-\d{2}\s")
 
@@ -210,7 +211,7 @@ def validate(snap, problems, only_ids=None, only_companies=None, only_coverage=N
             problems.append("coverage %s: sweepState %r must be done, partial, not swept or manual" % (vid, v["sweepState"]))
         if v.get("result") and v["result"] not in ("HIT", "NONE", "LEAD", "PENDING"):
             problems.append("coverage %s: result %r must be HIT, NONE, LEAD or PENDING" % (vid, v["result"]))
-        if v.get("sweepState") == "manual" and not str(v.get("detail", "")).startswith("MANUAL:"):
+        if v.get("sweepState") == "manual" and not re.match(r"\s*(\d{4}-\d{2}-\d{2}\s+)?MANUAL:", str(v.get("detail", ""))):
             problems.append("coverage %s: a manual employer's detail must start with MANUAL:" % vid)
 
     for aid, a in snap["answers"].items():

@@ -10,7 +10,7 @@ Prepare the user for a named interview. Run when the user asks.
 | Stage 00 | `../00-intake/output/my-rules.md` | Writing style | How the file reads |
 | Stage 07 | `../07-resume/output/resume.md` | Full file | The user's stories come only from their own record |
 | Shared | `../../shared/my-setup.md` | Full file | Tracker kind and location, Python command, browser, email connector |
-| Shared | `../../shared/tracker-access.md` | Full file | Only for the optional history line |
+| Shared | `../../shared/tracker-access.md` | Full file | The step 1 direct request, and the optional history line |
 | Shared | `../../shared/recurring-mistakes.md` | Full file | Read before any tracker write |
 | Shared | `../../shared/next-steps.md` | "After interview prep" | What to suggest when the session ends |
 | Tracker | `listings` (that listing), `answers` (Work history) | One row; work history entries | The saved posting, the history, the user's record |
@@ -18,7 +18,7 @@ Prepare the user for a named interview. Run when the user asks.
 
 ## Process
 
-1. Confirm with the user which interview, the stage (phone screen, hiring manager, panel, onsite), the date, and who they are meeting, if known. If the listing is not at Interview yet, offer to set it, and ask when they applied so `appliedDate` is filled too (a direct request, `shared/tracker-access.md`, checked with `--stage user`).
+1. Confirm with the user which interview, the stage (phone screen, hiring manager, panel, onsite), the date, and who they are meeting, if known. If the listing is not at Interview yet, offer to set it, and ask when they applied so `appliedDate` is filled too (a direct request, `shared/tracker-access.md`, with its own snapshot and `--stage user` check before step 2).
 2. Read the listing (artifact: `get`; spreadsheet: `sheet.py show`). Read its `postingText`.
 3. Build the company brief from allowed sources only, every fact linked.
 4. List the likely questions, including the hard ones the user's record invites.

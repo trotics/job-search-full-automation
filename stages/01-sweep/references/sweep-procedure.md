@@ -17,7 +17,7 @@ The detail behind each step of the sweep. Board-by-board reading is in `board-te
 2. **Search by department, not only by title.** Open the board's categories that hold the user's target roles (for example Sales, Customer Service, Operations, Finance) and read every entry to mid level posting in them; titles vary too much between employers for a title search alone. Then read every posting that could match the user's target roles, with its requirements in full, and its **own** location text (many boards misreport location).
 3. Large boards: read them in parts and record how far you got in `sweepProgress`, with `sweepState` `partial`.
 4. A posting is new if no row in `listings` has its job number, or its title and location at that employer.
-5. **If the site will not load,** first try the known workarounds (the board's public feed, an alternate host, the sitemap). If they fail, do not try to get past anything. Set `sweepState` to `manual`, `result` to `LEAD`, and start `detail` with "MANUAL:" plus the link and which kind of failure it was: a **bot check** (the user can usually open it in their own browser), a **browser refusal** (the browser tool will not open the site), or a **structural absence** (the employer has no postings of its own). Never remove an employer from the target list because its site was hard to reach.
+5. **If the site will not load,** first try the known workarounds (the board's public feed, an alternate host, the sitemap). If they fail, do not try to get past anything. Set `sweepState` to `manual`, `result` to `LEAD`, and start `detail` with today's date and "MANUAL:" plus the link and which kind of failure it was: a **bot check** (the user can usually open it in their own browser), a **browser refusal** (the browser tool will not open the site), or a **structural absence** (the employer has no postings of its own). Never remove an employer from the target list because its site was hard to reach.
 
 ## The coverage row
 
@@ -26,7 +26,7 @@ Update the employer's `coverage` row, or create it if the employer has none yet 
 - `sweepDate`: today.
 - `sweepState`: `done`, `partial`, or `manual` (see "Reading one employer" step 5).
 - `result`: `HIT` if a listing was added, `NONE` if nothing fit, `LEAD` if something needs the user.
-- `detail`: a dated line at the start, with older text kept after "Earlier:".
+- `detail`: a dated line at the start (`YYYY-MM-DD ...`, or `YYYY-MM-DD MANUAL: ...` for a manual employer), with older text kept after "Earlier:".
 - `skipped`: one line per skipped posting: title, req id, reason.
 
 ## Rechecking listings (status To apply only)

@@ -23,7 +23,7 @@ Check employers for new listings, and confirm that listings already in the track
 
 ## Process
 
-1. Take a tracker snapshot before writing anything. If this run may write more than five rows, take a backup too.
+1. Take a tracker snapshot before writing anything. If this run may write more than five rows on the spreadsheet, take a backup too (for the artifact tracker the before snapshot counts).
 2. If the user asked to add employers, add them as `adding-employers.md` says.
 3. Agree the scope with the user (`sweep-procedure.md`, "Scope").
 4. For each employer in scope, read its own board (`sweep-procedure.md`, "Reading one employer").
@@ -53,7 +53,7 @@ Stage 02 follows the user's autonomy lines and asks before writing when they say
 | Protected listings | No listing at Applied, Followed up, Interview or Offer was changed (`check_tracker.py`) |
 | Evidence | No status change rests on aggregator evidence |
 | User's notes | `yourNotes` untouched on every row (`check_tracker.py`) |
-| Backup | Taken if more than five rows were written |
+| Backup | On the spreadsheet, taken if more than five rows were written |
 | Next step | The session ended with the next thing to say, in quotes |
 
 ## Outputs

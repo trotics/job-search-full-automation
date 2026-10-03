@@ -57,6 +57,7 @@ A job search system for one person. Set up once, then run any stage when the per
 | Find employers, research a company, industry or role | `stages/08-company-research/CONTEXT.md` | Adds employers only after approval |
 | Add employers the person names | `shared/adding-employers.md` | Outside a stage, checked with `--stage research` |
 | A returning person with no request | `shared/next-steps.md` | "A returning person with no request": read the tracker, suggest one thing |
+| Decide a close call (apply or skip) | `stages/02-fit-review/references/fit-outcomes.md` | "The person decides a close call", checked with `--stage fit` |
 | A status change, or a job they applied to on their own | `shared/tracker-access.md` | "Direct requests", checked with `--stage user` |
 
 ### Shared Resources
@@ -175,7 +176,7 @@ The one way any session adds an employer to `companies`. Only when the user asks
    - `keepAnyway`: `no`, unless the user asked to keep an excluded-industry employer (step 2).
    - `onHold`: `yes` only if the user's rules put this employer on hold, otherwise `no`.
    - `added`: today, `YYYY-MM-DD`.
-4. Show the list to the user before saving. Write only the employers they approve, with a snapshot before and a check after (`tracker-access.md`). Inside a sweep or a fit review, that stage's own check covers it. Anywhere else (the intake, company research, or a direct request), run the check with `--stage research`, then suggest a sweep of the new employers ("Say 'Sweep [names]'").
+4. Show the list to the user before saving. Write only the employers they approve, with a snapshot before and a check after (`tracker-access.md`). Inside a sweep or a fit review, that stage's own check covers it. When a direct request also adds a listing (a job they applied to on their own), the one `--stage user` check covers both. Anywhere else (the intake, company research, or a direct request), run the check with `--stage research`, then suggest a sweep of the new employers ("Say 'Sweep [names]'").
 
 ---
 
@@ -245,7 +246,7 @@ System settings for this job search, filled in once by setup. Every stage reads 
 
 ## Next steps
 
-What to suggest when a session ends, so the person always knows what to say next. "Check my email" is short for "Check my email for employer replies". Wherever a line says "Check my email" and `my-setup.md` shows no email connector, say instead: "In a few days, paste any employer replies here and say 'Check these emails' (or connect your email in Claude's settings)." If the person has no browser Claude can control (no desktop app, see `no-folder.md`), never suggest "Let's apply" or "Run a sweep" as something to do now: say "When you are at the desktop app, say 'Let's apply'", and meanwhile suggest "Build my resume" (if there is no resume yet) or "Is this a fit? [paste a posting and its link]". Suggest only; never start the next stage yourself. Keep it to one or two lines, with the exact words to say in quotes, and pick the line that fits what just happened.
+What to suggest when a session ends, so the person always knows what to say next. "Check my email" is short for "Check my email for employer replies". Wherever a line says "Check my email" and `my-setup.md` shows no email connector, say instead: "In a few days, paste any employer replies here and say 'Check these emails' (or connect your email in Claude's settings)." If the person has no browser Claude can control (no desktop app, see `no-folder.md`), never suggest "Run a sweep" as something to do now. "Let's apply" still works with a fill sheet (Claude prepares every answer; the person fills in the form and submits it in their own browser), so say that plainly. Also suggest "Build my resume" (if there is no resume yet) or "Is this a fit? [paste a posting and its link]". Suggest only; never start the next stage yourself. Keep it to one or two lines, with the exact words to say in quotes, and pick the line that fits what just happened.
 
 ### After the interview
 
@@ -287,6 +288,13 @@ What to suggest when a session ends, so the person always knows what to say next
 - The listing is still at To apply: "Apply first: say 'Apply to the [company] [title] listing'. Then send the drafts yourself."
 - Otherwise: "Send the drafts yourself when you are ready. In a few days, say 'Check my email'."
 
+- No listings qualified: say why in one line (for example "outreach is for listings at To apply or Applied recently"), then the next most useful thing from "A returning person with no request".
+
+### After a direct change
+
+- A rejection or a closed listing: one kind line, then the next most useful thing from "A returning person with no request".
+- Anything else: confirm what changed in one line, then the same.
+
 ### After interview prep
 
 "Good luck. After the interview, say 'Check my email' to log the next step."
@@ -304,7 +312,7 @@ What to suggest when a session ends, so the person always knows what to say next
 Find the tracker in `my-setup.md` and read `listings` and `coverage` as `tracker-access.md` says (no snapshot needed: this only reads). An employer with no `coverage` row has never been swept, unless its industry is excluded (those are skipped on purpose and do not count). Then suggest the one most useful thing:
 
 1. A deadline or an interview coming up (a listing at Interview whose newest history line gives a future date, or a deadline in the latest mailbox report): name it with its date first. If no prep file for it exists in `stages/05-interview-prep/output/`, add "Say 'Prep me for my interview with [company] on [day]'"; if one exists, just wish them luck. For an assessment or a reply to send, say what to do and by when.
-2. Things waiting on the person: close calls in the latest sweep or fit report that they have not decided, and employers whose `coverage` says `manual` or `LEAD`. Name them in one line each and ask them to decide or open the site.
+2. Things waiting on the person: close calls in the latest sweep or fit report that are not decided yet (their req id is in neither `listings` nor `coverage.skipped`; recording a decision: `stages/02-fit-review/references/fit-outcomes.md`), and employers whose `coverage` says `manual` or `LEAD`. Name them in one line each and ask them to decide or open the site.
 3. Listings at To apply: "Say 'Let's apply'."
 4. Applications in and no mailbox check in the last week: "Say 'Check my email'."
 5. No sweep in the last week: "Say 'Run a sweep'."
@@ -331,9 +339,11 @@ In `my-setup.md`, the spreadsheet tracker's location is "my-tracker.xlsx (kept b
 
 ### Scripts
 
-The scripts are in this Skill's `tools/` folder. If code execution is on, run them from there with the full path, on the files the person attached (for example `python <skill folder>/tools/check_tracker.py snapshot my-tracker.xlsx before.json`), and give back the changed files.
+The scripts are in this Skill's `tools/` folder. If code execution is on, run them from there with the full path, on the files the person attached (for example `python <skill folder>/tools/check_tracker.py snapshot my-tracker.xlsx <stamp>-before.json`), and give back the changed files.
 
 If code execution is off or a script cannot run: edit the spreadsheet only if you can, otherwise give the person the exact rows to type in. Check the work by hand against `recurring-mistakes.md` and the stage's Audit table, and say "checked by hand; the script did not run". Never call that a passed check. Backups and snapshots made in code execution are lost when the chat ends: the downloaded tracker is the person's only backup, so remind them to keep the previous copy until the new one is saved.
+
+**The one-file Skill** (`single-file-skill/SKILL.md`) has no `tools/` and no tracker files. With code execution, build the spreadsheet with openpyxl from the tabs and columns in `tracker-columns.md` (settings has one row, id `main`), and check by hand. Without it, get the tracker from the full workspace at the link at the end of this file.
 
 ### Setup
 
@@ -348,7 +358,7 @@ Build it with `tools/build_resume.py` in code execution and give it as a downloa
 
 ### What needs the desktop app
 
-Sweeps of most career sites, and applying, need a browser Claude can control. Until the person is at a computer with the desktop app, suggest fit calls on postings they paste ("Is this a fit? [paste the posting and its link]"), resume work, company research and interview prep.
+Sweeps of most career sites need a browser Claude can control. Applying works without one through a fill sheet (`stages/03-apply/references/apply-procedure.md`, "No browser Claude can use"): Claude prepares every answer and the person submits it in their own browser. Until the person is at a computer with the desktop app, also suggest fit calls on postings they paste ("Is this a fit? [paste the posting and its link]"), resume work, company research and interview prep.
 
 The full workspace folder, with everything set up for the desktop app, is at https://github.com/trotics/job-search-full-automation.
 
@@ -619,7 +629,7 @@ A Claude artifact page the user published from `tracker/tracker-page.html`, with
 
 When the person asks for a tracker change outside a stage, take a snapshot first and run the check with `--stage user` afterwards.
 
-- **A status change:** read the row fresh, change `status`, and append a history line: `YYYY-MM-DD status set to <status> at the user's request.`
+- **A status change:** read the row fresh, change `status`, and append a history line: `YYYY-MM-DD status set to <status> at the user's request.` When the new status is Applied, also set `appliedDate` (ask the date). After a fill sheet, use the history line in `stages/03-apply/references/apply-procedure.md`, "No browser Claude can use".
 - **A job they applied to on their own:** add the employer first if it is not on the target list (`adding-employers.md`), then add a `listings` row with every column `check_tracker.py` requires: `id` (`<company-slug>-<req id or short title slug>`, unique), `company` (as in `companies`), `title`, `location`, `url`, `industry`, `pay` (or "not posted"), `why` (one line, for example "Applied by the user outside a session"), `teaches` ("Not read." if unknown), `priority`, `status` `Applied`, `appliedDate` (the date they give), `postingText` (the posting if they have it; otherwise "Not saved: applied outside a session"), and `history`: `YYYY-MM-DD added at the user's request; applied on their own on YYYY-MM-DD.` Leave `yourNotes` empty.
 
 ### Backups and snapshots
@@ -1044,7 +1054,7 @@ Check employers for new listings, and confirm that listings already in the track
 
 ### Process
 
-1. Take a tracker snapshot before writing anything. If this run may write more than five rows, take a backup too.
+1. Take a tracker snapshot before writing anything. If this run may write more than five rows on the spreadsheet, take a backup too (for the artifact tracker the before snapshot counts).
 2. If the user asked to add employers, add them as `adding-employers.md` says.
 3. Agree the scope with the user (`sweep-procedure.md`, "Scope").
 4. For each employer in scope, read its own board (`sweep-procedure.md`, "Reading one employer").
@@ -1074,7 +1084,7 @@ Stage 02 follows the user's autonomy lines and asks before writing when they say
 | Protected listings | No listing at Applied, Followed up, Interview or Offer was changed (`check_tracker.py`) |
 | Evidence | No status change rests on aggregator evidence |
 | User's notes | `yourNotes` untouched on every row (`check_tracker.py`) |
-| Backup | Taken if more than five rows were written |
+| Backup | On the spreadsheet, taken if more than five rows were written |
 | Next step | The session ended with the next thing to say, in quotes |
 
 ### Outputs
@@ -1320,7 +1330,7 @@ The detail behind each step of the sweep. Board-by-board reading is in `board-te
 2. **Search by department, not only by title.** Open the board's categories that hold the user's target roles (for example Sales, Customer Service, Operations, Finance) and read every entry to mid level posting in them; titles vary too much between employers for a title search alone. Then read every posting that could match the user's target roles, with its requirements in full, and its **own** location text (many boards misreport location).
 3. Large boards: read them in parts and record how far you got in `sweepProgress`, with `sweepState` `partial`.
 4. A posting is new if no row in `listings` has its job number, or its title and location at that employer.
-5. **If the site will not load,** first try the known workarounds (the board's public feed, an alternate host, the sitemap). If they fail, do not try to get past anything. Set `sweepState` to `manual`, `result` to `LEAD`, and start `detail` with "MANUAL:" plus the link and which kind of failure it was: a **bot check** (the user can usually open it in their own browser), a **browser refusal** (the browser tool will not open the site), or a **structural absence** (the employer has no postings of its own). Never remove an employer from the target list because its site was hard to reach.
+5. **If the site will not load,** first try the known workarounds (the board's public feed, an alternate host, the sitemap). If they fail, do not try to get past anything. Set `sweepState` to `manual`, `result` to `LEAD`, and start `detail` with today's date and "MANUAL:" plus the link and which kind of failure it was: a **bot check** (the user can usually open it in their own browser), a **browser refusal** (the browser tool will not open the site), or a **structural absence** (the employer has no postings of its own). Never remove an employer from the target list because its site was hard to reach.
 
 ### The coverage row
 
@@ -1329,7 +1339,7 @@ Update the employer's `coverage` row, or create it if the employer has none yet 
 - `sweepDate`: today.
 - `sweepState`: `done`, `partial`, or `manual` (see "Reading one employer" step 5).
 - `result`: `HIT` if a listing was added, `NONE` if nothing fit, `LEAD` if something needs the user.
-- `detail`: a dated line at the start, with older text kept after "Earlier:".
+- `detail`: a dated line at the start (`YYYY-MM-DD ...`, or `YYYY-MM-DD MANUAL: ...` for a manual employer), with older text kept after "Earlier:".
 - `skipped`: one line per skipped posting: title, req id, reason.
 
 ### Rechecking listings (status To apply only)
@@ -1361,7 +1371,7 @@ Decide whether one posting goes in the tracker. A sweep runs this for every new 
 
 | Source | File/Location | Section/Scope | Why |
 |--------|--------------|---------------|-----|
-| User or sweep | The posting, read on the employer's own site | Title, location detail, pay, requirements, work type | What is being judged |
+| User or sweep | The posting, read on the employer's own site, or pasted by the user | Title, location detail, pay, requirements, work type | What is being judged |
 | Stage 00 | `../00-intake/output/my-rules.md` | Full file | The user's rules |
 | Shared | `../../shared/rules.md` | Sections 1 to 6 | The checks |
 | Shared | `../../shared/my-setup.md` | Full file | Tracker kind and location, Python command, browser, email connector |
@@ -1454,6 +1464,15 @@ For example a commission-only role when the user's rules say nothing about commi
 5. **Pay and next step:** posted pay or "not posted", and any named next role.
 6. **Lean:** Apply or Skip, with one sentence of reasoning.
 7. **Decide:** the one question the user needs to answer.
+
+### The person decides a close call
+
+When the person answers a close call (in the session or a later one), record it, so it is never asked again. Take a snapshot first and check with `--stage fit` after.
+
+- **Apply:** write the listing as in "Pass", with history `YYYY-MM-DD added after the user's close-call decision.` Set the employer's `coverage.result` to `HIT`.
+- **Skip:** add `title, req id, skipped by the user's decision YYYY-MM-DD` to the employer's `coverage.skipped`. Set `result` to `NONE` unless something else there is still waiting.
+
+A close call counts as decided when its req id is in `listings` or in `coverage.skipped`.
 
 ### A closed listing that is live again
 
@@ -1817,7 +1836,7 @@ Try these in order. Move to the next only if the one before it failed.
 - **b. Hidden input.** If the visible control is a button or a drag-and-drop zone, find the hidden `input[type=file]` behind it (with `read_page`, `find`, or a read-only check of the page) and use the file upload tool on it.
 - **c. The computer's file picker.** If a click opened it, close it (Escape) and go back to b. Only if b finds no input: if the desktop control tool can work that dialog on this computer, use it to type the full path and confirm. If the tool's access level blocks it, stop this option.
 - **d. Paste or type.** If the form offers "paste your resume" or "enter manually", use the text of `resume.md`, and flag it in the review summary.
-- **e. Switch browsers.** If the active browser cannot upload at all (for example the built-in browser pane), move this application to Claude in Chrome and start again at a.
+- **e. Switch browsers.** If the active browser cannot upload at all (for example the built-in browser pane), move this application to Claude in Chrome, if it is connected, and start again at a.
 - **Never:** "Apply with LinkedIn" or any LinkedIn import; signing in to Google Drive, Dropbox or any other account to import a file; any step that needs a password, a code or a CAPTCHA. Those are walls.
 - **Check after every upload.** The page must show the file name (or a preview), and it must be the file chosen above. If the site filled fields from the resume, check every one against the answer bank and fix any that are wrong.
 - **Hand it to the user only when a to e all failed or hit a wall.** Say which options you tried and why each failed.
@@ -1828,7 +1847,7 @@ Try these in order. Move to the next only if the one before it failed.
 - Fill from the answer bank and the resume. Invent nothing. For a question the answer bank does not cover, answer only if the answer is plainly safe and true from the resume. Otherwise ask the user. Questions about years of experience always go to the user unless the answer bank has the number.
 - **Optional free-text boxes** ("Why are you interested?"): leave blank unless the user's rules say to fill them. If you fill one, draft it in the user's writing style and flag it.
 - **Required free-text boxes:** draft them in the user's writing style from the resume and the posting, and get the user's OK on that text before it goes in.
-- **Questions answered from the resume** rather than the answer bank: flag each one, and offer to add it to the answer bank.
+- **Questions answered from the resume** rather than the answer bank: flag each one, and offer to add it to the answer bank. Also offer to save any new answer the user gives during the form (for example a years-of-experience number).
 - **Pay:** the answer bank's wording where text is allowed, the single number where one is required.
 - **Voluntary questions** (gender, race, veteran, disability): from the answer bank. With no entry, choose "I don't wish to answer" or the closest option, and tell the user.
 - **Links** (LinkedIn, portfolio): only when required, from the answer bank. Never open LinkedIn.
@@ -2005,7 +2024,7 @@ Prepare the user for a named interview. Run when the user asks.
 | Stage 00 | `../00-intake/output/my-rules.md` | Writing style | How the file reads |
 | Stage 07 | `../07-resume/output/resume.md` | Full file | The user's stories come only from their own record |
 | Shared | `../../shared/my-setup.md` | Full file | Tracker kind and location, Python command, browser, email connector |
-| Shared | `../../shared/tracker-access.md` | Full file | Only for the optional history line |
+| Shared | `../../shared/tracker-access.md` | Full file | The step 1 direct request, and the optional history line |
 | Shared | `../../shared/recurring-mistakes.md` | Full file | Read before any tracker write |
 | Shared | `../../shared/next-steps.md` | "After interview prep" | What to suggest when the session ends |
 | Tracker | `listings` (that listing), `answers` (Work history) | One row; work history entries | The saved posting, the history, the user's record |
@@ -2013,7 +2032,7 @@ Prepare the user for a named interview. Run when the user asks.
 
 ### Process
 
-1. Confirm with the user which interview, the stage (phone screen, hiring manager, panel, onsite), the date, and who they are meeting, if known. If the listing is not at Interview yet, offer to set it, and ask when they applied so `appliedDate` is filled too (a direct request, `shared/tracker-access.md`, checked with `--stage user`).
+1. Confirm with the user which interview, the stage (phone screen, hiring manager, panel, onsite), the date, and who they are meeting, if known. If the listing is not at Interview yet, offer to set it, and ask when they applied so `appliedDate` is filled too (a direct request, `shared/tracker-access.md`, with its own snapshot and `--stage user` check before step 2).
 2. Read the listing (artifact: `get`; spreadsheet: `sheet.py show`). Read its `postingText`.
 3. Build the company brief from allowed sources only, every fact linked.
 4. List the likely questions, including the hard ones the user's record invites.
@@ -2061,6 +2080,8 @@ Use only these:
 3. **The employer's own website:** what they sell, to whom, leadership, press releases.
 4. **Recent news** from established news outlets and trade publications, found by web search, each linked.
 5. **The user's own record:** the resume text and the answer bank's work history entries. The user's stated history is the only source for their stories.
+
+If web search is not available, build the brief from the saved posting and the listing only, and say plainly in the file what could not be researched.
 
 Do not use as fact: anonymous review sites, aggregator job listings, social media posts, or anything you cannot link. You may mention review-site themes only as "people say", and only if the user asks.
 
@@ -2672,7 +2693,7 @@ Research sessions the user starts by asking: (A) find employers, (B) a company d
 | Links | Every fact in the report has a link to an allowed source |
 | Access | No LinkedIn page was opened, no site required a sign-in, nothing was scraped |
 | Part A approval | Every new employer was approved by the user and has its own careers site link |
-| Part A names | No new employer matches an existing name, an excluded industry or a never-contact entry |
+| Part A names | No new employer matches an existing name or a never-contact entry, and none is in an excluded industry unless the user asked to keep it (`keepAnyway` yes) |
 | Check | Part A: `check_tracker.py --stage research` passes |
 | Next step | The session ended with the next thing to say, in quotes |
 
