@@ -14,7 +14,7 @@ This was built for one real job search and used every day on it. This public ver
 |---|---|
 | "Set me up" | Interviews you one question at a time about the jobs you want, where, pay, industries and your hard noes. Shows you your rules and saves them only when you approve. |
 | "Build my resume" | Asks about your work one question at a time, writes down only facts you confirm, looks at a few real postings for the job you want so your resume puts first what those employers ask for, and builds a clean resume. Works for any job in any field. You approve the facts, each section and the final PDF. Already happy with your resume? Skip it. |
-| "Find employers for my target list" | Searches local and industry lists for employers that fit your rules, checks each one has its own careers site, and adds only the ones you approve. |
+| "Suggest employers that fit my background" | Searches local and industry lists for employers that fit your rules, checks each one has its own careers site, and adds only the ones you approve. |
 | "Tell me about [company]" | A short, sourced brief on one employer. It can also map an industry near you, or research what a job title does and pays (from employers' own posted pay). |
 | "Add these employers: ..." | Finds each employer's own careers page and adds it to your target list. |
 | "Run a sweep" | Reads your employers' career sites, adds postings that fit your rules to your tracker, and records why the others did not fit. Rechecks that open listings are still up. |
@@ -141,7 +141,7 @@ The instructions themselves are plain text files. If you want to try another AI 
 - **"Prep me for my interview with [company] on [day]"**: the prep file is saved in `reports/`.
 - **"Change my rules"**: reruns only the parts of the interview you want to change.
 - **Changing statuses yourself:** you can change a status on the tracker page any time. It adds a dated line to that listing's history. Avoid doing it while Claude is in the middle of a session; do it before or after, so the session's check only sees the session's own changes.
-- **"Find employers for my target list"**, **"Tell me about [company]"**, **"Build my resume"**: see `skill/job-search/references/prompts.md` for the full list of things you can say.
+- **"Suggest employers that fit my background"**, **"Tell me about [company]"**, **"Build my resume"**: see `skill/job-search/references/prompts.md` for the full list of things you can say.
 
 ## Safety notes
 

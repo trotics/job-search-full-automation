@@ -4,7 +4,7 @@ Research sessions the user starts by asking. Four kinds:
 
 | Kind | The user says something like | Writes to the tracker |
 |---|---|---|
-| A. Find employers | "Find employers for my target list" | New `companies` rows, after the user approves each one |
+| A. Find employers | "Suggest employers that fit my background" | New `companies` rows, after the user approves each one |
 | B. Company deep dive | "Tell me about [company]" | Nothing (a report only) |
 | C. Industry map | "Map the [industry] employers around [place]" | Nothing, unless the user then asks to add some (run A for those) |
 | D. Role research | "What does a [title] do, and what does it pay around here?" | Nothing (a report only) |

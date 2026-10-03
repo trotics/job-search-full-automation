@@ -93,7 +93,7 @@ Ask them in this order. The number in brackets is the section of `my-rules.md` i
    - **"Yes, but I want it improved"**: run `stages/07-resume.md`, starting from their file. Their resume is a source of facts, and nothing changes without their yes.
    - **"No" or "I need a new one"**: run `stages/07-resume.md` from the start.
    Tell them they can skip this for now and say "build my resume" any time.
-7. **Employers.** Ask: "Do you already have a list of employers you want to work for?" If yes, add them with sweep step 0. If no, or they want more, offer stage 08 part A ("find employers for my target list"). Do not start it unless they say yes.
+7. **Employers.** Ask: "Do you already have a list of employers you want to work for?" If yes, add them with sweep step 0. If no, or they want more, offer stage 08 part A ("suggest employers that fit my background"). Do not start it unless they say yes.
 8. Point them to `references/prompts.md` for what to say in later sessions.
 
 ## Outputs

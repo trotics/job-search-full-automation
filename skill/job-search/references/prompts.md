@@ -20,7 +20,7 @@ Copy any of these into a session. Words in [brackets] are yours to fill in. Each
 
 ## Finding employers and researching them (stage 08)
 
-- "Find employers for my target list." (Part A, using your rules)
+- "Suggest employers that fit my background." (Part A, using your rules)
 - "Find [industry] employers in or near [place]." (Part A, narrowed)
 - "Find employers like [company A] and [company B]." (Part A, starting from competitors and neighbors of good fits)
 - "Find remote-friendly employers in [industry] that hire people in [state]." (Part A, remote only)

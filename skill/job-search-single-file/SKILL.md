@@ -287,7 +287,7 @@ Ask them in this order. The number in brackets is the section of `my-rules.md` i
    - **"Yes, but I want it improved"**: run `stages/07-resume.md`, starting from their file. Their resume is a source of facts, and nothing changes without their yes.
    - **"No" or "I need a new one"**: run `stages/07-resume.md` from the start.
    Tell them they can skip this for now and say "build my resume" any time.
-7. **Employers.** Ask: "Do you already have a list of employers you want to work for?" If yes, add them with sweep step 0. If no, or they want more, offer stage 08 part A ("find employers for my target list"). Do not start it unless they say yes.
+7. **Employers.** Ask: "Do you already have a list of employers you want to work for?" If yes, add them with sweep step 0. If no, or they want more, offer stage 08 part A ("suggest employers that fit my background"). Do not start it unless they say yes.
 8. Point them to `references/prompts.md` for what to say in later sessions.
 
 ### Outputs
@@ -793,7 +793,7 @@ Research sessions the user starts by asking. Four kinds:
 
 | Kind | The user says something like | Writes to the tracker |
 |---|---|---|
-| A. Find employers | "Find employers for my target list" | New `companies` rows, after the user approves each one |
+| A. Find employers | "Suggest employers that fit my background" | New `companies` rows, after the user approves each one |
 | B. Company deep dive | "Tell me about [company]" | Nothing (a report only) |
 | C. Industry map | "Map the [industry] employers around [place]" | Nothing, unless the user then asks to add some (run A for those) |
 | D. Role research | "What does a [title] do, and what does it pay around here?" | Nothing (a report only) |
@@ -1425,7 +1425,7 @@ Copy any of these into a session. Words in [brackets] are yours to fill in. Each
 
 ### Finding employers and researching them (stage 08)
 
-- "Find employers for my target list." (Part A, using your rules)
+- "Suggest employers that fit my background." (Part A, using your rules)
 - "Find [industry] employers in or near [place]." (Part A, narrowed)
 - "Find employers like [company A] and [company B]." (Part A, starting from competitors and neighbors of good fits)
 - "Find remote-friendly employers in [industry] that hire people in [state]." (Part A, remote only)
