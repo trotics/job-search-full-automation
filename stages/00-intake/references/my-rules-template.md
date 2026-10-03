@@ -53,7 +53,7 @@ Last updated: [YYYY-MM-DD]
 ## 8. Autonomy
 
 - Sweep: [autonomous within the rules / ask before writing]
-- Fit calls: [autonomous / bring me every call]
+- Fit calls: [autonomous / bring me every close call]
 - Apply: Human review before every submission. Auto-submit is off unless I turn it on for one session in writing.
 - Outreach: [off / drafts when I start it by name]
 - Mailbox check: [pasted emails only / on, using my email connector]

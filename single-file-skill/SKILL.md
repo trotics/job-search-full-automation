@@ -57,7 +57,7 @@ A job search system for one person. Set up once, then run any stage when the per
 | Find employers, research a company, industry or role | `stages/08-company-research/CONTEXT.md` | Adds employers only after approval |
 | Add employers the person names | `shared/adding-employers.md` | Outside a stage, checked with `--stage research` (or `--stage user` when a listing is added too) |
 | A returning person with no request | `shared/next-steps.md` | "A returning person with no request": read the tracker, suggest one thing |
-| Decide a close call (apply or skip) | `stages/02-fit-review/CONTEXT.md`, then `references/fit-outcomes.md` | "The person decides a close call", checked with `--stage fit` |
+| Decide a close call (apply or skip) | `stages/02-fit-review/CONTEXT.md`, then `references/fit-outcomes.md` | "The person decides a close call", checked with `--stage fit` (`--stage user` for dropping an existing listing) |
 | A status change, or a job they applied to on their own | `shared/tracker-access.md` | "Direct requests", checked with `--stage user` |
 
 ### Shared Resources
@@ -289,6 +289,11 @@ What to suggest when a session ends, so the person always knows what to say next
 - Otherwise: "Send the drafts yourself when you are ready. In a few days, say 'Check my email'."
 
 - No listings qualified: say why in one line (for example "outreach is for listings at To apply or Applied recently"), then the next most useful thing from "A returning person with no request".
+
+### After a close-call decision
+
+- They chose to apply: "Say 'Apply to the [company] [title] listing'."
+- They chose to skip: confirm in one line, then the next most useful thing from "A returning person with no request".
 
 ### After a direct change
 
@@ -968,7 +973,7 @@ Last updated: [YYYY-MM-DD]
 ### 8. Autonomy
 
 - Sweep: [autonomous within the rules / ask before writing]
-- Fit calls: [autonomous / bring me every call]
+- Fit calls: [autonomous / bring me every close call]
 - Apply: Human review before every submission. Auto-submit is off unless I turn it on for one session in writing.
 - Outreach: [off / drafts when I start it by name]
 - Mailbox check: [pasted emails only / on, using my email connector]
@@ -1380,6 +1385,7 @@ Decide whether one posting goes in the tracker. A sweep runs this for every new 
 | Shared | `../../shared/adding-employers.md` | Full file | When the employer is not on the target list |
 | Shared | `../../shared/next-steps.md` | "After a sweep or a fit call" | What to suggest when the session ends |
 | Tracker | `listings`, `companies`, `settings` | That employer's rows | Duplicates, spelling, settings lists |
+| Previous runs | `../01-sweep/output/`, `output/` | The latest report | Close calls waiting for a decision |
 | Reference | `references/fit-outcomes.md` | Full file | What to write for each result |
 
 ### Process
@@ -1469,10 +1475,10 @@ For example a commission-only role when the user's rules say nothing about commi
 
 When the person answers a close call (in the session or a later one), record it, so it is never asked again. Take a snapshot first and check with `--stage fit` after.
 
-- **Apply:** first re-open the posting on the employer's own site to confirm it is live and copy `postingText` (if it cannot be opened, follow "not confirmed live" as for pasted text). Then write the listing as in "Pass", with history `YYYY-MM-DD added after the user's close-call decision.` (add "; not confirmed live on the employer's site" when it was judged on pasted text) If the employer has a `coverage` row, set its `result` to `HIT`.
-- **Skip:** if the employer has a `coverage` row, add `title, req id, skipped by the user's decision YYYY-MM-DD` to its `skipped` and set `result` to `NONE` unless something else there is still waiting. If it has no coverage row, do not create one: add `YYYY-MM-DD decided: skip` under that close call in its report instead.
+- **Apply:** first re-open the posting on the employer's own site to confirm it is live and copy `postingText` (if it cannot be opened, ask for the employer's link first, as in the CONTEXT step on pasted postings, and record "not confirmed live"). Then write the listing as in "Pass", with history `YYYY-MM-DD added after the user's close-call decision.` (add "; not confirmed live on the employer's site" when it was judged on pasted text) If the employer has a `coverage` row, set its `result` to `HIT`.
+- **Skip:** if the employer has a `coverage` row, add `title, req id, skipped by the user's decision YYYY-MM-DD` to its `skipped` and set `result` to `NONE` unless something else there is still waiting. Keep every earlier line of `skipped` when you add one (read the cell fresh and write it back with the new line at the end), and add a dated line to the start of `detail` saying the close call was decided. If it has no coverage row, do not create one: add `YYYY-MM-DD decided: skip` under that close call in its report instead (with no folder, give the updated report as a download so the mark is kept).
 
-A close call that is already a listing and that the person now drops is a status change to `Closed` (`shared/tracker-access.md`, "Direct requests").
+A close call that is already a listing and that the person now drops is a status change to `Closed`: do it as a direct request with its own snapshot and a `--stage user` check (`shared/tracker-access.md`, "Direct requests"), not inside the `--stage fit` check.
 
 A close call counts as decided when its req id (or, with none, its title and location) is in `listings` or `coverage.skipped`, or its report marks it decided.
 
@@ -1842,7 +1848,7 @@ Try these in order. Move to the next only if the one before it failed.
 - **Never:** "Apply with LinkedIn" or any LinkedIn import; signing in to Google Drive, Dropbox or any other account to import a file; any step that needs a password, a code or a CAPTCHA. Those are walls.
 - **Check after every upload.** The page must show the file name (or a preview), and it must be the file chosen above. If the site filled fields from the resume, check every one against the answer bank and fix any that are wrong.
 - **Hand it to the user only when a to e all failed or hit a wall.** Say which options you tried and why each failed.
-- **Claude in Chrome not connected** (`my-setup.md`): options a to e cannot run. Tell the user the full path of the file to attach, wait until they say it is attached, check the file name on the page, and record `upload: attached by the user`.
+- **Claude in Chrome not connected** (`my-setup.md`): options a to e cannot run. At the point where the file goes in (last, on forms that do not read the resume; first, on forms that do), tell the user the full path of the file to attach, wait until they say it is attached, check the file name on the page, and record `upload: attached by the user`.
 
 ### Filling the form
 

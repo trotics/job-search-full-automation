@@ -37,7 +37,7 @@ Try these in order. Move to the next only if the one before it failed.
 - **Never:** "Apply with LinkedIn" or any LinkedIn import; signing in to Google Drive, Dropbox or any other account to import a file; any step that needs a password, a code or a CAPTCHA. Those are walls.
 - **Check after every upload.** The page must show the file name (or a preview), and it must be the file chosen above. If the site filled fields from the resume, check every one against the answer bank and fix any that are wrong.
 - **Hand it to the user only when a to e all failed or hit a wall.** Say which options you tried and why each failed.
-- **Claude in Chrome not connected** (`my-setup.md`): options a to e cannot run. Tell the user the full path of the file to attach, wait until they say it is attached, check the file name on the page, and record `upload: attached by the user`.
+- **Claude in Chrome not connected** (`my-setup.md`): options a to e cannot run. At the point where the file goes in (last, on forms that do not read the resume; first, on forms that do), tell the user the full path of the file to attach, wait until they say it is attached, check the file name on the page, and record `upload: attached by the user`.
 
 ## Filling the form
 

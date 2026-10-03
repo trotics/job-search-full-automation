@@ -44,6 +44,11 @@ What to suggest when a session ends, so the person always knows what to say next
 
 - No listings qualified: say why in one line (for example "outreach is for listings at To apply or Applied recently"), then the next most useful thing from "A returning person with no request".
 
+## After a close-call decision
+
+- They chose to apply: "Say 'Apply to the [company] [title] listing'."
+- They chose to skip: confirm in one line, then the next most useful thing from "A returning person with no request".
+
 ## After a direct change
 
 - A rejection or a closed listing: one kind line, then the next most useful thing from "A returning person with no request".
