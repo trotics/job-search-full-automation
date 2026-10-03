@@ -300,6 +300,8 @@ def check(before, after, stage, problems):
         if new and str(old.get("detail", "")) and old.get("detail") != new.get("detail"):
             if str(old.get("detail", "")).strip() not in str(new.get("detail", "")):
                 problems.append("coverage %s: earlier detail was not kept" % cid)
+        if new and str(old.get("skipped", "")).strip() and str(old.get("skipped", "")).strip() not in str(new.get("skipped", "")):
+            problems.append("coverage %s: earlier skipped lines were not kept" % cid)
 
     changed_companies = {k for k, v in after["companies"].items() if before["companies"].get(k) != v}
     validate(after, problems, only_ids=new_ids | {k for k in a if k in b and a[k] != b[k]},

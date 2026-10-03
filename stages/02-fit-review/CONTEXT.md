@@ -13,8 +13,8 @@ Decide whether one posting goes in the tracker. A sweep runs this for every new 
 | Shared | `../../shared/tracker-access.md` | Full file | Reading, writing and the check |
 | Shared | `../../shared/recurring-mistakes.md` | Full file | Read before any tracker write |
 | Shared | `../../shared/adding-employers.md` | Full file | When the employer is not on the target list |
-| Shared | `../../shared/next-steps.md` | "After a sweep or a fit call" | What to suggest when the session ends |
-| Tracker | `listings`, `companies`, `settings` | That employer's rows | Duplicates, spelling, settings lists |
+| Shared | `../../shared/next-steps.md` | "After a sweep or a fit call", "After a close-call decision" | What to suggest when the session ends |
+| Tracker | `listings`, `companies`, `settings`, `coverage` | That employer's rows | Duplicates, spelling, settings lists |
 | Previous runs | `../01-sweep/output/`, `output/` | The latest report | Close calls waiting for a decision |
 | Reference | `references/fit-outcomes.md` | Full file | What to write for each result |
 

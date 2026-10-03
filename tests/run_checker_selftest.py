@@ -39,6 +39,9 @@ def case_grouped_card_number(d):
     l = L(d, "kestrel-telehealth-kt-3315"); l["status"] = "Applied"; l["appliedDate"] = "2026-09-30"
     l["history"] += " | 2026-09-30 applied, confirmation 4417-8823-1190-5521; upload: hidden file input."
 CASES.append(("grouped_card_number", case_grouped_card_number, "apply"))
+def case_skipped_lines_dropped(d):
+    c = [x for x in d["coverage"] if x.get("skipped")][0]; c["skipped"] = "Only the newest skip line."
+CASES.append(("skipped_lines_dropped", case_skipped_lines_dropped, "fit"))
 CASES += [("coverage_bad_state", case_coverage_bad_state, "sweep"),
           ("coverage_manual_no_reason", case_coverage_manual_no_reason, "sweep")]
 def case_applied_no_upload_method(d):

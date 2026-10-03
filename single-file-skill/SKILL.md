@@ -1383,8 +1383,8 @@ Decide whether one posting goes in the tracker. A sweep runs this for every new 
 | Shared | `../../shared/tracker-access.md` | Full file | Reading, writing and the check |
 | Shared | `../../shared/recurring-mistakes.md` | Full file | Read before any tracker write |
 | Shared | `../../shared/adding-employers.md` | Full file | When the employer is not on the target list |
-| Shared | `../../shared/next-steps.md` | "After a sweep or a fit call" | What to suggest when the session ends |
-| Tracker | `listings`, `companies`, `settings` | That employer's rows | Duplicates, spelling, settings lists |
+| Shared | `../../shared/next-steps.md` | "After a sweep or a fit call", "After a close-call decision" | What to suggest when the session ends |
+| Tracker | `listings`, `companies`, `settings`, `coverage` | That employer's rows | Duplicates, spelling, settings lists |
 | Previous runs | `../01-sweep/output/`, `output/` | The latest report | Close calls waiting for a decision |
 | Reference | `references/fit-outcomes.md` | Full file | What to write for each result |
 
@@ -1475,8 +1475,8 @@ For example a commission-only role when the user's rules say nothing about commi
 
 When the person answers a close call (in the session or a later one), record it, so it is never asked again. Take a snapshot first and check with `--stage fit` after.
 
-- **Apply:** first re-open the posting on the employer's own site to confirm it is live and copy `postingText` (if it cannot be opened, ask for the employer's link first, as in the CONTEXT step on pasted postings, and record "not confirmed live"). Then write the listing as in "Pass", with history `YYYY-MM-DD added after the user's close-call decision.` (add "; not confirmed live on the employer's site" when it was judged on pasted text) If the employer has a `coverage` row, set its `result` to `HIT`.
-- **Skip:** if the employer has a `coverage` row, add `title, req id, skipped by the user's decision YYYY-MM-DD` to its `skipped` and set `result` to `NONE` unless something else there is still waiting. Keep every earlier line of `skipped` when you add one (read the cell fresh and write it back with the new line at the end), and add a dated line to the start of `detail` saying the close call was decided. If it has no coverage row, do not create one: add `YYYY-MM-DD decided: skip` under that close call in its report instead (with no folder, give the updated report as a download so the mark is kept).
+- **Apply:** first re-open the posting on the employer's own site to confirm it is live and copy `postingText` (if it cannot be opened, ask for the employer's link first, as in the CONTEXT step on pasted postings, and record "not confirmed live"). Then write the listing as in "Pass", with history `YYYY-MM-DD added after the user's close-call decision` plus `; not confirmed live on the employer's site` when it was judged on pasted text, ending with a period If the employer has a `coverage` row, set its `result` to `HIT`, unless another close call there is still waiting (then leave `LEAD`).
+- **Skip:** if the employer has a `coverage` row, add `title, req id: skipped by the user's decision YYYY-MM-DD` to its `skipped` and set `result` to `NONE` unless something else there is still waiting. Keep every earlier line of `skipped` when you add one (read the cell fresh and write it back with the new line at the end), and add a dated line to the start of `detail` saying the close call was decided, keeping older text after "Earlier:" (`shared/tracker-columns.md`). If it has no coverage row, do not create one: add `YYYY-MM-DD decided: skip` under that close call in its report instead (with no folder, give the updated report as a download so the mark is kept).
 
 A close call that is already a listing and that the person now drops is a status change to `Closed`: do it as a direct request with its own snapshot and a `--stage user` check (`shared/tracker-access.md`, "Direct requests"), not inside the `--stage fit` check.
 
