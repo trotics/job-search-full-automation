@@ -66,7 +66,8 @@ Stages run small Python scripts in `tools/` (in the user's job search folder) to
 
 - `references/tracker-columns.md`: every tab and column, in plain words.
 - `references/answer-bank.md`: how to use the answer bank.
-- `references/application-techniques.md`: how upload controls and form auto-fill behave.
+- `references/board-techniques.md`: how to read each kind of job board, boards that misreport location, signs a posting is gone, and how to run research helpers.
+- `references/application-techniques.md`: how each platform's application form behaves, upload methods, resume-reader mistakes, legal text to watch for, and walls by platform.
 - `references/recurring-mistakes.md`: mistakes that have happened before.
 - `references/sample-resume.md`: a made-up resume showing the format `my-files/resume.md` should follow.
 - `references/resume-guide.md`: resume rules, examples by field, and the default (stage 07).

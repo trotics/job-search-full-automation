@@ -26,13 +26,15 @@ Apply in **Claude in Chrome** when it is connected. It can upload files. The app
 - Listings at To apply, worked in priority order (High, then Medium, then Low), oldest `posted` first within each. Skip `On hold` listings unless the user says go.
 - The answer bank: `answers` in the tracker (see `references/answer-bank.md`).
 - `my-files/resume.md` for text fields, and `my-files/resume.pdf` to upload. Ask once per session for access to `my-files/` if you do not have it, then upload the resume yourself.
-- `references/application-techniques.md`: how upload controls and auto-fill behave.
+- `references/application-techniques.md`: how each platform's form behaves, how to get answers into fields, upload methods, resume-reader mistakes, the legal text to watch for, and the walls by platform. Read the platform's section before each form.
 
 ## Steps
 
 1. **Still live?** Open the posting on the employer's own site. If it is gone, set `expired` or `filled` with a history entry and move on.
 2. **Save the posting.** Copy the full posting text into `postingText` now, even if fit review saved it already, and append a history line: `YYYY-MM-DD posting text saved before applying.` The later copy wins, because postings change. Interview prep depends on this.
-3. **Re-check the fit.** Read the posting in full before the user does anything on the site. Re-check it against the rules. If it now fails, tell the user and let them decide.
+3. **Re-check the fit.** Read the posting in full before the user does anything on the site, so they never create an account for a job that does not fit. Re-check it against the rules. If it now fails, tell the user and let them decide.
+   - **One tab per application.** Open each application in its own new tab; opening another address in a tab with a half-filled form throws the form away.
+   - **Apply links that submit on their own.** On some platforms, once the user is signed in, opening another job's apply link submits that application at once from the saved profile, with no form to review (see `references/application-techniques.md`). On such a platform, opening the link **is** submitting: do it only after the user has said yes to that application, as in step 13.
 4. **Upload the resume.** Try these in order. Move to the next only if the one before it failed.
    - **Which file:** `my-files/resumes/resume-<listing id>.pdf` if the listing's history shows a tailored resume was approved (stage 07 part D), otherwise `my-files/resume.pdf`.
    - **a. File upload tool.** Use Claude in Chrome's file upload tool on the form's file input, with the full path to that file. Do not click the input first: clicking opens the computer's own file picker.
@@ -52,8 +54,8 @@ Apply in **Claude in Chrome** when it is connected. It can upload files. The app
 9. **References:** from the answer bank, in the order it lists them. Never list the user's current employer, or anyone the user's rules say never to contact.
 10. **Cover letter:** if the form requires one, draft it from the resume and the posting, in the user's writing style. Show it to the user. It is attached only after the user signs off on that letter.
 11. **Legal text** (arbitration, waivers, non-compete, non-solicitation, broad permission to contact past employers): quote it to the user. **Never tick a legal agreement box yourself**, in any mode. The user reads it and ticks it, or decides not to apply.
-12. **Walls** (create account, password, verification code, CAPTCHA, Social Security number or other ID): fill everything up to the wall, then hand the browser to the user. Continue after they are through. Never do the wall step yourself, and never read what they typed.
-13. **Review before submit.** Show the user a summary of every answer on the form, including the upload (file name and method) and any auto-filled fields you corrected, and stop. Submit only when the user says "submit" for this application, or clicks submit themselves. Under auto-submit, still post the summary in the chat as you submit.
+12. **Walls** (create account, password, verification code, CAPTCHA, Social Security number or other ID): fill everything up to the wall, then hand the browser to the user. Continue after they are through. Never do the wall step yourself, and never read what they typed. After any click that sends a code, take no more clicks until the user says they are through.
+13. **Review before submit.** Show the user a summary of every answer on the form, including the upload (file name and method) and any auto-filled fields you corrected, and stop. Submit only when the user says "submit" for this application, or clicks submit themselves. If a submit fails, read the error messages, fix the fields and submit **once** more; repeated failed submits can trigger a security code or a lockout. Under auto-submit, still post the summary in the chat as you submit.
 14. **After submitting:** capture the confirmation (confirmation page text or number). Set `status` to `Applied` and `appliedDate` to today. Append a history entry: date, req id, title, company, location, pay if posted, the application system used, the username if an account was used (never a password), the confirmation, the upload method written exactly as `upload: <method>` (for example `upload: hidden file input`; the check looks for `upload:`), and anything unusual.
 15. **If blocked and the user has stepped away** (for example they left the session at a wall): leave the status at To apply and append a history entry naming the exact step that blocked. Never work around the block.
 16. Add any new account to `answers` (topic `Account`, question = the site, answer = the username). Never a password.

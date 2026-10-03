@@ -56,7 +56,7 @@ STAGE_MOVES = {
     "outreach": set(),
     "prep": set(),
     "mailbox": {(a, b) for a in ("Applied", "Followed up", "Interview")
-                for b in ("Followed up", "Interview", "Rejected", "Offer") if a != b},
+                for b in ("Followed up", "Interview", "Rejected", "Offer", "expired") if a != b},
     "research": set(),
     "resume": set(),
     "user": None,

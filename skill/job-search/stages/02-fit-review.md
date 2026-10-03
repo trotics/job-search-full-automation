@@ -44,7 +44,14 @@ Check in this order. The first failure decides.
   - `history`: `YYYY-MM-DD added from the employer's own site by fit review.`
   - `yourNotes`: leave empty.
 - **Fail:** one line in the employer's `coverage.skipped`: title, req id, reason.
-- **A matter of taste, not a rule** (for example a commission-only role when the user's rules say nothing about commission): do not add it. List it in the session report for the user.
+- **A matter of taste, not a rule** (for example a commission-only role when the user's rules say nothing about commission): do not add it. List it in the session report for the user, in this shape, so they can decide from it alone:
+  1. **Flag:** what made it a close call.
+  2. **Posting says:** the exact requirement or fact, quoted short, marked required or preferred.
+  3. **You have:** how the user's background compares, from the resume and answer bank only.
+  4. **Teaches:** what the role would build.
+  5. **Pay and next step:** posted pay or "not posted", and any named next role.
+  6. **Lean:** Apply or Skip, with one sentence of reasoning.
+  7. **Decide:** the one question the user needs to answer.
 - **A closed listing that is live again:** do not reopen it. List it in the report. The user decides.
 
 ## Done when

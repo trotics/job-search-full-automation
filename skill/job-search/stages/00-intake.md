@@ -87,7 +87,23 @@ Ask them in this order. The number in brackets is the section of `my-rules.md` i
    - `roleFamilies`: the kinds of role from questions 2 to 4, with a `*` after the ones that are targets.
    - `tracks`: leave as `Main` unless the user is searching for two quite different kinds of role.
    - `priorities`: leave as `High; Medium; Low; On hold` unless the user asks.
-5. Ask: "Do you want to start your answer bank now? It holds the answers you give on most forms: contact details, work history, years of experience in the work you are targeting, work authorization, references, pay wording and the optional diversity questions. You can also fill it later." If yes, ask one item at a time and save each to `answers` after the user confirms it. Never ask for or store passwords, ID numbers or bank details.
+5. Ask: "Do you want to start your answer bank now? It holds the answers application forms ask for again and again, so you are not asked each time. You can also fill it later." If yes, ask one item at a time, in this order, and save each to `answers` after the user confirms it. The user may skip any item.
+   - **Contact:** full name, preferred name, email, phone and phone type, city and state, county (some forms require it), street address only if they want forms filled with it.
+   - **Work history:** each job (title, employer, city, start and end month and year), the **reason for leaving** each one, and whether each past employer **may be contacted**; if yes, that supervisor's name, title and contact details (some forms require them).
+   - **Years of experience** in the work they are targeting, and in common form categories (customer service, sales, a key tool).
+   - **Education:** school, degree, field, year.
+   - **Licenses and registrations:** held, and whether any was ever denied, revoked or suspended. Never the license number.
+   - **Work authorization:** authorized to work in the country, needs sponsorship now or later, age 18 or over.
+   - **Pay:** the text wording, the single number, and hourly or salary.
+   - **Logistics:** earliest start date, willing to relocate, willing to travel (how much), overtime and shift work.
+   - **Employer relationships:** currently bound by a non-compete or other restrictive agreement; ever worked for a given employer is asked per form, so note only whether they want to be asked each time.
+   - **"Ever been fired or asked to resign":** the user's own answer, or "ask me each time".
+   - **References:** names, relationship and contact details, in the order to use them. Never the user's current employer.
+   - **Links:** LinkedIn or portfolio (used only when a form requires it).
+   - **Voluntary self-identification:** gender, Hispanic or Latino, race, veteran status (and whether "protected veteran" applies), disability. "I don't wish to answer" is a full answer for each.
+   - **Optional:** pronouns, consent to text messages.
+   - **Always the user's, never stored as an answer:** criminal history, assessments, whether they would sign a future non-solicitation agreement. Tell the user these will always come to them on the form.
+   Never ask for or store passwords, ID numbers or bank details.
 6. **Resume.** Ask: "Do you already have a resume you are happy with?" Offer three answers, and respect the choice:
    - **"Yes, use mine as it is"** (opt out): ask them to put it in `my-files/resume.pdf`. Offer to make the text copy `my-files/resume.md` from it, and show the copy before saving. Do not rewrite or critique it. Stage 07 never runs unless they ask later.
    - **"Yes, but I want it improved"**: run `stages/07-resume.md`, starting from their file. Their resume is a source of facts, and nothing changes without their yes.

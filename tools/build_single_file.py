@@ -18,7 +18,7 @@ ORDER = [
     ("stages/00-intake.md", None), ("stages/01-sweep.md", None), ("stages/02-fit-review.md", None),
     ("stages/03-apply.md", None), ("stages/04-outreach.md", None), ("stages/05-interview-prep.md", None),
     ("stages/06-mailbox-check.md", None), ("stages/07-resume.md", None), ("stages/08-company-research.md", None),
-    ("references/tracker-columns.md", None), ("references/answer-bank.md", None), ("references/application-techniques.md", None),
+    ("references/tracker-columns.md", None), ("references/answer-bank.md", None), ("references/board-techniques.md", None), ("references/application-techniques.md", None),
     ("references/recurring-mistakes.md", None), ("references/my-rules-template.md", None),
     ("references/sample-resume.md", None), ("references/resume-guide.md", None),
     ("references/resume-facts-template.md", None), ("references/prompts.md", None),

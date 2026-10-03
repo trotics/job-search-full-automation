@@ -1,5 +1,7 @@
 # Job Search Full Automation
 
+![Job Search Full Automation: a free Claude Skill. It does the legwork. You make every call.](docs/images/banner.png)
+
 A free set of instructions (a "Skill") that turns Claude (and only Claude) into a job search assistant. It finds openings on employers' own career sites, checks each one against your rules, keeps a tracker up to date, fills in applications with you, drafts outreach for you to send, and prepares you for interviews.
 
 **It automates the research, the tracking and the form-filling. You stay in charge of every submission and every message.**
@@ -22,6 +24,13 @@ This was built for one real job search and used every day on it. This public ver
 | "Run outreach" | Finds the likely hiring manager from public sources and drafts a short note. You decide whether to send it. |
 | "Prep me for my interview with ..." | Writes a prep file: company brief with sources, likely questions, your true stories that answer them, and questions to ask. |
 | "Check my email" | Reads your inbox (if you have an email connector), finds employer replies, and suggests status updates. Changes nothing until you say yes. |
+
+<p>
+  <img src="docs/images/card-what-it-is.png" alt="Three things you say: Set me up, Run a sweep, Let's apply" width="49%">
+  <img src="docs/images/card-what-it-will-not-do.png" alt="What it will never do: submit without your review, send messages, touch passwords, enter ID numbers, automate LinkedIn, contact your current employer" width="49%">
+</p>
+
+![An example sweep: each posting runs the same checks, and every skip has a reason](docs/images/preview.png)
 
 ## What it will not do
 
@@ -174,6 +183,7 @@ Everything personal stays in your job search folder (`my-files/`, `reports/`, `b
 | `tracker/spreadsheet/` | The spreadsheet tracker (`.xlsx`) and matching `.csv` files. |
 | `my-files/`, `reports/`, `backups/` | Your files. Ignored by git. |
 | `requirements.txt` | The two Python add-ons the scripts need. |
+| `docs/images/` | The pictures in this README. |
 | `tools/` | Small scripts Claude uses: tracker checks, safe spreadsheet writes, and builds. |
 | `tests/`, `examples/test-run/` | A full test with a made-up user, including a resume built by stage 07. See `examples/test-run/test-results.md`. |
 

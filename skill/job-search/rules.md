@@ -54,7 +54,7 @@ Column names are in `references/tracker-columns.md`. They are the same in the ar
   - Sweeps may set **expired** or **filled** on listings at To apply, after confirming on the employer's own site, with a history entry.
   - Fit review sets **To apply** on new listings.
   - The apply stage sets **Applied**, and only after the user reviewed the filled form and the application was submitted. It may also set **expired** or **filled** on a listing at To apply when the employer's own site shows the posting is gone, with a history entry.
-  - The mailbox check (stage 06) may set **Followed up**, **Interview**, **Rejected** or **Offer**, only after the user says yes to each change in that session.
+  - The mailbox check (stage 06) may set **Followed up**, **Interview**, **Rejected**, **Offer**, or **expired** (the employer cancelled the role), only after the user says yes to each change in that session.
   - The user may ask for any status change directly.
   - Nothing else changes a status.
 - Never change the status of a listing at Applied, Followed up, Interview or Offer except as above. On those listings sessions may only append history lines, and stage 04 may fill the outreach columns.
