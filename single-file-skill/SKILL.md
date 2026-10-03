@@ -232,7 +232,7 @@ Eight levels, plus a top rung for chief roles. Most fields use some version of t
 | L8 | Executive | "VP", "senior VP", "general manager", owns a business unit or a whole function across the company |
 | L9 | Chief | "Chief ... officer", "president", company-wide profit and loss |
 
-Two tracks run side by side above L3: **individual contributor** and **people leader** (L5 to L8). Principal, staff, expert or individual "director" roles with no reports take the level their scope, required years and pay match (L4 to L7), marked "IC track" in `why`. Moving between tracks at the same scope is a **track switch**, not a step: bring it to the person as a close call. Moving from L4 to a first L5 role is a step up.
+Two tracks run side by side above L3: **individual contributor** and **people leader** (L5 to L8). For individual roles above L4, use scope as the guide: several teams or 8+ years is an L5 equivalent, a whole function is an L6 or L7 equivalent. A small team with no hiring or budget ownership is L5; hiring or a budget makes it L6. An individual role matches a next step only on the same track: an IC L5 is not a match for a "first team lead" goal. Principal, staff, expert or individual "director" roles with no reports take the level their scope, required years and pay match (L4 to L7), marked "IC track" in `why`. Moving between tracks at the same scope is a **track switch**, not a step: bring it to the person as a close call. Moving from L4 to a first L5 role is a step up.
 
 **Senior VP and executive VP** stay at L8, a stronger L8 rather than a new level. **L9** chief roles are a step up for an L8, a stretch for L7, and out of reach below that.
 
@@ -259,11 +259,13 @@ Place each posting on the ladder (duties, scope, years, then title), then compar
 | **Step down** (lower than current) | Allowed only if the person's rules say so | Otherwise a no (check 3). If allowed, say why it is worth it in `why`. |
 | **Same level** | Always allowed | Normal fit. |
 | **Step up** (one level higher) | Always allowed, and preferred when it matches their next step | Raise priority one band only when it matches their next step and pay and place fit (`fit-outcomes.md`). |
-| **Stretch** (two levels higher) | Allowed only when most required duties match the person's real experience | A close call for the person, never added on its own. |
+| **Stretch** (two levels higher) | The person decides | A close call for the person, never added on its own; lean Skip when most required duties do not match their real experience. |
 | **Out of reach** (three or more higher) | Not a target | A no, unless the person asks. |
 | **Track switch** (same scope, other track) | Allowed only with the person's yes | A close call for the person. |
 
 Start every `why` with the step, for example "Step up (L3 to L4): ...", so the person can scan the tracker by direction.
+
+**When the level is unclear.** Apply the tie-breaks above first (required years versus duties; title last). If a posting could still sit at two levels and the result would differ (added, close call, or no), do not pick one. Treat it as a close call: in "Flag", name both levels and what points to each (duties, scope, required years, pay), and ask the person which reading fits. If both readings give the same result (for example same level or a step up, both added), write the listing at the lower level's step, add "(level unclear: L4 or L5)" to the `why` prefix, and do not raise priority for a next-step match.
 
 Inside the stretch on required years (rules section 3), years alone never fail a step up.
 
@@ -1524,7 +1526,7 @@ Decide whether one posting goes in the tracker. A sweep runs this for every new 
 3. Check in this order. The first failure decides:
    1. **Duplicate?** Same req id, or same title and location at the same employer, already in `listings`: stop, nothing to add.
    2. **Live on the employer's own site?** If the site shows it gone: no. If you cannot open the site (no browser, or the person pasted the text), judge it on the pasted text, say "not confirmed live", and ask for the employer's link before writing a listing.
-   3. **Target role and level?** Not one of the user's target roles, one of their "out" roles, a step down they do not allow, or out of reach: no. A stretch or a track switch is a close call (rules 1, `career-direction.md`).
+   3. **Target role and level?** Not one of the user's target roles, one of their "out" roles, a step down they do not allow, or out of reach: no. A stretch, a track switch, or a level that is unclear between two steps is a close call (rules 1, `career-direction.md`).
    4. **Industry and product?** An "out" industry, or an excluded industry without `keepAnyway`: no (rules 1).
    5. **Place?** Fails the user's place rules: no (rules 4).
    6. **Pay?** Under the floor: no. No posted pay: decide plausibility and write the reasoning (rules 2).
@@ -1576,10 +1578,10 @@ What to write for each result of a fit review. Column meanings are in `shared/tr
 - `company`: spelled exactly as in `companies`.
 - `title`, `location` (the posting's own location detail), `url` (employer's own site), `reqId`, `industry`, `posted` (date as shown, or blank).
 - `pay`: the posted pay as written, or "not posted".
-- `why`: starts with the career step (for example "Step up (L3 to L4):", "Same level (L3):" or "Track switch (L6 to IC L6):", `shared/career-direction.md`), then one or two sentences on the fit, any reach (years, industry), and anything the user should know.
+- `why`: starts with the career step (for example "Step up (L3 to L4):", "Same level (L3):", "Stretch (L4 to L6):" or "Track switch (L6 to IC L6):", `shared/career-direction.md`), then one or two sentences on the fit, any reach (years, industry), and anything the user should know.
 - `teaches`: what the role would teach the user, starting "Stated:" (the posting says so), "Not stated." or "Not read." When it builds toward their next step, say how.
 - `family`: one of `settings.roleFamilies`, written without the `*`. `track`: one of `settings.tracks`.
-- `priority`: `High` (clear fit, pay at or above the floor), `Medium` (fits with a reach), `Low` (fits on paper, weaker on taste or pay), or `On hold`. A step up that matches the user's next step moves up one band (Low to Medium, Medium to High), but never to High when `why` names a years reach.
+- `priority`: `High` (clear fit, pay at or above the floor), `Medium` (fits with a reach), `Low` (fits on paper, weaker on taste or pay), or `On hold`. A step up that matches the user's next step moves up one band (Low to Medium, Medium to High), but never to High when `why` names a years reach. A stretch the person chose to apply to is Medium.
 - `postingText`: the posting's full text, copied from the employer's own page (title, location, pay, duties, requirements). This lets later stages work after the posting is taken down. If the page is too long, keep at least the duties, requirements and pay.
 - `status`: `To apply`.
 - `history`: `YYYY-MM-DD added from the employer's own site by fit review.` If it was judged on pasted text: `YYYY-MM-DD added from pasted posting text by fit review; not confirmed live on the employer's site.`, and `why` ends with "Not confirmed live."
@@ -1593,7 +1595,7 @@ One line in the employer's `coverage.skipped`: title, req id, reason. Run alone,
 
 For example a commission-only role when the user's rules say nothing about commission. Do not add it. List it in the session report for the user, in this shape, so they can decide from it alone:
 
-1. **Flag:** what made it a close call.
+1. **Flag:** what made it a close call. For an unclear level, name both levels and what points to each.
 2. **Posting says:** the exact requirement or fact, quoted short, marked required or preferred.
 3. **You have:** how the user's background compares, from the resume, the answer bank and the experience section of `my-rules.md` only.
 4. **Teaches:** what the role would build.
@@ -1609,6 +1611,8 @@ When the person answers a close call (in the session or a later one), record it,
 - **Skip:** if the employer has a `coverage` row, add `title, req id: skipped by the user's decision YYYY-MM-DD` to its `skipped` and set `result` to `NONE` unless something else there is still waiting. Keep every earlier line of `skipped` when you add one (read the cell fresh and write it back with the new line at the end), and add a dated line to the start of `detail` saying the close call was decided, keeping older text after "Earlier:" (`shared/tracker-columns.md`). If it has no coverage row, do not create one: add `YYYY-MM-DD decided: skip` under that close call in its report instead (with no folder, give the updated report as a download so the mark is kept).
 
 A close call that is already a listing and that the person now drops is a status change to `Closed`: do it as a direct request with its own snapshot and a `--stage user` check (`shared/tracker-access.md`, "Direct requests"), not inside the `--stage fit` check.
+
+For an unclear level, use the level the person chose in the `why` prefix.
 
 A close call counts as decided when its req id (or, with none, its title and location) is in `listings` or `coverage.skipped`, or its report marks it decided.
 

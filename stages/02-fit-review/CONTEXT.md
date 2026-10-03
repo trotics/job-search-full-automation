@@ -27,7 +27,7 @@ Decide whether one posting goes in the tracker. A sweep runs this for every new 
 3. Check in this order. The first failure decides:
    1. **Duplicate?** Same req id, or same title and location at the same employer, already in `listings`: stop, nothing to add.
    2. **Live on the employer's own site?** If the site shows it gone: no. If you cannot open the site (no browser, or the person pasted the text), judge it on the pasted text, say "not confirmed live", and ask for the employer's link before writing a listing.
-   3. **Target role and level?** Not one of the user's target roles, one of their "out" roles, a step down they do not allow, or out of reach: no. A stretch or a track switch is a close call (rules 1, `career-direction.md`).
+   3. **Target role and level?** Not one of the user's target roles, one of their "out" roles, a step down they do not allow, or out of reach: no. A stretch, a track switch, or a level that is unclear between two steps is a close call (rules 1, `career-direction.md`).
    4. **Industry and product?** An "out" industry, or an excluded industry without `keepAnyway`: no (rules 1).
    5. **Place?** Fails the user's place rules: no (rules 4).
    6. **Pay?** Under the floor: no. No posted pay: decide plausibility and write the reasoning (rules 2).
