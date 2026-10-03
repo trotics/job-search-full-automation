@@ -19,7 +19,7 @@ What to write for each result of a fit review. Column meanings are in `shared/tr
 
 ## Fail
 
-One line in the employer's `coverage.skipped`: title, req id, reason.
+One line in the employer's `coverage.skipped`: title, req id, reason. Run alone, for an employer with no `coverage` row: record the skip only in the fit report, and never create a coverage row outside a sweep (a coverage row means the employer was swept).
 
 ## A matter of taste, not a rule
 

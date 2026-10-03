@@ -23,7 +23,7 @@ Decide whether one posting goes in the tracker. A sweep runs this for every new 
 2. **Employer not on the target list** (for example the user pasted a link): ask whether to add it. If yes, add it as `adding-employers.md` says, then go on. If no, give the fit call in chat only and write nothing.
 3. Check in this order. The first failure decides:
    1. **Duplicate?** Same req id, or same title and location at the same employer, already in `listings`: stop, nothing to add.
-   2. **Live on the employer's own site?** If not: no.
+   2. **Live on the employer's own site?** If the site shows it gone: no. If you cannot open the site (no browser, or the person pasted the text), judge it on the pasted text, say "not confirmed live", and ask for the employer's link before writing a listing.
    3. **Target role?** Not one of the user's target roles, or one of their "out" roles: no (rules 1).
    4. **Industry and product?** An "out" industry, or an excluded industry without `keepAnyway`: no (rules 1).
    5. **Place?** Fails the user's place rules: no (rules 4).

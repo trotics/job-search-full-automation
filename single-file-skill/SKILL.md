@@ -16,7 +16,7 @@ This one file holds everything: the routing, the rules, the stage contracts and 
 ## Where to work
 
 - **The working folder holds the full workspace** (`CLAUDE.md` and `stages/` of this system): read that folder's `CLAUDE.md` and follow it. Its files are the same as this Skill's, plus the person's own outputs.
-- **Otherwise,** this Skill folder is the workspace. Start at `CONTEXT.md` here. Every path in these files is relative to this folder (for example `shared/rules.md`, `stages/01-sweep/CONTEXT.md`). Save the person's files in their own folder at the same paths when there is one; when there is none, follow "No folder to work in" in `CONTEXT.md`.
+- **Otherwise,** this Skill folder is the workspace. Start at `CONTEXT.md` here. Every path in these files is relative to this folder (for example `shared/rules.md`, `stages/01-sweep/CONTEXT.md`). Save the person's files in their own folder at the same paths when there is one; when there is none, follow `shared/no-folder.md`.
 
 ## Every session
 
@@ -30,7 +30,7 @@ This one file holds everything: the routing, the rules, the stage contracts and 
 
 ## Scripts
 
-The stages check their work with small Python scripts in `tools/`, which come with the full workspace, not with this Skill. Without them, say so plainly whenever a check cannot run: a stage whose check could not run is not done.
+The stages check their work with small Python scripts. They are in this Skill's `tools/` folder too: run them with code execution, from that folder's full path (`shared/no-folder.md`, "Scripts"). If they cannot run, check by hand as that file says, and say plainly that the script did not run.
 
 ---
 
@@ -73,12 +73,13 @@ A job search system for one person. Set up once, then run any stage when the per
 | Prompts | `shared/prompts.md` | What the person can say to start each stage |
 | Next steps | `shared/next-steps.md` | What to suggest when a session ends, and to a returning person |
 | Python setup | `shared/python-setup.md` | Installing and checking Python |
+| No folder | `shared/no-folder.md` | Working in a chat with no folder: files to re-attach, scripts, resume PDF |
 | Tracker page | `tracker/tracker-page.html` | The page published as the person's tracker |
 | Scripts | `tools/` | `check_tracker.py`, `check_resume.py`, `build_resume.py`, `sheet.py` |
 
 ### No folder to work in
 
-On Claude on the web or a tablet there may be no folder Claude can read and write. Then ask the person to attach `my-rules.md` and `my-setup.md` (and `resume-facts.md` for the resume stage) at the start of each chat, or keep them in a Claude Project. Give every file you create or change as a download, and tell them to save it and attach it next time. Sweeps of most career sites, and applying, need the desktop app.
+On Claude on the web, a tablet, or the Skill uploaded in the Claude app, there may be no folder Claude can read and write. Then follow `shared/no-folder.md`: which files the person keeps and re-attaches (including the spreadsheet tracker), how to run or replace the scripts, and what needs the desktop app.
 
 ---
 
@@ -93,6 +94,8 @@ Read this file when the person types `setup`, asks to be set up, or `shared/my-s
 ### Before the questions
 
 Say hello in two or three sentences: this finds jobs on employers' own career sites, checks each against their rules, keeps a tracker, builds a resume from facts they confirm, and fills in applications with them. Nothing is ever submitted or sent without their review. Setup takes about 15 minutes.
+
+In a chat with no folder, follow `shared/no-folder.md`, "Setup", alongside this file.
 
 Ask once for permission to run the setup commands (a version check, an install of two Python add-ons, and a self-test), rather than asking for each one. Then work out the derived fields below while they answer.
 
@@ -114,14 +117,14 @@ The person should be able to answer both in one message.
 - Type: selection
 - Options:
   - **Yes, use mine as it is:** ask them to save it as `stages/07-resume/output/resume.pdf` (offer to wait). Write "use mine".
-  - **Yes, but I want it improved:** write "improve mine". Ask them to save it in the same place, as a source of facts.
+  - **Yes, but I want it improved:** write "improve mine". Ask them to save it in the same place (or paste its text when the resume stage starts), as a source of facts.
   - **No, or I need a new one:** write "build new".
   - Default: "decide later".
 
 ### Derived fields (do not ask)
 
 #### `{{PYTHON_COMMAND}}`
-If there is no `tools/` folder (the Skill alone, without the full workspace folder), write "none (Skill only)", skip the self-test, and tell the person the checks need the full folder from GitHub. Otherwise follow `shared/python-setup.md`: find the command that works (`python`, `python3` or `py`), install the add-ons, and run the self-test. Write the command, or "none" if the person chose to continue without Python.
+In a chat with no folder: write "code execution" if you can run Python there (then use the Skill's `tools/` as `shared/no-folder.md` says), otherwise "none (Skill only)"; skip the install and the self-test. Otherwise follow `shared/python-setup.md`: find the command that works (`python`, `python3` or `py`), install the add-ons, and run the self-test. Write the command, or "none" if the person chose to continue without Python.
 
 #### `{{APPLY_BROWSER}}`
 Check whether the Claude in Chrome tools are available to you. Write "Claude in Chrome" or "not connected yet". If not connected, tell them: applying works best with the Claude in Chrome extension, because it can upload their resume (`stages/03-apply/references/claude-in-chrome-setup.md`). Sweeps and everything else work without it. This is not a blocker for today.
@@ -138,7 +141,7 @@ Today, `YYYY-MM-DD`.
 
 1. Copy `shared/my-setup-template.md` to `shared/my-setup.md` and replace every placeholder in the copy with the answers and derived values. Never edit the template.
 2. Scan `shared/my-setup.md` for any remaining `{{` patterns. If any remain, ask for the missing information.
-3. Mention once, for chats outside this folder: they can also upload `job-search-skill.zip` in the Claude app (Customize, then Skills, then +, then Upload a skill; code execution must be on in Settings). It is not needed when working in this folder.
+3. Only when working in the folder, mention once, for chats outside it: they can also upload `job-search-skill.zip` in the Claude app (Customize, then Skills, then +, then Upload a skill; code execution must be on in Settings). It is not needed when working in this folder.
 4. Tell the person:
 
 "You are set up. Here is your setup:
@@ -159,7 +162,7 @@ Next is a short interview about the jobs you want. I ask one question at a time.
 
 The one way any session adds an employer to `companies`. Only when the user asks, or approves a suggestion.
 
-1. Find the employer's own careers site. A redirect to the company's own careers subdomain, or to the job board the company itself links to (Workday, Greenhouse, Lever, Ashby and the like), counts as its own site. If the link you tried does not open, find the real one from the company's own home page. Never guess: leave the employer out until you have it.
+1. Find the employer's own careers site. A redirect to the company's own careers subdomain, or to the job board the company itself links to (Workday, Greenhouse, Lever, Ashby and the like), counts as its own site. If the link you tried does not open, find the real one from the company's own home page. Never guess: leave the employer out until you have it. A careers link the user gives you counts; open it to confirm when you can.
 2. Check that it is not already on the target list (exact name, `recurring-mistakes.md` item 7), not the user's current employer, and not on the never-contact list in the user's rules. Any of those: leave it out and say why.
    - **An industry the user ruled out** (in `settings.excludedIndustries` or "out" in their rules): tell the user and ask. Add it only if they say so in this session, and then set `keepAnyway` to `yes` and say in the report that they asked for it. Otherwise leave it out.
 3. Build the row:
@@ -171,7 +174,7 @@ The one way any session adds an employer to `companies`. Only when the user asks
    - `keepAnyway`: `no`, unless the user asked to keep an excluded-industry employer (step 2).
    - `onHold`: `yes` only if the user's rules put this employer on hold, otherwise `no`.
    - `added`: today, `YYYY-MM-DD`.
-4. Show the list to the user before saving. Write only the employers they approve, with a snapshot before and a check after (`tracker-access.md`). Inside a sweep or a fit review, that stage's own check covers it. Anywhere else (the intake, company research, or a direct request), run the check with `--stage research`.
+4. Show the list to the user before saving. Write only the employers they approve, with a snapshot before and a check after (`tracker-access.md`). Inside a sweep or a fit review, that stage's own check covers it. Anywhere else (the intake, company research, or a direct request), run the check with `--stage research`, then suggest a sweep of the new employers ("Say 'Sweep [names]'").
 
 ---
 
@@ -241,7 +244,7 @@ System settings for this job search, filled in once by setup. Every stage reads 
 
 ## Next steps
 
-What to suggest when a session ends, so the person always knows what to say next. Wherever a line says "Check my email" and `my-setup.md` shows no email connector, say instead: "In a few days, paste any employer replies here and say 'Check these emails' (or connect your email in Claude's settings)." Suggest only; never start the next stage yourself. Keep it to one or two lines, with the exact words to say in quotes, and pick the line that fits what just happened.
+What to suggest when a session ends, so the person always knows what to say next. "Check my email" is short for "Check my email for employer replies". Wherever a line says "Check my email" and `my-setup.md` shows no email connector, say instead: "In a few days, paste any employer replies here and say 'Check these emails' (or connect your email in Claude's settings)." Suggest only; never start the next stage yourself. Keep it to one or two lines, with the exact words to say in quotes, and pick the line that fits what just happened.
 
 ### After the interview
 
@@ -302,6 +305,46 @@ Find the tracker in `my-setup.md` and read `listings` and `coverage` as `tracker
 3. Applications in and no mailbox check in the last week: "Say 'Check my email'."
 4. No sweep in the last week: "Say 'Run a sweep'."
 5. Otherwise: "Say 'Suggest employers that fit my background'."
+
+---
+
+<!-- shared/no-folder.md -->
+
+## Working without a folder
+
+For a chat with no folder Claude can read and write (Claude on the web, a tablet, or the Skill uploaded in the Claude app). Every other file still applies; this one says what changes.
+
+### The person's files travel with them
+
+There is nowhere to keep files between chats, so the person keeps them:
+
+- `my-setup.md`, `my-rules.md`, and `my-tracker.xlsx` (if their tracker is the spreadsheet).
+- For the resume: `resume-facts.md`, `resume.md` and `resume.pdf`.
+
+At the start of each chat, ask them to attach the ones the task needs, or to keep them in the files of a Claude Project so every chat sees them. **Every session that creates or changes one of these files ends by giving the complete new file as a download**, with one line: "Save this over your old copy, and attach it next time." Never start a new tracker when the person has one they did not attach: ask for it.
+
+### Scripts
+
+The scripts are in this Skill's `tools/` folder. If code execution is on, run them from there with the full path, on the files the person attached (for example `python <skill folder>/tools/check_tracker.py snapshot my-tracker.xlsx before.json`), and give back the changed files.
+
+If code execution is off or a script cannot run: edit the spreadsheet only if you can, otherwise give the person the exact rows to type in. Check the work by hand against `recurring-mistakes.md` and the stage's Audit table, and say "checked by hand; the script did not run". Never call that a passed check.
+
+### Setup
+
+- Skip the permission request for setup commands when code execution is off.
+- Tracker: publish the tracker page if you can (the page is in this Skill's `tracker/` folder). Otherwise give `tracker/spreadsheet/job-search-tracker.xlsx` as a download named `my-tracker.xlsx`, and tell them to keep it.
+- Resume they want to use: ask them to attach it, rather than save it in a folder.
+- Do not suggest uploading the Skill; they already have it.
+
+### The resume PDF
+
+Build it with `tools/build_resume.py` in code execution and give it as a download. If that cannot run, give `resume.md` as a download and tell them to paste it into a word processor and save it as a PDF; then run the resume checks by hand (no dashes or pronouns, every fact in the facts file, page count).
+
+### What needs the desktop app
+
+Sweeps of most career sites, and applying, need a browser Claude can control. Until the person is at a computer with the desktop app, suggest fit calls on postings they paste ("Is this a fit? [paste the posting and its link]"), resume work, company research and interview prep.
+
+The full workspace folder, with everything set up for the desktop app, is at https://github.com/trotics/job-search-full-automation.
 
 ---
 
@@ -1329,7 +1372,7 @@ Decide whether one posting goes in the tracker. A sweep runs this for every new 
 2. **Employer not on the target list** (for example the user pasted a link): ask whether to add it. If yes, add it as `adding-employers.md` says, then go on. If no, give the fit call in chat only and write nothing.
 3. Check in this order. The first failure decides:
    1. **Duplicate?** Same req id, or same title and location at the same employer, already in `listings`: stop, nothing to add.
-   2. **Live on the employer's own site?** If not: no.
+   2. **Live on the employer's own site?** If the site shows it gone: no. If you cannot open the site (no browser, or the person pasted the text), judge it on the pasted text, say "not confirmed live", and ask for the employer's link before writing a listing.
    3. **Target role?** Not one of the user's target roles, or one of their "out" roles: no (rules 1).
    4. **Industry and product?** An "out" industry, or an excluded industry without `keepAnyway`: no (rules 1).
    5. **Place?** Fails the user's place rules: no (rules 4).
@@ -1392,7 +1435,7 @@ What to write for each result of a fit review. Column meanings are in `shared/tr
 
 ### Fail
 
-One line in the employer's `coverage.skipped`: title, req id, reason.
+One line in the employer's `coverage.skipped`: title, req id, reason. Run alone, for an employer with no `coverage` row: record the skip only in the fit report, and never create a coverage row outside a sweep (a coverage row means the employer was swept).
 
 ### A matter of taste, not a rule
 

@@ -35,9 +35,10 @@ A job search system for one person. Set up once, then run any stage when the per
 | Prompts | `shared/prompts.md` | What the person can say to start each stage |
 | Next steps | `shared/next-steps.md` | What to suggest when a session ends, and to a returning person |
 | Python setup | `shared/python-setup.md` | Installing and checking Python |
+| No folder | `shared/no-folder.md` | Working in a chat with no folder: files to re-attach, scripts, resume PDF |
 | Tracker page | `tracker/tracker-page.html` | The page published as the person's tracker |
 | Scripts | `tools/` | `check_tracker.py`, `check_resume.py`, `build_resume.py`, `sheet.py` |
 
 ## No folder to work in
 
-On Claude on the web or a tablet there may be no folder Claude can read and write. Then ask the person to attach `my-rules.md` and `my-setup.md` (and `resume-facts.md` for the resume stage) at the start of each chat, or keep them in a Claude Project. Give every file you create or change as a download, and tell them to save it and attach it next time. Sweeps of most career sites, and applying, need the desktop app.
+On Claude on the web, a tablet, or the Skill uploaded in the Claude app, there may be no folder Claude can read and write. Then follow `shared/no-folder.md`: which files the person keeps and re-attaches (including the spreadsheet tracker), how to run or replace the scripts, and what needs the desktop app.

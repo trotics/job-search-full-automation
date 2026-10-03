@@ -8,6 +8,8 @@ Read this file when the person types `setup`, asks to be set up, or `shared/my-s
 
 Say hello in two or three sentences: this finds jobs on employers' own career sites, checks each against their rules, keeps a tracker, builds a resume from facts they confirm, and fills in applications with them. Nothing is ever submitted or sent without their review. Setup takes about 15 minutes.
 
+In a chat with no folder, follow `shared/no-folder.md`, "Setup", alongside this file.
+
 Ask once for permission to run the setup commands (a version check, an install of two Python add-ons, and a self-test), rather than asking for each one. Then work out the derived fields below while they answer.
 
 ## Ask these all at once
@@ -28,14 +30,14 @@ The person should be able to answer both in one message.
 - Type: selection
 - Options:
   - **Yes, use mine as it is:** ask them to save it as `stages/07-resume/output/resume.pdf` (offer to wait). Write "use mine".
-  - **Yes, but I want it improved:** write "improve mine". Ask them to save it in the same place, as a source of facts.
+  - **Yes, but I want it improved:** write "improve mine". Ask them to save it in the same place (or paste its text when the resume stage starts), as a source of facts.
   - **No, or I need a new one:** write "build new".
   - Default: "decide later".
 
 ## Derived fields (do not ask)
 
 ### `{{PYTHON_COMMAND}}`
-If there is no `tools/` folder (the Skill alone, without the full workspace folder), write "none (Skill only)", skip the self-test, and tell the person the checks need the full folder from GitHub. Otherwise follow `shared/python-setup.md`: find the command that works (`python`, `python3` or `py`), install the add-ons, and run the self-test. Write the command, or "none" if the person chose to continue without Python.
+In a chat with no folder: write "code execution" if you can run Python there (then use the Skill's `tools/` as `shared/no-folder.md` says), otherwise "none (Skill only)"; skip the install and the self-test. Otherwise follow `shared/python-setup.md`: find the command that works (`python`, `python3` or `py`), install the add-ons, and run the self-test. Write the command, or "none" if the person chose to continue without Python.
 
 ### `{{APPLY_BROWSER}}`
 Check whether the Claude in Chrome tools are available to you. Write "Claude in Chrome" or "not connected yet". If not connected, tell them: applying works best with the Claude in Chrome extension, because it can upload their resume (`stages/03-apply/references/claude-in-chrome-setup.md`). Sweeps and everything else work without it. This is not a blocker for today.
@@ -52,7 +54,7 @@ Today, `YYYY-MM-DD`.
 
 1. Copy `shared/my-setup-template.md` to `shared/my-setup.md` and replace every placeholder in the copy with the answers and derived values. Never edit the template.
 2. Scan `shared/my-setup.md` for any remaining `{{` patterns. If any remain, ask for the missing information.
-3. Mention once, for chats outside this folder: they can also upload `job-search-skill.zip` in the Claude app (Customize, then Skills, then +, then Upload a skill; code execution must be on in Settings). It is not needed when working in this folder.
+3. Only when working in the folder, mention once, for chats outside it: they can also upload `job-search-skill.zip` in the Claude app (Customize, then Skills, then +, then Upload a skill; code execution must be on in Settings). It is not needed when working in this folder.
 4. Tell the person:
 
 "You are set up. Here is your setup:

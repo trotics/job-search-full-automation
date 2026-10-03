@@ -27,6 +27,10 @@ def package_files():
         if name == "my-setup.md":  # the person's own filled-in copy, never packaged
             continue
         files.append(("shared/" + name, os.path.join(ROOT, "shared", name)))
+    for name in sorted(os.listdir(os.path.join(ROOT, "tools"))):
+        if name.endswith(".py") and name not in ("build_skill_zip.py", "build_single_file.py", "build_template.py", "check_repo.py"):
+            files.append(("tools/" + name, os.path.join(ROOT, "tools", name)))
+    files.append(("requirements.txt", os.path.join(ROOT, "requirements.txt")))
     stages = os.path.join(ROOT, "stages")
     for stage in sorted(os.listdir(stages)):
         files.append(("stages/%s/CONTEXT.md" % stage, os.path.join(stages, stage, "CONTEXT.md")))

@@ -12,7 +12,7 @@ The person stays in charge. Never submit an application without their review, ne
 ## Where to work
 
 - **The working folder holds the full workspace** (`CLAUDE.md` and `stages/` of this system): read that folder's `CLAUDE.md` and follow it. Its files are the same as this Skill's, plus the person's own outputs.
-- **Otherwise,** this Skill folder is the workspace. Start at `CONTEXT.md` here. Every path in these files is relative to this folder (for example `shared/rules.md`, `stages/01-sweep/CONTEXT.md`). Save the person's files in their own folder at the same paths when there is one; when there is none, follow "No folder to work in" in `CONTEXT.md`.
+- **Otherwise,** this Skill folder is the workspace. Start at `CONTEXT.md` here. Every path in these files is relative to this folder (for example `shared/rules.md`, `stages/01-sweep/CONTEXT.md`). Save the person's files in their own folder at the same paths when there is one; when there is none, follow `shared/no-folder.md`.
 
 ## Every session
 
@@ -26,4 +26,4 @@ The person stays in charge. Never submit an application without their review, ne
 
 ## Scripts
 
-The stages check their work with small Python scripts in `tools/`, which come with the full workspace, not with this Skill. Without them, say so plainly whenever a check cannot run: a stage whose check could not run is not done.
+The stages check their work with small Python scripts. They are in this Skill's `tools/` folder too: run them with code execution, from that folder's full path (`shared/no-folder.md`, "Scripts"). If they cannot run, check by hand as that file says, and say plainly that the script did not run.
