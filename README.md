@@ -49,7 +49,7 @@ This was built for one real job search and used every day on it. This public ver
 ## What you need
 
 1. **A Claude account** on a paid plan, using the **Claude desktop app**. Cowork is the easiest way to run it. Claude Code works too. This project works with Claude only (see "Built for Claude").
-2. **Claude in Chrome** (the Claude browser extension for Google Chrome), connected to the Claude app. Sweeps can use the app's built-in browser, but **applying works best with Claude in Chrome**, because the built-in browser cannot upload files such as your resume.
+2. **Claude in Chrome** (the Claude browser extension for Google Chrome), connected to the Claude app. [How to get it](https://support.claude.com/en/articles/12012173-get-started-with-claude-in-chrome). Sweeps can use the app's built-in browser, but **applying works best with Claude in Chrome**, because the built-in browser cannot upload files such as your resume.
 3. **This folder**, downloaded to your computer. It becomes your job search folder.
 4. **Your resume** as a PDF.
 5. **Python 3, with two add-ons (openpyxl and reportlab).** Claude runs small scripts to check its own work and to build your resume as a PDF.
@@ -62,29 +62,51 @@ This was built for one real job search and used every day on it. This public ver
 
 ## Setup (about 15 minutes)
 
-### Step 1. Download this folder
+### The quick way
+
+1. **Download** [job-search-full-automation-main.zip](https://github.com/trotics/job-search-full-automation/archive/refs/heads/main.zip) and unzip it somewhere easy to find, for example your Documents folder.
+2. **Open the folder in Claude.**
+   - **Cowork** (recommended): in the Claude desktop app, start a new Cowork task and choose the unzipped folder as the folder Claude works in.
+   - **Claude Code:** open the unzipped folder as your project.
+3. **Say:** "Hey, look at this folder and set me up."
+
+Claude reads `START-HERE.md` in the folder and does the rest with you, one step at a time:
+- it checks Python and installs the two add-ons;
+- it runs a quick self-test;
+- it publishes your private tracker page, or sets up the spreadsheet;
+- it asks about your resume and checks your browser;
+- it starts the setup interview.
+
+It asks before running anything. No separate Skill install is needed: in Claude Code the Skill loads from the folder by itself, and in Cowork Claude reads the Skill's instruction files straight from the folder.
+
+Next time, open the same folder and say what you want ("Run a sweep", "Let's apply").
+
+### Step by step (if you prefer, or if the quick way gets stuck)
+
+#### Step 1. Download this folder
 
 Download it here: **[job-search-full-automation-main.zip](https://github.com/trotics/job-search-full-automation/archive/refs/heads/main.zip)**. (Or, on [the GitHub page](https://github.com/trotics/job-search-full-automation), click **Code**, then **Download ZIP**.) Unzip it somewhere easy to find, for example your Documents folder. It unzips to a folder called `job-search-full-automation-main`; you can rename it. This folder is now your **job search folder**.
 
-### Step 2. Add the Skill to Claude
+#### Step 2. Add the Skill to Claude (optional when you work in this folder)
 
 **In the Claude app (chat or Cowork):**
 
-1. Open **Customize**, then **Skills**.
-2. Click **+**, then **Upload a skill**.
-3. Choose `job-search-skill.zip` from your job search folder.
-4. Make sure the new **job-search** skill is switched on.
+1. In **Settings**, make sure **code execution** is turned on. Skills need it.
+2. Open **Customize**, then **Skills**.
+3. Click **+**, then **Upload a skill**.
+4. Choose `job-search-skill.zip` from your job search folder.
+5. Make sure the new **job-search** skill is switched on.
 
-**In Claude Code:** copy the folder `skill/job-search` into `.claude/skills/` in your home folder, so you end up with `.claude/skills/job-search/SKILL.md`.
+**In Claude Code:** nothing to do. The Skill loads from this folder's `.claude/skills/` when you open the folder. To use it in every project, also copy `skill/job-search` into `.claude/skills/` in your home folder.
 
-### Step 3. Give Claude your folder
+#### Step 3. Give Claude your folder
 
 - **Cowork:** start a new task and choose your job search folder as the folder Claude works in.
 - **Claude Code:** open your job search folder as the project.
 
 Put your resume in the `my-files` folder and name it `resume.pdf`.
 
-### Step 4. Set up your tracker
+#### Step 4. Set up your tracker
 
 The tracker is where everything lives: your target employers, every listing, its status, its history, and your answer bank.
 
@@ -100,7 +122,7 @@ Your tracker is private to you. Anyone you share the link with can see your sear
 
 Both trackers use the same columns, described in plain words in `skill/job-search/references/tracker-columns.md`.
 
-### Step 5. Your first session
+#### Step 5. Your first session
 
 Say: **"Set me up for my job search."**
 
@@ -112,7 +134,7 @@ Then it asks about your resume. Pick one:
 
 Last, it asks whether you already have a list of employers, and offers to find some.
 
-### Step 6. Your first sweep
+#### Step 6. Your first sweep
 
 1. Say: **"Suggest employers that fit my background."** Claude works from your rules and resume, says why each one fits, and finds its own careers site. Add any you already know: **"Also add these employers: ..."**. You approve the list before it is saved.
 2. Say: **"Run a sweep."**
@@ -178,7 +200,9 @@ Everything personal stays in your job search folder (`my-files/`, `reports/`, `b
 
 | Path | What it is |
 |---|---|
+| `START-HERE.md`, `CLAUDE.md` | Setup instructions Claude follows when you open this folder. |
 | `job-search-skill.zip` | The Skill, ready to upload to the Claude app. |
+| `.claude/skills/job-search/` | A copy of the Skill that Claude Code loads automatically from this folder. Built from `skill/job-search` by `tools/build_skill_zip.py`; edit the original, not the copy. |
 | `skill/job-search/` | The same Skill as plain files: the map (`SKILL.md`), the rules, nine stages (00 to 08) and references. |
 | `skill/job-search-single-file/SKILL.md` | The whole Skill as one file, built from the folder above. |
 | `tracker/tracker-page.html` | The artifact tracker page. |
@@ -193,7 +217,7 @@ Everything personal stays in your job search folder (`my-files/`, `reports/`, `b
 
 You need Python 3, openpyxl and reportlab (`python -m pip install -r requirements.txt`).
 
-- Edit the Skill in `skill/job-search/`, then rebuild the ZIP and the single file:
+- Edit the Skill in `skill/job-search/`, then rebuild the ZIP (which also refreshes the copy in `.claude/skills/`) and the single file:
   `python tools/build_skill_zip.py` and `python tools/build_single_file.py`.
 - Test the tracker page without publishing it: `python tests/build_local_test.py tests/sample-data/tracker-after-fit.json`, serve the folder with `python -m http.server 8791`, and open `http://localhost:8791/tests/build/tracker-test.html`. It runs against a stand-in database (`tests/stand-in-db.js`).
 - Prove the tracker checker still catches rule breaks: `python tests/run_checker_selftest.py`.

@@ -9,8 +9,9 @@ backups/*
 # Test build output
 tests/build/
 
-# Local tool settings
-.claude/
+# Local tool settings (the Skill copy in .claude/skills/ is shared on purpose: Claude Code loads it automatically)
+.claude/*
+!.claude/skills/
 __pycache__/
 *.pyc
 ~$*.xlsx

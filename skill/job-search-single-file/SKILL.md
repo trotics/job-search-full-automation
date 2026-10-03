@@ -203,6 +203,7 @@ Set up a new user, or change an existing user's rules. Ends with `my-files/my-ru
 
 - Ask **one question at a time**. Wait for the answer before asking the next one.
 - Keep each question short. Give one or two examples so the user knows what kind of answer fits. Examples should not lead the user toward any industry.
+- **If an answer is already known** (setup in `START-HERE.md` already chose the tracker and asked about the resume), do not ask it again. Say in one line what you have and move on.
 - If an answer is vague, ask one follow-up. If it is still vague, write down what they said and move on.
 - Never guess an answer. If the user skips a question, write "None" or "Not decided" in that line.
 - If `my-files/my-rules.md` already exists, read it first. Only ask about the parts the user wants to change, then add a dated line to section 10.
@@ -218,9 +219,9 @@ Set up a new user, or change an existing user's rules. Ends with `my-files/my-ru
 Ask them in this order. The number in brackets is the section of `my-rules.md` it fills.
 
 **Tracker**
-1. "Will you keep your tracker as a Claude artifact (a web page in your Claude account) or as a spreadsheet file?" [Tracker]
+1. "Will you keep your tracker as a private web page in your Claude account (recommended) or as a spreadsheet file?" [Tracker]
    - **Artifact, already published:** "Paste the link." Save it.
-   - **Artifact, not published yet:** offer to publish it now, together: publish `tracker/tracker-page.html` as a new artifact with the `db` capability (README, "Set up your tracker"), show the user the empty tracker, and save the link. If publishing is not possible here (for example on a device without that feature), offer the spreadsheet for now.
+   - **Artifact, not published yet:** offer to publish it now, together: publish `tracker/tracker-page.html` as a new artifact with the `db` capability (README, "Step 4. Set up your tracker"), show the user the empty tracker, and save the link. If publishing is not possible here (for example on a device without that feature), offer the spreadsheet for now.
    - **Spreadsheet:** copy `tracker/spreadsheet/job-search-tracker.xlsx` to `my-files/` and save that path.
    - The tracker must exist before step 4 below writes `settings` and `answers` to it. If it still does not exist by then, keep those values in the chat, tell the user, and write them the first time the tracker exists.
 
@@ -306,7 +307,7 @@ Ask them in this order. The number in brackets is the section of `my-rules.md` i
    - **"Yes, but I want it improved"**: run `stages/07-resume.md`, starting from their file. Their resume is a source of facts, and nothing changes without their yes.
    - **"No" or "I need a new one"**: run `stages/07-resume.md` from the start.
    Tell them they can skip this for now and say "build my resume" any time.
-7. **Employers.** Ask: "Do you already have a list of employers you want to work for?" If yes, add them with sweep step 1. If no, or they want more, offer stage 08 part A ("suggest employers that fit my background"). Do not start it unless they say yes.
+7. **Employers.** Ask: "Do you already have a list of employers you want to work for?" If yes, add them as stage 01 step 1 describes (adding employers). If no, or they want more, offer stage 08 part A ("suggest employers that fit my background"). Do not start it unless they say yes.
 8. Point them to `references/prompts.md` for what to say in later sessions.
 
 ### Outputs
@@ -407,7 +408,7 @@ Decide whether one posting goes in the tracker. The sweep calls this for every n
 - `rules.md` and `my-files/my-rules.md`.
 - The posting, read on the employer's own site: title, location detail, pay, requirements, work type (full-time, part-time, contract).
 - The tracker: existing listings for that employer, to avoid duplicates.
-- **Employer not on the target list** (for example the user pasted a link): ask the user whether to add the employer. If yes, add its `companies` row first, exactly as sweep step 1 says, then review the posting. If no, give the fit call in chat only and write nothing.
+- **Employer not on the target list** (for example the user pasted a link): ask the user whether to add the employer. If yes, add its `companies` row first, exactly as stage 01 step 1 says (adding employers), then review the posting. If no, give the fit call in chat only and write nothing.
 - Take a snapshot before writing, and after writing run `python tools/check_tracker.py check backups/before.json backups/after.json --stage fit` (snapshots: `references/tracker-columns.md`, "Checking by script").
 
 ### Steps

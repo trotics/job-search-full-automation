@@ -144,6 +144,19 @@ def main():
             count += 1
             scan_text(label, text, problems, banned)
     git_state = scan_git(problems, banned)
+    # The Skill copy Claude Code loads must match the original exactly (rebuild with tools/build_skill_zip.py).
+    src, dup = os.path.join(ROOT, "skill", "job-search"), os.path.join(ROOT, ".claude", "skills", "job-search")
+    if os.path.isdir(dup):
+        def files(base):
+            out = {}
+            for dp, _, fn in os.walk(base):
+                for n in fn:
+                    p = os.path.join(dp, n)
+                    with open(p, "rb") as f:
+                        out[os.path.relpath(p, base)] = f.read().replace(b"\r\n", b"\n")
+            return out
+        if files(src) != files(dup):
+            problems.append(("copied", ".claude/skills/job-search", "differs from skill/job-search: run tools/build_skill_zip.py"))
     if arg("--private-folder"):
         scan_private_copies(arg("--private-folder"), problems)
 
