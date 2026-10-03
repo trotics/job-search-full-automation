@@ -2,11 +2,6 @@
 
 Last updated: 2026-09-20
 
-## Tracker
-
-- Kind: Artifact
-- Where: [her artifact link] (in this test, the stand-in database)
-
 ## 1. Target roles
 
 - Roles I want: clinical sales specialist; account executive at a health tech company; sales development representative if the pay clears my floor.

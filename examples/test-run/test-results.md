@@ -62,7 +62,7 @@ Spreadsheet path (writes made with tools/sheet.py, snapshots from the .xlsx):
 
 Listing: Kestrel Telehealth, Account Executive, Health Systems (High). A made-up application form (`tests/sample-data/apply-form.html`, served only on this computer) was filled following stage 03, as Maya, in two runs.
 
-**Run 1, built-in browser pane.** Everything the answer bank covers was filled. The resume upload was not tried in this run, because the built-in pane has no file upload tool (stage 03 now sends the application to Claude in Chrome at this point: upload step 4e).
+**Run 1, built-in browser pane.** Everything the answer bank covers was filled. The resume upload was not tried in this run, because the built-in pane has no file upload tool (stage 03 now sends the application to Claude in Chrome at this point: upload option e).
 
 **Run 2, Claude in Chrome.** Maya's made-up resume (`tests/sample-data/maya-ortell-resume.pdf`, built by `tests/make_test_resume_pdf.py`) was uploaded to three different controls. Before touching any of them, a read-only check of the page listed every file input: one visible, two hidden. No upload control was clicked.
 
@@ -118,7 +118,7 @@ On a real submission, the history entry would end with "upload: hidden file inpu
 | 6 | The first run did not test the resume upload. The built-in browser pane it used has no upload tool, but uploading itself works (it did in the original system, through Claude in Chrome). | Stage 03 now tries five upload methods in order before handing the upload to the user, checks the page after every upload, and checks every auto-filled field. Retested in Claude in Chrome: three controls, all uploaded (section 4). |
 | 7 | Stage 03 had no rule for optional free-text boxes, or for questions answered from the resume. | Rules added: leave optional text blank unless told otherwise; flag resume-sourced answers in the review. |
 | 8 | The answer bank had no entry for years of experience, a common form question. | The intake now asks for it. |
-| 9 | Nothing told a new user what to do when their tracker link was not set yet. | `SKILL.md` now sends them to tracker setup before any stage that writes. |
+| 9 | Nothing told a new user what to do when their tracker link was not set yet. | Setup now creates the tracker before any stage that writes. |
 | 10 | The legal-text rule caught a broad "contact your current employer" clause that conflicts with the never-contact list. | Worked as designed. Kept as an example in this report. |
 | 11 | The new auto-fill check caught two wrong fields (empty phone, contact line in city) from the form's own resume reader. | Fixed in the form from the answer bank, and listed in the review summary. |
 
@@ -152,5 +152,5 @@ What broke while building it, and the fixes:
 
 ## 7. Company research (stage 08)
 
-Not run live: it needs real web searches, and every place and employer in this test is made up. What was tested: the tracker checker lets the research stage add an employer, and fails it if it tries to add or change a listing (`tests/run_checker_selftest.py`). The first live run should be a short part A session ("find 5 employers for my target list"), checked by hand against the stage 08 "Done when" list.
+Not run live: it needs real web searches, and every place and employer in this test is made up. What was tested: the tracker checker lets the research stage add an employer, and fails it if it tries to add or change a listing (`tests/run_checker_selftest.py`). The first live run should be a short part A session ("find 5 employers for my target list"), checked by hand against the stage 08 Audit table.
 

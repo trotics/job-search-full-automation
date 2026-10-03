@@ -1,7 +1,7 @@
 """The tracker's tabs and columns, shared by the spreadsheet tools.
 
 The artifact tracker uses the same collection and field names.
-Plain-language descriptions of every column are in skill/job-search/references/tracker-columns.md.
+Plain-language descriptions of every column are in shared/tracker-columns.md.
 """
 
 COLUMNS = {

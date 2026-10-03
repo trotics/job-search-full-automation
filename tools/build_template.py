@@ -35,7 +35,7 @@ GUIDE = [
     ("History", "The history column on listings is a log. Claude only adds to the end. Do not delete entries."),
     ("Status", "Sweeps never change a listing at Applied, Followed up, Interview or Offer."),
     ("Never store", "Passwords, ID numbers, bank or card numbers. Not in any tab."),
-    ("Column guide", "Every column is described in skill/job-search/references/tracker-columns.md."),
+    ("Column guide", "Every column is described in shared/tracker-columns.md."),
 ]
 
 

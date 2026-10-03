@@ -1,9 +1,9 @@
 """Safe writes to the spreadsheet tracker. Claude uses this in sessions; you can too.
 
 Commands:
-  python tools/sheet.py backup  my-files/job-search-tracker.xlsx
-  python tools/sheet.py show    my-files/job-search-tracker.xlsx listings <id>
-  python tools/sheet.py apply   my-files/job-search-tracker.xlsx changes.json
+  python tools/sheet.py backup  tracker/my-tracker.xlsx
+  python tools/sheet.py show    tracker/my-tracker.xlsx listings <id>
+  python tools/sheet.py apply   tracker/my-tracker.xlsx changes.json
 
 changes.json is a list of changes, applied in order:
   {"tab": "listings", "op": "add",    "id": "acme-r12", "fields": {...}}       new row (id must be new)
@@ -30,7 +30,7 @@ from tracker_schema import APPEND_ONLY, COLUMNS, USER_ONLY  # noqa: E402
 
 
 def backup(path):
-    folder = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(path))), "backups")
+    folder = os.path.join(os.path.dirname(os.path.abspath(path)), "backups")
     os.makedirs(folder, exist_ok=True)
     out = os.path.join(folder, "tracker-backup-%s.xlsx" % datetime.now().strftime("%Y-%m-%d-%H%M"))
     shutil.copy2(path, out)

@@ -70,14 +70,14 @@ This was built for one real job search and used every day on it. This public ver
    - **In Claude Code:** open the unzipped folder as your project.
 3. **Say:** "Hey, look at this folder and set me up."
 
-Claude reads `START-HERE.md` in the folder and does the rest with you, one step at a time:
-- it checks Python and installs the two add-ons;
-- it runs a quick self-test;
+Claude reads `CLAUDE.md` in the folder, runs the setup in `setup/questionnaire.md`, and does the rest with you, one step at a time:
+- it asks two questions at once: where you want your tracker, and whether you already have a resume;
+- it checks Python, installs the two add-ons and runs a quick self-test;
 - it publishes your private tracker page, or sets up the spreadsheet;
-- it asks about your resume and checks your browser;
+- it checks your browser and email connector;
 - it starts the setup interview.
 
-It asks before running anything. No separate Skill install is needed: in Claude Code the Skill loads from the folder by itself, and in a conversation Claude reads the Skill's instruction files straight from the folder.
+It asks before running anything. No separate Skill install is needed: Claude reads the instruction files straight from the folder.
 
 Next time, start a conversation in the same folder (Work in a folder) and say what you want ("Run a sweep", "Let's apply").
 
@@ -99,14 +99,14 @@ Download it here: **[job-search-full-automation-main.zip](https://github.com/tro
 4. Choose `job-search-skill.zip` from your job search folder.
 5. Make sure the new **job-search** skill is switched on.
 
-**In Claude Code:** nothing to do. The Skill loads from this folder's `.claude/skills/` when you open the folder. To use it in every project, also copy `skill/job-search` into `.claude/skills/` in your home folder.
+**In Claude Code:** nothing to do when you open this folder: Claude reads `CLAUDE.md` by itself. To use the Skill in other projects, unzip `job-search-skill.zip` into `.claude/skills/` in your home folder.
 
 #### Step 3. Give Claude your folder
 
 - **Claude desktop app:** start a new conversation, choose **Work in a folder** under the message box, and pick your job search folder.
 - **Claude Code:** open your job search folder as the project.
 
-Put your resume in the `my-files` folder and name it `resume.pdf`.
+Then say **"setup"**. Claude asks where you want your tracker and whether you have a resume, all at once. If you want to use your own resume, save it as `stages/07-resume/output/resume.pdf`.
 
 #### Step 4. Set up your tracker
 
@@ -116,23 +116,23 @@ The tracker is where everything lives: your target employers, every listing, its
 
 1. Ask Claude: **"Publish tracker/tracker-page.html as a new artifact with the db capability, and give me the link."**
 2. Open the link. You should see an empty tracker that says "No listings recorded yet". The database starts empty. Nothing from anyone else's search is in it.
-3. Keep the link. The intake interview (Step 5) asks for it.
+3. Claude saves the link in `shared/my-setup.md` (private, never shared by git), so every session finds your tracker.
 
 Your tracker is private to you. Anyone you share the link with can see your search, so think before sharing. If Claude says it cannot publish an artifact with a database on your plan, use Option B.
 
-**Option B: spreadsheet tracker.** Copy `tracker/spreadsheet/job-search-tracker.xlsx` into your `my-files` folder. Claude reads and writes it during sessions. You can open it in Excel to read it and type in the `yourNotes` column. **Close it in Excel before each session**, because Claude cannot safely save it while you have it open. The `.csv` files in the same folder have the same tabs, for anyone who wants to import them into another program.
+**Option B: spreadsheet tracker.** Claude copies `tracker/spreadsheet/job-search-tracker.xlsx` to `tracker/my-tracker.xlsx`. Claude reads and writes it during sessions. You can open it in Excel to read it and type in the `yourNotes` column. **Close it in Excel before each session**, because Claude cannot safely save it while you have it open. The `.csv` files in the same folder have the same tabs, for anyone who wants to import them into another program.
 
-Both trackers use the same columns, described in plain words in `skill/job-search/references/tracker-columns.md`.
+Both trackers use the same columns, described in plain words in `shared/tracker-columns.md`.
 
 #### Step 5. Your first session
 
-Say: **"Set me up for my job search."**
+Setup goes straight into the intake interview (later, say **"Change my rules"** to redo parts of it).
 
-Claude runs the intake interview: about 30 short questions, one at a time. When you finish, it shows you your rules in full. Change anything you like, then say **approve**. Only then are they saved to `my-files/my-rules.md`. Claude then saves your tracker settings and offers to start your answer bank (the answers you give on most forms).
+Claude runs it: about 30 short questions, one at a time. When you finish, it shows you your rules in full. Change anything you like, then say **approve**. Only then are they saved to `stages/00-intake/output/my-rules.md`. Claude then saves your tracker settings and offers to start your answer bank (the answers you give on most forms).
 
-Then it asks about your resume. Pick one:
-- **"Use mine as it is"**: put it in `my-files/resume.pdf`. Claude will not change it.
-- **"Improve mine"** or **"I need a new one"**: Claude asks about each job, one question at a time, and builds your resume from the facts you confirm (about 20 to 40 minutes). You can also skip this and say "build my resume" later.
+Your resume follows the choice you made at setup:
+- **"Use mine as it is"**: it stays in `stages/07-resume/output/resume.pdf`. Claude will not change it.
+- **"Improve mine"** or **"I need a new one"**: say **"Build my resume"**. Claude asks about each job, one question at a time, and builds your resume from the facts you confirm (about 20 to 40 minutes).
 
 Last, it asks whether you already have a list of employers, and offers to find some.
 
@@ -141,7 +141,7 @@ Last, it asks whether you already have a list of employers, and offers to find s
 1. Say: **"Suggest employers that fit my background."** Claude works from your rules and resume, says why each one fits, and finds its own careers site. Add any you already know: **"Also add these employers: ..."**. You approve the list before it is saved.
 2. Say: **"Run a sweep."**
 
-Claude reads each employer's own career site, adds listings that fit to your tracker, and saves a short report in `reports/`. Then say **"Let's apply"** when you have time to sit with it.
+Claude reads each employer's own career site, adds listings that fit to your tracker, and saves a short report in `stages/01-sweep/output/`. Then say **"Let's apply"** when you have time to sit with it.
 
 ---
 
@@ -173,10 +173,11 @@ The instructions themselves are plain text files. If you want to try another AI 
 - **"Run a sweep"**: weekly is a good pace.
 - **"Let's apply"**: Claude works through your To apply listings, highest priority first, in Claude in Chrome. It uploads your resume itself, checks anything the site filled in from it, and stops for your review before anything is submitted. If no upload method works, it tells you what it tried and asks you to attach the file.
 - **"Check my email"**: after you have applied to a few places.
-- **"Prep me for my interview with [company] on [day]"**: the prep file is saved in `reports/`.
+- **"Prep me for my interview with [company] on [day]"**: the prep file is saved in `stages/05-interview-prep/output/`.
 - **"Change my rules"**: reruns only the parts of the interview you want to change.
+- **"status"**: shows which stages have produced something so far.
 - **Changing statuses or notes yourself:** you can change a status or type in Your notes on the tracker page any time. A status change adds a dated line to that listing's history. Avoid doing either while Claude is in the middle of a session; do it before or after. If you do, the session's check will say so, and Claude will tell you rather than touch your change.
-- **"Suggest employers that fit my background"**, **"Tell me about [company]"**, **"Build my resume"**: see `skill/job-search/references/prompts.md` for the full list of things you can say.
+- **"Suggest employers that fit my background"**, **"Tell me about [company]"**, **"Build my resume"**: see `shared/prompts.md` for the full list of things you can say.
 
 ## Safety notes
 
@@ -194,22 +195,34 @@ LinkedIn and some job boards prohibit automated access in their terms of use. **
 
 ## Your privacy
 
-Everything personal stays in your job search folder (`my-files/`, `reports/`, `backups/`) and your own tracker. Git ignores those folders, so if you ever put your copy of this project on GitHub, your files stay off it.
+Everything personal stays in your job search folder (each stage's `output/` folder, `shared/my-setup.md`, `tracker/my-tracker.xlsx` and `tracker/backups/`) and your own tracker. Git ignores those files, so if you ever put your copy of this project on GitHub, your files stay off it.
 
 ---
+
+## How it is organized
+
+*Upgrading from an earlier version?* Your files moved: your rules now live in `stages/00-intake/output/my-rules.md` and your resume files in `stages/07-resume/output/`. Copy them there, then say "setup".
+
+The folder follows the [Interpretable Context Methodology](https://github.com/RinDig/Interpretable-Context-Methodology) (ICM): the folder structure is the workflow, written in plain Markdown, with no framework.
+
+- `CLAUDE.md` says where Claude is and what the triggers do; `CONTEXT.md` routes each request to one stage.
+- Each stage's `CONTEXT.md` is a contract: an Inputs table naming exactly which files (and which sections) to load, the process, the points where you decide, an audit checklist that must pass, and where the outputs go.
+- How-to knowledge lives in each stage's `references/` and in `shared/`, in one place each. Stages pass files to later stages through their `output/` folders, and all of them share one tracker.
+- Say **"status"** any time to see which stages have produced something.
 
 ## What is in this folder
 
 | Path | What it is |
 |---|---|
-| `START-HERE.md`, `CLAUDE.md` | Setup instructions Claude follows when you open this folder. |
-| `job-search-skill.zip` | The Skill, ready to upload to the Claude app. |
-| `.claude/skills/job-search/` | A copy of the Skill that Claude Code loads automatically from this folder. Built from `skill/job-search` by `tools/build_skill_zip.py`; edit the original, not the copy. |
-| `skill/job-search/` | The same Skill as plain files: the map (`SKILL.md`), the rules, nine stages (00 to 08) and references. |
-| `skill/job-search-single-file/SKILL.md` | The whole Skill as one file, built from the folder above. |
+| `CLAUDE.md` | The map Claude reads first: the folders, the `setup` and `status` triggers, and what to do in every session. |
+| `CONTEXT.md` | Task routing: which stage handles what you ask for. |
+| `setup/questionnaire.md` | The one-time setup. |
+| `shared/` | Used by every stage: the rules, the tracker guides, the answer bank guide, prompts, Python setup, and `my-setup-template.md` (setup fills in a private copy, `my-setup.md`). |
+| `stages/00-intake/` to `stages/08-company-research/` | One folder per stage: `CONTEXT.md` (the stage's contract), `references/` (how to do it) and `output/` (what it made for you, ignored by git). |
+| `job-search-skill.zip` | The same instructions packaged as a Skill, ready to upload to the Claude app. |
+| `single-file-skill/SKILL.md` | The whole Skill as one file. |
 | `tracker/tracker-page.html` | The artifact tracker page. |
-| `tracker/spreadsheet/` | The spreadsheet tracker (`.xlsx`) and matching `.csv` files. |
-| `my-files/`, `reports/`, `backups/` | Your files. Ignored by git. |
+| `tracker/spreadsheet/` | The spreadsheet tracker (`.xlsx`) and matching `.csv` files. Your own copy goes in `tracker/my-tracker.xlsx`, backups in `tracker/backups/` (both ignored by git). |
 | `requirements.txt` | The two Python add-ons the scripts need. |
 | `docs/images/` | The pictures in this README. |
 | `tools/` | Small scripts Claude uses: tracker checks, safe spreadsheet writes, and builds. |
@@ -219,7 +232,7 @@ Everything personal stays in your job search folder (`my-files/`, `reports/`, `b
 
 You need Python 3, openpyxl and reportlab (`python -m pip install -r requirements.txt`).
 
-- Edit the Skill in `skill/job-search/`, then rebuild the ZIP (which also refreshes the copy in `.claude/skills/`) and the single file:
+- Edit the workspace files (`CLAUDE.md`, `CONTEXT.md`, `setup/`, `shared/`, `stages/*/CONTEXT.md` and `references/`; the Skill's own front page is `tools/package/SKILL.md`), then rebuild the ZIP and the single file:
   `python tools/build_skill_zip.py` and `python tools/build_single_file.py`.
 - Test the tracker page without publishing it: `python tests/build_local_test.py tests/sample-data/tracker-after-fit.json`, serve the folder with `python -m http.server 8791`, and open `http://localhost:8791/tests/build/tracker-test.html`. It runs against a stand-in database (`tests/stand-in-db.js`).
 - Prove the tracker checker still catches rule breaks: `python tests/run_checker_selftest.py`.
@@ -230,7 +243,7 @@ You need Python 3, openpyxl and reportlab (`python -m pip install -r requirement
 
 If you change this project and put your version online, your name, phone, email or employers can slip into an example or a test without you noticing. Before you share it:
 
-1. Make a plain text file **outside** the project folder (or in `my-files/`, which git never uploads), for example `private-strings.txt`.
+1. Make a plain text file **outside** the project folder, for example `private-strings.txt`.
 2. Put one private detail per line: your name, email, phone, street, employers, and anything else that must never be public.
 3. Run `python tools/check_repo.py --banned path/to/private-strings.txt`.
 

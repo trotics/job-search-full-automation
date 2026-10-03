@@ -6,10 +6,10 @@ Works with both trackers:
     with the `snapshot-dir` command.
 
 Commands:
-  python tools/check_tracker.py snapshot my-files/job-search-tracker.xlsx backups/before.json
-  python tools/check_tracker.py snapshot-dir backups/before-db backups/before.json   (artifact: after ArtifactData list with out_dir)
-  python tools/check_tracker.py check backups/before.json backups/after.json --stage sweep
-  python tools/check_tracker.py validate backups/after.json
+  python tools/check_tracker.py snapshot tracker/my-tracker.xlsx tracker/backups/before.json
+  python tools/check_tracker.py snapshot-dir tracker/backups/before-db tracker/backups/before.json   (artifact: after ArtifactData list with out_dir)
+  python tools/check_tracker.py check tracker/backups/before.json tracker/backups/after.json --stage sweep
+  python tools/check_tracker.py validate tracker/backups/after.json
 
 Stages: intake, sweep, fit, apply, outreach, prep, mailbox, resume, research, user.
 Exit code 0 means every check passed.

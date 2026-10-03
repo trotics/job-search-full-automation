@@ -81,8 +81,8 @@ POSTINGS_CASES = [
 
 
 def sample_resume_case():
-    """The sample in references/sample-resume.md must build and pass, so users can copy its format."""
-    text = open(os.path.join(ROOT, "skill", "job-search", "references", "sample-resume.md"), encoding="utf-8").read()
+    """The sample in stages/07-resume/references/sample-resume.md must build and pass, so users can copy its format."""
+    text = open(os.path.join(ROOT, "stages", "07-resume", "references", "sample-resume.md"), encoding="utf-8").read()
     resume = text.split("---\n", 1)[1].strip() + "\n"
     facts = resume + "\n## What employers ask for\n- Based on: default\n- Built and confirmed by the user: 2026-01-01\n"
     return resume, facts

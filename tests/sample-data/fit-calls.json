@@ -1,5 +1,5 @@
 {
-  "note": "Fit calls made by Claude for the made-up user, following stages/02-fit-review.md and examples/test-run/my-rules.md. The first failing check decides.",
+  "note": "Fit calls made by Claude for the made-up user, following stages/02-fit-review/CONTEXT.md and examples/test-run/my-rules.md. The first failing check decides.",
   "excluded_not_swept": [
     {"company": "Tallow Pharma", "reason": "Industry Pharmaceuticals is in settings.excludedIndustries and keepAnyway is no, so the sweep skips the employer (rules 1). Posting TP-5012 was never read."},
     {"company": "Summit Nurse Staffing", "reason": "Industry Staffing is in settings.excludedIndustries and keepAnyway is no, so the sweep skips the employer (rules 1). Posting SNS-14 was never read."}

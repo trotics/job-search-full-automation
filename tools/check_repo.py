@@ -2,15 +2,15 @@
 
 Checks every file in the repo, the inside of the .xlsx and .zip files, and the git history for:
   1. Your private strings (optional): personal details that must never be shared, such as your
-     name, phone, email, street or employers. Keep them in a private file OUTSIDE the repo, or in
-     my-files/ (which git ignores), one per line, and pass it with --banned.
+     name, phone, email, street or employers. Keep them in a private file OUTSIDE the repo,
+     one per line, and pass it with --banned.
      A line ending in "(whole word, case-sensitive)" matches only as a whole word with that exact case.
   2. Em dashes and en dashes.
   3. Files copied unchanged from a private folder (optional: --private-folder).
 
 Usage:
   python tools/check_repo.py
-  python tools/check_repo.py --banned my-files/banned-strings.txt
+  python tools/check_repo.py --banned ../private/banned-strings.txt
   python tools/check_repo.py --banned PATH --private-folder PATH
 
 Exit code 0 means clean. Anything else means a check failed.
@@ -48,7 +48,7 @@ def load_banned(path):
 
 def repo_files():
     """Files git would share: tracked files plus new files git does not ignore.
-    Your own my-files/, reports/ and backups/ are ignored by git, so they are never shared and not checked."""
+    Your stage output folders, tracker copy and backups are ignored by git, so they are never shared and not checked."""
     try:
         out = subprocess.run(["git", "ls-files", "--cached", "--others", "--exclude-standard", "-z"],
                              cwd=ROOT, capture_output=True, check=True).stdout.decode("utf-8", "replace")
@@ -60,11 +60,12 @@ def repo_files():
     except (OSError, subprocess.CalledProcessError):
         pass
     # No git: check every file except the folders git would ignore.
-    ignored = SKIP_DIRS | {"my-files", "reports", "backups", "build"}
+    ignored = SKIP_DIRS | {"output", "backups", "build"}
     for dirpath, dirnames, filenames in os.walk(ROOT):
         dirnames[:] = [d for d in dirnames if d not in ignored]
         for name in filenames:
-            yield os.path.join(dirpath, name)
+            if name not in ("my-tracker.xlsx", "my-setup.md"):
+                yield os.path.join(dirpath, name)
 
 
 def texts_of(path):
@@ -144,19 +145,6 @@ def main():
             count += 1
             scan_text(label, text, problems, banned)
     git_state = scan_git(problems, banned)
-    # The Skill copy Claude Code loads must match the original exactly (rebuild with tools/build_skill_zip.py).
-    src, dup = os.path.join(ROOT, "skill", "job-search"), os.path.join(ROOT, ".claude", "skills", "job-search")
-    if os.path.isdir(dup):
-        def files(base):
-            out = {}
-            for dp, _, fn in os.walk(base):
-                for n in fn:
-                    p = os.path.join(dp, n)
-                    with open(p, "rb") as f:
-                        out[os.path.relpath(p, base)] = f.read().replace(b"\r\n", b"\n")
-            return out
-        if files(src) != files(dup):
-            problems.append(("copied", ".claude/skills/job-search", "differs from skill/job-search: run tools/build_skill_zip.py"))
     if arg("--private-folder"):
         scan_private_copies(arg("--private-folder"), problems)
 

@@ -1,7 +1,7 @@
-"""Check a resume against the rules in references/resume-guide.md.
+"""Check a resume against the rules in stages/07-resume/references/resume-guide.md.
 
 Usage:
-  python tools/check_resume.py my-files/resume.md --facts my-files/resume-facts.md [--pdf my-files/resume.pdf --years 6]
+  python tools/check_resume.py stages/07-resume/output/resume.md --facts stages/07-resume/output/resume-facts.md \n      [--pdf stages/07-resume/output/resume.pdf --years 6]
 
 Fails if:
   - a number, job title, employer, school or skill on the resume is not in the facts file,
@@ -131,7 +131,7 @@ def main():
     # The "What employers ask for" section: every user has one, from postings or a named fallback.
     prof = re.search(r"(?ms)^## What employers ask for\s*$(.*?)(?=^## )", facts + "\n## end\n")
     if not prof:
-        problems.append("facts file has no '## What employers ask for' section (stage 07 Part B)")
+        problems.append("facts file has no '## What employers ask for' section (stages/07-resume/references/employer-asks.md)")
     else:
         p = prof.group(1)
         def field(name):

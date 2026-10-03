@@ -1,10 +1,10 @@
-"""Build a plain, one-column resume PDF from my-files/resume.md.
+"""Build a plain, one-column resume PDF from stages/07-resume/output/resume.md.
 
 Usage:
-  python tools/build_resume.py my-files/resume.md my-files/resume.pdf
+  python tools/build_resume.py stages/07-resume/output/resume.md stages/07-resume/output/resume.pdf
 
 Needs reportlab (python -m pip install reportlab). The input format is in
-skill/job-search/references/resume-guide.md, "File format".
+stages/07-resume/references/resume-guide.md, "File format".
 Prints the page count, so stage 07 can check the length limit.
 """
 import os

@@ -2,7 +2,7 @@
 
 Maya Ortell is a made-up person: a registered nurse with six years in hospitals (three on a medical-surgical floor, three in intensive care), moving into healthcare technology sales. She lives in Larkfield, a made-up metro in the made-up state of Calder. Wrenford is a made-up city 70 miles away.
 
-Claude asked one question at a time and waited for each answer. Shortened here to question and answer.
+Claude asked one question at a time and waited for each answer. Shortened here to question and answer. This test ran when the tracker was the interview's first question; it is now asked at setup (`setup/questionnaire.md`), so the other numbers below are one higher than in `stages/00-intake/references/interview-questions.md`.
 
 | # | Question | Maya's answer |
 |---|---|---|
@@ -50,7 +50,7 @@ Claude ran stage 07 from the start, one question at a time, for each of her two 
 
 Before writing, Claude read 3 postings for her target role that were already in her tracker (Brightline Charting BC-1042, Halyard Patient Monitoring HPM-388, Kestrel Telehealth KT-3315). It noted that all 3 sell software to hospitals, all 3 accept clinical experience in place of sales years, and 1 requires an RN license. From that it summed up what employers ask for: licenses directly under the summary, then in each nursing job the training, software-adoption and vendor bullets first. It listed the posting terms she can use because her facts support them (hospitals, intensive care, remote patient monitoring, training) and the ones she cannot (quota, demos, telehealth, acute care), and asked whether any of those were true for her. She said no. The closest example was "Healthcare technology or medical sales" plus the career-changer notes. Maya confirmed the summary, and it was saved in the "What employers ask for" section of her facts file. Claude drafted the resume one section at a time, Maya approved each one, the checks passed, and she approved the PDF (`resume/maya-ortell-resume.pdf`).
 
-**The opt-out path** ("Yes, use mine as it is") was not run as its own session in this test. What the intake says to do there: ask for the file in `my-files/resume.pdf`, offer a text copy, do not critique or change it, and do not run stage 07 unless the user asks later.
+**The opt-out path** ("Yes, use mine as it is") was not run as its own session in this test. What the intake says to do there: ask for the file in `stages/07-resume/output/resume.pdf`, offer a text copy, do not critique or change it, and do not run stage 07 unless the user asks later.
 
 ## Employers
 

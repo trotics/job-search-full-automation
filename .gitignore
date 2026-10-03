@@ -1,17 +1,15 @@
-# Your personal files never go in git.
-my-files/*
-!my-files/README.md
-reports/*
-!reports/README.md
-backups/*
-!backups/README.md
+# Your personal files never go in git: everything a stage makes, your tracker copy and its backups.
+stages/*/output/*
+!stages/*/output/.gitkeep
+shared/my-setup.md
+tracker/my-tracker.xlsx
+tracker/backups/
 
 # Test build output
 tests/build/
 
-# Local tool settings (the Skill copy in .claude/skills/ is shared on purpose: Claude Code loads it automatically)
-.claude/*
-!.claude/skills/
+# Local tool settings
+.claude/
 __pycache__/
 *.pyc
 ~$*.xlsx

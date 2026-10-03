@@ -1,0 +1,59 @@
+# Stage 02: Fit review
+
+Decide whether one posting goes in the tracker. A sweep runs this for every new posting. The user can also hand you a posting link and ask for a fit call.
+
+## Inputs
+
+| Source | File/Location | Section/Scope | Why |
+|--------|--------------|---------------|-----|
+| User or sweep | The posting, read on the employer's own site | Title, location detail, pay, requirements, work type | What is being judged |
+| Stage 00 | `../00-intake/output/my-rules.md` | Full file | The user's rules |
+| Shared | `../../shared/rules.md` | Sections 1 to 6 | The checks |
+| Shared | `../../shared/my-setup.md` | Full file | Tracker kind and location, Python command, browser, email connector |
+| Shared | `../../shared/tracker-access.md` | Full file | Reading, writing and the check |
+| Shared | `../../shared/recurring-mistakes.md` | Full file | Read before any tracker write |
+| Shared | `../../shared/adding-employers.md` | Full file | When the employer is not on the target list |
+| Tracker | `listings`, `companies`, `settings` | That employer's rows | Duplicates, spelling, settings lists |
+| Reference | `references/fit-outcomes.md` | Full file | What to write for each result |
+
+## Process
+
+1. **Employer not on the target list** (for example the user pasted a link): ask whether to add it. If yes, add it as `adding-employers.md` says, then go on. If no, give the fit call in chat only and write nothing.
+2. Take a tracker snapshot, unless a sweep already took one this session.
+3. Check in this order. The first failure decides:
+   1. **Duplicate?** Same req id, or same title and location at the same employer, already in `listings`: stop, nothing to add.
+   2. **Live on the employer's own site?** If not: no.
+   3. **Target role?** Not one of the user's target roles, or one of their "out" roles: no (rules 1).
+   4. **Industry and product?** An "out" industry, or an excluded industry without `keepAnyway`: no (rules 1).
+   5. **Place?** Fails the user's place rules: no (rules 4).
+   6. **Pay?** Under the floor: no. No posted pay: decide plausibility and write the reasoning (rules 2).
+   7. **Hard requirements?** License before hire, a specific degree the user lacks, any hard no in the user's rules: no. Required years inside the user's stretch never fail it on their own (rules 3).
+   8. **On-hold employer?** Add the listing, set `priority` to `On hold`, and say so in `why`.
+4. Follow the user's autonomy lines in `my-rules.md`: if they want to be asked before listings are written, or want every close call, show the result and wait for their yes before writing.
+5. Write the result as `references/fit-outcomes.md` says: a new listing, a skipped line, or a report item for the user.
+6. If no sweep is running, take an after snapshot and run the check with `--stage fit`.
+
+## Checkpoints
+
+| After Step | Agent Presents | Human Decides |
+|------------|---------------|---------------|
+| 1 | Whether to add an employer not on the target list | Add it, or a chat-only fit call |
+| 3 | Each result, when the user's autonomy lines say to ask | Write it, or not |
+| 5 | Close calls that depend on taste, in the report | Apply or skip |
+
+## Audit
+
+| Check | Pass Condition |
+|-------|---------------|
+| Every posting | Ends as a new listing, a skipped line, or a report item for the user |
+| No Review fit | No listing was created at Review fit; close calls are in the report instead |
+| Columns | Every new listing has every column in `fit-outcomes.md`, including `postingText`, and a unique `id` |
+| Check | `check_tracker.py` passes (`--stage fit`, or the sweep's own check) |
+
+## Outputs
+
+| Artifact | Location | Format |
+|----------|----------|--------|
+| New listing | Tracker, `listings` | One row at To apply |
+| Skipped line | Tracker, `coverage.skipped` | Title, req id, reason |
+| Close calls | The sweep report, or `output/[YYYY-MM-DD]-fit-report.md` when run alone | The seven-part shape in `fit-outcomes.md` |
