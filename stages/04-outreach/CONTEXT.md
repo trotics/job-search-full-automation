@@ -14,6 +14,7 @@
 | Shared | `../../shared/tracker-access.md` | Full file | Reading, writing and the check |
 | Shared | `../../shared/recurring-mistakes.md` | Full file | Read before any tracker write |
 | Shared | `../../shared/next-steps.md` | "After outreach" | What to suggest when the session ends |
+| Shared | `../../shared/lessons.md` | Full file | Learning from this session |
 | Tracker | `listings`, `companies` | Qualifying listings | What to research |
 | Reference | `references/outreach-rules.md` | Full file | Qualifying listings, sources, confidence, drafts |
 
@@ -27,7 +28,7 @@
 6. Save the outreach columns and one history line per listing worked.
 7. Take an after snapshot and run the check with `--stage outreach`.
 8. Run the audit below, then save the report.
-9. End by suggesting the next step in one or two lines (`next-steps.md`, "After outreach"). Suggest only; do not start it.
+9. Ask once what this session taught (`lessons.md`) and add any lesson the person approves. Then end by suggesting the next step in one or two lines (`next-steps.md`, "After outreach"). Suggest only; do not start it.
 
 ## Checkpoints
 
@@ -45,6 +46,7 @@
 | Length | Every connection note is under 300 characters and every message under 90 words |
 | Style | No em dashes or en dashes in any draft |
 | Columns | Only the outreach columns and history were written (`check_tracker.py --stage outreach`) |
+| Lessons | The person was asked once what the session taught; only approved lessons were added |
 | Next step | The session ended with the next thing to say, in quotes |
 
 ## Outputs

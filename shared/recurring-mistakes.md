@@ -1,6 +1,6 @@
 # Recurring mistakes to avoid
 
-Each of these happened during real use of this system. Read this list before any tracker write.
+Each of these happened during real use of this system. Read this list before any tracker write. When a session finds a new mistake that could happen again, add it at the end as `lessons.md` says, with the person's OK.
 
 1. **Aggregator pages treated as proof.** An unattended run marked a batch of listings expired because a job aggregator showed them gone. Most were still live on the employers' own sites, and some were already Applied. Only the employer's own site decides.
 2. **Changing listings at Applied or later.** The same run did it. Sweeps never touch them.

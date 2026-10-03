@@ -16,6 +16,7 @@ Research sessions the user starts by asking: (A) find employers, (B) a company d
 | Shared | `../../shared/helpers.md` | Full file | Only if you use research helpers |
 | Shared | `../../shared/prompts.md` | "Finding employers and researching them" | Wording the user can use |
 | Shared | `../../shared/next-steps.md` | "After company research" | What to suggest when the session ends |
+| Shared | `../../shared/lessons.md` | Full file | Learning from this session |
 | Tracker | `companies`, `settings` | All rows | The target list, tiers, industry words |
 | Previous runs | `output/` | "Checked and not added" and "Leads" lists | So earlier work is not repeated |
 | Reference | `references/research-rules.md` | Full file | Sources, links, names, size, the four kinds |
@@ -31,7 +32,7 @@ Research sessions the user starts by asking: (A) find employers, (B) a company d
 5. **[Checkpoint]** Part A: show the candidates in one table for the user to approve, drop or change.
 6. Part A: write only the approved employers, take an after snapshot, and run the check with `--stage research`.
 7. Run the audit below, then save the report.
-8. End by suggesting the next step in one or two lines (`next-steps.md`, "After company research"). Suggest only; do not start it.
+8. Ask once what this session taught (`lessons.md`) and add any lesson the person approves. Then end by suggesting the next step in one or two lines (`next-steps.md`, "After company research"). Suggest only; do not start it.
 
 ## Checkpoints
 
@@ -49,6 +50,7 @@ Research sessions the user starts by asking: (A) find employers, (B) a company d
 | Part A approval | Every new employer was approved by the user and has its own careers site link |
 | Part A names | No new employer matches an existing name or a never-contact entry, and none is in an excluded industry unless the user asked to keep it (`keepAnyway` yes) |
 | Check | Part A: `check_tracker.py --stage research` passes |
+| Lessons | The person was asked once what the session taught; only approved lessons were added |
 | Next step | The session ended with the next thing to say, in quotes |
 
 ## Outputs

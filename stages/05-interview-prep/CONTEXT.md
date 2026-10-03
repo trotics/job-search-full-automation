@@ -13,6 +13,7 @@ Prepare the user for a named interview. Run when the user asks.
 | Shared | `../../shared/tracker-access.md` | Full file | The step 1 direct request, and the optional history line |
 | Shared | `../../shared/recurring-mistakes.md` | Full file | Read before any tracker write |
 | Shared | `../../shared/next-steps.md` | "After interview prep" | What to suggest when the session ends |
+| Shared | `../../shared/lessons.md` | Full file | Learning from this session |
 | Tracker | `listings` (that listing), `answers` (Work history) | One row; work history entries | The saved posting, the history, the user's record |
 | Reference | `references/prep-sources-and-format.md` | Full file | Which sources count, and what the file holds |
 
@@ -26,7 +27,7 @@ Prepare the user for a named interview. Run when the user asks.
 6. Add questions for the user to ask, and the logistics from the listing's history.
 7. Run the audit below, then save the file and give the user its path.
 8. If the user wants it, add one history line saying prep was done, with a snapshot before and after and the check with `--stage prep`.
-9. End by suggesting the next step in one or two lines (`next-steps.md`, "After interview prep"). Suggest only; do not start it.
+9. Ask once what this session taught (`lessons.md`) and add any lesson the person approves. Then end by suggesting the next step in one or two lines (`next-steps.md`, "After interview prep"). Suggest only; do not start it.
 
 ## Checkpoints
 
@@ -42,6 +43,7 @@ Prepare the user for a named interview. Run when the user asks.
 | Company facts | Every fact about the company has a link to an allowed source |
 | Stories | Every story is one the user has stated or the resume shows |
 | Saved | The file is saved in `output/` and the user has the path |
+| Lessons | The person was asked once what the session taught; only approved lessons were added |
 | Next step | The session ended with the next thing to say, in quotes |
 
 ## Outputs

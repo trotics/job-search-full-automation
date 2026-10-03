@@ -14,6 +14,7 @@ Build the user's resume from facts they state, shaped by what real postings for 
 | Shared | `../../shared/tracker-access.md` | Full file | Only for a tailored version's history line |
 | Shared | `../../shared/recurring-mistakes.md` | Full file | Read before any tracker write |
 | Shared | `../../shared/next-steps.md` | "After the resume" | What to suggest when the session ends |
+| Shared | `../../shared/lessons.md` | Full file | Learning from this session |
 | User | Their current resume, if any (`output/resume.pdf` or pasted) | Full content | A source of facts only |
 | Tracker | `listings` | `postingText` of listings for the target role | Real postings, and the listing for a tailored version |
 | Reference | `references/fact-questions.md` | Full file | Collecting the facts |
@@ -35,7 +36,7 @@ Build the user's resume from facts they state, shaped by what real postings for 
 8. Back up any earlier PDF, build `output/resume.pdf`, check the page count, and run the check again.
 9. **[Checkpoint]** The user opens and approves the PDF.
 10. For a tailored version, follow `writing-and-tailoring.md`, "A tailored version for one listing".
-11. End by suggesting the next step in one or two lines (`next-steps.md`, "After the resume"). Suggest only; do not start it.
+11. Ask once what this session taught (`lessons.md`) and add any lesson the person approves. Then end by suggesting the next step in one or two lines (`next-steps.md`, "After the resume"). Suggest only; do not start it.
 
 ## Checkpoints
 
@@ -58,6 +59,7 @@ Build the user's resume from facts they state, shaped by what real postings for 
 | Style | `check_resume.py` passes: no dashes, no pronouns, no personal data that does not belong, sensible bullets, standard headings |
 | Length | The page count is within the limit |
 | Approval | The user approved the final PDF, and any earlier `resume.pdf` was backed up first |
+| Lessons | The person was asked once what the session taught; only approved lessons were added |
 | Next step | The session ended with the next thing to say, in quotes |
 
 ## Outputs

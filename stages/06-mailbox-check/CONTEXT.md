@@ -14,6 +14,7 @@ Read the user's email for replies from employers and suggest status updates. Run
 | Shared | `../../shared/tracker-access.md` | Full file | Reading, writing and the check |
 | Shared | `../../shared/recurring-mistakes.md` | Full file | Read before any tracker write |
 | Shared | `../../shared/next-steps.md` | "After the mailbox check" | What to suggest when the session ends |
+| Shared | `../../shared/lessons.md` | Full file | Learning from this session |
 | Tracker | `listings`, `companies` | Listings at Applied, Followed up, Interview; To apply only to notice a reply | What a message can match |
 | Reference | `references/reading-and-sorting-mail.md` | Full file | Ways in, the window, matching, sorting, what gets written |
 
@@ -28,7 +29,7 @@ Read the user's email for replies from employers and suggest status updates. Run
 7. Write only what the user approved: `status` and one history line per listing.
 8. Take an after snapshot and run the check with `--stage mailbox`.
 9. Run the audit below, then save the report.
-10. End by suggesting the next step in one or two lines (`next-steps.md`, "After the mailbox check"). Suggest only; do not start it.
+10. Ask once what this session taught (`lessons.md`) and add any lesson the person approves. Then end by suggesting the next step in one or two lines (`next-steps.md`, "After the mailbox check"). Suggest only; do not start it.
 
 ## Checkpoints
 
@@ -47,6 +48,7 @@ Read the user's email for replies from employers and suggest status updates. Run
 | Secrets | No code, sign-in link or password was copied anywhere |
 | Window | The window covered is written in the report |
 | Check | `check_tracker.py --stage mailbox` passes, and `yourNotes` is untouched |
+| Lessons | The person was asked once what the session taught; only approved lessons were added |
 | Next step | The session ended with the next thing to say, in quotes |
 
 ## Outputs

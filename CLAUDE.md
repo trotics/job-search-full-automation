@@ -67,6 +67,6 @@ Pipeline Status: job-search-full-automation   (setup: DONE)
 
 ## Do not
 
-- Do not edit files in `shared/`, `stages/*/references/`, `stages/*/CONTEXT.md`, `tools/`, `tracker/` (except the person's own copy and backups) or `tests/` unless the person asks to change how the system works. `shared/my-setup.md` is written only by `setup`, from `shared/my-setup-template.md`.
+- Do not edit files in `shared/`, `stages/*/references/`, `stages/*/CONTEXT.md`, `tools/`, `tracker/` (except the person's own copy and backups) or `tests/` unless the person asks to change how the system works, or approves a lesson (`shared/lessons.md`). `shared/my-setup.md` is written only by `setup`, from `shared/my-setup-template.md`.
 - Do not run `git` commands that push, publish or change history.
 - Do not put the person's details anywhere except `stages/*/output/`, `shared/my-setup.md`, `tracker/my-tracker.xlsx`, `tracker/backups/` and their own tracker.

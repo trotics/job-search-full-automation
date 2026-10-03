@@ -14,6 +14,7 @@ Decide whether one posting goes in the tracker. A sweep runs this for every new 
 | Shared | `../../shared/recurring-mistakes.md` | Full file | Read before any tracker write |
 | Shared | `../../shared/adding-employers.md` | Full file | When the employer is not on the target list |
 | Shared | `../../shared/next-steps.md` | "After a sweep or a fit call", "After a close-call decision" | What to suggest when the session ends |
+| Shared | `../../shared/lessons.md` | Full file | Learning from this session |
 | Tracker | `listings`, `companies`, `settings`, `coverage` | That employer's rows | Duplicates, spelling, settings lists |
 | Previous runs | `../01-sweep/output/`, `output/` | The latest report | Close calls waiting for a decision |
 | Reference | `references/fit-outcomes.md` | Full file | What to write for each result |
@@ -34,7 +35,7 @@ Decide whether one posting goes in the tracker. A sweep runs this for every new 
 4. Follow the user's autonomy lines in `my-rules.md`: if they want to be asked before listings are written, show each result and wait for their yes before writing. "Bring me every close call" applies only to close calls; clear fits are written as usual.
 5. Write the result as `references/fit-outcomes.md` says: a new listing, a skipped line, or a report item for the user.
 6. If no sweep is running, take an after snapshot and run the check with `--stage fit`.
-7. If no sweep is running, end by suggesting the next step (`next-steps.md`, "After a sweep or a fit call"). Inside a sweep, the sweep does this.
+7. If no sweep is running: ask once what this session taught (`lessons.md`) and add any lesson the person approves, then end by suggesting the next step (`next-steps.md`, "After a sweep or a fit call"). Inside a sweep, the sweep does this.
 
 ## Checkpoints
 
@@ -52,6 +53,7 @@ Decide whether one posting goes in the tracker. A sweep runs this for every new 
 | No Review fit | No listing was created at Review fit; close calls are in the report instead |
 | Columns | Every new listing has every column in `fit-outcomes.md`, including `postingText`, and a unique `id` |
 | Check | `check_tracker.py` passes (`--stage fit`, or the sweep's own check) |
+| Lessons | The person was asked once what the session taught; only approved lessons were added |
 | Next step | The session ended with the next thing to say, in quotes |
 
 ## Outputs
